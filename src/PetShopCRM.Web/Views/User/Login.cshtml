@@ -1,0 +1,23 @@
+﻿@model UserLoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-12">
+            @Html.LabelFor(x => x.Login)
+            <input asp-for="Login" type="text" class="form-control" />
+            @Html.ValidationMessageFor(x => x.Login)
+        </div>
+        <div class="col-12">
+            @Html.LabelFor(x => x.Password)
+            <input asp-for="Password" type="password" class="form-control" />
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+        <div class="col-12">
+            <input class="btn btn-success" type="submit" value="Enviar" />
+        </div>
+    </div>
+</form>

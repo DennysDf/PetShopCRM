@@ -16,7 +16,8 @@ namespace PetShopCRM.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            await userService.AddAsync(new Domain.Models.User { Name = "Kevyn", Login = "kevyn", Password = "123", Type = Domain.Enums.UserType.Admin });
+            await userService.AddAsync(new Domain.Models.User { Name = "Kevyn Carlos Batista Anacleto", Login = "kevyn", Password = "123", Type = Domain.Enums.UserType.Admin });
+            await userService.AddAsync(new Domain.Models.User { Name = "Dennys Fonseca de Souza", Login = "dennys", Password = "123", Type = Domain.Enums.UserType.Admin });
 
             return View();
         }

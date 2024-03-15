@@ -4,6 +4,8 @@ using PetShopCRM.Application;
 using PetShopCRM.Domain.Enums;
 using PetShopCRM.Infrastructure;
 using PetShopCRM.Web.Resources;
+using PetShopCRM.Web.Services;
+using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.SignalHubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +36,11 @@ builder.Services.AddAuthorizationBuilder()
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+
+//Web services
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
 
 builder.Services.AddSignalR(options =>
 {

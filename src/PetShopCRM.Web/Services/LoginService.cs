@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using PetShopCRM.Domain.Models;
-using static System.Net.WebRequestMethods;
+using PetShopCRM.Web.Services.Interfaces;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 
-namespace PetShopCRM.Web.Util;
+namespace PetShopCRM.Web.Services;
 
-public static class LoginUtil
+public class LoginService(IHttpContextAccessor httpContextAccessor) : ILoginService
 {
-    public static async Task LoginAsync(IHttpContextAccessor httpContextAccessor, User user)
+    public async Task LoginAsync(User user)
     {
         var claims = new List<Claim>()
         {
@@ -31,9 +30,9 @@ public static class LoginUtil
             await httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
     }
 
-    public static async Task LogoutAsync(IHttpContextAccessor httpContextAccessor)
+    public async Task LogoutAsync()
     {
-        if(httpContextAccessor.HttpContext is not null)
+        if (httpContextAccessor.HttpContext is not null)
             await httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
     }
 }

@@ -1,23 +1,35 @@
 ﻿@model UserLoginVM
 @{
     ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<form method="post">
-    @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-12">
-            @Html.LabelFor(x => x.Login)
-            <input asp-for="Login" type="text" class="form-control" />
-            @Html.ValidationMessageFor(x => x.Login)
-        </div>
-        <div class="col-12">
-            @Html.LabelFor(x => x.Password)
-            <input asp-for="Password" type="password" class="form-control" />
-            @Html.ValidationMessageFor(x => x.Password)
-        </div>
-        <div class="col-12">
-            <input class="btn btn-success" type="submit" value="Enviar" />
-        </div>
+<div class="login-container">
+    <div class="d-flex justify-content-center mb-4">
+        <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" alt="Logo" class="mb-4" height="150">
     </div>
-</form>
+    <div class="separator"></div>
+    <form method="post">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text p-3"><i class="fas fa-user fa-fw"></i></span>
+                </div>
+                <input asp-for="Login" type="text" class="form-control" placeholder="Username" aria-label="Username">
+            </div>
+            <span asp-validation-for="Login" class="text-danger"></span>
+            <div class="input-group pt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text p-3"><i class="fas fa-lock fa-fw"></i></span>
+                </div>
+                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <a href="#">Esqueceu sua senha?</a>
+        <div class="separator"></div>
+        <div class="login-button">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>

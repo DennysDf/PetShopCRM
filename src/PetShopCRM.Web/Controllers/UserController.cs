@@ -2,20 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Web.Models;
+using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.Util;
 
 namespace PetShopCRM.Web.Controllers
 {
     public class UserController(
-        IHttpContextAccessor httpContextAccessor,
+        ILoginService loginService,
+        INotificationService notificationService,
         IUserService userService) : Controller
     {
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            await userService.AddAsync(new Domain.Models.User { Active = true, Name = "Kevyn", Login = "kevyn", Password = "123" });
-
             return View();
         }
 
@@ -31,7 +31,9 @@ namespace PetShopCRM.Web.Controllers
 
                     if (response.Success)
                     {
-                        await LoginUtil.LoginAsync(httpContextAccessor, response.Data);
+                        await loginService.LoginAsync(response.Data);
+
+                        notificationService.Success(Resources.Text.UserLogged);
 
                         return RedirectToAction("Index", "Home");
                     }
@@ -41,9 +43,11 @@ namespace PetShopCRM.Web.Controllers
 
                 return View(userLogin);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                ModelState.TryAddModelError(nameof(userLogin.Login), ex.Message);
+
+                return View(userLogin);
             }
         }
 
@@ -53,7 +57,7 @@ namespace PetShopCRM.Web.Controllers
         {
             try
             {
-                await LoginUtil.LogoutAsync(httpContextAccessor);
+                await loginService.LogoutAsync();
                 
                 return RedirectToAction(nameof(Login));
             }

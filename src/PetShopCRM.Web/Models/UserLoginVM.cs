@@ -7,11 +7,11 @@ namespace PetShopCRM.Web.Models
 {
     public class UserLoginVM
     {
-        [Required(ErrorMessage = ValidationKeys.Required)]
+        [Required(ErrorMessage = ValidationKeysUtil.Required)]
         [DisplayName("Usuário")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = ValidationKeys.Required)]
+        [Required(ErrorMessage = ValidationKeysUtil.Required)]
         [DisplayName("Senha")]
         public string Password { get; set; }
 

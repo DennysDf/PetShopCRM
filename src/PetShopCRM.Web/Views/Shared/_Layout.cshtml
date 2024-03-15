@@ -1,51 +1,200 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using PetShopCRM.Web.Services.Interfaces
+@using PetShopCRM.Web.Util
+@inject ILoggedUserService loggedUser
+
+<!DOCTYPE html>
+<html dir="ltr" lang="pt-br">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     <title>@ViewData["Title"] - PetShopCRM.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/AlertifyJS/css/alertify.min.css" />
+    <link rel="stylesheet" href="~/lib/AlertifyJS/css/themes/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/sn8/themify-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="~/lib/mdi/font/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PetShopCRM.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/template.css" asp-append-version="true" />
+    <style type="text/css">
+        .bootstrap-datetimepicker-widget {
+            width: 285px !important;
+        }
+
+
+        #navbarSupportedContent {
+            border-bottom: 2px solid #719ECE;
+            box-shadow: 0 2px 1px -2px #719ECE;
+        }
+
+        input {
+            border: 1px solid rgba(128, 128, 128, 0.42) !important;
+        }
+
+            input:focus {
+                outline: none !important;
+                border: 1px solid blue;
+                box-shadow: 0 0 20px #719ECE;
+            }
+
+        textarea {
+            border: 1px solid rgba(128, 128, 128, 0.42) !important;
+        }
+
+            textarea:focus {
+                outline: none !important;
+                border: 1px solid blue;
+                box-shadow: 0 0 20px #719ECE;
+            }
+
+
+        body {
+            font-size: 0.900rem;
+        }
+
+        .field-validation-error {
+            font-weight: 700;
+            color: red;
+        }
+
+        label {
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PetShopCRM.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <div id="main-wrapper" data-sidebartype="mini-sidebar" class="mini-sidebar">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
+                        <b class="logo-icon ">
+                            <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" width="65" height="50" alt="homepage" class="light-logo" />
+                        </b>
+                        <span class="logo-text text-center">
+                            <span class="accordionsa">
+                                Pet Shop
+                            </span>
+                        </span>
+                    </a>
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                    </ul>
+                    <ul class="navbar-nav float-right d-flex  align-items-center">
+                        <li class="nav-item dropdown ">
+                            <div class="row font-weight-bold text-white">
+                                <div class="col-12">
+                                    @loggedUser.Name
+                                </div>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @if (loggedUser.Image == "")
+                                {
+                                    <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" alt="user" class="rounded-circle" width="31">
+                                }
+                                else
+                                {
+                                    <img src="~/Upload/Usuarios/@loggedUser.Image" alt="user" class="rounded-circle" width="31">
+                                }
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated">
+
+                                <a class="dropdown-item" href="@Url.Action("Perfil","User")"><i class="ti-user m-r-5 m-l-5"></i> Meu Perfil</a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="@Url.Action("Logout", "User")"><i class="text-danger fa fa-power-off m-r-5 m-l-5"></i> Sair</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
                         </li>
                     </ul>
                 </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PetShopCRM.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">@ViewData["Title"]</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+                                    @Html.Raw(ViewBag.Caminho)
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <footer class="footer text-center">
+                DevRoyale - 2024
+            </footer>
         </div>
-    </footer>
+    </div>
+    <!--Container Main end-->
     <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/AlertifyJS/alertify.min.js"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/perfect-scrollbar.jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/highlight.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.verySimpleImageViewer.min.js" asp-append-version="true"></script>
+    <script src="~/js/printThis.js" asp-append-version="true"></script>
+    <script src="~/js/waves.js" asp-append-version="true"></script>
+    <script src="~/js/custom.min.js" asp-append-version="true"></script>
+    <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ol = $(".breadcrumb > li");
+            $.each(ol, function (key, element) {
+                $(element).addClass("breadcrumb-item");
+            });
+        })
+        
+        @if (NotificationUtil.Stack.Count > 0)
+        {
+            foreach (string item in NotificationUtil.Stack.Reverse())
+            {
+                var a = item;
+                @:  @Html.Raw(a)
+            }
+            NotificationUtil.Stack.Clear();
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")
 </body>

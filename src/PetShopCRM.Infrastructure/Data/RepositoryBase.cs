@@ -24,6 +24,30 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
         return await Task.FromResult(query);
     }
 
+    public async Task<int> GetTotalByAsync(Expression<Func<T, bool>>? filter = null)
+    {
+        var query = _context.Set<T>().AsNoTracking();
+
+        if (filter != null)
+            query = query.Where(filter);
+
+        return await query.CountAsync();
+    }
+
+    public async Task<IQueryable<T>> GetPaginateByAsync(Expression<Func<T, bool>>? filter = null, int pageIndex = 0, int pageSize = 10)
+    {
+        var query = _context.Set<T>().AsNoTracking();
+
+        if (filter != null)
+            query = query.Where(filter);
+
+        query = query
+            .Skip(pageIndex * pageSize)
+            .Take(pageSize);
+
+        return await Task.FromResult(query);
+    }
+
     public async Task AddOrUpdateAsync(T entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
@@ -54,10 +78,11 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
 
         try
         {
+            if (entities.Exists(x => x.Id != 0))
+                _context.Set<T>().UpdateRange(entities.Where(x => x.Id != 0));
+
             if (entities.Exists(x => x.Id == 0))
                 await _context.Set<T>().AddRangeAsync(entities.Where(x => x.Id == 0));
-            else
-                _context.Set<T>().UpdateRange(entities.Where(x => x.Id != 0));
 
             await _context.SaveChangesAsync();
         }

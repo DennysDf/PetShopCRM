@@ -1,0 +1,37 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
+@import url(/lib/font-awesome/css/all.min.css);
+
+body {
+    background-color: #808080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 85%;
+    max-width: 85%;
+    margin: auto;
+}
+
+.separator {
+    border-bottom: 1px solid #808080;
+    margin: 20px 0;
+}
+
+.login-button {
+    text-align: right;
+}
+
+@media screen and (min-width: 768px) {
+    .login-container {
+        width: 50%;
+        max-width: 500px;
+    }
+}

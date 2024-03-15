@@ -5,6 +5,7 @@ namespace PetShopCRM.Infrastructure;
 
 public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbContext(options)
 {
+    public DbSet<User> Users { get; set; }
     public DbSet<Fake> Fakes { get; set; }
     public DbSet<Tutor> Tutores { get; set; }
     public DbSet<Pet> Pets { get; set; }

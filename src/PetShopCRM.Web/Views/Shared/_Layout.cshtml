@@ -194,6 +194,20 @@
             }
             NotificationUtil.Stack.Clear();
         }
+
+        signalRObject.execute('/Notification', function (connection) {
+            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            connection.on('ReceiveNotificationAll', function (script) {
+                eval(script);
+            });
+
+            connection.on('ReceiveNotificationUser', function (script) {
+                eval(script);
+            });
+        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")

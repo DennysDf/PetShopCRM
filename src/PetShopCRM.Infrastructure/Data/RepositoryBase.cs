@@ -58,6 +58,7 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
 
             if (entity.Id == 0)
             {
+                entity.Active = true;
                 entity.CreatedDate = DateTime.Now;
                 await _context.Set<T>().AddAsync(entity);
             }
@@ -79,10 +80,27 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
         try
         {
             if (entities.Exists(x => x.Id != 0))
-                _context.Set<T>().UpdateRange(entities.Where(x => x.Id != 0));
+            {
+                var entitiesUpdate = entities.Where(x => x.Id != 0).ToList();
+
+                entitiesUpdate.ForEach(x => x.UpdatedDate = DateTime.Now);
+
+                _context.Set<T>().UpdateRange(entitiesUpdate);
+            }
+                
 
             if (entities.Exists(x => x.Id == 0))
+            {
+                var entitiesAdd = entities.Where(x => x.Id == 0).ToList();
+
+                entitiesAdd.ForEach(x =>
+                {
+                    x.Active = true;
+                    x.CreatedDate = DateTime.Now;
+                });
+
                 await _context.Set<T>().AddRangeAsync(entities.Where(x => x.Id == 0));
+            }
 
             await _context.SaveChangesAsync();
         }

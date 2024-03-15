@@ -16,6 +16,9 @@ namespace PetShopCRM.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
+            await userService.AddAsync(new Domain.Models.User { Name = "Kevyn Carlos Batista Anacleto", Login = "kevyn", Password = "123", Type = Domain.Enums.UserType.Admin });
+            await userService.AddAsync(new Domain.Models.User { Name = "Dennys Fonseca de Souza", Login = "dennys", Password = "123", Type = Domain.Enums.UserType.Admin });
+
             return View();
         }
 
@@ -65,6 +68,16 @@ namespace PetShopCRM.Web.Controllers
             {
                 throw;
             }
+        }
+
+        [AllowAnonymous]
+        public IActionResult Ajax()
+        {
+            notificationService.Send(Domain.Enums.NotificationType.Error, "Deu erro na bagaça toda!");
+
+            notificationService.Send(Domain.Enums.NotificationType.Error, "Deu erro na bagaça do Dennys!", 1);
+
+            return Ok();
         }
     }
 }

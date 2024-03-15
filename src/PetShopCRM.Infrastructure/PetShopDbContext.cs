@@ -5,7 +5,7 @@ namespace PetShopCRM.Infrastructure;
 
 public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbContext(options)
 {
-    public DbSet<Fake> Fakes { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

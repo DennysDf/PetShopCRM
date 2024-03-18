@@ -17,7 +17,7 @@ builder.Services.AddControllersWithViews()
         options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ValidationMessages));
     });
 
-builder.Services.AddDbContext<PetShopDbContext>(
+builder.Services.AddDbContextPool<PetShopDbContext>(
         options => options.UseSqlServer("name=ConnectionStrings:PetShopDb"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

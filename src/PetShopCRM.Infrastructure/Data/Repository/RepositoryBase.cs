@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Domain.Models;
-using PetShopCRM.Infrastructure.Data.Interfaces;
+using PetShopCRM.Infrastructure.Data.Repository.Interfaces;
 using System.Linq.Expressions;
 
-namespace PetShopCRM.Infrastructure.Data;
+namespace PetShopCRM.Infrastructure.Data.Repository;
 
 public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> where T : EntityBase
 {
@@ -48,9 +48,9 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
         return await Task.FromResult(query);
     }
 
-    public async Task AddOrUpdateAsync(T entity)
+    public async Task<T> AddOrUpdateAsync(T entity)
     {
-        if (entity == null) throw new ArgumentNullException(nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
 
         try
         {
@@ -65,7 +65,7 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
             else
                 _context.Set<T>().Update(entity);
 
-            await _context.SaveChangesAsync();
+            return entity;
         }
         catch (Exception)
         {
@@ -73,9 +73,9 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
         }
     }
 
-    public async Task AddOrUpdateRangeAsync(List<T> entities)
+    public async Task<List<T>> AddOrUpdateRangeAsync(List<T> entities)
     {
-        if (entities == null) throw new ArgumentNullException(nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
 
         try
         {
@@ -87,7 +87,7 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
 
                 _context.Set<T>().UpdateRange(entitiesUpdate);
             }
-                
+
 
             if (entities.Exists(x => x.Id == 0))
             {
@@ -102,7 +102,7 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
                 await _context.Set<T>().AddRangeAsync(entities.Where(x => x.Id == 0));
             }
 
-            await _context.SaveChangesAsync();
+            return entities;
         }
         catch (Exception)
         {
@@ -121,8 +121,6 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
             if (entity == null) throw new NullReferenceException(nameof(entity));
 
             _context.Remove(entity);
-
-            await _context.SaveChangesAsync();
         }
         catch (Exception)
         {

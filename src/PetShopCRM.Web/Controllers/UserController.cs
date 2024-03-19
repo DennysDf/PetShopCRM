@@ -81,5 +81,10 @@ namespace PetShopCRM.Web.Controllers
 
             return Ok();
         }
+
+        public IActionResult Perfil()
+        {
+            return View();
+        }
     }
 }

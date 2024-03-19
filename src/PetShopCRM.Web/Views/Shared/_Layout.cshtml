@@ -26,7 +26,7 @@
 
 
         #navbarSupportedContent {
-            border-bottom: 2px solid #719ECE;
+            border-bottom: 2px solid #AABD24;
             box-shadow: 0 2px 1px -2px #719ECE;
         }
 
@@ -80,11 +80,11 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
                         <b class="logo-icon ">
-                            <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" width="65" height="50" alt="homepage" class="light-logo" />
+                            <img src="~/imagens/logo-mini.png" width="55" height="50" alt="homepage" style="padding-left:8px" class="light-logo" />
                         </b>
                         <span class="logo-text text-center">
                             <span class="accordionsa">
-                                Pet Shop
+                                <img src="~/imagens/vet-card.png" width="165" height="45" alt="homepage"  class="light-logo" />
                             </span>
                         </span>
                     </a>
@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid" id="center-container">
                 @RenderBody()
             </div>
             <footer class="footer text-center">

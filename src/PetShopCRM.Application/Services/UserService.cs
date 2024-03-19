@@ -18,6 +18,13 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         return user;
     }
 
+    public async Task<ResponseDTO<User>> GetUserById(int id)
+    {
+        var user = await unitOfWork.UserRepository.GetByIdAsync(id);        
+        return new ResponseDTO<User>(user != null,Resources.Message.UserNotFound, user);
+        
+    }
+
     public async Task<ResponseDTO<User>> ValidateUser(UserLoginDTO userLogin)
     {
         var user = await unitOfWork.UserRepository.GetByLoginAndPasswordAsync(userLogin.UserLogin, userLogin.UserPassword);
@@ -28,4 +35,7 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
 
         return response;
     }
+
+
+
 }

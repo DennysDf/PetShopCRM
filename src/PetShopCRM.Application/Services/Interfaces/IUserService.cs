@@ -7,4 +7,6 @@ public interface IUserService
 {
     Task<User> AddAsync(User user);
     Task<ResponseDTO<User>> ValidateUser(UserLoginDTO userLogin);
+
+    Task<ResponseDTO<User>> GetUserById(int id);
 }

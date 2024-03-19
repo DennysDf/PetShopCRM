@@ -44,6 +44,11 @@
       "provider": "unpkg",
       "library": "@mdi/font@6.7.96",
       "destination": "wwwroot/lib/mdi/font/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery.mask@1.14.16",
+      "destination": "wwwroot/lib/jquery.mask/"
     }
   ]
 }

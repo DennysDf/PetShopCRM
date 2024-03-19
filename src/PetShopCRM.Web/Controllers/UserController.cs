@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
-using PetShopCRM.Web.Models;
+using PetShopCRM.Web.Models.Usuario;
+using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.Util;
 
@@ -10,7 +11,7 @@ namespace PetShopCRM.Web.Controllers
     public class UserController(
         ILoginService loginService,
         INotificationService notificationService,
-        IUserService userService) : Controller
+        IUserService userService, ILoggedUserService loggedUserService) : Controller
     {
         [HttpGet]
         [AllowAnonymous]
@@ -82,9 +83,13 @@ namespace PetShopCRM.Web.Controllers
             return Ok();
         }
 
-        public IActionResult Perfil()
+        public async Task<IActionResult> Perfil()
         {
-            return View();
+            var user = await userService.GetUserById(loggedUserService.Id);
+            var profile =  new ProfileVM();
+            profile.ToViewModel(user.Data);
+
+            return View(profile);
         }
     }
 }

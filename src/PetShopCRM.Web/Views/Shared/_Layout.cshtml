@@ -134,6 +134,14 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
                         </li>
+                        <li class="sidebar-item">
+                        <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Pacientes")" class="sidebar-link"><i class="fa fa-users"></i><span class="hide-menu"> Pet </span></a></li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Procedimentos")" class="sidebar-link"><i class="fa fa-file"></i><span class="hide-menu">  Clínicas </span></a></li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Medicos")" class="sidebar-link"><i class="fa fa-user-circle"></i><span class="hide-menu">  Tutor </span></a></li>
+                        </ul>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -176,6 +184,7 @@
     <script src="~/js/custom.min.js" asp-append-version="true"></script>
     <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script><
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -184,7 +193,9 @@
                 $(element).addClass("breadcrumb-item");
             });
         })
-        
+
+        $(".phone-mask").mask("(00) 0 0000-0000")
+
         @if (NotificationUtil.Stack.Count > 0)
         {
             foreach (string item in NotificationUtil.Stack.Reverse())

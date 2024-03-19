@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
-using PetShopCRM.Web.Models.Usuario;
+using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.Util;
@@ -19,8 +19,6 @@ namespace PetShopCRM.Web.Controllers
         {
             await userService.AddAsync(new Domain.Models.User { Name = "Kevyn Carlos Batista Anacleto", Login = "kevyn", Password = "123", Type = Domain.Enums.UserType.Admin });
             await userService.AddAsync(new Domain.Models.User { Name = "Dennys Fonseca de Souza", Login = "dennys", Password = "123", Type = Domain.Enums.UserType.Admin });
-
-
 
             return View();
         }
@@ -83,13 +81,25 @@ namespace PetShopCRM.Web.Controllers
             return Ok();
         }
 
-        public async Task<IActionResult> Perfil()
+        public async Task<IActionResult> Profile()
         {
             var user = await userService.GetUserById(loggedUserService.Id);
             var profile =  new ProfileVM();
             profile.ToViewModel(user.Data);
 
             return View(profile);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(ProfileVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Id = loggedUserService.Id;
+                var response = await userService.UpdateAsync(model.ToDTO());
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

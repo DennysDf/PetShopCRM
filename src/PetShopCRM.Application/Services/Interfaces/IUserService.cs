@@ -1,4 +1,5 @@
 ﻿using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.User;
 using PetShopCRM.Domain.Models;
 
 namespace PetShopCRM.Application.Services.Interfaces;
@@ -9,4 +10,6 @@ public interface IUserService
     Task<ResponseDTO<User>> ValidateUser(UserLoginDTO userLogin);
 
     Task<ResponseDTO<User>> GetUserById(int id);
+
+    Task<ResponseDTO<User>> UpdateAsync(ProfileDTO modelProfile);
 }

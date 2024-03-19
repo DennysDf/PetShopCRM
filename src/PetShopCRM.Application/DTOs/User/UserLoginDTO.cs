@@ -1,3 +1,3 @@
-﻿namespace PetShopCRM.Application.DTOs;
+﻿namespace PetShopCRM.Application.DTOs.User;
 
 public record UserLoginDTO(string UserLogin, string UserPassword);

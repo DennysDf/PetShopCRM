@@ -28,18 +28,18 @@
 
 
     <div class="row mt-2">
-        @*         <div class="col-sm-6">
-        <label asp-for="Senha">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
-        <input asp-for="Senha" type="password" class="form-control"  placeholder="Senha atual..." />
-        <span asp-validation-for="Senha"></span>
-        </div> *@
+            <div class="col-sm-6">
+            <label asp-for="Password">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
+            <span asp-validation-for="Password"></span>
+        </div>
     </div>
 
     <div class="row mt-1">
         <div class="col-sm-6">
-            <label asp-for="Password">Nova senha:</label>
-            <input type="password" asp-for="Password" placeholder="Senha..." class="form-control" />
-            <span asp-validation-for="Password"></span>
+            <label asp-for="PasswordNew">Nova senha:</label>
+            <input type="password" asp-for="PasswordNew" placeholder="Senha..." class="form-control" />
+            <span asp-validation-for="PasswordNew"></span>
         </div>
         <div class="col-sm-6">
             <label asp-for="ConfirmPassword">Confirme a senha:</label>
@@ -50,8 +50,8 @@
 
     <div class="row mt-1">
         <div class="col-sm-6">
-            <label for="Foto">Foto:</label>
-            <input type="file" name="Foto" class="form-control" />
+            <label asp-for="UrlPhoto" for="Foto">Foto:</label>
+            <input type="file" asp-for="UrlPhoto" class="form-control" accept="image/*" />
         </div>
     </div>
 

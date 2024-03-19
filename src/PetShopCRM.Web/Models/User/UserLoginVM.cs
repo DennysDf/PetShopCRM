@@ -1,9 +1,9 @@
-﻿using PetShopCRM.Application.DTOs;
+﻿using PetShopCRM.Application.DTOs.User;
 using PetShopCRM.Web.Util;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetShopCRM.Web.Models.Usuario;
+namespace PetShopCRM.Web.Models.User;
 
 public class UserLoginVM
 {

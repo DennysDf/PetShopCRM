@@ -1,5 +1,4 @@
-﻿
-
+﻿@model ICollection<PetVM>
 @{
     ViewData["Title"] = "Pet";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,8 +19,8 @@
         <thead class="thead-dark">
             <tr>
                 <th width="15">#</th>
-                <th >Nome</th>
-                <th >Chip</th>
+                <th>Nome</th>
+                <th>Chip</th>
                 <th>Tutor</th>
                 <th>Espécie</th>
                 <th width="15" class="text-center"> </th>
@@ -32,9 +31,10 @@
             {
                 <tr class="bg-white">
                     <td>@item.Id</td>
-                    <td class="text-nowrap">@item.Nome</td>
-                    <td class="text-nowrap valor">@item.ValorTable</td>
-                    <td class="text-nowrap">@item.DataFinal</td>
+                    <td class="text-nowrap">@item.Name</td>
+                    <td class="text-nowrap valor">@item.Identifier</td>
+                    <td class="text-nowrap">@item.Guardian</td>
+                    <td class="text-nowrap">@item.Specie</td>
 
                     <td class="text-nowrap text-right" width="15">
                         <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
@@ -94,36 +94,22 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
                 <button type="button" id="confirm-del" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
             </div>
-
         </div>
     </div>
 </div>
 
 @section Scripts{
-
-
     <script>
 
-        function inicio() {
-            $('.valor').mask('#.##0,00', { reverse: true });
-            $('#DataFinal').mask('00/00/0000')
-        }
-
-        inicio();
-        
-
         $("#modal-open, .edit").click(function () {
-            
-
             var id = $(this).data("id");
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-                inicio();
-
+                
                 if (id !=0) {
-                    $(".title").text("Editar Evento")                    
+                    $(".title").text("Editar Pet")                    
                 } else {
-                    $(".title").text("Cadastrar Evento")
+                    $(".title").text("Cadastrar Pet")
                 }
                 $("#modal").modal("show");
             })
@@ -141,14 +127,10 @@
 
         $(".btn-dark").tooltip();
 
-        $(".table").DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
-            }
-        }).order([1, 'asc'])
-
-
-
+        // $(".table").DataTable({
+        //     "language": {
+        //         "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+        //     }
+        // }).order([1, 'asc'])
     </script>
-
 }

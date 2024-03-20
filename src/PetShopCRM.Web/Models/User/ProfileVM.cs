@@ -1,4 +1,5 @@
-﻿using PetShopCRM.Application.DTOs.User;
+﻿using Microsoft.AspNetCore.Mvc;
+using PetShopCRM.Application.DTOs.User;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Util;
 using System.ComponentModel;
@@ -14,12 +15,12 @@ public class ProfileVM
     [DisplayName("Nome")]
     public string Name { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [Remote("ValidatePassword", "User",ErrorMessage = ValidationKeysUtil.ValidatePassword)]
     [DisplayName("Senha")]
     public string Password { get; set; }
 
     [MinLength(6, ErrorMessage = ValidationKeysUtil.SizeMin)]
-    [DisplayName("6")]
+    [DisplayName("Nova senha")]
     public string PasswordNew { get; set; }
 
 

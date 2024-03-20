@@ -17,8 +17,7 @@ namespace PetShopCRM.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-            await userService.AddAsync(new Domain.Models.User { Name = "Kevyn Carlos Batista Anacleto", Login = "kevyn", Password = "123", Type = Domain.Enums.UserType.Admin });
-            await userService.AddAsync(new Domain.Models.User { Name = "Dennys Fonseca de Souza", Login = "dennys", Password = "123", Type = Domain.Enums.UserType.Admin });
+
 
             return View();
         }
@@ -97,10 +96,19 @@ namespace PetShopCRM.Web.Controllers
             {
                 model.Id = loggedUserService.Id;
                 var response = await userService.UpdateAsync(model.ToDTO());
-                notificationService.Success("Teste");
+
+                if (response.Success)                
+                    notificationService.Success(response.Message);                
+                else
+                    notificationService.Error();
             }
 
             return RedirectToAction("Index","Home");
+        }
+
+        public bool ValidatePassword(int id )
+        {
+            return true;
         }
     }
 }

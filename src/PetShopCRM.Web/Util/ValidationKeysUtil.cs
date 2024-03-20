@@ -7,5 +7,6 @@
         public const string Email = "Email";
         public const string SizeMin = "SizeMin";
         public const string SizeMax = "SizeMax";
+        public const string ValidatePassword = "ValidatePassword";
     }
 }

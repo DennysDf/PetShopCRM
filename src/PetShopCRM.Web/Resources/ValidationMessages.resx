@@ -127,12 +127,15 @@
     <value>O campo {0} é obrigatório.</value>
   </data>
   <data name="SizeMax" xml:space="preserve">
-    <value>Máximo de {0} caracteres.</value>
+    <value>Máximo de {1} caracteres.</value>
   </data>
   <data name="SizeMin" xml:space="preserve">
-    <value>Minímo de {0} caracteres.</value>
+    <value>Minímo de {1} caracteres.</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Usuário não localizado</value>
+  </data>
+  <data name="ValidatePassword" xml:space="preserve">
+    <value>Senha diferente da atual.</value>
   </data>
 </root>

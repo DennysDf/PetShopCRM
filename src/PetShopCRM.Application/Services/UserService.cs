@@ -46,8 +46,15 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         userDb.Password = modelProfile.Password ?? userDb.Password; 
         userDb.UrlPhoto = "";
 
-        var user = await unitOfWork.UserRepository.AddOrUpdateAsync(userDb);
+        try
+        {
+            var user = await unitOfWork.UserRepository.AddOrUpdateAsync(userDb);
 
-        return new ResponseDTO<User>(user != null, Resources.Message.UserNotFound, user);
+            return new ResponseDTO<User>(true, Resources.Message.UserSucessUpdate, user);
+        }
+        catch (Exception ex)
+        {
+            return new ResponseDTO<User>(false, ex.Message, null);
+        }        
     }
 }

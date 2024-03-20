@@ -88,7 +88,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Máximo de {0} caracteres..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Máximo de {1} caracteres..
         /// </summary>
         public static string SizeMax {
             get {
@@ -97,7 +97,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Minímo de {0} caracteres..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Minímo de {1} caracteres..
         /// </summary>
         public static string SizeMin {
             get {
@@ -111,6 +111,15 @@ namespace PetShopCRM.Web.Resources {
         public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha diferente da atual..
+        /// </summary>
+        public static string ValidatePassword {
+            get {
+                return ResourceManager.GetString("ValidatePassword", resourceCulture);
             }
         }
     }

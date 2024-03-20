@@ -79,6 +79,15 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário atualizado com sucesso..
+        /// </summary>
+        internal static string UserSucessUpdate {
+            get {
+                return ResourceManager.GetString("UserSucessUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário válido.
         /// </summary>
         internal static string UserValid {

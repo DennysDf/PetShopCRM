@@ -1,5 +1,132 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ICollection<GuardianVM>
 @{
+    ViewData["Title"] = "Tutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mb-3 ">
+    <div class="col-12 text-center">
+        <button data-id="0" id="modal-open" class="btn btn-success">
+            <i class="fa fa-plus-circle"></i>
+            <b>Incluir Tutor</b>
+        </button>
+    </div>
+</div>
+
+<div class="container">
+
+    <table class="table table-sm table-striped  table-responsive-lg bg-white table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th width="15">#</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th width="15" class="text-center"> </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            @foreach (var item in Model)
+            {
+                <tr class="bg-white">
+                    <td>@item.Id</td>
+                    <td class="text-nowrap">@item.Name</td>
+                    <td class="text-nowrap valor">@item.Address</td>
+                    <td class="text-nowrap">@item.Phone</td>
+                    <td class="text-nowrap text-right" width="15">
+                        <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
+                            <i class="fa fa-times text-danger"> </i>
+                        </a>
+                        <a class="edit" href="#" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                            <i class="text-dark fa fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="modal fade" role="dialog" data-backdrop="static" id="modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form asp-action="Index" method="post">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title title">Cadastrar Material</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" style="padding-top:120px" role="dialog" id="delete" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fa fa-exclamation-triangle " style="color:yellow"></i>  ATENÇÃO <i style="color:yellow" class="fa fa-exclamation-triangle"></i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="font-weight-bold font-18">
+                    Tem certeza que deseja apagar esta Clínica?
+                    <input type="hidden" id="del-evento" />
+                </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                <button type="button" id="confirm-del" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        $("#modal-open, .edit").click(function () {
+            var id = $(this).data("id");
+            $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
+                $("#modal-body").html(response);
+
+                if (id != 0) {
+                    $(".title").text("Editar Tutor")
+                } else {
+                    $(".title").text("Cadastrar Tutor")
+                }
+                $("#modal").modal("show");
+            })
+        })
+
+        $(".deletar").click(function () {
+            var id = $(this).data("id")
+            $("#del-evento").val(id)
+            $("#delete").modal("show")
+        })
+
+        $("#confirm-del").click(function () {
+            window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
+        });
+
+        $(".btn-dark").tooltip();
+
+        // $(".table").DataTable({
+        //     "language": {
+        //         "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+        //     }
+        // }).order([1, 'asc'])
+    </script>
 }

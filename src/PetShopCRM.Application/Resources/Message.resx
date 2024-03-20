@@ -123,6 +123,9 @@
   <data name="UserNotFound" xml:space="preserve">
     <value>Usuário não encontrado.</value>
   </data>
+  <data name="UserSucessUpdate" xml:space="preserve">
+    <value>Usuário atualizado com sucesso.</value>
+  </data>
   <data name="UserValid" xml:space="preserve">
     <value>Usuário válido</value>
   </data>

@@ -5,8 +5,8 @@ using PetShopCRM.Application.Services.Interfaces;
 namespace PetShopCRM.Web.Controllers;
 
 [Authorize]
-public class GuardianController(
-    ILogger<GuardianController> logger,
+public class SpecieController(
+    ILogger<SpecieController> logger,
     IUserService userService) : Controller
 {
     public IActionResult Index()

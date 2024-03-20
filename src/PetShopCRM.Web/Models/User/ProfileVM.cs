@@ -18,12 +18,12 @@ public class ProfileVM
     [DisplayName("Senha")]
     public string Password { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [DisplayName("Nova Senha")]
+    [MinLength(6, ErrorMessage = ValidationKeysUtil.SizeMin)]
+    [DisplayName("6")]
     public string PasswordNew { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [Compare(nameof(PasswordNew),ErrorMessage = ValidationKeysUtil.ComparePassword)]
+
+    [Compare(nameof(PasswordNew), ErrorMessage = ValidationKeysUtil.ComparePassword)]
     [DisplayName("Confirmar senha")]
     public string ConfirmPassword { get; set; }
 
@@ -34,10 +34,10 @@ public class ProfileVM
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Telefone")]
-    public string Phone { get; set; }    
+    public string Phone { get; set; }
     public IFormFile UrlPhoto { get; set; }
 
-    public void ToViewModel( Domain.Models.User model)
+    public void ToViewModel(Domain.Models.User model)
     {
         Name = model.Name;
         Password = model.Password;
@@ -48,6 +48,6 @@ public class ProfileVM
 
     public ProfileDTO ToDTO()
     {
-        return new ProfileDTO(Id, Name, Password, PasswordNew, ConfirmPassword, Email, Phone, UrlPhoto.GetBytes() );
+        return new ProfileDTO(Id, Name, Password, PasswordNew, ConfirmPassword, Email, Phone, UrlPhoto.GetBytes());
     }
 }

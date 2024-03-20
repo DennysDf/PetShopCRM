@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShopCRM.Domain.Mappers
-{
-    public class UserMapper : IEntityTypeConfiguration<User>
-    {
-        public void Configure(EntityTypeBuilder<User> builder)
-        {
+namespace PetShopCRM.Domain.Mappers;
 
-        }
+public class UserMapper : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+
     }
 }

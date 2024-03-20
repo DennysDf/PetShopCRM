@@ -31,7 +31,7 @@ namespace PetShopCRM.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var response = await userService.ValidateUser(userLogin.ToDTO());
+                    var response = await userService.ValidateAsync(userLogin.ToDTO());
 
                     if (response.Success)
                     {
@@ -83,7 +83,7 @@ namespace PetShopCRM.Web.Controllers
 
         public async Task<IActionResult> Profile()
         {
-            var user = await userService.GetUserById(loggedUserService.Id);
+            var user = await userService.GetUserByIdAsync(loggedUserService.Id);
             var profile =  new ProfileVM();
             profile.ToViewModel(user.Data);
 
@@ -97,9 +97,10 @@ namespace PetShopCRM.Web.Controllers
             {
                 model.Id = loggedUserService.Id;
                 var response = await userService.UpdateAsync(model.ToDTO());
+                notificationService.Success("Teste");
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
     }
 }

@@ -43,13 +43,11 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         userDb.Name = modelProfile.Name;
         userDb.Email = modelProfile.Email;
         userDb.Phone = modelProfile.Phone;
-        userDb.Password = modelProfile.Password ?? userDb.Password;
-        userDb.UrlPhoto =
+        userDb.Password = modelProfile.Password ?? userDb.Password; 
+        userDb.UrlPhoto = "";
 
+        var user = await unitOfWork.UserRepository.AddOrUpdateAsync(userDb);
 
-
-
-        var user = await unitOfWork.UserRepository.AddOrUpdateAsync();
-
+        return new ResponseDTO<User>(user != null, Resources.Message.UserNotFound, user);
     }
 }

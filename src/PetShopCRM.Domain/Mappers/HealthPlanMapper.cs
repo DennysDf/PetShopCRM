@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PetShopCRM.Domain.Mappers;
 
-public class SpecieMapper : IEntityTypeConfiguration<Specie>
+public class HealthPlanMapper : IEntityTypeConfiguration<HealthPlan>
 {
-    public void Configure(EntityTypeBuilder<Specie> builder)
+    public void Configure(EntityTypeBuilder<HealthPlan> builder)
     {
 
     }

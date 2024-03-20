@@ -70,11 +70,38 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Formato de e-mail inválido..
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} é obrigatório..
         /// </summary>
         public static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Máximo de {0} caracteres..
+        /// </summary>
+        public static string SizeMax {
+            get {
+                return ResourceManager.GetString("SizeMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Minímo de {0} caracteres..
+        /// </summary>
+        public static string SizeMin {
+            get {
+                return ResourceManager.GetString("SizeMin", resourceCulture);
             }
         }
         

@@ -7,9 +7,9 @@ namespace PetShopCRM.Application.Services.Interfaces;
 public interface IUserService
 {
     Task<User> AddAsync(User user);
-    Task<ResponseDTO<User>> ValidateUser(UserLoginDTO userLogin);
+    Task<ResponseDTO<User>> ValidateAsync(UserLoginDTO userLogin);
 
-    Task<ResponseDTO<User>> GetUserById(int id);
+    Task<ResponseDTO<User>> GetUserByIdAsync(int id);
 
     Task<ResponseDTO<User>> UpdateAsync(ProfileDTO modelProfile);
 }

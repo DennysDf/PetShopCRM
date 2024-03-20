@@ -8,13 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShopCRM.Domain.Mappers
-{
-    public class ClinicMapper : IEntityTypeConfiguration<Clinic>
-    {
-        public void Configure(EntityTypeBuilder<Clinic> builder)
-        {
+namespace PetShopCRM.Domain.Mappers;
 
-        }
+public class ClinicMapper : IEntityTypeConfiguration<Clinic>
+{
+    public void Configure(EntityTypeBuilder<Clinic> builder)
+    {
+
     }
 }

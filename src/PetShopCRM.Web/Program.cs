@@ -49,13 +49,6 @@ builder.Services.AddSignalR(options =>
 
 var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var db = scope.ServiceProvider.GetRequiredService<PetShopDbContext>();
-//    db.Database.EnsureDeleted();
-//    db.Database.EnsureCreated();
-//}
-
 app.UseAuthentication();
 
 // Configure the HTTP request pipeline.

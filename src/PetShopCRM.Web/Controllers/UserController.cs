@@ -8,6 +8,7 @@ using PetShopCRM.Web.Util;
 
 namespace PetShopCRM.Web.Controllers
 {
+    [Authorize]
     public class UserController(
         ILoginService loginService,
         INotificationService notificationService,
@@ -17,8 +18,6 @@ namespace PetShopCRM.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
-
-
             return View();
         }
 
@@ -68,16 +67,6 @@ namespace PetShopCRM.Web.Controllers
             {
                 throw;
             }
-        }
-
-        [AllowAnonymous]
-        public IActionResult Ajax()
-        {
-            notificationService.Send(Domain.Enums.NotificationType.Error, "Deu erro na bagaça toda!");
-
-            notificationService.Send(Domain.Enums.NotificationType.Error, "Deu erro na bagaça do Dennys!", 1);
-
-            return Ok();
         }
 
         public async Task<IActionResult> Profile()

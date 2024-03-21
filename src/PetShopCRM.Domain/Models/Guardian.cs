@@ -7,4 +7,6 @@ public  class Guardian : EntityBase
     public string CPF { get; set; }
     public string Phone { get; set; }
     public string Address { get; set; }
+
+    public virtual ICollection<Pet> Pets { get; set; }
 }

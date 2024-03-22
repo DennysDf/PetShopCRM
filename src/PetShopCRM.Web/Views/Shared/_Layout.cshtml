@@ -84,7 +84,7 @@
                         </b>
                         <span class="logo-text text-center">
                             <span class="accordionsa">
-                                <img src="~/imagens/vet-card.png" width="165" height="45" alt="homepage"  class="light-logo" />
+                                <img src="~/imagens/vet-card.png" width="165" height="45" alt="homepage" class="light-logo" />
                             </span>
                         </span>
                     </a>
@@ -135,12 +135,13 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
                         </li>
                         <li class="sidebar-item">
-                        <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
-                        <ul aria-expanded="false" class="collapse  first-level">
-                            <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pet </span></a></li>
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-person"></i><span class="hide-menu">  Tutor </span></a></li>
-                        </ul>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-person"></i><span class="hide-menu">  Tutores </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -206,19 +207,19 @@
             NotificationUtil.Stack.Clear();
         }
 
-        signalRObject.execute('/Notification', function (connection) {
-            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
-                return console.error(err.toString());
-            });
+            signalRObject.execute('/Notification', function (connection) {
+                connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                    return console.error(err.toString());
+                });
 
-            connection.on('ReceiveNotificationAll', function (script) {
-                eval(script);
-            });
+                connection.on('ReceiveNotificationAll', function (script) {
+                    eval(script);
+                });
 
-            connection.on('ReceiveNotificationUser', function (script) {
-                eval(script);
+                connection.on('ReceiveNotificationUser', function (script) {
+                    eval(script);
+                });
             });
-        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")

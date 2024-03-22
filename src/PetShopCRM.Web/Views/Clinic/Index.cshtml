@@ -1,7 +1,6 @@
 ﻿@model ICollection<ClinicVM>
 @{
-    ViewData["Title"] = "Clínica";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Clínica";    
 }
 
 <div class="row mb-3 ">
@@ -121,7 +120,7 @@
             window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
         });
 
-        $(".btn-dark").tooltip();
+        //$(".btn-dark").tooltip();
 
         // $(".table").DataTable({
         //     "language": {

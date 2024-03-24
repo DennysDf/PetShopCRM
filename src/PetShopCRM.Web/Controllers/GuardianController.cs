@@ -1,24 +1,52 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.Guardian;
+using PetShopCRM.Web.Services.Interfaces;
 
 namespace PetShopCRM.Web.Controllers;
 
 [Authorize]
 public class GuardianController(
-    ILogger<GuardianController> logger,
-    IUserService userService) : Controller
+        ILoginService loginService,
+        INotificationService notificationService,
+        IGuardianService guardianService, ILoggedUserService loggedUserService,
+        IUpload upload) : Controller
 {
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var guardian = new List<GuardianVM>();
+        var guardians = await guardianService.GetAllAsync();
 
-        return View(guardian);
+        var guardianVMList = new GuardianVM().ToList(guardians);
+
+        return View(guardianVMList);
     }
 
-    public IActionResult Ajax(int id)
+    public async Task<IActionResult> Ajax(int id)
     {
-        return View();
+        var guardianDTO = await guardianService.GetByIdAsync(id);
+        var guardianVM = new GuardianVM();
+
+        if (guardianDTO.Success)
+        {
+            guardianVM = guardianVM.ToVM(guardianDTO.Data);
+        }
+        else
+        {
+            //COLOCAR MENSAGEM DE ERRO AQUI
+        }
+
+        return View(guardianVM);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Index(GuardianVM model)
+    {
+        var guardian = await guardianService.AddAsync(model.ToModel());
+
+        notificationService.Success(Resources.Text.GuardianAddSucess);
+        
+        return RedirectToAction("Index");
     }
 }

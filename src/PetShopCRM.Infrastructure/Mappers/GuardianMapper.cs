@@ -24,7 +24,7 @@ public class GuardianMapper : IEntityTypeConfiguration<Guardian>
         builder.Property(x => x.Name)
             .IsRequired();
 
-        builder.Property(x => x.DateBith)
+        builder.Property(x => x.DateBirth)
             .IsRequired(false);
 
         builder.Property(x => x.CPF)

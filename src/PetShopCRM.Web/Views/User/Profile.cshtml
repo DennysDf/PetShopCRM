@@ -24,17 +24,23 @@
             <span asp-validation-for="Email"></span>
         </div>
     </div>
-
-
-
-    <div class="row mt-2">
-            <div class="col-sm-6">
-            <label asp-for="Password">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
-            <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
-            
+    <div class="row mt-1">
+        <div class="col-sm-6">
+            <label asp-for="Photo" for="Foto">Foto:</label>
+            <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="Phone">Telefone:</label>
+            <input type="text" asp-for="Phone" placeholder="Telefone..." class="form-control phone-mask" />
+            <span asp-validation-for="Phone"></span>
         </div>
     </div>
-
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <label asp-for="Password">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
+        </div>
+    </div>
     <div class="row mt-1">
         <div class="col-sm-6">
             <label asp-for="PasswordNew">Nova senha:</label>
@@ -45,23 +51,6 @@
             <label asp-for="ConfirmPassword">Confirme a senha:</label>
             <input type="password" asp-for="ConfirmPassword" placeholder="Confirme a senha..." class="form-control" />
             <span asp-validation-for="ConfirmPassword"></span>
-        </div>
-    </div>
-
-    <div class="row mt-1">
-        <div class="col-sm-6">
-            <label asp-for="UrlPhoto" for="Foto">Foto:</label>
-            <input type="file" asp-for="UrlPhoto" class="form-control" accept="image/*" />
-        </div>
-    </div>
-
-
-
-    <div class="row mt-1">
-        <div class="col-sm-6">
-            <label asp-for="Phone">Telefone:</label>
-            <input type="text" asp-for="Phone" placeholder="Telefone..." class="form-control phone-mask" />
-            <span asp-validation-for="Phone"></span>
         </div>
     </div>
     <div class="row my-3 d-none" id="row-submit">

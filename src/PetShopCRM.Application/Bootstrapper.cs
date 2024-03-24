@@ -9,6 +9,7 @@ public static class Bootstrapper
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IGuardianService, GuardianService>();
 
         return services;
     }

@@ -61,6 +61,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor castrado com sucesso..
+        /// </summary>
+        public static string GuardianAddSucess {
+            get {
+                return ResourceManager.GetString("GuardianAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao executar ação.
         /// </summary>
         public static string NotificationError {

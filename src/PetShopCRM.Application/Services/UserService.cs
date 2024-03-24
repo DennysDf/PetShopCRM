@@ -3,6 +3,7 @@ using PetShopCRM.Application.DTOs.User;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
+using System.Collections;
 
 namespace PetShopCRM.Application.Services;
 
@@ -44,11 +45,12 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         userDb.Email = modelProfile.Email;
         userDb.Phone = modelProfile.Phone;
         userDb.Password = modelProfile.Password ?? userDb.Password; 
-        userDb.UrlPhoto = "";
+        userDb.UrlPhoto = modelProfile.NamePhoto;
 
         try
         {
             var user = await unitOfWork.UserRepository.AddOrUpdateAsync(userDb);
+            await unitOfWork.SaveChangesAsync();
 
             return new ResponseDTO<User>(true, Resources.Message.UserSucessUpdate, user);
         }

@@ -1,6 +1,45 @@
-﻿@*
-    
-*@
+﻿@model GuardianVM
+@await Html.PartialAsync("_ValidationScriptsPartial")
 @{
     Layout = null;
 }
+
+
+<div class="row">
+    <input type="hidden" asp-for="Id" />
+    <div class=" col-sm-8">
+        <label asp-for="Name">Nome*:</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome..." autofocus />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="DateBirth">Data de Nascimento*:</label>
+        <input type="text" class="form-control date-mask" asp-for="DateBirth" placeholder="Escreva a Data de Nascimento..." autofocus />
+        <span asp-validation-for="DateBirth"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-6">
+        <label asp-for="CPF">CPF*:</label>
+        <input type="text" class="form-control cpf-mask" asp-for="CPF" placeholder="Escreva o CPF..." autofocus />
+        <span asp-validation-for="CPF"></span>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-12">
+                <label asp-for="Phone">Telefone*:</label>
+                <input type="text" class="form-control phone-mask" asp-for="Phone" placeholder="Escreva o Telefone..." autofocus />
+                <span asp-validation-for="Phone"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-12">
+        <label asp-for="Address">Endereço*:</label>
+        <input type="text" class="form-control" asp-for="Address" placeholder="Escreva o Endereço..." autofocus />
+        <span asp-validation-for="Address"></span>
+    </div>
+    <div class="col-sm-4">
+    </div>
+</div>

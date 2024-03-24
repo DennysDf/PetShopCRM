@@ -12,7 +12,8 @@ namespace PetShopCRM.Web.Controllers
     public class UserController(
         ILoginService loginService,
         INotificationService notificationService,
-        IUserService userService, ILoggedUserService loggedUserService) : Controller
+        IUserService userService, ILoggedUserService loggedUserService,
+        IUpload upload) : Controller
     {
         [HttpGet]
         [AllowAnonymous]
@@ -84,7 +85,11 @@ namespace PetShopCRM.Web.Controllers
             if (ModelState.IsValid)
             {
                 model.Id = loggedUserService.Id;
+                model.NamePhoto = upload.GetNameFile(model.Photo ?? null);
                 var response = await userService.UpdateAsync(model.ToDTO());
+
+                if (model.Photo != null)              
+                    upload.SavePhotoProfile(model.Photo, model.Id);
 
                 if (response.Success)                
                     notificationService.Success(response.Message);                

@@ -100,7 +100,7 @@
             var id = $(this).data("id");
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-
+                maskInit();
                 if (id != 0) {
                     $(".title").text("Editar Clínica")
                 } else {

@@ -61,6 +61,42 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica não encontrada..
+        /// </summary>
+        internal static string ClinicNotFound {
+            get {
+                return ResourceManager.GetString("ClinicNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor não encontrado..
+        /// </summary>
+        internal static string GuardianNotFound {
+            get {
+                return ResourceManager.GetString("GuardianNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet não encontrado..
+        /// </summary>
+        internal static string PetNotFound {
+            get {
+                return ResourceManager.GetString("PetNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie não encontrada..
+        /// </summary>
+        internal static string SpecieNotFound {
+            get {
+                return ResourceManager.GetString("SpecieNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário inválido.
         /// </summary>
         internal static string UserInvalid {

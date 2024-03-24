@@ -10,8 +10,8 @@ public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbCo
     public DbSet<Guardian> Guardians { get; set; }
     public DbSet<Pet> Pets { get; set; }
     public DbSet<Clinic> Clinics { get; set; }
-
     public DbSet<Specie> Species { get; set; }
+    public DbSet<HealthPlan> HealthPlans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

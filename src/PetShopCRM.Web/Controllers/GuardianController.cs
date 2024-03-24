@@ -43,10 +43,20 @@ public class GuardianController(
     [HttpPost]
     public async Task<IActionResult> Index(GuardianVM model)
     {
-        var guardian = await guardianService.AddAsync(model.ToModel());
+        var message = model.Id != 0 ? Resources.Text.GuardianUpdateSucess : Resources.Text.GuardianAddSucess;
+        await guardianService.AddOrUpdateAsync(model.ToModel());
 
-        notificationService.Success(Resources.Text.GuardianAddSucess);
+        notificationService.Success(message);
         
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var guardian = await guardianService.DeleteAsync(id);
+        notificationService.Success(Resources.Text.GuardianDeleteSucess);
+
         return RedirectToAction("Index");
     }
 }

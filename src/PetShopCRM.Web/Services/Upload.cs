@@ -9,7 +9,7 @@ public class Upload :IUpload
     {
         if (file != null)
         {
-            var directory = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Upload\\Notas\\{id}");
+            var directory = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Upload\\Profile\\{id}");
 
             if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
 

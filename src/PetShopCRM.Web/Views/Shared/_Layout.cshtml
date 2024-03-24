@@ -150,6 +150,8 @@
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-person"></i><span class="hide-menu">  Tutores </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
+                                
                             </ul>
                         </li>
                     </ul>
@@ -208,6 +210,8 @@
             $(".phone-mask").mask("(00) 0 0000-0000")
             $(".date-mask").mask("00/00/0000")
             $(".cpf-mask").mask("000.000.000-00")
+            $(".cnpj-mask").mask("00.000.000/0000-00")
+            $('.value-mask').mask('#.##0,00', { reverse: true });
         }
         maskInit();
 

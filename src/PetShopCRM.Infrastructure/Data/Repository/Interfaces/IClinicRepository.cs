@@ -2,6 +2,6 @@
 
 namespace PetShopCRM.Infrastructure.Data.Repository.Interfaces;
 
-public interface IGuardianRepository : IRepositoryBase<Guardian>
+public interface IClinicRepository : IRepositoryBase<Clinic>
 {
 }

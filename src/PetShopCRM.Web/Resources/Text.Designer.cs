@@ -61,11 +61,83 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica castrada com sucesso..
+        /// </summary>
+        public static string ClinicAddSucess {
+            get {
+                return ResourceManager.GetString("ClinicAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica apagada com sucesso..
+        /// </summary>
+        public static string ClinicDeleteSucess {
+            get {
+                return ResourceManager.GetString("ClinicDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica atualizada com sucesso..
+        /// </summary>
+        public static string ClinicUpdateSucess {
+            get {
+                return ResourceManager.GetString("ClinicUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor castrado com sucesso..
         /// </summary>
         public static string GuardianAddSucess {
             get {
                 return ResourceManager.GetString("GuardianAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor apagado com sucesso..
+        /// </summary>
+        public static string GuardianDeleteSucess {
+            get {
+                return ResourceManager.GetString("GuardianDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor atualizado com sucesso..
+        /// </summary>
+        public static string GuardianUpdateSucess {
+            get {
+                return ResourceManager.GetString("GuardianUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plano de Saúde castrado com sucesso..
+        /// </summary>
+        public static string HealthPlanAddSucess {
+            get {
+                return ResourceManager.GetString("HealthPlanAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plano de Saúde apagada com sucesso..
+        /// </summary>
+        public static string HealthPlanDeleteSucess {
+            get {
+                return ResourceManager.GetString("HealthPlanDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plano de Saúde atualizado com sucesso..
+        /// </summary>
+        public static string HealthPlanUpdateSucess {
+            get {
+                return ResourceManager.GetString("HealthPlanUpdateSucess", resourceCulture);
             }
         }
         
@@ -84,6 +156,60 @@ namespace PetShopCRM.Web.Resources {
         public static string NotificationTypeError {
             get {
                 return ResourceManager.GetString("NotificationTypeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet castrado com sucesso..
+        /// </summary>
+        public static string PetAddSucess {
+            get {
+                return ResourceManager.GetString("PetAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica apagada com sucesso..
+        /// </summary>
+        public static string PetDeleteSucess {
+            get {
+                return ResourceManager.GetString("PetDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica atualizada com sucesso..
+        /// </summary>
+        public static string PetUpdateSucess {
+            get {
+                return ResourceManager.GetString("PetUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie castrada com sucesso..
+        /// </summary>
+        public static string SpecieAddSucess {
+            get {
+                return ResourceManager.GetString("SpecieAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie apagada com sucesso..
+        /// </summary>
+        public static string SpecieDeleteSucess {
+            get {
+                return ResourceManager.GetString("SpecieDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie atualizada com sucesso..
+        /// </summary>
+        public static string SpecieUpdateSucess {
+            get {
+                return ResourceManager.GetString("SpecieUpdateSucess", resourceCulture);
             }
         }
         

@@ -17,53 +17,35 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
 {
 
     public async Task<List<Guardian>> GetAllAsync()
-    {
-
-        //colocar filtro de apenas o ativos
-        var guardians = await unitOfWork.GuardianRepository.GetByAsync();
+    {   
+        var guardians = await unitOfWork.GuardianRepository.GetByAsync(x => x.Active);
 
         return guardians.ToList();
     }
 
-    public async Task<Guardian> AddAsync(Guardian guardian)
+    public async Task<Guardian> AddOrUpdateAsync(Guardian model)
     {
-        ArgumentNullException.ThrowIfNull(guardian);
-
-        await unitOfWork.GuardianRepository.AddOrUpdateAsync(guardian);
+        ArgumentNullException.ThrowIfNull(model);
+        model.Active = true;
+        await unitOfWork.GuardianRepository.AddOrUpdateAsync(model);
 
         await unitOfWork.SaveChangesAsync();
 
-        return guardian;
+        return model;
     }
 
     public async Task<ResponseDTO<Guardian>> GetByIdAsync(int id)
     {
-        var guardian = await unitOfWork.GuardianRepository.GetByIdAsync(id);
-        return new ResponseDTO<Guardian>(guardian != null, Resources.Message.UserNotFound, guardian);
+        var model = await unitOfWork.GuardianRepository.GetByIdAsync(id);
+        return new ResponseDTO<Guardian>(model != null, Resources.Message.GuardianNotFound, model);
 
     }
 
-    Task<ResponseDTO<Guardian>> IGuardianService.UpdateAsync(GuardianDTO modelProfile)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var delete = await unitOfWork.GuardianRepository.DeleteAsync(id);
+
+        return delete;
     }
-
-    //public async Task<ResponseDTO<User>> UpdateAsync(GuardianDTO modelProfile)
-    //{
-    //    var userDb = await unitOfWork.GuardianRepository.GetByIdAsync(modelProfile.Id);
-
-
-    //    try
-    //    {
-    //        var user = await unitOfWork.UserRepository.AddOrUpdateAsync(userDb);
-    //        await unitOfWork.SaveChangesAsync();
-
-    //        return new ResponseDTO<User>(true, Resources.Message.UserSucessUpdate, user);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        return new ResponseDTO<User>(false, ex.Message, null);
-    //    }
-
-    //}
+ 
 }

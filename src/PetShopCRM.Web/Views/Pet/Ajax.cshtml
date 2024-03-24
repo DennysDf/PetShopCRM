@@ -1,6 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PetVM
+@await Html.PartialAsync("_ValidationScriptsPartial")
 @{
     Layout = null;
 }
+
+
+<div class="row">
+    <input type="hidden" asp-for="Id" />
+    <div class=" col-sm-6">
+        <label asp-for="Name">Nome*:</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome do Pet..." autofocus />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="col-sm-6">
+        <label asp-for="Identifier">Chip*:</label>
+        <input type="text" class="form-control" asp-for="Identifier" placeholder="Escreva o número do chip..." autofocus />
+        <span asp-validation-for="Identifier"></span>
+    </div>
+ 
+</div>
+<div class="row mt-2">
+
+    <div class="col-sm-6">
+        <label asp-for="GuardianId">Tutor*:</label>
+        <select asp-for="GuardianId" class="form-control">
+            <option disabled selected>Selecione</option>
+            <option value="1">Dennys Fonseca de Souza </option>
+        </select>
+        <span asp-validation-for="GuardianId"></span>
+    </div>
+
+
+    <div class="col-sm-6">
+        <label asp-for="SpecieId">Espécie*:</label>
+        <select asp-for="SpecieId" class="form-control">
+            <option disabled selected>Selecione</option>
+            <option value="1">Cachorro</option>
+        </select>
+        <span asp-validation-for="SpecieId"></span>
+    </div>
+</div>

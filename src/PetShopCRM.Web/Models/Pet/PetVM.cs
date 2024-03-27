@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using PetShopCRM.Web.Models.Clinic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PetShopCRM.Web.Models.Pet;
 
@@ -25,6 +26,9 @@ public class PetVM
     [DisplayName("Espécie")]
     public int SpecieId { get; set; }
     public string Specie { get; set; }
+
+    public SelectList GuardianList { get; set; }
+    public SelectList SpecieList { get; set; }
 
 
     public List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM

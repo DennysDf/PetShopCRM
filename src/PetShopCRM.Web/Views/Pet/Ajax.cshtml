@@ -23,9 +23,8 @@
 
     <div class="col-sm-6">
         <label asp-for="GuardianId">Tutor*:</label>
-        <select asp-for="GuardianId" class="form-control">
-            <option disabled selected>Selecione</option>
-            <option value="1">Dennys Fonseca de Souza </option>
+        <select asp-for="GuardianId" class="form-control" asp-items="Model.GuardianList">
+            <option disabled selected>Selecione</option>            
         </select>
         <span asp-validation-for="GuardianId"></span>
     </div>
@@ -33,9 +32,8 @@
 
     <div class="col-sm-6">
         <label asp-for="SpecieId">Espécie*:</label>
-        <select asp-for="SpecieId" class="form-control">
+        <select asp-for="SpecieId" class="form-control" asp-items="Model.SpecieList">
             <option disabled selected>Selecione</option>
-            <option value="1">Cachorro</option>
         </select>
         <span asp-validation-for="SpecieId"></span>
     </div>

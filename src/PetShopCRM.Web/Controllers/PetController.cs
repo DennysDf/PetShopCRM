@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Web.Models.Clinic;
@@ -14,6 +16,8 @@ public class PetController(
         ILoginService loginService,
         INotificationService notificationService,
         IPetService petService, ILoggedUserService loggedUserService,
+        IGuardianService guardianService,
+        ISpecieService specieService,
         IUpload upload) : Controller
 {
     public async Task<IActionResult> Index()
@@ -22,6 +26,8 @@ public class PetController(
 
         var petsVMList = new PetVM().ToList(pets);
 
+
+
         return View(petsVMList);
     }
 
@@ -29,6 +35,12 @@ public class PetController(
     {
         var petDTO = await petService.GetByIdAsync(id);
         var petVM = new PetVM();
+
+        var guardians = guardianService.GetAllAsync().Result.ToList();
+        petVM.GuardianList = new SelectList(guardians.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
+
+        var species = specieService.GetAllAsync().Result.ToList();
+        petVM.SpecieList = new SelectList(species.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
 
         if (petDTO.Success)
         {

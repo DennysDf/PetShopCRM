@@ -18,7 +18,7 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddDbContextPool<PetShopDbContext>(
-        options => options.UseSqlServer("name=ConnectionStrings:PetShopDblocal"));
+        options => options.UseSqlServer("name=ConnectionStrings:PetShopDbServe"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

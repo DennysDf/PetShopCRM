@@ -46,9 +46,17 @@
       "destination": "wwwroot/lib/mdi/font/"
     },
     {
-      "provider": "cdnjs",
       "library": "jquery.mask@1.14.16",
       "destination": "wwwroot/lib/jquery.mask/"
+    },
+    {
+      "library": "Chart.js@4.4.1",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap-table@1.22.4",
+      "destination": "wwwroot/lib/bootstrap-table/"
     }
   ]
 }

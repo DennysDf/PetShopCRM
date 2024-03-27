@@ -42,5 +42,8 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
             .WithMany(x => x.Pets)
             .HasForeignKey(x => x.SpecieId)
             .HasConstraintName("Pets_Species_SpecieId");
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

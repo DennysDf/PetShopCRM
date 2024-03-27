@@ -31,14 +31,15 @@ public class PetVM
     public SelectList SpecieList { get; set; }
 
 
-    public List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM
+    public static List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM
     {
         Id = pet.Id,
         Name = pet.Name,                
         GuardianId  = pet.GuardianId,   
         Identifier = pet.Identifier,
-        SpecieId = pet.SpecieId
-
+        SpecieId = pet.SpecieId,
+        Guardian = pet.Guardian?.Name ?? string.Empty,
+        Specie = pet.Specie?.Name ?? string.Empty
     }).ToList();
 
     public Domain.Models.Pet ToModel() => new Domain.Models.Pet() { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId  };

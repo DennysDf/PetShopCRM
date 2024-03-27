@@ -11,5 +11,5 @@ public interface IRepositoryBase<T> where T : EntityBase
     Task<IQueryable<T>> GetPaginateByAsync(Expression<Func<T, bool>>? filter = null, int pageIndex = 0, int pageSize = 10);
     Task<T> AddOrUpdateAsync(T entity);
     Task<List<T>> AddOrUpdateRangeAsync(List<T> entities);
-    Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteOrRestoreAsync(int id);
 }

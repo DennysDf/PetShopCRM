@@ -22,13 +22,12 @@ public class PetController(
 {
     public async Task<IActionResult> Index()
     {
-        var pets = await petService.GetAllAsync();
+        var petsComplete = await petService.GetAllCompleteAsync();
 
-        var petsVMList = new PetVM().ToList(pets);
+        if(!petsComplete.Success)
+            notificationService.Warning(petsComplete.Message);
 
-
-
-        return View(petsVMList);
+        return View(PetVM.ToList(petsComplete.Data));
     }
 
     public async Task<IActionResult> Ajax(int id)

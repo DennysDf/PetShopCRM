@@ -33,7 +33,7 @@ public class HealthPlanService(IUnitOfWork unitOfWork) : IHealthPlanService
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var delete = await unitOfWork.HealthPlansRepository.DeleteAsync(id);
+        var delete = await unitOfWork.HealthPlansRepository.DeleteOrRestoreAsync(id);
 
         return delete;
     }

@@ -43,7 +43,7 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var delete = await unitOfWork.GuardianRepository.DeleteAsync(id);
+        var delete = await unitOfWork.GuardianRepository.DeleteOrRestoreAsync(id);
 
         return delete;
     }

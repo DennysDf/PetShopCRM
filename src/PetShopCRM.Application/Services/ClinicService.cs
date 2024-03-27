@@ -38,7 +38,7 @@ public class ClinicService(IUnitOfWork unitOfWork) : IClinicService
 
     public async Task<bool> DeleteAsync(int id)
     {
-        var delete = await unitOfWork.ClinicRepository.DeleteAsync(id);
+        var delete = await unitOfWork.ClinicRepository.DeleteOrRestoreAsync(id);
 
         return delete;
     }

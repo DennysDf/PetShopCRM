@@ -10,6 +10,10 @@ public static class Bootstrapper
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IGuardianService, GuardianService>();
+        services.AddScoped<IClinicService, ClinicService>();
+        services.AddScoped<IPetService, PetService>();
+        services.AddScoped<ISpecieService, SpecieService>();
+        services.AddScoped<IHealthPlanService, HealthPlanService>();
 
         return services;
     }

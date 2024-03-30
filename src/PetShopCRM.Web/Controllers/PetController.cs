@@ -1,26 +1,74 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Web.Models.Clinic;
+using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Pet;
+using PetShopCRM.Web.Services.Interfaces;
 
 namespace PetShopCRM.Web.Controllers;
 
 [Authorize]
 public class PetController(
-    ILogger<PetController> logger,
-    IUserService userService) : Controller
+        ILoginService loginService,
+        INotificationService notificationService,
+        IPetService petService, ILoggedUserService loggedUserService,
+        IGuardianService guardianService,
+        ISpecieService specieService,
+        IUpload upload) : Controller
 {
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var pets = new List<PetVM>();
+        var petsComplete = await petService.GetAllCompleteAsync();
 
-        return View(pets);
+        if(!petsComplete.Success)
+            notificationService.Warning(petsComplete.Message);
+
+        return View(PetVM.ToList(petsComplete.Data));
     }
 
-    public IActionResult Ajax(int id)
+    public async Task<IActionResult> Ajax(int id)
     {
+        var petDTO = await petService.GetByIdAsync(id);
+        var petVM = new PetVM();
 
-        return View();
+        if (petDTO.Success)
+            petVM = petVM.ToVM(petDTO.Data);
+        else
+            notificationService.Error();    
+        
+
+        var guardians = guardianService.GetAllAsync().Result.ToList();
+        petVM.GuardianList = new SelectList(guardians.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
+
+        var species = specieService.GetAllAsync().Result.ToList();
+        petVM.SpecieList = new SelectList(species.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
+
+
+        return View(petVM);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Index(PetVM model)
+    {
+        var message = model.Id != 0 ? Resources.Text.PetUpdateSucess : Resources.Text.PetAddSucess;
+        await petService.AddOrUpdateAsync(model.ToModel());
+
+        notificationService.Success(message);
+
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var pet = await petService.DeleteAsync(id);
+        notificationService.Success(Resources.Text.PetDeleteSucess);
+
+        return RedirectToAction("Index");
     }
 
 }

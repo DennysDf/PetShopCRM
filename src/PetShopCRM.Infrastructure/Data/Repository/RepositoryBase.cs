@@ -110,7 +110,7 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
         }
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteOrRestoreAsync(int id)
     {
         if (id == 0) throw new ArgumentNullException(nameof(id));
 
@@ -120,7 +120,9 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
 
             if (entity == null) throw new NullReferenceException(nameof(entity));
 
-            _context.Remove(entity);
+            entity.Active = !entity.Active;
+
+            _context.Update(entity);
         }
         catch (Exception)
         {

@@ -7,8 +7,7 @@ namespace PetShopCRM.Application.Services.Interfaces;
 public interface IGuardianService
 {
     Task<List<Guardian>> GetAllAsync();
+    Task<Guardian> AddOrUpdateAsync(Guardian guardin);
     Task<ResponseDTO<Guardian>> GetByIdAsync(int id);
-    Task<Guardian> AddAsync(Guardian guardin);
-    Task<ResponseDTO<Guardian>> UpdateAsync(GuardianDTO modelGuardian);
-    
+    Task<bool> DeleteAsync(int id);
 }

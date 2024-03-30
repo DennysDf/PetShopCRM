@@ -14,40 +14,41 @@
 </div>
 
 <div class="container">
-
-    <table class="table table-sm table-striped  table-responsive-lg bg-white table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th width="15">#</th>
-                <th>Nome</th>
-                <th>Chip</th>
-                <th>Tutor</th>
-                <th>Espécie</th>
-                <th width="15" class="text-center"> </th>
-            </tr>
-        </thead>
-        <tbody class="bg-white">
-            @foreach (var item in Model)
-            {
-                <tr class="bg-white">
-                    <td>@item.Id</td>
-                    <td class="text-nowrap">@item.Name</td>
-                    <td class="text-nowrap valor">@item.Identifier</td>
-                    <td class="text-nowrap">@item.Guardian</td>
-                    <td class="text-nowrap">@item.Specie</td>
-
-                    <td class="text-nowrap text-right" width="15">
-                        <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
-                            <i class="fa fa-times text-danger"> </i>
-                        </a>
-                        <a class="edit" href="#" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
-                            <i class="text-dark fa fa-pencil-alt"></i>
-                        </a>
-                    </td>
+    <div class="table-responsive-xl">
+        <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th width="15">#</th>
+                    <th>Nome</th>
+                    <th>Chip</th>
+                    <th>Tutor</th>
+                    <th>Espécie</th>
+                    <th width="15" class="text-center"> </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="bg-white">
+                @foreach (var item in Model)
+                {
+                    <tr class="bg-white">
+                        <td>@item.Id</td>
+                        <td class="text-nowrap">@item.Name</td>
+                        <td class="text-nowrap valor">@item.Identifier</td>
+                        <td class="text-nowrap">@item.Guardian</td>
+                        <td class="text-nowrap">@item.Specie</td>
+
+                        <td class="text-nowrap text-right" width="15">
+                            <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
+                                <i class="fa fa-times text-danger"> </i>
+                            </a>
+                            <a class="edit" href="#" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                <i class="text-dark fa fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

@@ -35,20 +35,18 @@ public class PetController(
         var petDTO = await petService.GetByIdAsync(id);
         var petVM = new PetVM();
 
+        if (petDTO.Success)
+            petVM = petVM.ToVM(petDTO.Data);
+        else
+            notificationService.Error();    
+        
+
         var guardians = guardianService.GetAllAsync().Result.ToList();
         petVM.GuardianList = new SelectList(guardians.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
 
         var species = specieService.GetAllAsync().Result.ToList();
         petVM.SpecieList = new SelectList(species.Select(c => new { c.Id, c.Name }).ToList(), "Id", "Name");
 
-        if (petDTO.Success)
-        {
-            petVM = petVM.ToVM(petDTO.Data);
-        }
-        else
-        {
-            //COLOCAR MENSAGEM DE ERRO AQUI
-        }
 
         return View(petVM);
     }

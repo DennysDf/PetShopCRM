@@ -50,13 +50,22 @@
       "destination": "wwwroot/lib/jquery.mask/"
     },
     {
+      "provider": "unpkg",
+      "library": "bootstrap-table@1.22.4",
+      "destination": "wwwroot/lib/bootstrap-table/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "tableexport.jquery.plugin@1.28.0",
+      "destination": "wwwroot/lib/tableexport.jquery.plugin/"
+    },
+    {
       "library": "Chart.js@4.4.1",
       "destination": "wwwroot/lib/Chart.js/"
     },
     {
-      "provider": "unpkg",
-      "library": "bootstrap-table@1.22.4",
-      "destination": "wwwroot/lib/bootstrap-table/"
+      "library": "apexcharts@3.48.0",
+      "destination": "wwwroot/lib/apexcharts/"
     }
   ]
 }

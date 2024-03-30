@@ -19,7 +19,7 @@ public class PetVM
     public string Guardian { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [DisplayName("Identificador")]
+    [DisplayName("Chip")]
     public string Identifier { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
@@ -42,7 +42,7 @@ public class PetVM
         Specie = pet.Specie?.Name ?? string.Empty
     }).ToList();
 
-    public Domain.Models.Pet ToModel() => new Domain.Models.Pet() { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId  };
+    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId  };
 
-    public PetVM ToVM(Domain.Models.Pet model) => new PetVM { Id = model.Id, Name = model.Name, GuardianId = model.GuardianId, Identifier = model.Identifier, SpecieId = model.SpecieId };
+    public PetVM ToVM(Domain.Models.Pet model) => new() { Id = model.Id, Name = model.Name, GuardianId = model.GuardianId, Identifier = model.Identifier, SpecieId = model.SpecieId };
 }

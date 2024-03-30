@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/lib/mdi/font/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/template.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-table/dist/bootstrap-table.min.css" />
     <style type="text/css">
         .bootstrap-datetimepicker-widget {
             width: 285px !important;
@@ -148,7 +149,7 @@
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-person"></i><span class="hide-menu">  Tutores </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
                                 
@@ -183,7 +184,7 @@
         </div>
     </div>
     <!--Container Main end-->
-    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>    
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/AlertifyJS/alertify.min.js"></script>
@@ -196,8 +197,16 @@
     <script src="~/js/custom.min.js" asp-append-version="true"></script>
     <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script><
+    <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
+    <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
+    <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script>
+    <script src="~/lib/Chart.js/chart.umd.min.js" asp-append-version="true"></script>
+    @* <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script> *@
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             var ol = $(".breadcrumb > li");
@@ -214,6 +223,17 @@
             $('.value-mask').mask('#.##0,00', { reverse: true });
         }
         maskInit();
+
+        $('.bootstrap-table').each(function () {
+            // Atribui as propriedades usando o método .attr()
+            $(this).attr({
+                'data-toggle': 'table',
+                'data-search': 'true',
+                'data-pagination': 'true',
+                'data-show-export': 'true',
+                'data-page-list': '[10, 25, 50, 100, all]'
+            });
+        });
 
         @if (NotificationUtil.Stack.Count > 0)
         {

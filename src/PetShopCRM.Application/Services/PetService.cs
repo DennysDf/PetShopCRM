@@ -47,7 +47,7 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
     public async Task<bool> DeleteAsync(int id)
     {
         var delete = await unitOfWork.PetRepository.DeleteOrRestoreAsync(id);
-
+        await unitOfWork.SaveChangesAsync();
         return delete;
     }
 }

@@ -14,7 +14,8 @@ public class LoginService(IHttpContextAccessor httpContextAccessor) : ILoginServ
         {
             new("Id", user.Id.ToString()),
             new(ClaimTypes.Name, user.Name),
-            new(ClaimTypes.Role, user.Type.ToString())
+            new(ClaimTypes.Role, user.Type.ToString()),     
+            new("Image",  user.UrlPhoto != null ? $"{user.UrlPhoto}": "")
         };
 
         var claimsIdentity = new ClaimsIdentity(

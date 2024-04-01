@@ -33,5 +33,5 @@ public class HealthPlansVM
 
     public Domain.Models.HealthPlan ToModel() => new Domain.Models.HealthPlan() { Id = this.Id, Name = this.Name, Value = this.Value, Description = this.Description  };
 
-    public HealthPlansVM ToVM(Domain.Models.HealthPlan model) => new HealthPlansVM { Id = model.Id, Name = model.Name, Description = model.Description, Value = model.Value};
+    public HealthPlansVM ToVM(Domain.Models.HealthPlan model) => new HealthPlansVM { Id = model.Id, Name = model.Name, Description = model.Description, ValueFrontEnd = model.Value.ToString()};
 }

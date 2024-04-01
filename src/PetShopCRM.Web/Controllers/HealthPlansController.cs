@@ -48,7 +48,7 @@ public class HealthPlansController(
     public async Task<IActionResult> Index(HealthPlansVM model)
     {
         var message = model.Id != 0 ? Resources.Text.HealthPlanUpdateSucess : Resources.Text.HealthPlanAddSucess;
-        model.Value = decimal.Parse(model.ValueFrontEnd);
+        model.Value = model.ValueFrontEnd.StringToDecimal();
         await healthPlanService.AddOrUpdateAsync(model.ToModel());
 
         notificationService.Success(message);

@@ -18,11 +18,11 @@
         <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
             <thead class="thead-dark">
                 <tr>
-                    <th width="15">#</th>
+                    <th data-field="id" width="15">#</th>
                     <th>Nome</th>
                     <th>Endereço</th>
                     <th>Telefone</th>
-                    <th width="15" class="text-center"> </th>
+                    <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -95,32 +95,42 @@
     </div>
 </div>
 
+
 @section Scripts {
     <script>
-
         $("#modal-open, .edit").click(function () {
             var id = $(this).data("id");
+            Ajax(id)
+        })
+
+        function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 maskInit();
                 if (id != 0) {
-                    $(".title").text("Editar Tutor")
+                    $(".title").text("Editar Pet")
                 } else {
-                    $(".title").text("Cadastrar Tutor")
+                    $(".title").text("Cadastrar Pet")
                 }
                 $("#modal").modal("show");
             })
-        })
-
-        $(".deletar").click(function () {
-            var id = $(this).data("id")
-            $("#del-evento").val(id)
-            $("#delete").modal("show")
-        })
+        }
 
         $("#confirm-del").click(function () {
             window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
         });
 
+        var $table = $('#table')
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                var id = [row.id]
+                Ajax(id)
+            },
+            'click .deletar': function (e, value, row, index) {
+                var id = [row.id]
+                $("#del-evento").val(id)
+                $("#delete").modal("show")
+            }
+        }
     </script>
 }

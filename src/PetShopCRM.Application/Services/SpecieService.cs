@@ -36,7 +36,7 @@ public class SpecieService(IUnitOfWork unitOfWork) : ISpecieService
     public async Task<bool> DeleteAsync(int id)
     {
         var delete = await unitOfWork.SpecieRepository.DeleteOrRestoreAsync(id);
-
+        await unitOfWork.SaveChangesAsync();
         return delete;
     }
 

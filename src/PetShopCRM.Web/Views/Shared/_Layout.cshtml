@@ -121,7 +121,7 @@
                                 }
                                 else
                                 {
-                                    <img src="~/Upload/Usuarios/@loggedUser.Image" alt="user" class="rounded-circle" width="31">
+                                    <img src="~/Upload/Profile/@loggedUser.Id/@loggedUser.Image" alt="user" class="rounded-circle" width="31">
                                 }
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated">
@@ -202,7 +202,7 @@
     <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
     <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script>
+    @* <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script> *@
     <script src="~/lib/Chart.js/chart.umd.min.js" asp-append-version="true"></script>
     @* <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script> *@
 
@@ -224,8 +224,7 @@
         }
         maskInit();
 
-        $('.bootstrap-table').each(function () {
-            // Atribui as propriedades usando o método .attr()
+        $('.bootstrap-table').each(function () {            
             $(this).attr({
                 'data-toggle': 'table',
                 'data-search': 'true',

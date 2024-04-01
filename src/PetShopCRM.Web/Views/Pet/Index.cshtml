@@ -15,15 +15,15 @@
 
 <div class="container">
     <div class="table-responsive-xl">
-        <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+        <table id="table-teste" class="table table-sm table-striped bootstrap-table bg-white table-hover" data-toggle="table" data-search="true" data-pagination="true" data-show-export="true" data-page-list="[10  25  50  100  all]">
             <thead class="thead-dark">
                 <tr>
-                    <th width="15">#</th>
+                    <th data-field="id" width="15">#</th>
                     <th>Nome</th>
                     <th>Chip</th>
                     <th>Tutor</th>
                     <th>Espécie</th>
-                    <th width="15" class="text-center"> </th>
+                    <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -59,15 +59,14 @@
             <form asp-action="Index" method="post">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title title">Cadastrar Material</h5>
-                    <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="modal-body">
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger"  data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
                     <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
                 </div>
             </form>
@@ -81,7 +80,7 @@
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h5 class="modal-title"><i class="fa fa-exclamation-triangle " style="color:yellow"></i>  ATENÇÃO <i style="color:yellow" class="fa fa-exclamation-triangle"></i></h5>
-                <button type="button" class="close"  data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -92,46 +91,48 @@
                 </span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger"  data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
                 <button type="button" id="confirm-del" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts{
+@section Scripts {
     <script>
-
         $("#modal-open, .edit").click(function () {
             var id = $(this).data("id");
+            Ajax(id)
+        })
+
+        function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-                
-                if (id !=0) {
-                    $(".title").text("Editar Pet")                    
+
+                if (id != 0) {
+                    $(".title").text("Editar Pet")
                 } else {
                     $(".title").text("Cadastrar Pet")
                 }
                 $("#modal").modal("show");
             })
-          })
-
-        $(".deletar").click(function () {
-            var id = $(this).data("id")
-            $("#del-evento").val(id)
-            $("#delete").modal("show")
-        })
+        }
 
         $("#confirm-del").click(function () {
             window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
         });
 
-        //$(".btn-dark").tooltip();
-
-        // $(".table").DataTable({
-        //     "language": {
-        //         "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
-        //     }
-        // }).order([1, 'asc'])
+        var $table = $('#table')
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                var id = [row.id]
+                Ajax(id)
+            },
+            'click .deletar': function (e, value, row, index) {
+                var id = [row.id]
+                $("#del-evento").val(id)
+                $("#delete").modal("show")
+            }
+        }
     </script>
 }

@@ -65,4 +65,20 @@ CREATE TABLE HealthPlans (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL
 );
+CREATE TABLE Payments (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    ExternalId NVARCHAR(255) NOT NULL,
+    PetId INT NOT NULL,
+    GuardianId INT NOT NULL,
+    HealthPlanId INT NOT NULL,
+    IsRecurrence BIT NOT NULL,
+    Installments INT NOT NULL,
+    LastPayment DATETIME2,
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,
+    CONSTRAINT Payments_Pets_PetId FOREIGN KEY (PetId) REFERENCES Pets(Id),
+    CONSTRAINT Payments_Guardians_GuardianId FOREIGN KEY (GuardianId) REFERENCES Guardians(Id),
+    CONSTRAINT Payments_HealthPlans_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id)
+);
 INSERT INTO Users VALUES ('Administrador', 0, 'admin', '123', NULL, NULL, NULL, GETDATE(), NULL, 1)

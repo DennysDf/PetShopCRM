@@ -9,4 +9,6 @@ public class Pet : EntityBase
 
     public virtual Guardian Guardian { get; set; }
     public virtual Specie Specie { get; set; }
+
+    public virtual ICollection<Payment> Payments { get; set; }
 }

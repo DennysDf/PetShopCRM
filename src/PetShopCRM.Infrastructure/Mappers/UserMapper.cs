@@ -42,5 +42,8 @@ public class UserMapper : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.UrlPhoto)
             .IsRequired(false);
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

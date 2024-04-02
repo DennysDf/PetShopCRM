@@ -1,5 +1,10 @@
-﻿namespace PetShopCRM.External.PagarMe.Interfaces;
+﻿using PagarmeApiSDK.Standard.Models;
+using PetShopCRM.Domain.Models;
+using PetShopCRM.External.PagarMe.Models;
 
-internal interface IPagarMeService
+namespace PetShopCRM.External.PagarMe.Interfaces;
+
+public interface IPagarMeService
 {
+    GetSubscriptionResponse? GenerateRecurrence(Guardian guardian, HealthPlan plan, CardDTO card, BillingAddressDTO? billingAddress = null);
 }

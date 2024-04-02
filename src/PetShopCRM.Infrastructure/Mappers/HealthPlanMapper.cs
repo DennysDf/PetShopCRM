@@ -29,5 +29,8 @@ public class HealthPlanMapper : IEntityTypeConfiguration<HealthPlan>
 
         builder.Property(x => x.Description)
             .IsRequired(false);
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

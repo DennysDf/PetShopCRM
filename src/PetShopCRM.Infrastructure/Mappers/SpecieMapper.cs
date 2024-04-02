@@ -23,5 +23,8 @@ public class SpecieMapper : IEntityTypeConfiguration<Specie>
         //Specie
         builder.Property(x => x.Name)
             .IsRequired();
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

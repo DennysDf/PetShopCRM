@@ -14,6 +14,7 @@ public static class Bootstrapper
         services.AddScoped<IPetService, PetService>();
         services.AddScoped<ISpecieService, SpecieService>();
         services.AddScoped<IHealthPlanService, HealthPlanService>();
+        services.AddScoped<IPaymentService, PaymentService>();
 
         return services;
     }

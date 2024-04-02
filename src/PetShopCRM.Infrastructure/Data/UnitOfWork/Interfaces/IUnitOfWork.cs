@@ -10,6 +10,7 @@ public interface IUnitOfWork : IDisposable
     IPetRepository PetRepository { get; }
     ISpecieRepository SpecieRepository { get; }
     IHealthPlansRepository HealthPlansRepository { get; }
+    IPaymentRepository PaymentRepository { get; }
 
     Task<int> SaveChangesAsync();
 }

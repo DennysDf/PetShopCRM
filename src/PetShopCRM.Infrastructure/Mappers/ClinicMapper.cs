@@ -35,5 +35,8 @@ public class ClinicMapper : IEntityTypeConfiguration<Clinic>
 
         builder.Property(x => x.CNPJ)
            .IsRequired();
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

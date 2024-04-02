@@ -25,6 +25,10 @@ public class GuardianVM
     [DisplayName("Telefone")]
     public string Phone { get; set; }
 
+    [EmailAddress(ErrorMessage = ValidationKeysUtil.Email)]
+    [DisplayName("E-mail")]
+    public string Email { get; set; }
+
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Endereço")]
     public string Address { get; set; }
@@ -36,12 +40,13 @@ public class GuardianVM
             CPF = guardian.CPF,
             DateBirth = guardian.DateBirth,
             Id = guardian.Id,
-            Phone = guardian.Phone
+            Phone = guardian.Phone,
+            Email = guardian.Email
         }).ToList();
 
-    public Domain.Models.Guardian ToModel() => new Domain.Models.Guardian() { Id = this.Id, Name = this.Name, Address = this.Address, CPF = this.CPF, DateBirth = this.DateBirth, Phone = this.Phone };
+    public Domain.Models.Guardian ToModel() => new() { Id = this.Id, Name = this.Name, Address = this.Address, CPF = this.CPF, DateBirth = this.DateBirth, Phone = this.Phone, Email = this.Email };
 
-    public GuardianVM ToVM(Domain.Models.Guardian model) => new GuardianVM { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone };
+    public GuardianVM ToVM(Domain.Models.Guardian model) => new() { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone, Email = model.Email };
     
 
 }

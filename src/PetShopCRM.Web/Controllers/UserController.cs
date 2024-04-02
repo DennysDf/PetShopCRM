@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
@@ -92,11 +93,16 @@ namespace PetShopCRM.Web.Controllers
                 if (model.Photo != null)              
                     upload.SavePhotoProfile(model.Photo, model.Id);
 
-                if (response.Success)                
-                    notificationService.Success(response.Message);                
+                if (response.Success)
+                {
+                    await loginService.LoginAsync(response.Data);
+                    notificationService.Success(response.Message);
+                }                
                 else
                     notificationService.Error();
             }
+
+            
 
             return RedirectToAction("Index","Home");
         }

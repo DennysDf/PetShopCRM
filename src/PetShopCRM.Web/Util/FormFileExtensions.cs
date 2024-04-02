@@ -1,6 +1,4 @@
-﻿namespace PetShopCRM.Web.Util;
-
-public static class FormFileExtensions
+﻿public static class FormFileExtensions
 {
     public static byte[] GetBytes(this IFormFile formFile)
     {

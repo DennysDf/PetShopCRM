@@ -31,7 +31,7 @@
                     <tr class="bg-white">
                         <td>@item.Id</td>
                         <td class="text-nowrap">@item.Name</td>
-                        <td class="text-nowrap valor">@item.Address</td>
+                        <td class="text-nowrap">@item.City, @item.State, @item.Address</td>
                         <td class="text-nowrap">@item.Phone</td>
                         <td class="text-nowrap text-right" width="15">
                             <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
@@ -107,6 +107,7 @@
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 maskInit();
+                changeCep();
                 if (id != 0) {
                     $(".title").text("Editar Pet")
                 } else {
@@ -131,6 +132,24 @@
                 $("#del-evento").val(id)
                 $("#delete").modal("show")
             }
+        }
+
+        function changeCep(){
+            $("#CEP").keyup(function () { 
+                if (($(this).val().length) == 9) {
+                    $.getJSON('@Url.Action("GetAddressByCEP")', { "CEP": $(this).val() }, function (response) {
+                        $("#City").val(response.city)
+                        $("#State").val(response.state)
+                        $("#Address").val(response.street)
+                        $("#Neighborhood").val(response.neighborhood)
+                    })
+                }else{
+                    $("#City").val("")
+                    $("#State").val("")
+                    $("#Address").val("")
+                    $("#Neighborhood").val("")
+                }
+            })
         }
     </script>
 }

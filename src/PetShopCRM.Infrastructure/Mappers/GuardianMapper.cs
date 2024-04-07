@@ -35,5 +35,20 @@ public class GuardianMapper : IEntityTypeConfiguration<Guardian>
 
         builder.Property(x => x.Address)
             .IsRequired(false);
+
+        builder.Property(x => x.Country)
+            .IsRequired(false);
+
+        builder.Property(x => x.State)
+            .IsRequired(false);
+
+        builder.Property(x => x.City)
+            .IsRequired(false);
+
+        builder.Property(x => x.CEP)
+            .IsRequired(false);
+
+        builder.Property(x => x.Neighborhood)
+          .IsRequired(false);
     }
 }

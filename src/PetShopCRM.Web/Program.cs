@@ -18,7 +18,7 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddDbContextPool<PetShopDbContext>(
-        options => options.UseSqlServer("name=ConnectionStrings:PetShopDbServe"));
+        options => options.UseSqlServer("name=ConnectionStrings:PetShopDblocal"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -42,6 +42,7 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
 builder.Services.AddScoped<IUpload, Upload>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddSignalR(options =>
 {

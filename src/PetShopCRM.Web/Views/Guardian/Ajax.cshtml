@@ -35,11 +35,33 @@
     </div>
 </div>
 <div class="row mt-2">
-    <div class="col-sm-12">
+    <div class="col-sm-5">
+        <label asp-for="CEP">CEP*:</label>
+        <input type="text" class="form-control cep-mask" asp-for="CEP" placeholder="Escreva o CEP..." autofocus />
+        <span asp-validation-for="CEP"></span>
+    </div>    
+</div>
+<div class="row mt-2">
+    <div class="col-sm-8">
+        <label asp-for="City">Cidade*:</label>
+        <input type="text" class="form-control" readonly asp-for="City" placeholder="Escreva a Cidade..." autofocus />
+        <span asp-validation-for="City"></span>
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="State">Estado*:</label>
+        <input type="text" class="form-control" readonly asp-for="State" placeholder="Escreva a Estado..." autofocus />
+        <span asp-validation-for="State"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-8">
         <label asp-for="Address">Endereço*:</label>
         <input type="text" class="form-control" asp-for="Address" placeholder="Escreva o Endereço..." autofocus />
         <span asp-validation-for="Address"></span>
     </div>
     <div class="col-sm-4">
+        <label asp-for="Neighborhood">Bairro*:</label>
+        <input type="text" class="form-control" asp-for="Neighborhood" placeholder="Escreva o Bairro..." autofocus />
+        <span asp-validation-for="Neighborhood"></span>
     </div>
-</div>
+</div>  

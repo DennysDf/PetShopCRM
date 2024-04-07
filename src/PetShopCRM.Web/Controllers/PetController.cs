@@ -24,9 +24,6 @@ public class PetController(
     {
         var petsComplete = await petService.GetAllCompleteAsync();
 
-        if(!petsComplete.Success)
-            notificationService.Warning(petsComplete.Message);
-
         return View(PetVM.ToList(petsComplete.Data));
     }
 

@@ -1,3 +1,5 @@
 ﻿namespace PetShopCRM.Application.DTOs.Specie;
 
-public class SpecieDTO(int Id, string Name);
+public record SpecieDTO(int Id, string Name);
+
+public record SpeciePercentDTO(string Name, decimal Percent);

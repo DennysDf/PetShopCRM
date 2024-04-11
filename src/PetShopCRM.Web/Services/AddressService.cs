@@ -1,9 +1,7 @@
-﻿using PetShopCRM.Web.DTOs;
+﻿using PetShopCRM.Application.DTOs;
 using PetShopCRM.Web.Models.Endereco;
 using PetShopCRM.Web.Services.Interfaces;
-using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PetShopCRM.Web.Services;
 
@@ -19,9 +17,9 @@ public class AddressService : IAddressService
             var objResponse = JsonSerializer.Deserialize<AddressModel>(contentResp);
 
             if (responseBrasilApi.IsSuccessStatusCode)
-                return new ResponseDTO<AddressModel>(true,"certo", objResponse);
+                return new ResponseDTO<AddressModel>(true,"", objResponse);
             else
-                return new ResponseDTO<AddressModel>(false, "Errado", objResponse);
+                return new ResponseDTO<AddressModel>(false,"", objResponse);
         }
     }
 }

@@ -7,7 +7,7 @@ public class UserRepository(PetShopDbContext context) : RepositoryBase<User>(con
 {
     public async Task<User?> GetByLoginAndPasswordAsync(string login, string password)
     {
-        var user = (await GetByAsync(x => x.Login.Equals(login) && x.Password.Equals(password))).FirstOrDefault();
+        var user = (GetBy(x => x.Login.Equals(login) && x.Password.Equals(password))).FirstOrDefault();
 
         return user;
     }

@@ -18,7 +18,7 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
 
     public async Task<List<Guardian>> GetAllAsync()
     {   
-        var guardians = await unitOfWork.GuardianRepository.GetByAsync(x => x.Active);
+        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active);
 
         return guardians.ToList();
     }

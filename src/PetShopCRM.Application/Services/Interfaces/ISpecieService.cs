@@ -1,4 +1,5 @@
 ﻿using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Specie;
 using PetShopCRM.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -14,4 +15,5 @@ public interface ISpecieService
     Task<Specie> AddOrUpdateAsync(Specie guardin);
     Task<ResponseDTO<Specie>> GetByIdAsync(int id);
     Task<bool> DeleteAsync(int id);
+    Task<List<SpeciePercentDTO>> GetPercent();
 }

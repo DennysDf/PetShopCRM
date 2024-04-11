@@ -15,7 +15,7 @@ public class ClinicService(IUnitOfWork unitOfWork) : IClinicService
 {
     public async Task<List<Clinic>> GetAllAsync()
     {
-        var clinics = await unitOfWork.ClinicRepository.GetByAsync(x => x.Active);
+        var clinics = unitOfWork.ClinicRepository.GetBy(x => x.Active);
 
         return clinics.ToList();
     }

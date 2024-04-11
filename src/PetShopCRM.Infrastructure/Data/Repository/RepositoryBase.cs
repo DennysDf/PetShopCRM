@@ -14,14 +14,14 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<IQueryable<T>> GetByAsync(Expression<Func<T, bool>>? filter = null)
+    public  IQueryable<T> GetBy(Expression<Func<T, bool>>? filter = null)
     {
         var query = _context.Set<T>().AsNoTracking();
 
         if (filter != null)
             query = query.Where(filter);
 
-        return await Task.FromResult(query);
+        return query;
     }
 
     public async Task<int> GetTotalByAsync(Expression<Func<T, bool>>? filter = null)

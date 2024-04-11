@@ -1,4 +1,4 @@
-﻿using PetShopCRM.Web.DTOs;
+﻿using PetShopCRM.Application.DTOs;
 using PetShopCRM.Web.Models.Endereco;
 
 namespace PetShopCRM.Web.Services.Interfaces;

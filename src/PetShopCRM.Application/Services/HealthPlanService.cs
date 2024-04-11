@@ -10,7 +10,7 @@ public class HealthPlanService(IUnitOfWork unitOfWork) : IHealthPlanService
 {
     public async Task<List<HealthPlan>> GetAllAsync()
     {
-        var healthPlans = await unitOfWork.HealthPlansRepository.GetByAsync(x => x.Active);
+        var healthPlans = unitOfWork.HealthPlansRepository.GetBy(x => x.Active);
 
         return healthPlans.ToList();
     }

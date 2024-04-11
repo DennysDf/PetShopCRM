@@ -42,7 +42,6 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-5 col-lg-6">
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card widget-flat">
@@ -76,7 +75,6 @@
                     </div> <!-- end card-->
                 </div> <!-- end col-->
             </div> <!-- end row -->
-
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card widget-flat">
@@ -111,10 +109,11 @@
                 </div> <!-- end col-->
             </div> <!-- end row -->
         </div> <!-- end col -->
+        
+    </div>
 
-
-
-        <div class="col-xl-7 col-lg-6">
+    <div class="row">
+        <div class="col-xl-6 col-lg-6">
             <div class="card card-h-100">
                 <div class="d-flex card-header justify-content-between align-items-center">
                     <h4 class="header-title">Projections Vs Actuals</h4>
@@ -127,7 +126,20 @@
             </div> <!-- end card-->
 
         </div> <!-- end col -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card card-h-100">
+                <div class="d-flex card-header justify-content-between align-items-center">
+                    <h4 class="header-title">Projections Vs Actuals</h4>
+                </div>
+                <div class="card-body pt-0">
+                    <div>
+                        <canvas class="my-4 h-15" id="pie"> </canvas>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
     </div>
+
 </div>
 @section Scripts {
     <script type="text/javascript">
@@ -139,9 +151,7 @@
                 labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'], // Seus rótulos de dados
                 datasets: [{
                     label: 'Vendas',
-                    data: [12, 19, 3, 5, 2, 12, 19, 3, 5, 2, 7, 5], // Seus dados
-                    backgroundColor: 'rgba(170, 189, 36, 0.2)', // Cor de fundo
-                    borderColor: 'rgba(170, 189, 36, 1)', // Cor da borda
+                    data: [12, 19, 3, 5, 2, 12, 19, 3, 5, 2, 7, 5], // Seus dados                    
                     borderWidth: 1 // Largura da borda,
                     
                 }]
@@ -150,5 +160,23 @@
                 responsive: true // Torna o gráfico responsivo
             }
         });
+
+        const xx = document.getElementById('pie').getContext('2d');;
+
+        const myChart2 = new Chart(xx, {
+            type: 'pie', // Escolha o tipo de gráfico desejado (por exemplo, 'bar', 'line', 'pie', etc.)
+            data: {
+                labels: [], // Seus rótulos de dados
+                datasets: [{
+                    label: 'Vendas',
+                    data: [12, 19, 3, 5, 2, 12, 19, 3, 5, 2, 7, 5], // Seus dados                    
+                    borderWidth: 1 // Largura da borda,
+                }]
+            },
+            options: {
+                responsive: true // Torna o gráfico responsivo
+            }
+        });
+
     </script>
 }

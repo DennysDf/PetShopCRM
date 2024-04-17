@@ -11,9 +11,9 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 {
     public async Task<List<Payment>> GetAllAsync()
     {
-        var guardians = await unitOfWork.PaymentRepository.GetByAsync();
+        var guardians = unitOfWork.PaymentRepository.GetBy().ToList();
 
-        return guardians.ToList();
+        return guardians;
     }
 
     public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)
@@ -50,5 +50,10 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         {
             return new ResponseDTO<Payment?>(false, ex.Message, null);
         }
+    }
+
+    public string GenerateWebhookUrl(string host)
+    {
+        return new Uri(new Uri(host), "/Payment/Webhook").AbsoluteUri;
     }
 }

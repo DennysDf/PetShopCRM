@@ -8,7 +8,7 @@ public static class Bootstrapper
 {
     public static IServiceCollection AddExternalServices(this IServiceCollection services)
     {
-        services.AddSingleton<IPagarMeService, PagarMeService>();
+        services.AddScoped<IPagarMeService, PagarMeService>();
 
         return services;
     }

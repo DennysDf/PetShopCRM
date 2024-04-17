@@ -11,6 +11,7 @@ public interface IUnitOfWork : IDisposable
     ISpecieRepository SpecieRepository { get; }
     IHealthPlansRepository HealthPlansRepository { get; }
     IPaymentRepository PaymentRepository { get; }
+    IConfigurationRepository ConfigurationRepository {  get; }
 
     Task<int> SaveChangesAsync();
 }

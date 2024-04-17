@@ -12,7 +12,7 @@ public static class EnumUtil
            .ToList();
     }
 
-    private static string GetDescription<T>(this T enumValue) where T : struct
+    public static string GetDescription<T>(this T enumValue) where T : struct
     {
         if (!typeof(T).IsEnum)
             return null;

@@ -8,9 +8,9 @@ public class GuardianRepository(PetShopDbContext context) : RepositoryBase<Guard
 {
     public async Task<Guardian?> GetByPetIdAsync(int petId)
     {
-        var query = await GetByAsync(x => x.Pets.Any(s => s.Id == petId));
-
-        var guardian = query.Include(x => x.Pets).FirstOrDefault();
+        var guardian = GetBy(x => x.Pets.Any(s => s.Id == petId))
+            .Include(x => x.Pets)
+            .FirstOrDefault();
 
         return guardian;
     }

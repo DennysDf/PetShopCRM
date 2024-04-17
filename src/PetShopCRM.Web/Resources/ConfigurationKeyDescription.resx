@@ -117,37 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClinicNotFound" xml:space="preserve">
-    <value>Clínica não encontrada.</value>
+  <data name="PagarMePassword" xml:space="preserve">
+    <value>Senha Pagar.me (em branco caso use secret key)</value>
   </data>
-  <data name="ConfigurationErrorUpdate" xml:space="preserve">
-    <value>Erro ao atualizar configuração.</value>
+  <data name="PagarMeUser" xml:space="preserve">
+    <value>Usuário Pagar.me (usuário ou secret key)</value>
   </data>
-  <data name="ConfigurationSuccessUpdate" xml:space="preserve">
-    <value>Configuração atualizada com sucesso.</value>
-  </data>
-  <data name="GuardianNotFound" xml:space="preserve">
-    <value>Tutor não encontrado.</value>
-  </data>
-  <data name="PaymentIntegrationFailed" xml:space="preserve">
-    <value>Falha na integração de pagamento.</value>
-  </data>
-  <data name="PetNotFound" xml:space="preserve">
-    <value>Pet não encontrado.</value>
-  </data>
-  <data name="SpecieNotFound" xml:space="preserve">
-    <value>Espécie não encontrada.</value>
-  </data>
-  <data name="UserInvalid" xml:space="preserve">
-    <value>Usuário inválido</value>
-  </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>Usuário não encontrado.</value>
-  </data>
-  <data name="UserSucessUpdate" xml:space="preserve">
-    <value>Usuário atualizado com sucesso.</value>
-  </data>
-  <data name="UserValid" xml:space="preserve">
-    <value>Usuário válido</value>
+  <data name="SystemName" xml:space="preserve">
+    <value>Nome do sistema</value>
   </data>
 </root>

@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using PetShopCRM.Application;
 using PetShopCRM.Domain.Enums;
 using PetShopCRM.External;
 using PetShopCRM.Infrastructure;
-using PetShopCRM.Infrastructure.Seetings;
+using PetShopCRM.Infrastructure.Settings;
 using PetShopCRM.Web.Resources;
 using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;

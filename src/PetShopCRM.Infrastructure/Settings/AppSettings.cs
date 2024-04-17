@@ -1,4 +1,4 @@
-﻿namespace PetShopCRM.Infrastructure.Seetings;
+﻿namespace PetShopCRM.Infrastructure.Settings;
 
 public class AppSettings
 {

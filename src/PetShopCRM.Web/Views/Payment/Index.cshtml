@@ -111,6 +111,7 @@
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 maskInit();
+                changeCep()
                 if (id != 0) {
                     $(".title").text("Editar Pet")
                 } else {
@@ -135,6 +136,25 @@
                 $("#del-evento").val(id)
                 $("#delete").modal("show")
             }
+        }
+
+        function changeCep() {
+            $("#BillingAddress_ZipCode").keyup(function () {
+                if (($(this).val().length) == 9) {
+                    $.getJSON('@Url.Action("GetAddressByCEP", "Guardian")', { "CEP": $(this).val() }, function (response) {
+                        console.log(response)
+                        $("#BillingAddress_City").val(response.city)
+                        $("#BillingAddress_State").val(response.state)
+                        $("#BillingAddress_Address").val(response.street)
+                        $("#BillingAddress_Country").val("BR")
+                    })
+                } else {
+                    $("#BillingAddress_City").val("")
+                    $("#BillingAddress_State").val("")
+                    $("#BillingAddress_Address").val("")
+                    $("#BillingAddress_Country").val("")
+                }
+            })
         }
     </script>
 }

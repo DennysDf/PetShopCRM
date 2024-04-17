@@ -1,13 +1,12 @@
-﻿using Microsoft.Extensions.Options;
-using PagarmeApiSDK.Standard;
+﻿using PagarmeApiSDK.Standard;
 using PagarmeApiSDK.Standard.Authentication;
 using PagarmeApiSDK.Standard.Exceptions;
 using PagarmeApiSDK.Standard.Models;
+using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
-using PetShopCRM.Infrastructure.Seetings;
-using System.Drawing;
+using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 
 namespace PetShopCRM.External.PagarMe;
 
@@ -15,9 +14,12 @@ public class PagarMeService : IPagarMeService
 {
     private readonly IPagarmeApiSDKClient _client;
 
-    public PagarMeService(IOptions<AppSettings> appSettings)
+    public PagarMeService(IUnitOfWork unitOfWork)
     {
-        var auth = new BasicAuthModel.Builder(appSettings.Value.PagarMe.User, appSettings.Value.PagarMe.Password).Build();
+        var pagarMeUser = unitOfWork.ConfigurationRepository.GetBy(x => x.Key == ConfigurationKey.PagarMeUser).FirstOrDefault()?.Value ?? "";
+        var pagarMePassword = unitOfWork.ConfigurationRepository.GetBy(x => x.Key == ConfigurationKey.PagarMePassword).FirstOrDefault()?.Value ?? "";
+
+        var auth = new BasicAuthModel.Builder(pagarMeUser, pagarMePassword).Build();
 
         _client = new PagarmeApiSDKClient.Builder()
             .BasicAuthCredentials(auth)
@@ -72,7 +74,7 @@ public class PagarMeService : IPagarMeService
                         City = billingAddress?.City ?? guardian.City,
                         Country = billingAddress?.Country ?? guardian.Country,
                         State = billingAddress?.State ?? guardian.State,
-                        ZipCode = billingAddress?.ZipCode ?? guardian.ZipCode,
+                        ZipCode = billingAddress?.ZipCode ?? guardian.CEP,
                     }
                 },
                 Description = plan.Description,

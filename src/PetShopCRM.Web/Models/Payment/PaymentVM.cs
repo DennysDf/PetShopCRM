@@ -109,17 +109,14 @@ public class PaymentBillingAddressVM
     public string City { get; set; }
 
     [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
-    [StringLength(2, ErrorMessage = ValidationKeysUtil.SizeMax)]
     [DisplayName("Estado")]
     public string State { get; set; }
 
     [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
-    [StringLength(2, ErrorMessage = ValidationKeysUtil.SizeMax)]
     [DisplayName("País")]
     public string Country { get; set; }
 
     [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
-    [StringLength(8, ErrorMessage = ValidationKeysUtil.SizeMax)]
     [DisplayName("Código Postal (CEP)")]
     public string ZipCode { get; set; }
 

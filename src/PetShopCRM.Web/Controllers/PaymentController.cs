@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Models;
-using PetShopCRM.Web.Models.Clinic;
-using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Payment;
-using PetShopCRM.Web.Models.Pet;
 using PetShopCRM.Web.Services.Interfaces;
-using System.Runtime.InteropServices;
 
 namespace PetShopCRM.Web.Controllers;
 
@@ -73,4 +67,10 @@ public class PaymentController(
         return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
+    [HttpPost]
+    public void Webhook(object data)
+    {
+
+    }
 }

@@ -1,5 +1,6 @@
 ﻿@using PetShopCRM.Web.Services.Interfaces
 @using PetShopCRM.Web.Util
+@using PetShopCRM.Domain.Enums
 @inject ILoggedUserService loggedUser
 
 <!DOCTYPE html>
@@ -150,6 +151,10 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                                @if (loggedUser.Role == nameof(UserType.Admin))
+                                {
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
+                                }
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>

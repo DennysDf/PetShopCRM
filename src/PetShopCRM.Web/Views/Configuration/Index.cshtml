@@ -1,0 +1,110 @@
+﻿@model ICollection<ConfigurationVM>
+@{
+    ViewData["Title"] = "Configurações";
+}
+
+@if(Model.Any(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.System))
+{
+    var first = Model.Where(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.System).First();
+
+    <div class="border-5 border-black border-start row mt-2">
+        <div class="col-10">
+            <h3>@first.GroupDescription</h3>
+        </div>
+        <div class="col-2 text-center">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@first.Group" aria-expanded="false" aria-controls="@first.Group">
+                Exibir/Ocultar
+            </button>
+        </div>
+    </div>
+    <div class="collapse" id="@first.Group">
+        @foreach (var item in Model.Where(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.System))
+        {
+            <div class="border-5 border-black border-start row form-group-inline">
+                <div class="col-4 mt-2">
+                    @if(item.Type == PetShopCRM.Domain.Enums.ConfigurationType.text)
+                    {
+                        <input type="text" name="@item.Key" id="@item.Key" value="@item.Value" class="form-control" />
+                    }
+
+                    @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.numeric)
+                    {
+                        <input type="number" name="@item.Key" id="@item.Key" value="@item.Value" class="form-control" />
+                    }
+
+                    @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.boolean)
+                    {
+                        <input type="checkbox" name="@item.Key" id="@item.Key" value="@item.Value" class="" />
+                    }
+                </div>
+                <div class="col-8 mt-2">
+                    <label for="@item.Key" style="vertical-align: sub;">@item.KeyDescription</label>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@if (Model.Any(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.PagarMe))
+{
+    var first = Model.Where(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.PagarMe).First();
+
+    <div class="border-5 border-black border-start row mt-2">
+        <div class="col-10">
+            <h3>@first.GroupDescription</h3>
+        </div>
+        <div class="col-2 text-center">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#@first.Group" aria-expanded="false" aria-controls="@first.Group">
+                Exibir/Ocultar
+            </button>
+        </div>
+    </div>
+    <div class="collapse" id="@first.Group">
+        @foreach (var item in Model.Where(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.PagarMe))
+        {
+            <div class="border-5 border-black border-start row form-group-inline">
+                <div class="col-4 mt-2">
+                    @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.text)
+                    {
+                        <input type="text" name="@item.Key" id="@item.Key" value="@item.Value" class="form-control" />
+                    }
+
+                    @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.numeric)
+                    {
+                        <input type="number" name="@item.Key" id="@item.Key" value="@item.Value" class="form-control" />
+                    }
+
+                    @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.boolean)
+                    {
+                        <input type="checkbox" name="@item.Key" id="@item.Key" value="@item.Value" class="" />
+                    }
+                </div>
+                <div class="col-8 mt-2">
+                    <label for="@item.Key" style="vertical-align: sub;">@item.KeyDescription</label>
+                </div>
+            </div>
+        }
+
+        <div class="border-5 border-black border-start row form-group-inline">
+            <div class="col-4 mt-2">
+                <input type="text" name="PagarMeUrlWebhook" id="PagarMeUrlWebhook" value="@ViewBag.PagarMeUrlWebhook" class="form-control" readonly />
+            </div>
+            <div class="col-8 mt-2">
+                <label for="PagarMeUrlWebhook" style="vertical-align: sub;">URL Webhook (Copiar e colar no sistema Pagar.me)</label>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $('input:not([readonly])').on('change', function () {
+            var name = $(this).prop('name');
+            var value = $(this).val();
+
+            $.post('@Url.Action("Save")', { "key": name, "value": value }, function (response) {
+                
+            })
+        });
+    </script>
+}

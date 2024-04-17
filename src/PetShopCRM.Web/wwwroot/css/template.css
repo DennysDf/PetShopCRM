@@ -10323,10 +10323,10 @@ html[dir=ltr] body .p-l-0 {
     margin-left: 250px
 }
 
-    .page-wrapper > .container-fluid {
-        padding: 20px;
-        min-height: calc(100vh - 180px)
-    }
+.page-wrapper > .container-fluid {
+    padding: 20px;
+    min-height: calc(100vh - 180px)
+}
 
 .footer {
     padding: 15px 20px
@@ -11287,7 +11287,7 @@ ul.list-style-none {
             }
 
         .sidebar-nav ul .sidebar-item.selected > .sidebar-link {
-            background: #27a9e3;
+            background: #AABD24;
             opacity: 1
         }
 
@@ -15324,10 +15324,10 @@ body .jqstooltip {
 }
 
     .nav-pills.custom-pills .nav-link.active {
-        color: #2962FF;
+        color: #AABD24;
         opacity: 1;
         background-color: transparent;
-        border-bottom: 2px solid #2962FF
+        border-bottom: 2px solid #AABD24
     }
 
 label {

@@ -3,16 +3,19 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
 @import url(/lib/font-awesome/css/all.min.css);
 
-body {
-    background-color: #808080;
+body {    
+    background-image: url(../imagens/background-green.jpeg);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
+.txt-white{
+    color:white;
+}
 
 .login-container {
-    background-color: white;
+    background-color: #11763c;
     padding: 30px;
     border-radius: 8px;
     width: 85%;

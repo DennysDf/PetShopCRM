@@ -61,11 +61,65 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica não encontrada..
+        /// </summary>
+        internal static string ClinicNotFound {
+            get {
+                return ResourceManager.GetString("ClinicNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor não encontrado..
+        /// </summary>
+        internal static string GuardianNotFound {
+            get {
+                return ResourceManager.GetString("GuardianNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet não encontrado..
+        /// </summary>
+        internal static string PetNotFound {
+            get {
+                return ResourceManager.GetString("PetNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie não encontrada..
+        /// </summary>
+        internal static string SpecieNotFound {
+            get {
+                return ResourceManager.GetString("SpecieNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário inválido.
         /// </summary>
         internal static string UserInvalid {
             get {
                 return ResourceManager.GetString("UserInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário não encontrado..
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário atualizado com sucesso..
+        /// </summary>
+        internal static string UserSucessUpdate {
+            get {
+                return ResourceManager.GetString("UserSucessUpdate", resourceCulture);
             }
         }
         

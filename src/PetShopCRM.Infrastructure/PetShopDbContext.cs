@@ -7,9 +7,11 @@ namespace PetShopCRM.Infrastructure;
 public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
-    public DbSet<Tutor> Tutores { get; set; }
+    public DbSet<Guardian> Guardians { get; set; }
     public DbSet<Pet> Pets { get; set; }
-    public DbSet<Clinica> Clinicas { get; set; }
+    public DbSet<Clinic> Clinics { get; set; }
+    public DbSet<Specie> Species { get; set; }
+    public DbSet<HealthPlan> HealthPlans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

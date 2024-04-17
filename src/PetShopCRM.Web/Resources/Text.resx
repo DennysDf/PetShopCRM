@@ -117,11 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClinicAddSucess" xml:space="preserve">
+    <value>Clínica castrada com sucesso.</value>
+  </data>
+  <data name="ClinicDeleteSucess" xml:space="preserve">
+    <value>Clínica apagada com sucesso.</value>
+  </data>
+  <data name="ClinicUpdateSucess" xml:space="preserve">
+    <value>Clínica atualizada com sucesso.</value>
+  </data>
+  <data name="GuardianAddSucess" xml:space="preserve">
+    <value>Tutor castrado com sucesso.</value>
+  </data>
+  <data name="GuardianDeleteSucess" xml:space="preserve">
+    <value>Tutor apagado com sucesso.</value>
+  </data>
+  <data name="GuardianUpdateSucess" xml:space="preserve">
+    <value>Tutor atualizado com sucesso.</value>
+  </data>
+  <data name="HealthPlanAddSucess" xml:space="preserve">
+    <value>Plano de Saúde castrado com sucesso.</value>
+  </data>
+  <data name="HealthPlanDeleteSucess" xml:space="preserve">
+    <value>Plano de Saúde apagada com sucesso.</value>
+  </data>
+  <data name="HealthPlanUpdateSucess" xml:space="preserve">
+    <value>Plano de Saúde atualizado com sucesso.</value>
+  </data>
   <data name="NotificationError" xml:space="preserve">
     <value>Erro ao executar ação</value>
   </data>
   <data name="NotificationTypeError" xml:space="preserve">
     <value>Tipo não esperado</value>
+  </data>
+  <data name="PetAddSucess" xml:space="preserve">
+    <value>Pet castrado com sucesso.</value>
+  </data>
+  <data name="PetDeleteSucess" xml:space="preserve">
+    <value>Clínica apagada com sucesso.</value>
+  </data>
+  <data name="PetUpdateSucess" xml:space="preserve">
+    <value>Clínica atualizada com sucesso.</value>
+  </data>
+  <data name="SpecieAddSucess" xml:space="preserve">
+    <value>Espécie castrada com sucesso.</value>
+  </data>
+  <data name="SpecieDeleteSucess" xml:space="preserve">
+    <value>Espécie apagada com sucesso.</value>
+  </data>
+  <data name="SpecieUpdateSucess" xml:space="preserve">
+    <value>Espécie atualizada com sucesso.</value>
   </data>
   <data name="UserLogged" xml:space="preserve">
     <value>Login realizado com sucesso</value>

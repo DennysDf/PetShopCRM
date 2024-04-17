@@ -2,8 +2,11 @@
 
 public class Pet : EntityBase
 {
-    public string Nome { get; set; }
-    public int TutorId { get; set; }
-    public string Identificador { get; set; }
-    public int EspecieId { get; set; }
+    public string Name { get; set; }
+    public int GuardianId { get; set; }
+    public string Identifier { get; set; }
+    public int SpecieId { get; set; }
+
+    public virtual Guardian Guardian { get; set; }
+    public virtual Specie Specie { get; set; }
 }

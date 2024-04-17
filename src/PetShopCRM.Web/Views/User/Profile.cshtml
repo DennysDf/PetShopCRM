@@ -1,0 +1,76 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Perfil";
+    ViewData["Caminho"] = "<li>Perfil</li>";
+}
+
+<div class="row">
+    <div class="col-12 text-right">
+        <button type="button" class="btn btn-secondary  edit"> <i class="fa fa-pencil-alt"></i> Editar</button>
+    </div>
+</div>
+
+<form asp-action="Profile" method="post" enctype="multipart/form-data">
+
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <label asp-for="Name">Nome:</label>
+            <input type="text" asp-for="Name" placeholder="Nome..." class="form-control" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="Email">E-mail:</label><small> Será usado para recuperar senha.</small>
+            <input type="text" asp-for="Email" placeholder="Email..." class="form-control" />
+            <span asp-validation-for="Email"></span>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-sm-6">
+            <label asp-for="Photo" for="Foto">Foto:</label>
+            <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="Phone">Telefone:</label>
+            <input type="text" asp-for="Phone" placeholder="Telefone..." class="form-control phone-mask" />
+            <span asp-validation-for="Phone"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <label asp-for="Password">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-sm-6">
+            <label asp-for="PasswordNew">Nova senha:</label>
+            <input type="password" asp-for="PasswordNew" placeholder="Senha..." class="form-control" />
+            <span asp-validation-for="PasswordNew"></span>
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="ConfirmPassword">Confirme a senha:</label>
+            <input type="password" asp-for="ConfirmPassword" placeholder="Confirme a senha..." class="form-control" />
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+    </div>
+    <div class="row my-3 d-none" id="row-submit">
+        <div class="col-12 text-center">
+            <button class="btn btn-cyan" type="submit">Salvar</button>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <script type="text/javascript">
+
+        //$("#Telefone").mask('(00) 0 0000-0000');
+
+        $(".form-control").attr("readonly", true)
+
+        $(".edit").click(function () {
+            $(".form-control").removeAttr("readonly")
+            $("#row-submit").removeClass("d-none")
+            $(this).addClass("d-none")
+        });
+
+    </script>
+}

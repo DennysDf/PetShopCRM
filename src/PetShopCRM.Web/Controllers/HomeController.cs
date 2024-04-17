@@ -13,10 +13,12 @@ namespace PetShopCRM.Web.Controllers;
 [Authorize]
 public class HomeController(
     ILogger<HomeController> logger,
-    IUserService userService) : Controller
+    IUserService userService, ISpecieService specieService) : Controller
 {
     public async Task<IActionResult> Index()
     {
+        var percentSpecie = await specieService.GetPercent();
+
         return View();
     }
 

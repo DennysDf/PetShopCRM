@@ -61,6 +61,24 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a As senhas não são iguais..
+        /// </summary>
+        public static string ComparePassword {
+            get {
+                return ResourceManager.GetString("ComparePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Formato de e-mail inválido..
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} é obrigatório..
         /// </summary>
         public static string Required {
@@ -70,11 +88,38 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Máximo de {1} caracteres..
+        /// </summary>
+        public static string SizeMax {
+            get {
+                return ResourceManager.GetString("SizeMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Minímo de {1} caracteres..
+        /// </summary>
+        public static string SizeMin {
+            get {
+                return ResourceManager.GetString("SizeMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário não localizado.
         /// </summary>
         public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha diferente da atual..
+        /// </summary>
+        public static string ValidatePassword {
+            get {
+                return ResourceManager.GetString("ValidatePassword", resourceCulture);
             }
         }
     }

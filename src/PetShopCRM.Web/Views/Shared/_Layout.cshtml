@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/lib/mdi/font/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/template.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-table/dist/bootstrap-table.min.css" />
     <style type="text/css">
         .bootstrap-datetimepicker-widget {
             width: 285px !important;
@@ -26,7 +27,7 @@
 
 
         #navbarSupportedContent {
-            border-bottom: 2px solid #719ECE;
+            border-bottom: 2px solid #AABD24;
             box-shadow: 0 2px 1px -2px #719ECE;
         }
 
@@ -63,6 +64,15 @@
         label {
             font-weight: 700;
         }
+
+        .modal-content {
+            background-color: #f5f5f5 !important;
+        }
+
+        input {
+            background-color: white !important;
+        }
+    
     </style>
 </head>
 <body>
@@ -80,11 +90,11 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
                         <b class="logo-icon ">
-                            <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" width="65" height="50" alt="homepage" class="light-logo" />
+                            <img src="~/imagens/logo-mini.png" width="55" height="50" alt="homepage" style="padding-left:8px" class="light-logo" />
                         </b>
                         <span class="logo-text text-center">
                             <span class="accordionsa">
-                                Pet Shop
+                                <img src="~/imagens/vet-card.png" width="165" height="45" alt="homepage" class="light-logo" />
                             </span>
                         </span>
                     </a>
@@ -107,16 +117,16 @@
 
                                 @if (loggedUser.Image == "")
                                 {
-                                    <img src="https://w7.pngwing.com/pngs/1008/531/png-transparent-paw-graphics-logo-pet-paws-paw-logo-monochrome.png" alt="user" class="rounded-circle" width="31">
+                                    <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" alt="user" class="rounded-circle" width="31">
                                 }
                                 else
                                 {
-                                    <img src="~/Upload/Usuarios/@loggedUser.Image" alt="user" class="rounded-circle" width="31">
+                                    <img src="~/Upload/Profile/@loggedUser.Id/@loggedUser.Image" alt="user" class="rounded-circle" width="31">
                                 }
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated">
 
-                                <a class="dropdown-item" href="@Url.Action("Perfil","User")"><i class="ti-user m-r-5 m-l-5"></i> Meu Perfil</a>
+                                <a class="dropdown-item" href="@Url.Action("Profile","User")"><i class="ti-user m-r-5 m-l-5"></i> Meu Perfil</a>
                                 <div class="dropdown-divider"></div>
 
                                 <a class="dropdown-item" href="@Url.Action("Logout", "User")"><i class="text-danger fa fa-power-off m-r-5 m-l-5"></i> Sair</a>
@@ -133,6 +143,17 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
+                                
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -154,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid" id="center-container">
                 @RenderBody()
             </div>
             <footer class="footer text-center">
@@ -163,7 +184,7 @@
         </div>
     </div>
     <!--Container Main end-->
-    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>    
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/AlertifyJS/alertify.min.js"></script>
@@ -176,7 +197,16 @@
     <script src="~/js/custom.min.js" asp-append-version="true"></script>
     <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
+    <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
+    @* <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script> *@
+    <script src="~/lib/Chart.js/chart.umd.min.js" asp-append-version="true"></script>
+    @* <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script> *@
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             var ol = $(".breadcrumb > li");
@@ -184,7 +214,27 @@
                 $(element).addClass("breadcrumb-item");
             });
         })
-        
+
+        function maskInit(){
+            $(".phone-mask").mask("(00) 0 0000-0000")
+            $(".date-mask").mask("00/00/0000")
+            $(".cpf-mask").mask("000.000.000-00")
+            $(".cnpj-mask").mask("00.000.000/0000-00")
+            $('.value-mask').mask('#.##0,00', { reverse: true });
+            $(".cep-mask").mask("00000-000")
+        }
+        maskInit();
+
+        $('.bootstrap-table').each(function () {            
+            $(this).attr({
+                'data-toggle': 'table',
+                'data-search': 'true',
+                'data-pagination': 'true',
+                'data-show-export': 'true',
+                'data-page-list': '[10, 25, 50, 100, all]'
+            });
+        });
+
         @if (NotificationUtil.Stack.Count > 0)
         {
             foreach (string item in NotificationUtil.Stack.Reverse())
@@ -195,19 +245,19 @@
             NotificationUtil.Stack.Clear();
         }
 
-        signalRObject.execute('/Notification', function (connection) {
-            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
-                return console.error(err.toString());
-            });
+            signalRObject.execute('/Notification', function (connection) {
+                connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                    return console.error(err.toString());
+                });
 
-            connection.on('ReceiveNotificationAll', function (script) {
-                eval(script);
-            });
+                connection.on('ReceiveNotificationAll', function (script) {
+                    eval(script);
+                });
 
-            connection.on('ReceiveNotificationUser', function (script) {
-                eval(script);
+                connection.on('ReceiveNotificationUser', function (script) {
+                    eval(script);
+                });
             });
-        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")

@@ -17,8 +17,8 @@ builder.Services.AddControllersWithViews()
         options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(ValidationMessages));
     });
 
-builder.Services.AddDbContext<PetShopDbContext>(
-        options => options.UseSqlServer("name=ConnectionStrings:PetShopDb"));
+builder.Services.AddDbContextPool<PetShopDbContext>(
+        options => options.UseSqlServer("name=ConnectionStrings:PetShopDbLocal"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -41,6 +41,8 @@ builder.Services.AddServices();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
+builder.Services.AddScoped<IUpload, Upload>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddSignalR(options =>
 {
@@ -48,13 +50,6 @@ builder.Services.AddSignalR(options =>
 });
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<PetShopDbContext>();
-    db.Database.EnsureDeleted();
-    db.Database.EnsureCreated();
-}
 
 app.UseAuthentication();
 

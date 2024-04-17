@@ -4,6 +4,7 @@ using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Services.Interfaces;
+using System.Text.Json;
 
 namespace PetShopCRM.Web.Controllers;
 
@@ -11,7 +12,7 @@ namespace PetShopCRM.Web.Controllers;
 public class GuardianController(
         ILoginService loginService,
         INotificationService notificationService,
-        IGuardianService guardianService, ILoggedUserService loggedUserService,
+        IGuardianService guardianService, ILoggedUserService loggedUserService, IAddressService addressService,
         IUpload upload) : Controller
 {
     public async Task<IActionResult> Index()
@@ -44,6 +45,7 @@ public class GuardianController(
     public async Task<IActionResult> Index(GuardianVM model)
     {
         var message = model.Id != 0 ? Resources.Text.GuardianUpdateSucess : Resources.Text.GuardianAddSucess;
+        model.Country = "BR";
         await guardianService.AddOrUpdateAsync(model.ToModel());
 
         notificationService.Success(message);
@@ -58,5 +60,12 @@ public class GuardianController(
         notificationService.Success(Resources.Text.GuardianDeleteSucess);
 
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<string> GetAddressByCEP(string CEP)
+    {
+        var address = await addressService.GetByCEP(CEP);
+        return JsonSerializer.Serialize(address.Data);
     }
 }

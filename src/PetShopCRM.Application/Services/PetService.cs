@@ -11,14 +11,14 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
 {
     public async Task<List<Pet>> GetAllAsync()
     {
-        var guardians = await unitOfWork.PetRepository.GetByAsync();
+        var guardians = unitOfWork.PetRepository.GetBy();
 
         return guardians.ToList();
     }
 
     public async Task<ResponseDTO<List<Pet>>> GetAllCompleteAsync()
     {
-        var pets = await unitOfWork.PetRepository.GetByAsync();
+        var pets = unitOfWork.PetRepository.GetBy();
 
         var result = pets
             .Include(x => x.Guardian)

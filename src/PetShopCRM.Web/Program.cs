@@ -48,6 +48,7 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
 builder.Services.AddScoped<IUpload, Upload>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddSignalR(options =>
 {

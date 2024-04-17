@@ -1,10 +1,3 @@
 ﻿namespace PetShopCRM.External.PagarMe.Models;
 
-public class BillingAddressDTO
-{
-    public string Address { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string Country { get; set; }
-    public string ZipCode { get; set; }
-}
+public record BillingAddressDTO(string Address, string City, string State, string Country, string ZipCode);

@@ -1,12 +1,21 @@
-﻿namespace PetShopCRM.External.PagarMe.Models;
+﻿using System.ComponentModel;
+
+namespace PetShopCRM.External.PagarMe.Models;
 
 public enum CardBrand
 {
-    visa, 
-    mastercard, 
+    [Description("Visa")]
+    visa,
+    [Description("Mastercard")]
+    mastercard,
+    [Description("Hipercard")]
     hipercard,
-    elo, 
-    credz, 
-    sorocred, 
+    [Description("Elo")]
+    elo,
+    [Description("Credz")]
+    credz,
+    [Description("Sorocred")]
+    sorocred,
+    [Description("Banescard")]
     banescard
 }

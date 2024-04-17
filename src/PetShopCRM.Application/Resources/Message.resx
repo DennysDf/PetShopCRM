@@ -123,6 +123,9 @@
   <data name="GuardianNotFound" xml:space="preserve">
     <value>Tutor não encontrado.</value>
   </data>
+  <data name="PaymentIntegrationFailed" xml:space="preserve">
+    <value>Falha na integração de pagamento.</value>
+  </data>
   <data name="PetNotFound" xml:space="preserve">
     <value>Pet não encontrado.</value>
   </data>

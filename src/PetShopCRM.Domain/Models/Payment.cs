@@ -8,7 +8,7 @@ public class Payment : EntityBase
     public int HealthPlanId { get; set; }
     public bool IsRecurrence { get; set; }
     public int Installments { get; set;}
-    public DateTime LastPayment { get; set; }
+    public DateTime? LastPayment { get; set; }
 
     public virtual Pet Pet { get; set; }
     public virtual Guardian Guardian { get; set; }

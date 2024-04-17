@@ -39,7 +39,12 @@ CREATE TABLE Guardians (
     DateBirth NVARCHAR(20),
     CPF NVARCHAR(14),
     Phone NVARCHAR(20),
+    Email NVARCHAR(255),
     Address NVARCHAR(255),
+    City NVARCHAR(255),
+    State NVARCHAR(255),
+    Country NVARCHAR(255),
+    ZipCode NVARCHAR(255),
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL

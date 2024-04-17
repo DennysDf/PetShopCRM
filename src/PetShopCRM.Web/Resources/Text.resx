@@ -150,6 +150,9 @@
   <data name="NotificationTypeError" xml:space="preserve">
     <value>Tipo não esperado</value>
   </data>
+  <data name="PaymentAddSuccess" xml:space="preserve">
+    <value>Pagamento adicionado com sucesso.</value>
+  </data>
   <data name="PetAddSucess" xml:space="preserve">
     <value>Pet castrado com sucesso.</value>
   </data>

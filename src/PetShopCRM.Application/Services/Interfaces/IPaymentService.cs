@@ -1,8 +1,11 @@
-﻿using PetShopCRM.External.PagarMe.Models;
+﻿using PetShopCRM.Application.DTOs;
+using PetShopCRM.Domain.Models;
+using PetShopCRM.External.PagarMe.Models;
 
 namespace PetShopCRM.Application.Services.Interfaces;
 
 public interface IPaymentService
 {
-    public Task Generate(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null);
+    Task<List<Payment>> GetAllAsync();
+    Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null);
 }

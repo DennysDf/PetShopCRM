@@ -79,6 +79,15 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Falha na integração de pagamento..
+        /// </summary>
+        internal static string PaymentIntegrationFailed {
+            get {
+                return ResourceManager.GetString("PaymentIntegrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pet não encontrado..
         /// </summary>
         internal static string PetNotFound {

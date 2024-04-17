@@ -1,0 +1,9 @@
+label:has(+ input:not([data-val-required]))::after {
+    content: ":";
+    font-weight: bold;
+}
+
+label:has(+ input[data-val-required])::after {
+    content: "*:";
+    font-weight: bold;
+}

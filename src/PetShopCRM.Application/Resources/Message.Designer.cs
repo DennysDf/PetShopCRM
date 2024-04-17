@@ -70,11 +70,38 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao atualizar configuração..
+        /// </summary>
+        internal static string ConfigurationErrorUpdate {
+            get {
+                return ResourceManager.GetString("ConfigurationErrorUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Configuração atualizada com sucesso..
+        /// </summary>
+        internal static string ConfigurationSuccessUpdate {
+            get {
+                return ResourceManager.GetString("ConfigurationSuccessUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor não encontrado..
         /// </summary>
         internal static string GuardianNotFound {
             get {
                 return ResourceManager.GetString("GuardianNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Falha na integração de pagamento..
+        /// </summary>
+        internal static string PaymentIntegrationFailed {
+            get {
+                return ResourceManager.GetString("PaymentIntegrationFailed", resourceCulture);
             }
         }
         

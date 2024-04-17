@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application;
 using PetShopCRM.Domain.Enums;
+using PetShopCRM.External;
 using PetShopCRM.Infrastructure;
+using PetShopCRM.Infrastructure.Settings;
 using PetShopCRM.Web.Resources;
 using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
@@ -33,9 +35,12 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy(nameof(UserType.Admin), x => x.RequireRole(nameof(UserType.Admin)))
     .AddPolicy(nameof(UserType.General), x => x.RequireRole(nameof(UserType.Admin), nameof(UserType.General)));
 
+builder.Services.Configure<AppSettings>(builder.Configuration);
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
+builder.Services.AddExternalServices();
 
 //Web services
 builder.Services.AddScoped<ILoginService, LoginService>();

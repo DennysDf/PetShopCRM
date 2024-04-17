@@ -25,6 +25,10 @@ public class GuardianVM
     [DisplayName("Telefone")]
     public string Phone { get; set; }
 
+    [EmailAddress(ErrorMessage = ValidationKeysUtil.Email)]
+    [DisplayName("E-mail")]
+    public string Email { get; set; }
+
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Endereço")]
     public string Address { get; set; }

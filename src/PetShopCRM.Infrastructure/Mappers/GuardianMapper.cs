@@ -33,6 +33,9 @@ public class GuardianMapper : IEntityTypeConfiguration<Guardian>
         builder.Property(x => x.Phone)
             .IsRequired(false);
 
+        builder.Property(x => x.Email)
+            .IsRequired(false);
+
         builder.Property(x => x.Address)
             .IsRequired(false);
 

@@ -1,5 +1,6 @@
 ﻿@using PetShopCRM.Web.Services.Interfaces
 @using PetShopCRM.Web.Util
+@using PetShopCRM.Domain.Enums
 @inject ILoggedUserService loggedUser
 
 <!DOCTYPE html>
@@ -73,6 +74,9 @@
             background-color: white !important;
         }
     
+        .sidebar-link.active {
+            background-color: rgba(170, 189, 36, .3);
+        }
     </style>
 </head>
 <body>
@@ -147,12 +151,23 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
+                                @if (loggedUser.Role == nameof(UserType.Admin))
+                                {
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
+                                }
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
                                 
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu"> Pagamento </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Payment")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Registro </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Monitoring","Payment")" class="sidebar-link"><i class="fa-solid fa-table-columns"></i><span class="hide-menu">  Monitoramento </span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -222,7 +237,14 @@
             $(".cnpj-mask").mask("00.000.000/0000-00")
             $('.value-mask').mask('#.##0,00', { reverse: true });
             $(".cep-mask").mask("00000-000")
+
+            $('[data-mask]').each((index, element) => {
+                var mask = $(element).data('mask');
+
+                $(element).mask(mask);
+            });
         }
+
         maskInit();
 
         $('.bootstrap-table').each(function () {            
@@ -245,19 +267,21 @@
             NotificationUtil.Stack.Clear();
         }
 
-            signalRObject.execute('/Notification', function (connection) {
-                connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
-                    return console.error(err.toString());
-                });
-
-                connection.on('ReceiveNotificationAll', function (script) {
-                    eval(script);
-                });
-
-                connection.on('ReceiveNotificationUser', function (script) {
-                    eval(script);
-                });
+        signalRObject.execute('/Notification', function (connection) {
+            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                return console.error(err.toString());
             });
+
+            connection.on('ReceiveNotificationAll', function (script) {
+                eval(script);
+            });
+
+            connection.on('ReceiveNotificationUser', function (script) {
+                eval(script);
+            });
+        });
+
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")

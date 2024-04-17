@@ -120,8 +120,17 @@
   <data name="ClinicNotFound" xml:space="preserve">
     <value>Clínica não encontrada.</value>
   </data>
+  <data name="ConfigurationErrorUpdate" xml:space="preserve">
+    <value>Erro ao atualizar configuração.</value>
+  </data>
+  <data name="ConfigurationSuccessUpdate" xml:space="preserve">
+    <value>Configuração atualizada com sucesso.</value>
+  </data>
   <data name="GuardianNotFound" xml:space="preserve">
     <value>Tutor não encontrado.</value>
+  </data>
+  <data name="PaymentIntegrationFailed" xml:space="preserve">
+    <value>Falha na integração de pagamento.</value>
   </data>
   <data name="PetNotFound" xml:space="preserve">
     <value>Pet não encontrado.</value>

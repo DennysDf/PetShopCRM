@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Models;
+using PetShopCRM.External.PagarMe.Interfaces;
+using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Web.Models.User;
-using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
-using PetShopCRM.Web.Util;
 
 namespace PetShopCRM.Web.Controllers
 {
@@ -18,7 +19,7 @@ namespace PetShopCRM.Web.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }

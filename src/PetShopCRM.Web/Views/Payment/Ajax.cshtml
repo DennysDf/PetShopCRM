@@ -1,0 +1,110 @@
+﻿@model PaymentVM
+@await Html.PartialAsync("_ValidationScriptsPartial")
+@{
+    Layout = null;
+}
+
+<input type="hidden" asp-for="Id" />
+
+<div class="row">
+    <div class="col-sm-6 col-12">
+        <label asp-for="PetId">Pet*:</label>
+        <select asp-for="PetId" class="form-select" asp-items="Model.PetList">
+            <option disabled selected>Selecione</option>
+        </select>
+        <span asp-validation-for="PetId"></span>
+    </div>
+    <div class="col-sm-6 col-12">
+        <label asp-for="HealthPlanId">Plano de saúde*:</label>
+        <select asp-for="HealthPlanId" class="form-select" asp-items="Model.HealthPlanList">
+            <option disabled selected>Selecione</option>
+        </select>
+        <span asp-validation-for="HealthPlanId"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-4 col-12">
+        <label asp-for="Card.Installments"></label>
+        <input type="text" class="form-control" asp-for="Card.Installments" />
+        <span asp-validation-for="Card.Installments"></span>
+    </div>
+    <div class="col-sm-4 col-12">
+        <label asp-for="Card.Number"></label>
+        <input type="text" class="form-control" asp-for="Card.Number" data-mask="0000 0000 0000 0000" />
+        <span asp-validation-for="Card.Number"></span>
+    </div>
+    <div class="col-sm-4 col-12">
+        <label asp-for="Card.HolderName"></label>
+        <input type="text" class="form-control" asp-for="Card.HolderName" onkeyup="this.value = this.value.toUpperCase()" />
+        <span asp-validation-for="Card.HolderName"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-3 col-12">
+        <label asp-for="Card.ExpirationMonth"></label>
+        <input type="text" class="form-control" asp-for="Card.ExpirationMonth" data-mask="00" />
+        <span asp-validation-for="Card.ExpirationMonth"></span>
+    </div>
+    <div class="col-sm-3 col-12">
+        <label asp-for="Card.ExpirationYear"></label>
+        <input type="text" class="form-control" asp-for="Card.ExpirationYear" data-mask="00" />
+        <span asp-validation-for="Card.ExpirationYear"></span>
+    </div>
+    <div class="col-sm-3 col-12">
+        <label asp-for="Card.Cvv"></label>
+        <input type="text" class="form-control" asp-for="Card.Cvv" data-mask="0000" />
+        <span asp-validation-for="Card.Cvv"></span>
+    </div>
+    <div class="col-sm-3 col-12">
+        <label asp-for="Card.Brand"></label>
+        <select asp-for="Card.Brand" class="form-select" asp-items="Model.Card.BrandList">
+            <option disabled selected>Selecione</option>
+        </select>
+        <span asp-validation-for="Card.Brand"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <label class="form-check-label" asp-for="BillingAddress.HasBillingAddress"></label>
+        <div class="form-check form-check-inline ml-3">
+            <input class="form-check-inline" type="radio" asp-for="BillingAddress.HasBillingAddress" id="inlineRadio1" value="true" onclick="$('.divBillingAddress').removeClass('d-none')">
+            <label class="form-check-label" for="inlineRadio1">Sim</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-inline" type="radio" asp-for="BillingAddress.HasBillingAddress" id="inlineRadio2" value="false" onclick="$('.divBillingAddress').addClass('d-none')">
+            <label class="form-check-label" for="inlineRadio2">Não</label>
+        </div>
+    </div>
+</div>
+<div class="d-none divBillingAddress">
+    <div class="row mt-2">
+        <div class="col-sm-4 col-12">
+            <label asp-for="BillingAddress.ZipCode"></label>
+            <input type="text" class="form-control cep-mask" asp-for="BillingAddress.ZipCode" />
+            <span asp-validation-for="BillingAddress.ZipCode"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-4">
+            <label asp-for="BillingAddress.City"></label>
+            <input type="text" class="form-control" readonly asp-for="BillingAddress.City" />
+            <span asp-validation-for="BillingAddress.City"></span>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="BillingAddress.State"></label>
+            <input type="text" class="form-control" readonly asp-for="BillingAddress.State" />
+            <span asp-validation-for="BillingAddress.State"></span>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="BillingAddress.Country"></label>
+            <input type="text" class="form-control" readonly asp-for="BillingAddress.Country" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-12">
+            <label asp-for="BillingAddress.Address"></label>
+            <input type="text" class="form-control" asp-for="BillingAddress.Address" />
+            <span asp-validation-for="BillingAddress.Address"></span>
+        </div>
+    </div>
+</div>

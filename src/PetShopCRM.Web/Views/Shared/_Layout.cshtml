@@ -149,27 +149,30 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                @if (loggedUser.Role == nameof(UserType.Admin))
-                                {
-                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
-                                }
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu"> Pagamento </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Payment")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Registro </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Monitoring","Payment")" class="sidebar-link"><i class="fa-solid fa-table-columns"></i><span class="hide-menu">  Monitoramento </span></a></li>
                             </ul>
                         </li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
+                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
+  
+
+                         @if (loggedUser.Role == nameof(UserType.Admin))
+                        {
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                               
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
+                                
+                            </ul>
+                        </li>
+                        }
                     </ul>
                 </nav>
             </div>

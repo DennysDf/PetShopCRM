@@ -20,6 +20,12 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         return user;
     }
 
+    public async Task<List<User>> GetAllAsync()
+    {
+        var users = unitOfWork.UserRepository.GetBy();
+
+        return users.ToList();
+    }
     public async Task<ResponseDTO<User>> GetUserByIdAsync(int id)
     {
         var user = await unitOfWork.UserRepository.GetByIdAsync(id);        

@@ -14,12 +14,12 @@
 
     <div class="row mt-2">
         <div class="col-sm-6">
-            <label asp-for="Name">Nome:</label>
+            <label asp-for="Name"></label>
             <input type="text" asp-for="Name" placeholder="Nome..." class="form-control" />
             <span asp-validation-for="Name"></span>
         </div>
         <div class="col-sm-6">
-            <label asp-for="Email">E-mail:</label><small> Será usado para recuperar senha.</small>
+            <label asp-for="Email"></label><small> Será usado para recuperar senha.</small>
             <input type="text" asp-for="Email" placeholder="Email..." class="form-control" />
             <span asp-validation-for="Email"></span>
         </div>
@@ -30,25 +30,25 @@
             <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
         </div>
         <div class="col-sm-6">
-            <label asp-for="Phone">Telefone:</label>
+            <label asp-for="Phone"></label>
             <input type="text" asp-for="Phone" placeholder="Telefone..." class="form-control phone-mask" />
             <span asp-validation-for="Phone"></span>
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-sm-6">
-            <label asp-for="Password">Senha atual:</label> <small>Para atualizar a senha confirme a senha atual.</small>
+            <label asp-for="Password"></label> <small>Para atualizar a senha confirme a senha atual.</small>
             <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
         </div>
     </div>
     <div class="row mt-1">
         <div class="col-sm-6">
-            <label asp-for="PasswordNew">Nova senha:</label>
+            <label asp-for="PasswordNew"></label>
             <input type="password" asp-for="PasswordNew" placeholder="Senha..." class="form-control" />
             <span asp-validation-for="PasswordNew"></span>
         </div>
         <div class="col-sm-6">
-            <label asp-for="ConfirmPassword">Confirme a senha:</label>
+            <label asp-for="ConfirmPassword"></label>
             <input type="password" asp-for="ConfirmPassword" placeholder="Confirme a senha..." class="form-control" />
             <span asp-validation-for="ConfirmPassword"></span>
         </div>
@@ -61,8 +61,6 @@
 </form>
 @section Scripts {
     <script type="text/javascript">
-
-        //$("#Telefone").mask('(00) 0 0000-0000');
 
         $(".form-control").attr("readonly", true)
 

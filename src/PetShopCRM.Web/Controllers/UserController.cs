@@ -107,6 +107,19 @@ namespace PetShopCRM.Web.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public async Task<IActionResult> AddUser()
+        {
+            var users = await userService.GetAllAsync();
+
+            return View(AddUserVM.ToList(users));
+        }
+
+        public async Task<IActionResult> AjaxUser()
+        {
+
+            return View();
+        }
+
         public bool ValidatePassword(int id )
         {
             return true;

@@ -8,12 +8,12 @@
 <div class="row">
     <input type="hidden" asp-for="Id" />
     <div class=" col-sm-6">
-        <label asp-for="Name">Nome*:</label>
+        <label asp-for="Name"></label>
         <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome do Plano..." autofocus />
         <span asp-validation-for="Name"></span>
     </div>
     <div class="col-sm-6">
-        <label asp-for="ValueFrontEnd">Valor*:</label>
+        <label asp-for="ValueFrontEnd"></label>
         <input type="text" class="form-control value-mask" asp-for="ValueFrontEnd" placeholder="Escreva o valor..." autofocus />
         <span asp-validation-for="ValueFrontEnd"></span>
     </div>
@@ -21,7 +21,7 @@
 </div>
 <div class="row mt-2">
     <div class="col-sm-12">
-        <label asp-for="Description">Descrição:</label>
+        <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" placeholder="Escreva uma descrição..."></textarea>
         <span asp-validation-for="Description"></span>
     </div>

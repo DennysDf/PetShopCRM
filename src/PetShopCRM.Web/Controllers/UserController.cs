@@ -1,10 +1,14 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
+using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Services.Interfaces;
 
@@ -111,13 +115,44 @@ namespace PetShopCRM.Web.Controllers
         {
             var users = await userService.GetAllAsync();
 
+            
+
             return View(AddUserVM.ToList(users));
         }
 
-        public async Task<IActionResult> AjaxUser()
+        public async Task<IActionResult> AjaxUser(int id)
         {
+            var userDTO = await userService.GetUserByIdAsync(id);
+            var userVM = new AddUserVM();
 
-            return View();
+            if (userDTO.Success)
+                userVM = userVM.ToVM(userDTO.Data);
+
+        var typeUsers = new SelectList(EnumUtil.ToList<UserType>(), "Key", "Value");
+        userVM.TyUserList = typeUsers;
+
+            return View(userVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser(AddUserVM model)
+        {
+            var message = model.Id != 0 ? Resources.Text.UserUpdateSucess : Resources.Text.UserAddSucess;
+            
+            await userService.AddOrUpdateAsync(model.ToModel());
+
+            notificationService.Success(message);
+
+            return RedirectToAction("AddUser");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var guardian = await userService.DeleteAsync(id);
+            notificationService.Success(Resources.Text.UserDeleteSucess);
+
+            return RedirectToAction("AddUser");
         }
 
         public bool ValidatePassword(int id )

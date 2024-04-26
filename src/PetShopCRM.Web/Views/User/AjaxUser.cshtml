@@ -3,3 +3,55 @@
 @{
     Layout = null;
 }
+<div class="row">
+    <input type="hidden" asp-for="Id" />
+    <div class=" col-sm-12">
+        <label asp-for="Name"></label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome..." autofocus />
+        <span asp-validation-for="Name"></span>
+    </div> 
+</div>
+<div class="row mt-2">
+    <div class="col-sm-6">
+        <label asp-for="CPF"></label>
+        <input type="text" class="form-control cpf-mask" asp-for="CPF" placeholder="Escreva o CPF..." autofocus />
+        <span asp-validation-for="CPF"></span>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-12">
+                <label asp-for="Phone"></label>
+                <input type="text" class="form-control phone-mask" asp-for="Phone" placeholder="Escreva o Telefone..." autofocus />
+                <span asp-validation-for="Phone"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-6">
+        <label asp-for="Login"></label>
+        <input type="text" class="form-control" asp-for="Login" placeholder="Escreva o Login..." autofocus />
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="col-sm-6">
+        <label asp-for="Type"></label>
+        <select asp-for="Type" class="form-select" asp-items="Model.TyUserList">
+            <option disabled selected>Selecione</option>
+        </select>
+        <span asp-validation-for="Type"></span>
+        
+        
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-6">
+        <label asp-for="Password"></label>
+        <input type="password" class="form-control" asp-for="Password" placeholder="Escreva a senha..." autofocus />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="col-sm-6">
+        <label asp-for="ConfirmPassword"></label>
+        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirme a senha..." autofocus />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+</div>

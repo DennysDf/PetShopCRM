@@ -16,6 +16,7 @@ public class UnitOfWork(PetShopDbContext dbContext) : IUnitOfWork
     private IHealthPlansRepository? _healthPlansRepository;
     private IPaymentRepository? _paymentRepository;
     private IConfigurationRepository? _configurationRepository;
+    private IPaymentHistoryRepository? _paymentHistoryRepository;
 
     public IUserRepository UserRepository => _userRepository ??= new UserRepository(dbContext);
     public IGuardianRepository GuardianRepository => _guardianRepository ??= new GuardianRepository(dbContext);
@@ -25,7 +26,7 @@ public class UnitOfWork(PetShopDbContext dbContext) : IUnitOfWork
     public IHealthPlansRepository HealthPlansRepository => _healthPlansRepository ??= new HealthPlansRepository(dbContext);
     public IPaymentRepository PaymentRepository => _paymentRepository ??= new PaymentRepository(dbContext);
     public IConfigurationRepository ConfigurationRepository => _configurationRepository ??= new ConfigurationRepository(dbContext);
-
+    public IPaymentHistoryRepository PaymentHistoryRepository => _paymentHistoryRepository ??= new PaymentHistoryRepository(dbContext);
 
     public async Task<int> SaveChangesAsync()
     {

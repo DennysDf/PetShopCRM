@@ -18,7 +18,8 @@ public class PaymentController(
 {
     public async Task<IActionResult> Index()
     {
-        var payments = await paymentService.GetAllAsync();
+        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var payments = paymentsDTO.Data;
 
         return View(PaymentVM.ToList(payments));
     }

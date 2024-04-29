@@ -14,7 +14,8 @@ public class PaymentController(
         INotificationService notificationService,
         IPaymentService paymentService,
         IPetService petService,
-        IHealthPlanService healthPlanService) : Controller
+        IHealthPlanService healthPlanService,
+        IPaymentHistoryService paymentHistoryService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -30,8 +31,8 @@ public class PaymentController(
 
         var paymentVM = new PaymentVM
         {
-            PetList = new SelectList(pets.Select(c => new { c.Id, c.Name }).ToList(), nameof(Pet.Id), nameof(Pet.Name)),
-            HealthPlanList = new SelectList(healthPlans.Select(c => new { c.Id, c.Name }).ToList(), nameof(HealthPlan.Id), nameof(HealthPlan.Name)),
+            PetList = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name)),
+            HealthPlanList = new SelectList(healthPlans.Select(c => new { c.Id, Name = $"{c.Name} - R$ {c.Value}" }).ToList(), nameof(HealthPlan.Id), nameof(HealthPlan.Name)),
             Card = new PaymentCardVM
             {
                 BrandList = new SelectList(EnumUtil.ToList<CardBrand>(), "Key", "Value")
@@ -69,8 +70,21 @@ public class PaymentController(
 
     [AllowAnonymous]
     [HttpPost]
-    public void Webhook(object data)
+    public async Task<IActionResult> WebhookAsync(WebhookDTO dto)
     {
+        var isValid = paymentHistoryService.ValidateEvent(dto.type);
 
+        if(isValid)
+            _ = await paymentHistoryService.SaveAsync(dto.id, dto.type, dto.data.amount.ToString().StringLiteralToDecimal());
+
+        return Ok();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Monitoring()
+    {
+        var histories = await paymentHistoryService.GetAllAsync();
+
+        return View(PaymentHistoryVM.ToList(histories));
     }
 }

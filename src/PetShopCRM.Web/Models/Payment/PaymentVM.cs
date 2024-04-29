@@ -30,7 +30,8 @@ public class PaymentVM
     public string HealhPlan { get; set; }
     public string ExternalId { get; set; }
     public bool IsRecurrence { get; set; }
-    public int Installments { get; set; }
+    public int Installment { get; set; }
+    public DateTime? FirstPayment { get; set; }
     public DateTime? LastPayment { get; set; }
 
     public static List<PaymentVM> ToList(List<Domain.Models.Payment> payments)
@@ -42,7 +43,8 @@ public class PaymentVM
             HealthPlanId = x.HealthPlanId,
             ExternalId = x.ExternalId,
             IsRecurrence = x.IsRecurrence,
-            Installments = x.Installments,
+            Installment = x.Installment,
+            FirstPayment = x.FirstPayment,
             LastPayment = x.LastPayment,
             Pet = x.Pet.Name,
             HealhPlan = x.HealthPlan.Name

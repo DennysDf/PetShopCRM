@@ -23,17 +23,12 @@
     </div>
 </div>
 <div class="row mt-2">
-    <div class="col-sm-4 col-12">
-        <label asp-for="Card.Installments"></label>
-        <input type="text" class="form-control" asp-for="Card.Installments" />
-        <span asp-validation-for="Card.Installments"></span>
-    </div>
-    <div class="col-sm-4 col-12">
+    <div class="col-sm-6 col-12">
         <label asp-for="Card.Number"></label>
         <input type="text" class="form-control" asp-for="Card.Number" data-mask="0000 0000 0000 0000" />
         <span asp-validation-for="Card.Number"></span>
     </div>
-    <div class="col-sm-4 col-12">
+    <div class="col-sm-6 col-12">
         <label asp-for="Card.HolderName"></label>
         <input type="text" class="form-control" asp-for="Card.HolderName" onkeyup="this.value = this.value.toUpperCase()" />
         <span asp-validation-for="Card.HolderName"></span>

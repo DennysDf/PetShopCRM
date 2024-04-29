@@ -34,7 +34,8 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
                     PetId = petId,
                     HealthPlanId = healthPan.Id,
                     IsRecurrence = true,
-                    Installments = card.Installments,
+                    Installment = 1,
+                    FirstPayment = DateTime.Now,
                     LastPayment = DateTime.Now
                 };
 

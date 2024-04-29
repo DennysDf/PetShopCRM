@@ -41,8 +41,11 @@ public class PaymentMapper : IEntityTypeConfiguration<Payment>
         builder.Property(x => x.IsRecurrence)
             .IsRequired();
 
-        builder.Property(x => x.Installments)
+        builder.Property(x => x.Installment)
             .IsRequired();
+
+        builder.Property(x => x.FirstPayment)
+            .IsRequired(false);
 
         builder.Property(x => x.LastPayment)
             .IsRequired(false);

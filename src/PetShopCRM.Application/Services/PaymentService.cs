@@ -1,4 +1,5 @@
-﻿using PetShopCRM.Application.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopCRM.Application.DTOs;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
@@ -11,10 +12,24 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 {
     public async Task<List<Payment>> GetAllAsync()
     {
-        var guardians = unitOfWork.PaymentRepository.GetBy().ToList();
+        var payments = unitOfWork.PaymentRepository.GetBy().ToList();
 
-        return guardians;
+        return payments;
     }
+
+    public async Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync()
+    {
+        var payments = unitOfWork.PaymentRepository.GetBy();
+
+        var result = payments
+            .Include(x => x.Guardian)
+            .Include(x => x.Pet)
+            .Include(x => x.HealthPlan)
+            .ToList();
+
+        return new ResponseDTO<List<Payment>>(result.Count > 0, "Nenhum resultado encontrado", result);
+    }
+
 
     public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)
     {

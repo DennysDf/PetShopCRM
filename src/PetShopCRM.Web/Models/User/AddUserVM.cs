@@ -28,7 +28,7 @@ public class AddUserVM
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Tipo de usuário")]
-    public UserType Type { get; set; }
+    public UserType? Type { get; set; }
 
     public SelectList TyUserList { get; set; }
 

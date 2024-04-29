@@ -26,7 +26,11 @@
             width: 285px !important;
         }
 
-
+        .dropdown-item:active {
+            color: #fff;
+            text-decoration: none;
+            background-color: #AABD24!important;
+        }
         #navbarSupportedContent {
             border-bottom: 2px solid #AABD24;
             box-shadow: 0 2px 1px -2px #719ECE;
@@ -219,10 +223,7 @@
     <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
     <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
-    @* <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script> *@
-    <script src="~/lib/Chart.js/chart.umd.min.js" asp-append-version="true"></script>
-    @* <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script> *@
-
+    <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -231,6 +232,21 @@
                 $(element).addClass("breadcrumb-item");
             });
         })
+
+        function formatarNumeroBrasileiro(numero) {
+            var retorno = 0
+            if(!!numero){
+                retorno = numero.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+            }
+            return retorno
+        }
+
+        function YearNow() {
+            let dataAtual = new Date();
+            let anoAtual = dataAtual.getFullYear();
+            return anoAtual
+        }
+        
 
         function maskInit() {
             $(".phone-mask").mask("(00) 0 0000-0000")

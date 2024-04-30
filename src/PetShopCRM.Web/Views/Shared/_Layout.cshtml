@@ -98,11 +98,11 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                     <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
                         <b class="logo-icon ">
-                            <img src="~/imagens/logo-mini.png" width="55" height="50" alt="homepage" style="padding-left:8px" class="light-logo" />
+                            <img src="~/imagens/logo-mini.svg" width="60" height="55" alt="homepage" style="padding-left:8px" class="light-logo" />
                         </b>
                         <span class="logo-text text-center">
                             <span class="accordionsa">
-                                <img src="~/imagens/vet-card.png" width="165" height="45" alt="homepage" class="light-logo" />
+                                <img src="~/imagens/vet-card.svg" width="180" height="60" alt="homepage" class="light-logo" />
                             </span>
                         </span>
                     </a>
@@ -299,6 +299,23 @@
                 });
             });
 
+        removerPontoInicio($(".formatNumber").text())
+        function removerPontoInicio(str) {            
+            if (str.charAt(0) === '.') {
+                $(".formatNumber").text(str.slice(1));
+            }
+        }
+
+        function createArryDatas(objData) {
+            var arrDatas = [] 
+            $.each(objData, function (i, element) {
+                arrDatas.push(element.Name)
+            });
+
+            return arrDatas;
+        }
+
+     
 
     </script>
     @await RenderSectionAsync("Scripts", required: false)

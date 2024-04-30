@@ -32,7 +32,7 @@ public class PaymentController(
 
         var paymentVM = new PaymentVM
         {
-            PetList = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name)),
+            PetList = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).OrderBy(c => c.Name) .ToList(), nameof(Pet.Id), nameof(Pet.Name)),
             HealthPlanList = new SelectList(healthPlans.Select(c => new { c.Id, Name = $"{c.Name} - R$ {c.Value}" }).ToList(), nameof(HealthPlan.Id), nameof(HealthPlan.Name)),
             Card = new PaymentCardVM
             {

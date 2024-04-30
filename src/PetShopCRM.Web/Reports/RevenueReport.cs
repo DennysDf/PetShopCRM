@@ -5,8 +5,6 @@ namespace PetShopCRM.Web.Reports;
 public class RevenueReport
 {
     private readonly DateTime dateLastMonth = DateTime.Now.AddMonths(-1);
-    private readonly DateTime dateLastMonth2 = DateTime.Now.AddMonths(-2);
-
     public double GetQtdPayments(List<Payment> payments) => (double)payments
             .Where(c => c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year)
             .Sum(c => c.HealthPlan.Value);
@@ -14,10 +12,6 @@ public class RevenueReport
     private double GetQtdPaymentsLastMonth(List<Payment> payments) =>  (double)payments
             .Where(c => c.CreatedDate.Month == dateLastMonth.Month)
             .Sum(c => c.HealthPlan.Value);
-
-    private double GetQtdPaymentsLastMonth2(List<Payment> payments) => (double)payments
-          .Where(c => c.CreatedDate.Month == dateLastMonth2.Month)
-          .Sum(c => c.HealthPlan.Value);
 
     private bool CompareCurrentMonthWithLastMonth(double qtdPayments, double qtdPaymentsLastMonth) => qtdPayments > qtdPaymentsLastMonth;
 
@@ -47,14 +41,6 @@ public class RevenueReport
         var getQtdPayments = GetQtdPayments(payments);
         var getQtdPaymentsLastMonth = GetQtdPaymentsLastMonth(payments);
         return GetPercent(getQtdPayments, getQtdPaymentsLastMonth);
-    }
-
-    public double GetPercent2Months(List<Payment> payments)
-    {
-        
-        var getQtdPaymentsLastMonth = GetQtdPaymentsLastMonth(payments);
-        var getQtdPaymentsLastMonth2 = GetQtdPaymentsLastMonth2(payments);
-        return GetPercentMonthLast(getQtdPaymentsLastMonth, getQtdPaymentsLastMonth2);
     }
 
     private double GetPercent(double qtdPayments, double qtdPaymentsLastMonth) => Math.Round(((double)(qtdPayments - qtdPaymentsLastMonth) / qtdPaymentsLastMonth) * 100, 2);

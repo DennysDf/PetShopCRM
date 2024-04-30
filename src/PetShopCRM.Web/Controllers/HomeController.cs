@@ -7,6 +7,7 @@ using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models;
 using PetShopCRM.Web.Models.Guardian;
+using PetShopCRM.Web.Models.Payment;
 using PetShopCRM.Web.Reports;
 using PetShopCRM.Web.SignalHubs;
 using Polly.Bulkhead;
@@ -18,9 +19,9 @@ namespace PetShopCRM.Web.Controllers;
 [Authorize]
 public class HomeController(
     ILogger<HomeController> logger,
-    IUserService userService, 
-    ISpecieService specieService, 
-    IGuardianService guardianService, 
+    IUserService userService,
+    ISpecieService specieService,
+    IGuardianService guardianService,
     IPetService petService,
     IPaymentService paymentService) : Controller
 {
@@ -28,10 +29,12 @@ public class HomeController(
     public async Task<IActionResult> Index()
     {
         await CardGuardians();
-        await CardVendas();        
+        await CardVendas();
         await CardFaturamento();
-        await CardGrowth();
+        await CardPet();
         await ChartPieSpecie();
+        await ChartFaturamentoAnual();
+        await ChartFaturamentoAnualIndividual();
 
         return View();
     }
@@ -44,7 +47,7 @@ public class HomeController(
 
         ViewData["PercentGuardians"] = guardiansReport.GetPercent(guardians);
 
-        ViewData["QtdGuardians"] =  guardiansReport.GetQtdGuardians(guardians);
+        ViewData["QtdGuardians"] = guardiansReport.GetQtdGuardians(guardians);
 
         ViewData["TypeTextGuardians"] = guardiansReport.GetTypeText(guardians);
 
@@ -80,19 +83,17 @@ public class HomeController(
         ViewData["ArrowFaturamento"] = revenueReport.GetArrow(payments);
     }
 
-    public async Task CardGrowth()
+    public async Task CardPet()
     {
-        var growthReport = new GrowthReport();
+        var petsReport = new PetsReport();
 
-        var paymentsDTO = await paymentService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;        
-        var guardians = await guardianService.GetAllAsync();
+        var petsDTO = await petService.GetAllCompleteAsync();
+        var pets = petsDTO.Data;
 
-
-        ViewData["QtdGrowth"] = growthReport.GetPercent(guardians, payments); ;
-        ViewData["PercentGrowth"] = growthReport.GetPercentDifference(guardians, payments);
-        ViewData["TypeTextGrowth"] = growthReport.GetTypeText(guardians, payments);
-        ViewData["ArrowGrowth"] = growthReport.GetArrow(guardians, payments);
+        ViewData["QtdPets"] = petsReport.GetQtdPets(pets);
+        ViewData["PercentPets"] = petsReport.GetPercent(pets);
+        ViewData["TypeTextPets"] = petsReport.GetTypeText(pets);
+        ViewData["ArrowPets"] = petsReport.GetArrow(pets);
 
     }
 
@@ -113,6 +114,86 @@ public class HomeController(
         })
         .OrderByDescending(c => c.Index)
         .ToArray());
+    }
+
+    public async Task ChartFaturamentoAnualIndividual()
+    {
+        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var payments = paymentsDTO.Data;
+
+        var faturamentoAnual = payments.Select(c => new
+        {
+            c.HealthPlan.Value,
+            c.HealthPlan.Name,
+            mes = c.CreatedDate.Month
+        })
+        .GroupBy(c => new { c.Name })
+        .Select(c => new
+        {
+            Name = c.Key.Name,
+            Data = new Decimal[]
+            {
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 1).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 2).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 3).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 4).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 5).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 6).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 7).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 8).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 9).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 10).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 11).Sum(s => s.Value))),
+                Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 12).Sum(s => s.Value)))
+            }
+        }).ToList();
+
+        var teste = faturamentoAnual
+            .Select(c => new { 
+                Data = new Decimal[] 
+                {
+                    
+                }
+            }).ToList();
+
+        ViewData["ObjFaturamentoAnual"] = JsonConvert.SerializeObject(faturamentoAnual.ToArray());
+    }
+
+    public async Task ChartFaturamentoAnual()
+    {
+
+        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var payments = paymentsDTO.Data;
+
+        var faturamentoAnualIndividual = payments.Select(c => new
+        {
+            c.HealthPlan.Value,
+            c.HealthPlan.Name,
+            mes = c.CreatedDate.Month
+        })
+        .GroupBy(c => new { c.mes })
+        .Select(c => new
+        {
+            Name = c.Key.mes,
+            Data = new Decimal[]
+        {
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 1).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 2).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 3).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 4).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 5).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 6).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 7).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 8).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 9).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 10).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 11).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 12).Sum(s => s.Value)))
+        }
+        }).ToArray();
+
+        ViewData["ObjFaturamentoAnualIndividual"] = JsonConvert.SerializeObject(faturamentoAnualIndividual);
+
     }
 
     [Authorize(policy: nameof(UserType.Admin))]

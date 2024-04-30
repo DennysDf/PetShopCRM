@@ -30,6 +30,8 @@ public class PaymentVM
     public string HealhPlan { get; set; }
     public string ExternalId { get; set; }
     public bool IsRecurrence { get; set; }
+    public bool IsSuccess { get; set; }
+    public bool IsActive { get; set; }
     public int Installment { get; set; }
     public DateTime? FirstPayment { get; set; }
     public DateTime? LastPayment { get; set; }
@@ -46,6 +48,8 @@ public class PaymentVM
             Installment = x.Installment,
             FirstPayment = x.FirstPayment,
             LastPayment = x.LastPayment,
+            IsSuccess = x.IsSuccess,
+            IsActive = x.Active,
             Pet = x.Pet.Name,
             HealhPlan = x.HealthPlan.Name
         }).ToList();
@@ -66,13 +70,13 @@ public class PaymentCardVM
     [DisplayName("Mês de expiração")]
     [MaxLength(2, ErrorMessage = ValidationKeysUtil.SizeMax)]
     [MinLength(2, ErrorMessage = ValidationKeysUtil.SizeMin)]
-    public int? ExpirationMonth { get; set; }
+    public string ExpirationMonth { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Ano de expiração")]
     [MaxLength(2, ErrorMessage = ValidationKeysUtil.SizeMax)]
     [MinLength(2, ErrorMessage = ValidationKeysUtil.SizeMin)]
-    public int? ExpirationYear { get; set; }
+    public string ExpirationYear { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Código de segurança")]
@@ -84,15 +88,11 @@ public class PaymentCardVM
     [DisplayName("Bandeira")]
     public CardBrand? Brand { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [DisplayName("Recorrência (meses)")]
-    public int? Installments { get; set; }
-
     public SelectList BrandList { get; set; }
 
     public CardDTO ToDTO()
     {
-        return new CardDTO(Number, HolderName, ExpirationMonth.Value, ExpirationYear.Value, Cvv, Brand.Value, Installments.Value);
+        return new CardDTO(Number, HolderName, ExpirationMonth, ExpirationYear, Cvv, Brand.Value);
     }
 }
 

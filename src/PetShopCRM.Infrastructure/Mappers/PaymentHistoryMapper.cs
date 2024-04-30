@@ -37,8 +37,5 @@ public class PaymentHistoryMapper : IEntityTypeConfiguration<PaymentHistory>
             .WithMany(x => x.PaymentHistories)
             .HasForeignKey(x => x.PaymentId)
             .HasConstraintName("PaymentHistories_Payments_PaymentId");
-
-        //Filter
-        builder.HasQueryFilter(x => x.Active);
     }
 }

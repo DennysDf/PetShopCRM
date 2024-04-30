@@ -10,6 +10,7 @@ public class Payment : EntityBase
     public int Installment { get; set;}
     public DateTime? FirstPayment { get; set; }
     public DateTime? LastPayment { get; set; }
+    public bool IsSuccess { get; set; }
 
     public virtual Pet Pet { get; set; }
     public virtual Guardian Guardian { get; set; }

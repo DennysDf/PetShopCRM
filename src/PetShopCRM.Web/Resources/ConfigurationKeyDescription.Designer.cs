@@ -61,6 +61,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Url do dashboard do Pagar.me.
+        /// </summary>
+        public static string PagarMeDashboardUrl {
+            get {
+                return ResourceManager.GetString("PagarMeDashboardUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Senha Pagar.me (em branco caso use secret key).
         /// </summary>
         public static string PagarMePassword {

@@ -169,6 +169,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento cancelado com sucesso..
+        /// </summary>
+        public static string PaymentDeleteSuccess {
+            get {
+                return ResourceManager.GetString("PaymentDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pet castrado com sucesso..
         /// </summary>
         public static string PetAddSucess {

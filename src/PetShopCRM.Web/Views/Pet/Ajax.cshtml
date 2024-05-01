@@ -8,12 +8,12 @@
 <div class="row">
     <input type="hidden" asp-for="Id" />
     <div class=" col-sm-6">
-        <label asp-for="Name">Nome*:</label>
+        <label asp-for="Name"></label>
         <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome do Pet..." autofocus />
         <span asp-validation-for="Name"></span>
     </div>
     <div class="col-sm-6">
-        <label asp-for="Identifier">Chip*:</label>
+        <label asp-for="Identifier"></label>
         <input type="text" class="form-control" asp-for="Identifier" placeholder="Escreva o número do chip..." autofocus />
         <span asp-validation-for="Identifier"></span>
     </div>
@@ -22,7 +22,7 @@
 <div class="row mt-2">
 
     <div class="col-sm-6">
-        <label asp-for="GuardianId">Tutor*:</label>
+        <label asp-for="GuardianId"></label>
         <select asp-for="GuardianId" class="form-control" asp-items="Model.GuardianList">
             <option disabled selected>Selecione</option>            
         </select>
@@ -31,7 +31,7 @@
 
 
     <div class="col-sm-6">
-        <label asp-for="SpecieId">Espécie*:</label>
+        <label asp-for="SpecieId"></label>
         <select asp-for="SpecieId" class="form-control" asp-items="Model.SpecieList">
             <option disabled selected>Selecione</option>
         </select>

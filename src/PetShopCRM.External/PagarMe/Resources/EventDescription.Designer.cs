@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PetShopCRM.Web.Resources {
+namespace PetShopCRM.External.PagarMe.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PetShopCRM.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ConfigurationKeyDescription {
+    public class EventDescription {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ConfigurationKeyDescription() {
+        internal EventDescription() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PetShopCRM.Web.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetShopCRM.Web.Resources.ConfigurationKeyDescription", typeof(ConfigurationKeyDescription).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetShopCRM.External.PagarMe.Resources.EventDescription", typeof(EventDescription).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,65 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Url do dashboard do Pagar.me.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cartão expirado..
         /// </summary>
-        public static string PagarMeDashboardUrl {
+        public static string card_expired {
             get {
-                return ResourceManager.GetString("PagarMeDashboardUrl", resourceCulture);
+                return ResourceManager.GetString("card.expired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha Pagar.me (em branco caso use secret key).
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Reprovado no antifraude..
         /// </summary>
-        public static string PagarMePassword {
+        public static string charge_antifraud_reproved {
             get {
-                return ResourceManager.GetString("PagarMePassword", resourceCulture);
+                return ResourceManager.GetString("charge.antifraud_reproved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Ativar renovação automática do pagamento ao completar 12 parcelas.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cobrança paga..
         /// </summary>
-        public static string PagarMeRenewRecurrence {
+        public static string charge_paid {
             get {
-                return ResourceManager.GetString("PagarMeRenewRecurrence", resourceCulture);
+                return ResourceManager.GetString("charge.paid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário Pagar.me (usuário ou secret key).
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento da cobrança falhou..
         /// </summary>
-        public static string PagarMeUser {
+        public static string charge_payment_failed {
             get {
-                return ResourceManager.GetString("PagarMeUser", resourceCulture);
+                return ResourceManager.GetString("charge.payment_failed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome do sistema.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cobrança extornada..
         /// </summary>
-        public static string SystemName {
+        public static string charge_refunded {
             get {
-                return ResourceManager.GetString("SystemName", resourceCulture);
+                return ResourceManager.GetString("charge.refunded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Assinatura cancelada..
+        /// </summary>
+        public static string subscription_canceled {
+            get {
+                return ResourceManager.GetString("subscription.canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Assinatura criada..
+        /// </summary>
+        public static string subscription_created {
+            get {
+                return ResourceManager.GetString("subscription.created", resourceCulture);
             }
         }
     }

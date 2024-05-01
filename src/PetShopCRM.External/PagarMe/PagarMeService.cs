@@ -46,8 +46,8 @@ public class PagarMeService : IPagarMeService
                 Customer = new CreateCustomerRequest
                 {
                     Name = guardian.Name,
-                    Email = guardian.Email,
-                    Document = guardian.CPF,
+                    Email = guardian.Email ?? "teste@gmail.com",
+                    Document = guardian.CPF.Replace(".", "").Replace("-", ""),
                     DocumentType = "CPF",
                     Type = "individual",
                     Phones = new CreatePhonesRequest
@@ -62,10 +62,10 @@ public class PagarMeService : IPagarMeService
                 },
                 Card = new CreateCardRequest
                 {
-                    Number = card.Number,
+                    Number = card.Number.Replace(" ", ""),
                     HolderName = card.HolderName,
-                    ExpMonth = card.ExpirationMonth,
-                    ExpYear = card.ExpirationYear,
+                    ExpMonth = int.Parse(card.ExpirationMonth),
+                    ExpYear = int.Parse(card.ExpirationYear),
                     Cvv = card.Cvv,
                     Brand = card.Brand.ToString(),
                     BillingAddress = new CreateAddressRequest
@@ -77,13 +77,68 @@ public class PagarMeService : IPagarMeService
                         ZipCode = billingAddress?.ZipCode ?? guardian.CEP,
                     }
                 },
-                Description = plan.Description,
+                Description = plan.Description ?? plan.Name,
                 PricingScheme = new CreatePricingSchemeRequest
                 {
                     SchemeType = "unit",
                     Price = int.Parse(planValue)
                 },
                 Quantity = 1
+            });
+
+            return response;
+        }
+        catch (ApiException ex)
+        {
+
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
+        return null;
+    }
+
+    public GetSubscriptionResponse? CancelSubscription(string subscriptionId)
+    {
+        return _client.SubscriptionsController.CancelSubscription(subscriptionId, new CreateCancelSubscriptionRequest
+        {
+            CancelPendingInvoices = true
+        });
+    }
+
+    //status: paid ou waiting_funds
+    //type: chargeback, refund, chargeback_refund ou credit
+    public ListPayablesResponse GetPayables(string? type = null, string? status = null, int? page = null, int? size = null)
+    {
+        return _client.PayablesController.GetPayables(type: type, status: status, page: page, size: size);
+    }
+
+    public GetSubscriptionResponse? RenewRecurrence(HealthPlan plan, string customerId, string cardId, string value)
+    {
+        try
+        {
+            var response = _client.SubscriptionsController.CreateSubscription(new CreateSubscriptionRequest
+            {
+                PaymentMethod = "credit_card",
+                Currency = "BRL",
+                Interval = "month",
+                IntervalCount = 1,
+                BillingType = "prepaid",
+                Installments = 12,
+                Quantity = 1,
+                StartAt = DateTime.Now.AddDays(30),
+                StatementDescriptor = plan.Name,
+                Description = plan.Description ?? plan.Name,
+                CustomerId = customerId,
+                CardId = cardId,
+                PricingScheme = new CreatePricingSchemeRequest
+                {
+                    SchemeType = "unit",
+                    Price = int.Parse(value)
+                },
             });
 
             return response;

@@ -153,6 +153,9 @@
   <data name="PaymentAddSuccess" xml:space="preserve">
     <value>Pagamento adicionado com sucesso.</value>
   </data>
+  <data name="PaymentDeleteSuccess" xml:space="preserve">
+    <value>Pagamento cancelado com sucesso.</value>
+  </data>
   <data name="PetAddSucess" xml:space="preserve">
     <value>Pet castrado com sucesso.</value>
   </data>
@@ -171,7 +174,16 @@
   <data name="SpecieUpdateSucess" xml:space="preserve">
     <value>Espécie atualizada com sucesso.</value>
   </data>
+  <data name="UserAddSucess" xml:space="preserve">
+    <value>Usuário castrado com sucesso.</value>
+  </data>
+  <data name="UserDeleteSucess" xml:space="preserve">
+    <value>Usuário apagado com sucesso.</value>
+  </data>
   <data name="UserLogged" xml:space="preserve">
     <value>Login realizado com sucesso</value>
+  </data>
+  <data name="UserUpdateSucess" xml:space="preserve">
+    <value>Usuário atualizado com sucesso.</value>
   </data>
 </root>

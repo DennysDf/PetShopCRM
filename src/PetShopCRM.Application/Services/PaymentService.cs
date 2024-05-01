@@ -1,19 +1,42 @@
-﻿using PetShopCRM.Application.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopCRM.Application.DTOs;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
+using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
+using System.Text.Json;
 
 namespace PetShopCRM.Application.Services;
 
 public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeService) : IPaymentService
 {
+    public Payment? GetById(int id)
+    {
+        return unitOfWork.PaymentRepository.GetBy(x => x.Id == id)
+            .Include(x => x.HealthPlan)
+            .FirstOrDefault();
+    }
+
     public async Task<List<Payment>> GetAllAsync()
     {
-        var guardians = unitOfWork.PaymentRepository.GetBy().ToList();
+        var payments = unitOfWork.PaymentRepository.GetBy().ToList();
 
-        return guardians;
+        return payments;
+    }
+
+    public async Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync()
+    {
+        var payments = unitOfWork.PaymentRepository.GetBy();
+
+        var result = payments
+            .Include(x => x.Guardian)
+            .Include(x => x.Pet)
+            .Include(x => x.HealthPlan)
+            .ToList();
+
+        return new ResponseDTO<List<Payment>>(result.Count > 0, "Nenhum resultado encontrado", result);
     }
 
     public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)
@@ -25,7 +48,7 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 
             var paymentResponse = pagarMeService.GenerateRecurrence(guardian, healthPan, card, billingAddress);
 
-            if (paymentResponse != null && paymentResponse.Status.Equals("Success", StringComparison.OrdinalIgnoreCase))
+            if (paymentResponse != null)
             {
                 var payment = new Payment
                 {
@@ -34,8 +57,10 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
                     PetId = petId,
                     HealthPlanId = healthPan.Id,
                     IsRecurrence = true,
-                    Installments = card.Installments,
-                    LastPayment = DateTime.Now
+                    Installment = 0,
+                    FirstPayment = DateTime.Now,
+                    LastPayment = DateTime.Now,
+                    IsSuccess = paymentResponse.Status.Equals("active", StringComparison.OrdinalIgnoreCase)
                 };
 
                 await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
@@ -55,5 +80,50 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
     public string GenerateWebhookUrl(string host)
     {
         return new Uri(new Uri(host), "/Payment/Webhook").AbsoluteUri;
+    }
+
+    public async Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date)
+    {
+        var payment = await unitOfWork.PaymentRepository.GetByIdAsync(id);
+
+        if(payment != null)
+        {
+            payment.LastPayment = date;
+            payment.Installment++;
+
+            await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
+            await unitOfWork.SaveChangesAsync();
+        }
+    }
+
+    public async Task<bool> CancelAsync(int id)
+    {
+        var payment = await unitOfWork.PaymentRepository.GetByIdAsync(id);
+
+        if (payment == null) return false;
+
+        var result = pagarMeService.CancelSubscription(payment.ExternalId);
+
+        var deleted = await unitOfWork.PaymentRepository.DeleteOrRestoreAsync(payment.Id);
+        await unitOfWork.SaveChangesAsync();
+
+        return result != null && deleted;
+    }
+
+    public async Task RenewAsync(Payment payment, JsonElement data)
+    {
+        var subscriptionId = data.GetProperty("invoice").GetProperty("subscriptionId").GetString();
+        var customerId = data.GetProperty("customer").GetProperty("id").GetString();
+        var cardId = data.GetProperty("last_transaction").GetProperty("card").GetProperty("id").GetString();
+        var value = data.GetProperty("amount").GetInt32().ToString();
+
+        _ = pagarMeService.CancelSubscription(subscriptionId);
+        var resultRenew = pagarMeService.RenewRecurrence(payment.HealthPlan, customerId, cardId, value);
+
+        payment.ExternalId = resultRenew.Id;
+        payment.Active = true;
+
+        await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
+        await unitOfWork.SaveChangesAsync();
     }
 }

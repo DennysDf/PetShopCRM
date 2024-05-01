@@ -12,4 +12,10 @@ public interface IUserService
     Task<ResponseDTO<User>> GetUserByIdAsync(int id);
 
     Task<ResponseDTO<User>> UpdateAsync(ProfileDTO modelProfile);
+
+    Task<List<User>> GetAllAsync();
+
+    Task<User> AddOrUpdateAsync(User model);
+
+    Task<bool> DeleteAsync(int id);
 }

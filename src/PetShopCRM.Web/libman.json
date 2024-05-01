@@ -64,7 +64,8 @@
       "destination": "wwwroot/lib/Chart.js/"
     },
     {
-      "library": "apexcharts@3.48.0",
+      "provider": "unpkg",
+      "library": "apexcharts@3.49.0",
       "destination": "wwwroot/lib/apexcharts/"
     }
   ]

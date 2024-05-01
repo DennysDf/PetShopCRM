@@ -10,6 +10,7 @@ CREATE TABLE Users (
     [Password] NVARCHAR(255) NOT NULL,
     Email NVARCHAR(255),
     Phone NVARCHAR(20),
+    CPF NVARCHAR(14),
     UrlPhoto NVARCHAR(255),
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
@@ -78,8 +79,10 @@ CREATE TABLE Payments (
     GuardianId INT NOT NULL,
     HealthPlanId INT NOT NULL,
     IsRecurrence BIT NOT NULL,
-    Installments INT NOT NULL,
+    Installment INT NOT NULL,
+    FirstPayment DATETIME2,
     LastPayment DATETIME2,
+    IsSuccess BIT NOT NULL,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,
@@ -87,8 +90,9 @@ CREATE TABLE Payments (
     CONSTRAINT Payments_Guardians_GuardianId FOREIGN KEY (GuardianId) REFERENCES Guardians(Id),
     CONSTRAINT Payments_HealthPlans_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id)
 );
-INSERT INTO Users VALUES ('Administrador', 0, 'admin', '123', NULL, NULL, NULL, GETDATE(), NULL, 1);
-
+go
+INSERT INTO Users VALUES ('Administrador', 0, 'admin', '123', NULL, NULL,NULL, NULL, GETDATE(), NULL, 1);
+go
 CREATE TABLE Configurations (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     [Key] VARCHAR(200) NOT NULL,
@@ -99,6 +103,24 @@ CREATE TABLE Configurations (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,
 );
+go
 INSERT INTO Configurations VALUES ('PagarMeUser', 'sk_747d8ddf31334d94b19617f3e4f24b39', 1, 1, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('PagarMePassword', '', 1, 1, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('SystemName', 'Vet Card', 1, 0, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('PagarMeDashboardUrl', '', 1, 1, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('PagarMeRenewRecurrence', 'false', 2, 1, GETDATE(), NULL, 1)
+
+go
+CREATE TABLE PaymentHistories (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    PaymentId INT NOT NULL,
+    IsSuccess BIT NOT NULL,
+    [Event] VARCHAR(200) NOT NULL,
+    [Value] DECIMAL(18, 2) NOT NULL,
+    ExternalId VARCHAR(200) NOT NULL,
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,
+    CONSTRAINT PaymentHistories_Payments_PaymentId FOREIGN KEY (PaymentId) REFERENCES Payments(Id),
+);
+go

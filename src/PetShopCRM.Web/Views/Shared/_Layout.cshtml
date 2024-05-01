@@ -26,7 +26,11 @@
             width: 285px !important;
         }
 
-
+        .dropdown-item:active {
+            color: #fff;
+            text-decoration: none;
+            background-color: #AABD24!important;
+        }
         #navbarSupportedContent {
             border-bottom: 2px solid #AABD24;
             box-shadow: 0 2px 1px -2px #719ECE;
@@ -73,7 +77,7 @@
         input {
             background-color: white !important;
         }
-    
+
         .sidebar-link.active {
             background-color: rgba(170, 189, 36, .3);
         }
@@ -149,27 +153,29 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                @if (loggedUser.Role == nameof(UserType.Admin))
-                                {
-                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
-                                }
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu"> Pagamento </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="@Url.Action("Index","Payment")" class="sidebar-link"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Registro </span></a></li>
                                 <li class="sidebar-item"><a href="@Url.Action("Monitoring","Payment")" class="sidebar-link"><i class="fa-solid fa-table-columns"></i><span class="hide-menu">  Monitoramento </span></a></li>
                             </ul>
                         </li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
+                        <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
+
+
+                        @if (loggedUser.Role == nameof(UserType.Admin))
+                        {
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("AddUser","User")" class="sidebar-link"><i class="fa fa-user"></i><span class="hide-menu"> Usuários </span></a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </nav>
             </div>
@@ -199,7 +205,7 @@
         </div>
     </div>
     <!--Container Main end-->
-    <script src="~/lib/jquery/jquery.min.js"></script>    
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/AlertifyJS/alertify.min.js"></script>
@@ -217,10 +223,7 @@
     <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
     <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
-    @* <script src="~/lib/Chart.js/chart.js" asp-append-version="true"></script> *@
-    <script src="~/lib/Chart.js/chart.umd.min.js" asp-append-version="true"></script>
-    @* <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script> *@
-
+    <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -230,7 +233,22 @@
             });
         })
 
-        function maskInit(){
+        function formatarNumeroBrasileiro(numero) {
+            var retorno = 0
+            if(!!numero){
+                retorno = numero.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+            }
+            return retorno
+        }
+
+        function YearNow() {
+            let dataAtual = new Date();
+            let anoAtual = dataAtual.getFullYear();
+            return anoAtual
+        }
+        
+
+        function maskInit() {
             $(".phone-mask").mask("(00) 0 0000-0000")
             $(".date-mask").mask("00/00/0000")
             $(".cpf-mask").mask("000.000.000-00")
@@ -247,7 +265,7 @@
 
         maskInit();
 
-        $('.bootstrap-table').each(function () {            
+        $('.bootstrap-table').each(function () {
             $(this).attr({
                 'data-toggle': 'table',
                 'data-search': 'true',
@@ -267,19 +285,19 @@
             NotificationUtil.Stack.Clear();
         }
 
-        signalRObject.execute('/Notification', function (connection) {
-            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
-                return console.error(err.toString());
-            });
+            signalRObject.execute('/Notification', function (connection) {
+                connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                    return console.error(err.toString());
+                });
 
-            connection.on('ReceiveNotificationAll', function (script) {
-                eval(script);
-            });
+                connection.on('ReceiveNotificationAll', function (script) {
+                    eval(script);
+                });
 
-            connection.on('ReceiveNotificationUser', function (script) {
-                eval(script);
+                connection.on('ReceiveNotificationUser', function (script) {
+                    eval(script);
+                });
             });
-        });
 
 
     </script>

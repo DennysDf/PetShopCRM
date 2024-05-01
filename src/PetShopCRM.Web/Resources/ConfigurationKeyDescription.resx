@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PagarMeDashboardUrl" xml:space="preserve">
+    <value>Url do dashboard do Pagar.me</value>
+  </data>
   <data name="PagarMePassword" xml:space="preserve">
     <value>Senha Pagar.me (em branco caso use secret key)</value>
+  </data>
+  <data name="PagarMeRenewRecurrence" xml:space="preserve">
+    <value>Ativar renovação automática do pagamento ao completar 12 parcelas</value>
   </data>
   <data name="PagarMeUser" xml:space="preserve">
     <value>Usuário Pagar.me (usuário ou secret key)</value>

@@ -12,6 +12,7 @@ public interface IUnitOfWork : IDisposable
     IHealthPlansRepository HealthPlansRepository { get; }
     IPaymentRepository PaymentRepository { get; }
     IConfigurationRepository ConfigurationRepository {  get; }
+    IPaymentHistoryRepository PaymentHistoryRepository {  get; }
 
     Task<int> SaveChangesAsync();
 }

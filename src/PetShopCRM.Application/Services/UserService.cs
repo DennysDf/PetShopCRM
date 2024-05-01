@@ -20,6 +20,13 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         return user;
     }
 
+    public async Task<List<User>> GetAllAsync()
+    {
+        var users = unitOfWork.UserRepository.GetBy();
+
+        return users.ToList();
+    }
+
     public async Task<ResponseDTO<User>> GetUserByIdAsync(int id)
     {
         var user = await unitOfWork.UserRepository.GetByIdAsync(id);        
@@ -58,5 +65,23 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         {
             return new ResponseDTO<User>(false, ex.Message, null);
         }        
+    }
+
+    public async Task<User> AddOrUpdateAsync(User model)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+        model.Active = true;
+        await unitOfWork.UserRepository.AddOrUpdateAsync(model);
+
+        await unitOfWork.SaveChangesAsync();
+
+        return model;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var delete = await unitOfWork.UserRepository.DeleteOrRestoreAsync(id);
+        await unitOfWork.SaveChangesAsync();
+        return delete;
     }
 }

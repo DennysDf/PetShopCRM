@@ -11,9 +11,10 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
 {
     public async Task<List<Pet>> GetAllAsync()
     {
-        var guardians = unitOfWork.PetRepository.GetBy();
+        var pets = unitOfWork.PetRepository.GetBy()
+            .Include(x => x.Guardian);
 
-        return guardians.ToList();
+        return pets.ToList();
     }
 
     public async Task<ResponseDTO<List<Pet>>> GetAllCompleteAsync()

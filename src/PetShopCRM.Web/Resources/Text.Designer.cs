@@ -169,6 +169,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento cancelado com sucesso..
+        /// </summary>
+        public static string PaymentDeleteSuccess {
+            get {
+                return ResourceManager.GetString("PaymentDeleteSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pet castrado com sucesso..
         /// </summary>
         public static string PetAddSucess {
@@ -223,11 +232,38 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário castrado com sucesso..
+        /// </summary>
+        public static string UserAddSucess {
+            get {
+                return ResourceManager.GetString("UserAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário apagado com sucesso..
+        /// </summary>
+        public static string UserDeleteSucess {
+            get {
+                return ResourceManager.GetString("UserDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Login realizado com sucesso.
         /// </summary>
         public static string UserLogged {
             get {
                 return ResourceManager.GetString("UserLogged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário atualizado com sucesso..
+        /// </summary>
+        public static string UserUpdateSucess {
+            get {
+                return ResourceManager.GetString("UserUpdateSucess", resourceCulture);
             }
         }
     }

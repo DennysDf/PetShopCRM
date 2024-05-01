@@ -117,40 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ClinicNotFound" xml:space="preserve">
-    <value>Clínica não encontrada.</value>
+  <data name="card.expired" xml:space="preserve">
+    <value>Cartão expirado.</value>
   </data>
-  <data name="ConfigurationErrorUpdate" xml:space="preserve">
-    <value>Erro ao atualizar configuração.</value>
+  <data name="charge.antifraud_reproved" xml:space="preserve">
+    <value>Reprovado no antifraude.</value>
   </data>
-  <data name="ConfigurationSuccessUpdate" xml:space="preserve">
-    <value>Configuração atualizada com sucesso.</value>
+  <data name="charge.paid" xml:space="preserve">
+    <value>Cobrança paga.</value>
   </data>
-  <data name="GuardianNotFound" xml:space="preserve">
-    <value>Tutor não encontrado.</value>
+  <data name="charge.payment_failed" xml:space="preserve">
+    <value>Pagamento da cobrança falhou.</value>
   </data>
-  <data name="PaymentIntegrationFailed" xml:space="preserve">
-    <value>Falha na integração de pagamento.</value>
+  <data name="charge.refunded" xml:space="preserve">
+    <value>Cobrança extornada.</value>
   </data>
-  <data name="PaymentNotFound" xml:space="preserve">
-    <value>Pagamento não encontrado.</value>
+  <data name="subscription.canceled" xml:space="preserve">
+    <value>Assinatura cancelada.</value>
   </data>
-  <data name="PetNotFound" xml:space="preserve">
-    <value>Pet não encontrado.</value>
-  </data>
-  <data name="SpecieNotFound" xml:space="preserve">
-    <value>Espécie não encontrada.</value>
-  </data>
-  <data name="UserInvalid" xml:space="preserve">
-    <value>Usuário inválido</value>
-  </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>Usuário não encontrado.</value>
-  </data>
-  <data name="UserSucessUpdate" xml:space="preserve">
-    <value>Usuário atualizado com sucesso.</value>
-  </data>
-  <data name="UserValid" xml:space="preserve">
-    <value>Usuário válido</value>
+  <data name="subscription.created" xml:space="preserve">
+    <value>Assinatura criada.</value>
   </data>
 </root>

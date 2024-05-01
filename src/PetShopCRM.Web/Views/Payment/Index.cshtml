@@ -13,44 +13,60 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="table-responsive-xl">
-        <table id="table-teste" class="table table-sm table-striped bootstrap-table bg-white table-hover" data-toggle="table" data-search="true" data-pagination="true" data-show-export="true" data-page-list="[10  25  50  100  all]">
-            <thead class="thead-dark">
-                <tr>
-                    <th data-field="id" width="15">#</th>
-                    <th>Id Externo</th>
-                    <th>Pet</th>
-                    <th>Plano de saúde</th>
-                    <th>Parcelas</th>
-                    <th>Últ. Pagamento</th>
-                    @* <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th> *@
-                </tr>
-            </thead>
-            <tbody class="bg-white">
-                @foreach (var item in Model)
-                {
-                    <tr class="bg-white">
-                        <td>@item.Id</td>
-                        <td class="text-nowrap">@item.ExternalId</td>
-                        <td class="text-nowrap">@item.Pet</td>
-                        <td class="text-nowrap">@item.HealhPlan</td>
-                        <td class="text-nowrap">@item.Installments</td>
-                        <td class="text-nowrap">@(item.LastPayment?.ToString("d") ?? "-")</td>
+<div class="table-responsive-xl">
+    <table id="table-teste" class="table table-sm table-striped bootstrap-table bg-white table-hover" data-toggle="table" data-search="true" data-pagination="true" data-show-export="true" data-page-list="[10  25  50  100  all]">
+        <thead class="thead-dark">
+            <tr>
+                <th data-field="id" width="15">#</th>
+                <th>Id Externo</th>
+                <th>Chip - Pet - Tutor</th>
+                <th>Plano de saúde</th>
+                <th>Parcela Atual</th>
+                <th>Últ. Pagamento</th>
+                <th>Criado com:</th>
+                <th>Situação</th>
+                <th width="15" class="text-center" data-field="operate" data-events="operateEvents"></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            @foreach (var item in Model)
+            {
+                <tr class="bg-white">
+                    <td>@item.Id</td>
+                    <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">
+                        @if (string.IsNullOrEmpty(item.ExternalIdUrl))
+                        {
+                            @item.ExternalId
+                        }
+                        else
+                        {
+                            <a href="@item.ExternalIdUrl" target="_blank" data-toggle="tooltip" title="Acessar assinatura no Pagar.Me" data-placement="left">
+                                @item.ExternalId
+                            </a>
+                        }
+                    </td>
+                    <td class="text-nowrap">@item.Pet</td>
+                    <td class="text-nowrap">@item.HealhPlan</td>
+                    <td class="text-nowrap">@item.Installment</td>
+                    <td class="text-nowrap">@(item.LastPayment?.ToString() ?? "-")</td>
+                    <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">@(item.IsSuccess ? "Sucesso" : "Erro")</td>
+                    <td class="text-nowrap">@(item.IsActive ? "Ativo" : "Cancelado")</td>
+                    <td class="text-nowrap text-right" width="15">
+                        <a href="@Url.Action("Monitoring", "Payment", new { paymentId = item.Id })" target="_blank" data-toggle="tooltip" title="Monitorar" data-placement="left">
+                            <i class="text-dark fa-solid fa-table-columns"></i>
+                        </a>
 
-                        @* <td class="text-nowrap text-right" width="15">
-                            <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
+                        @if(item.IsSuccess && item.IsActive)
+                        {
+                            <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Cancelar" data-id="@item.Id">
                                 <i class="fa fa-times text-danger"> </i>
                             </a>
-                            <a class="edit" href="#" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
-                                <i class="text-dark fa fa-pencil-alt"></i>
-                            </a>
-                        </td> *@
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 
@@ -88,7 +104,7 @@
             </div>
             <div class="modal-body">
                 <span class="font-weight-bold font-18">
-                    Tem certeza que deseja apagar este Pet?
+                    Tem certeza que deseja cancelar esse pagamento?
                     <input type="hidden" id="del-evento" />
                 </span>
             </div>

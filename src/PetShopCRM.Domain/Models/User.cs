@@ -10,5 +10,6 @@ public class User : EntityBase
     public string Password { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
+    public string CPF { get; set; }
     public string UrlPhoto { get; set; }
 }

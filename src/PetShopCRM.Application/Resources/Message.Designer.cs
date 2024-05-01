@@ -106,6 +106,15 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento não encontrado..
+        /// </summary>
+        internal static string PaymentNotFound {
+            get {
+                return ResourceManager.GetString("PaymentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pet não encontrado..
         /// </summary>
         internal static string PetNotFound {

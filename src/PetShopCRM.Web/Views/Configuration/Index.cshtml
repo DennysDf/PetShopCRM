@@ -76,7 +76,7 @@
 
                     @if (item.Type == PetShopCRM.Domain.Enums.ConfigurationType.boolean)
                     {
-                        <input type="checkbox" name="@item.Key" id="@item.Key" value="@item.Value" class="" />
+                        <input type="checkbox" name="@item.Key" id="@item.Key" value="" class="" @(item.Value.Equals("true", StringComparison.OrdinalIgnoreCase) ? "checked" : "") />
                     }
                 </div>
                 <div class="col-8 mt-2">
@@ -101,6 +101,12 @@
         $('input:not([readonly])').on('change', function () {
             var name = $(this).prop('name');
             var value = $(this).val();
+
+            var isCheckbox = $(this).is('[type=checkbox]');
+
+            if(isCheckbox) {
+                value = $(this).prop("checked");
+            }
 
             $.post('@Url.Action("Save")', { "key": name, "value": value }, function (response) {
                 

@@ -8,26 +8,26 @@
 <div class="row">
     <input type="hidden" asp-for="Id" />
     <div class=" col-sm-8">
-        <label asp-for="Name">Nome*:</label>
+        <label asp-for="Name"></label>
         <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o Nome..." autofocus />
         <span asp-validation-for="Name"></span>
     </div>
     <div class="col-sm-4">
-        <label asp-for="Responsible">Nome do responsável*:</label>
+        <label asp-for="Responsible"></label>
         <input type="text" class="form-control " asp-for="Responsible" placeholder="Escreva o Nome do responsável..." autofocus />
         <span asp-validation-for="Responsible"></span>
     </div>
 </div>
 <div class="row mt-2">
     <div class="col-sm-6">
-        <label asp-for="CNPJ">CNPJ*:</label>
+        <label asp-for="CNPJ"></label>
         <input type="text" class="form-control cnpj-mask" asp-for="CNPJ" placeholder="Escreva o CNPJ..." autofocus />
         <span asp-validation-for="CNPJ"></span>
     </div>
     <div class="col-sm-6">
         <div class="row">
             <div class="col-12">
-                <label asp-for="Phone">Telefone*:</label>
+                <label asp-for="Phone"></label>
                 <input type="text" class="form-control phone-mask" asp-for="Phone" placeholder="Escreva o Telefone..." autofocus />
                 <span asp-validation-for="Phone"></span>
             </div>
@@ -36,7 +36,7 @@
 </div>
 <div class="row mt-2">
     <div class="col-sm-12">
-        <label asp-for="Address">Endereço*:</label>
+        <label asp-for="Address"></label>
         <input type="text" class="form-control" asp-for="Address" placeholder="Escreva o Endereço..." autofocus />
         <span asp-validation-for="Address"></span>
     </div>

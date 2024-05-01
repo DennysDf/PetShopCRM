@@ -41,142 +41,377 @@
 </style>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-5 col-lg-6">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card widget-flat">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="mdi mdi-account-multiple widget-icon"></i>
-                            </div>
-                            <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Tutores</h5>
-                            <h3 class="mt-3 mb-3">120</h3>
-                            <p class="mb-0 text-muted">
-                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
-                                <span class="text-nowrap">Desde o último mês.</span>
-                            </p>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-
-                <div class="col-sm-6">
-                    <div class="card widget-flat">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="mdi mdi-cart-plus widget-icon"></i>
-                            </div>
-                            <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Vendas</h5>
-                            <h3 class="mt-3 mb-3">40</h3>
-                            <p class="mb-0 text-muted">
-                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
-                                <span class="text-nowrap">Desde o último mês.</span>
-                            </p>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-            </div> <!-- end row -->
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card widget-flat">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="mdi mdi-currency-usd widget-icon"></i>
-                            </div>
-                            <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Receita</h5>
-                            <h3 class="mt-3 mb-3">R$ 6,254</h3>
-                            <p class="mb-0 text-muted">
-                                <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
-                                <span class="text-nowrap">Desde o mês passado.</span>
-                            </p>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-
-                <div class="col-sm-6">
-                    <div class="card widget-flat">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="mdi mdi-pulse widget-icon"></i>
-                            </div>
-                            <h5 class="text-muted fw-normal mt-0" title="Growth">Crescimento</h5>
-                            <h3 class="mt-3 mb-3">+ 30.56%</h3>
-                            <p class="mb-0 text-muted">
-                                <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 4.87%</span>
-                                <span class="text-nowrap">Desde o mês passado.</span>
-                            </p>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-            </div> <!-- end row -->
-        </div> <!-- end col -->
-        
-    </div>
-
-    <div class="row">
-        <div class="col-xl-6 col-lg-6">
-            <div class="card card-h-100">
-                <div class="d-flex card-header justify-content-between align-items-center">
-                    <h4 class="header-title">Projections Vs Actuals</h4>
-                </div>
-                <div class="card-body pt-0">
-                    <div>
-                        <canvas class="my-4 h-15" id="bar"> </canvas>
+        <div class="col-xl-3 col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        <i class="mdi mdi-account-multiple widget-icon"></i>
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-
-        </div> <!-- end col -->
-        <div class="col-xl-6 col-lg-6">
-            <div class="card card-h-100">
-                <div class="d-flex card-header justify-content-between align-items-center">
-                    <h4 class="header-title">Projections Vs Actuals</h4>
-                </div>
-                <div class="card-body pt-0">
-                    <div>
-                        <canvas class="my-4 h-15" id="pie"> </canvas>
-                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Tutores</h5>
+                    <h3 class="mt-3 mb-3">@ViewBag.QtdGuardians</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-@ViewBag.TypeTextGuardians me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGuardians-bold"></i>  @ViewBag.PercentGuardians %</span>
+                        <span class="text-nowrap">Desde o último mês.</span>
+                    </p>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
+
+        <div class="col-xl-3 col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        <i class="mdi mdi-cart-plus widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Vendas</h5>
+                    <h3 class="mt-3 mb-3">@ViewBag.QtdPayments</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-@ViewBag.TypeTextPayments me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPayments-bold"></i>  @ViewBag.PercentPayments %</span>
+                        <span class="text-nowrap">Desde o último mês.</span>
+                    </p>
+                </div> <!
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
     </div>
+
+    <div class="col-xl-3 col-lg-3">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-currency-usd widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
+                <h3 class="mt-3 mb-3"><span class="value-mask"> @ViewBag.QtdFaturamento </span> </h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div>
+
+    <div class="col-xl-3 col-lg-3">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-pulse widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Growth">Crescimento</h5>
+                <h3 class="mt-3 mb-3"> @ViewBag.QtdGrowth %</h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextGrowth me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGrowth-bold"></i>  @ViewBag.PercentGrowth %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="card-header justify-content-between align-items-center">
+            <h3 class="header-title">Relatórios de faturamento</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <div class="card card-h-100">
+            <div class="card-body pt-0">
+                <div id="chart-bar"></div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+
+    </div> <!-- end col -->
+    <div class="col-lg-6 col-sm-12">
+        <div class="card card-h-100">
+            <div class="card-body pt-0">
+                <div id="chart-line"></div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="card-header justify-content-between align-items-center">
+            <h3 class="header-title">Relatórios de indicadores</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <div class="card card-h-100">
+            <div class="card-body pt-0">
+                <div id="chart-pie"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <div class="card card-h-100">
+            <div class="card-body pt-0">
+                <div id="chart-area"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
+
+
 @section Scripts {
+    @* Grafico de barras *@
     <script type="text/javascript">
-        const ctx = document.getElementById('bar').getContext('2d');;
-
-        const myChart = new Chart(ctx, {
-            type: 'bar', // Escolha o tipo de gráfico desejado (por exemplo, 'bar', 'line', 'pie', etc.)
-            data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'], // Seus rótulos de dados
-                datasets: [{
-                    label: 'Vendas',
-                    data: [12, 19, 3, 5, 2, 12, 19, 3, 5, 2, 7, 5], // Seus dados                    
-                    borderWidth: 1 // Largura da borda,
-                    
-                }]
+        var options = {
+            series: [{
+                name: '',
+                data: [4214.12, 551.21, 5127.12, 5612.12, 2621.45, 5823.21, 634.98, 690.7, 6692.12, 3245.45, 2223.34, 5236.45]
+            }],
+            chart: {
+                type: 'bar',
+                height: 380
             },
-            options: {
-                responsive: true // Torna o gráfico responsivo
-            }
-        });
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
 
-        const xx = document.getElementById('pie').getContext('2d');;
-
-        const myChart2 = new Chart(xx, {
-            type: 'pie', // Escolha o tipo de gráfico desejado (por exemplo, 'bar', 'line', 'pie', etc.)
-            data: {
-                labels: [], // Seus rótulos de dados
-                datasets: [{
-                    label: 'Vendas',
-                    data: [12, 19, 3, 5, 2, 12, 19, 3, 5, 2, 7, 5], // Seus dados                    
-                    borderWidth: 1 // Largura da borda,
-                }]
+                },
             },
-            options: {
-                responsive: true // Torna o gráfico responsivo
+            colors: ['#AABD24'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['#AABD24']
+            },
+            title: {
+                text: 'Faturamento por plano (todos os planos) - ' + YearNow(),
+                align: 'center'
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                title: {
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'R$'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return formatarNumeroBrasileiro(val)
+                    }
+                }
             }
-        });
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
+        chart.render();
+    </script>
+
+    @* Grafico de linhas *@
+    <script type="text/javascript">
+
+        var options = {
+            series: [
+                {
+                    name: "VetCard Green ",
+                    data: [231.27, 245.98, 2920.14, 616.75, 387.62, 873.45, 298.36, 632.89, 666.51, 3514.72, 357.09, 249.81]
+
+                },
+                {
+                    name: "VetCard Gold",
+                    data: [417.52, 848.91, 625.33, 858.07, 936.44, 270.29, 586.18, 1364.79, 1629.16, 911.23, 305.67, 492.11]
+
+                },
+                {
+                    name: "VetCard Black",
+                    data: [683.29, 575.67, 522.84, 241.75, 389.02, 971.56, 265.81, 408.99, 813.27, 526.18, 750.93, 294.61]
+
+                }
+            ],
+            chart: {
+                height: 380,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            colors: ['#AABD24', '#D4AF37', '#292929'],
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opts) {
+                    return formatarNumeroBrasileiro(val)
+                },
+            },
+            title: {
+                text: 'Faturamento por plano (Individual) - ' + YearNow(),
+                align: 'center'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                title: {
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'R$'
+                },
+
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return formatarNumeroBrasileiro(val)
+                    }
+                }
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-line"), options);
+        chart.render();
+
+
 
     </script>
+
+    @* Species -  Grafico de pizza *@
+    <script type="text/javascript">
+
+        var objBanco = JSON.parse('@Html.Raw(ViewBag.ObjSpecies)')
+
+        var arrName = [];
+        $.each(objBanco, function (i, element) {
+            arrName.push(element.Name)
+        });
+
+        var arrIndex = [];
+        $.each(objBanco, function (i, element) {
+            arrIndex.push(element.Index)
+        });
+
+        console.log(objBanco)
+        var options = {
+            series: arrIndex,
+            chart: {
+                type: 'pie',
+                height: 380,
+                zoom: {
+                    enabled: false
+                }
+            },
+
+            labels: arrName,
+            theme: {
+                monochrome: {
+                    color: '#AABD24',
+                    enabled: true
+                }
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        offset: -5
+                    }
+                }
+            },
+            title: {
+                text: 'Espécies',
+                align: 'center'
+            },
+            dataLabels: {
+                formatter(val, opts) {
+                    const name = opts.w.globals.labels[opts.seriesIndex]
+                    return [name, val.toFixed(1) + '%']
+                }
+            },
+            legend: {
+                show: false
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-pie"), options);
+        chart.render();
+    </script>
+
+    @* Grafico de area *@
+    <script>
+
+
+        var options = {
+            series: [{
+                name: "VetCard Green",
+                data: [15, 22, 28, 11, 19, 9, 27, 14, 8, 25, 18, 12]
+            },
+            {
+                name: "VetCard Gold",
+                data: [29, 10, 20, 26, 13, 7, 23, 17, 21, 16, 24, 30]
+
+            },
+            {
+                name: "VetCard Black",
+                data: [7, 30, 16, 12, 25, 19, 8, 14, 22, 11, 18, 27]
+
+            }
+            ],
+            chart: {
+                height: 380,
+                type: 'area',
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'straight'
+            },
+
+            title: {
+                text: 'Vendas por plano - ' + YearNow(),
+                align: 'center'
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                title: {
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Qtd.'
+                },
+
+            },
+            tooltip: {
+                followCursor: true
+            },
+            theme: {
+                monochrome: {
+                    color: '#AABD24',
+                    enabled: true
+                }
+            },
+        }
+        var chart = new ApexCharts(document.querySelector("#chart-area"), options);
+        chart.render();
+
+    </script>
+
 }

@@ -1,7 +1,7 @@
-﻿@model ICollection<GuardianVM>
+﻿@model ICollection<AddUserVM>
 @{
-    ViewData["Title"] = "Tutores";
-    ViewData["Caminho"] = "<li>Tutores</li>";
+    ViewData["Title"] = "Usuários";
+    ViewData["Caminho"] = "<li>Usuários</li>";
 }
 
 
@@ -9,7 +9,7 @@
     <div class="col-12 text-center">
         <button data-id="0" id="modal-open" class="btn btn-success">
             <i class="fa fa-plus-circle"></i>
-            <b>Incluir Tutor</b>
+            <b>Incluir Usuário</b>
         </button>
     </div>
 </div>
@@ -21,8 +21,8 @@
                 <tr>
                     <th data-field="id" width="15">#</th>
                     <th>Nome</th>
-                    <th>Endereço</th>
-                    <th>Telefone</th>
+                    <th>Login</th>
+                    <th>E-mail</th>
                     <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th>
                 </tr>
             </thead>
@@ -32,8 +32,8 @@
                     <tr class="bg-white">
                         <td>@item.Id</td>
                         <td class="text-nowrap">@item.Name</td>
-                        <td class="text-nowrap">@item.City, @item.State, @item.Address</td>
-                        <td class="text-nowrap">@item.Phone</td>
+                        <td class="text-nowrap">@item.Login</td>
+                        <td class="text-nowrap">@item.Email</td>
                         <td class="text-nowrap text-right" width="15">
                             <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
                                 <i class="fa fa-times text-danger"> </i>
@@ -52,9 +52,9 @@
 <div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form asp-action="Index" method="post">
+            <form asp-action="AddUser" method="post">
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title title">Cadastrar Material</h5>
+                    <h5 class="modal-title title"></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,8 +81,8 @@
             </div>
             <div class="modal-body">
                 <span class="font-weight-bold font-18">
-                    Tem certeza que deseja apagar este Tutor?
-                    <input type="hidden" id="del-evento" />
+                    Tem certeza que deseja apagar este Usuário?
+                    <input type="hidden" id="del-user" />
                 </span>
             </div>
             <div class="modal-footer">
@@ -101,21 +101,20 @@
         })
 
         function Ajax(id) {
-            $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
+            $.post('@Url.Action("AjaxUser")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-                maskInit();
-                changeCep();
+                maskInit();                
                 if (id != 0) {
-                    $(".title").text("Editar Pet")
+                    $(".title").text("Editar Usuário")
                 } else {
-                    $(".title").text("Cadastrar Pet")
+                    $(".title").text("Cadastrar Usuário")
                 }
                 $("#modal").modal("show");
             })
         }
 
         $("#confirm-del").click(function () {
-            window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
+            window.location.href = "@Url.Action("Delete")?id=" + $("#del-user").val();
         });
 
         var $table = $('#table')
@@ -126,27 +125,9 @@
             },
             'click .deletar': function (e, value, row, index) {
                 var id = [row.id]
-                $("#del-evento").val(id)
+                $("#del-user").val(id)
                 $("#delete").modal("show")
             }
-        }
-
-        function changeCep(){
-            $("#CEP").keyup(function () { 
-                if (($(this).val().length) == 9) {
-                    $.getJSON('@Url.Action("GetAddressByCEP")', { "CEP": $(this).val() }, function (response) {
-                        $("#City").val(response.city)
-                        $("#State").val(response.state)
-                        $("#Address").val(response.street)
-                        $("#Neighborhood").val(response.neighborhood)
-                    })
-                }else{
-                    $("#City").val("")
-                    $("#State").val("")
-                    $("#Address").val("")
-                    $("#Neighborhood").val("")
-                }
-            })
         }
     </script>
 }

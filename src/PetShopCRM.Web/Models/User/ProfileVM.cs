@@ -16,7 +16,7 @@ public class ProfileVM
     public string Name { get; set; }
 
     [Remote("ValidatePassword", "User",ErrorMessage = ValidationKeysUtil.ValidatePassword)]
-    [DisplayName("Senha")]
+    [DisplayName("Senha atual")]
     public string? Password { get; set; }
 
     [MinLength(6, ErrorMessage = ValidationKeysUtil.SizeMin)]
@@ -24,7 +24,7 @@ public class ProfileVM
     public string? PasswordNew { get; set; }
 
     [Compare(nameof(PasswordNew), ErrorMessage = ValidationKeysUtil.ComparePassword)]
-    [DisplayName("Confirmar senha")]
+    [DisplayName("Confirme a senha")]
     public string? ConfirmPassword { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]

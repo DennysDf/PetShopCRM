@@ -61,6 +61,22 @@
             <div class="card widget-flat">
                 <div class="card-body">
                     <div class="float-end">
+                        <i class="fa-solid fa-dog widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Growth">Pets</h5>
+                    <h3 class="mt-3 mb-3"> @ViewBag.QtdPets </h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-@ViewBag.TypeTextPets me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPets-bold"></i>  @ViewBag.PercentPets %</span>
+                        <span class="text-nowrap">Desde o último mês.</span>
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+
+        <div class="col-xl-3 col-lg-3">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
                         <i class="mdi mdi-cart-plus widget-icon"></i>
                     </div>
                     <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Vendas</h5>
@@ -81,7 +97,7 @@
                     <i class="mdi mdi-currency-usd widget-icon"></i>
                 </div>
                 <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
-                <h3 class="mt-3 mb-3"><span class="value-mask"> @ViewBag.QtdFaturamento </span> </h3>
+                <h3 class="mt-3 mb-3">R$ <span class="value-mask formatNumber"> @ViewBag.QtdFaturamento </span> </h3>
                 <p class="mb-0 text-muted">
                     <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
                     <span class="text-nowrap">Desde o último mês.</span>
@@ -90,21 +106,7 @@
         </div> <!-- end card-->
     </div>
 
-    <div class="col-xl-3 col-lg-3">
-        <div class="card widget-flat">
-            <div class="card-body">
-                <div class="float-end">
-                    <i class="mdi mdi-pulse widget-icon"></i>
-                </div>
-                <h5 class="text-muted fw-normal mt-0" title="Growth">Crescimento</h5>
-                <h3 class="mt-3 mb-3"> @ViewBag.QtdGrowth %</h3>
-                <p class="mb-0 text-muted">
-                    <span class="text-@ViewBag.TypeTextGrowth me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGrowth-bold"></i>  @ViewBag.PercentGrowth %</span>
-                    <span class="text-nowrap">Desde o último mês.</span>
-                </p>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div>
+
 </div>
 <div class="row">
     <div class="col-12 text-center">
@@ -160,10 +162,32 @@
 @section Scripts {
     @* Grafico de barras *@
     <script type="text/javascript">
+
+        var objBancoFaturamentoAnual = JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnualIndividual)')
+
+        var jsonComplete = completarKeys(objBancoFaturamentoAnual, 12)
+
+        function completarKeys(jsonArray, maxKey) {            
+            const resultado = Array.from({ length: maxKey }, (v, k) => ({ Key: k + 1, Valor: 0 }));
+
+            jsonArray.forEach(item => {
+                if (item.Key && item.Key <= maxKey) {
+                    resultado[item.Key - 1].Valor = item.Valor;
+                }
+            });
+
+            return resultado;
+        }
+
+        var arrIndexFaturamentoAnual = [];
+        $.each(jsonComplete, function (i, element) {
+            arrIndexFaturamentoAnual.push(element.Valor)
+        });
+
         var options = {
             series: [{
                 name: '',
-                data: [4214.12, 551.21, 5127.12, 5612.12, 2621.45, 5823.21, 634.98, 690.7, 6692.12, 3245.45, 2223.34, 5236.45]
+                data: arrIndexFaturamentoAnual
             }],
             chart: {
                 type: 'bar',
@@ -216,28 +240,13 @@
         var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
         chart.render();
     </script>
+        
 
     @* Grafico de linhas *@
     <script type="text/javascript">
 
         var options = {
-            series: [
-                {
-                    name: "VetCard Green ",
-                    data: [231.27, 245.98, 2920.14, 616.75, 387.62, 873.45, 298.36, 632.89, 666.51, 3514.72, 357.09, 249.81]
-
-                },
-                {
-                    name: "VetCard Gold",
-                    data: [417.52, 848.91, 625.33, 858.07, 936.44, 270.29, 586.18, 1364.79, 1629.16, 911.23, 305.67, 492.11]
-
-                },
-                {
-                    name: "VetCard Black",
-                    data: [683.29, 575.67, 522.84, 241.75, 389.02, 971.56, 265.81, 408.99, 813.27, 526.18, 750.93, 294.61]
-
-                }
-            ],
+            series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnual)'.toLowerCase()),
             chart: {
                 height: 380,
                 type: 'line',
@@ -308,7 +317,6 @@
             arrIndex.push(element.Index)
         });
 
-        console.log(objBanco)
         var options = {
             series: arrIndex,
             chart: {
@@ -334,7 +342,7 @@
                 }
             },
             title: {
-                text: 'Espécies',
+                text: 'Espécies por Pets cadastrados',
                 align: 'center'
             },
             dataLabels: {
@@ -356,22 +364,9 @@
     <script>
 
 
+
         var options = {
-            series: [{
-                name: "VetCard Green",
-                data: [15, 22, 28, 11, 19, 9, 27, 14, 8, 25, 18, 12]
-            },
-            {
-                name: "VetCard Gold",
-                data: [29, 10, 20, 26, 13, 7, 23, 17, 21, 16, 24, 30]
-
-            },
-            {
-                name: "VetCard Black",
-                data: [7, 30, 16, 12, 25, 19, 8, 14, 22, 11, 18, 27]
-
-            }
-            ],
+            series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoArea)'.toLowerCase()),
             chart: {
                 height: 380,
                 type: 'area',

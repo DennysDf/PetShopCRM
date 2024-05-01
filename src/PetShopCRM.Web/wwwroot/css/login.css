@@ -3,12 +3,14 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800");
 @import url(/lib/font-awesome/css/all.min.css);
 
-body {    
-    background-image: url(../imagens/background-green.jpeg);
+body {
+    background-image: url(../imagens/background-green.jpg);
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-size: cover;
 }
 .txt-white{
     color:white;

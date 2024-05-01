@@ -7,14 +7,14 @@
 <input type="hidden" asp-for="Id" />
 
 <div class="row">
-    <div class="col-sm-6 col-12">
+    <div class="col-sm-8 col-12">
         <label asp-for="PetId">Pet*:</label>
         <select asp-for="PetId" class="form-select" asp-items="Model.PetList">
             <option disabled selected>Selecione</option>
         </select>
         <span asp-validation-for="PetId"></span>
     </div>
-    <div class="col-sm-6 col-12">
+    <div class="col-sm-4 col-12">
         <label asp-for="HealthPlanId">Plano de saúde*:</label>
         <select asp-for="HealthPlanId" class="form-select" asp-items="Model.HealthPlanList">
             <option disabled selected>Selecione</option>

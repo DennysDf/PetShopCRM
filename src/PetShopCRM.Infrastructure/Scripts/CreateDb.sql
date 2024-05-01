@@ -109,7 +109,6 @@ INSERT INTO Configurations VALUES ('PagarMePassword', '', 1, 1, GETDATE(), NULL,
 INSERT INTO Configurations VALUES ('SystemName', 'Vet Card', 1, 0, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('PagarMeDashboardUrl', '', 1, 1, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('PagarMeRenewRecurrence', 'false', 2, 1, GETDATE(), NULL, 1)
-
 go
 CREATE TABLE PaymentHistories (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,

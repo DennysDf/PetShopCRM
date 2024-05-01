@@ -77,7 +77,7 @@ public class HomeController(
         var revenueReport = new RevenueReport();
 
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;
+        var payments = paymentsDTO.Data.Where(x => x.IsSuccess).ToList();
 
         ViewData["QtdFaturamento"] = revenueReport.GetQtdPayments(payments);
         ViewData["PercentFaturamento"] = revenueReport.GetPercent(payments);
@@ -121,7 +121,7 @@ public class HomeController(
     public async Task ChartFaturamentoAnualIndividual()
     {
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;
+        var payments = paymentsDTO.Data.Where(x => x.IsSuccess);
 
         var faturamentoAnual = payments.Select(c => new
         {
@@ -159,7 +159,7 @@ public class HomeController(
     {
 
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;
+        var payments = paymentsDTO.Data.Where(x => x.IsSuccess);
 
         var faturamentoAnualIndividual = payments.Select(c => new
         {
@@ -208,7 +208,7 @@ public class HomeController(
     public async Task ChartArea()
     {
         var paymentsDTO = await paymentService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;
+        var payments = paymentsDTO.Data.Where(x => x.IsSuccess);
 
         var faturamentoAnual = payments.Select(c => new
         {

@@ -24,7 +24,7 @@ public class PaymentController(
     {
         var paymentsDTO = await paymentService.GetAllCompleteAsync();        
 
-        var paymentsVM = PaymentVM.ToList(payments.Data).OrderByDescending(x => x.Id).ToList();
+        var paymentsVM = PaymentVM.ToList(paymentsDTO.Data).OrderByDescending(x => x.Id).ToList();
 
         var configDashboardUrl = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeDashboardUrl);
 

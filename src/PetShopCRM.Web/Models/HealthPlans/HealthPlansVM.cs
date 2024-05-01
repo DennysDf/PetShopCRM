@@ -14,6 +14,7 @@ public class HealthPlansVM
     public string Name { get; set; }
 
     public decimal Value { get; set; }
+
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Valor")]
     public string ValueFrontEnd { get; set; }

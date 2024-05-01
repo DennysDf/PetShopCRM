@@ -29,8 +29,9 @@
         .dropdown-item:active {
             color: #fff;
             text-decoration: none;
-            background-color: #AABD24!important;
+            background-color: #AABD24 !important;
         }
+
         #navbarSupportedContent {
             border-bottom: 2px solid #AABD24;
             box-shadow: 0 2px 1px -2px #719ECE;
@@ -235,7 +236,7 @@
 
         function formatarNumeroBrasileiro(numero) {
             var retorno = 0
-            if(!!numero){
+            if (!!numero) {
                 retorno = numero.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
             }
             return retorno
@@ -246,15 +247,23 @@
             let anoAtual = dataAtual.getFullYear();
             return anoAtual
         }
-        
+
 
         function maskInit() {
             $(".phone-mask").mask("(00) 0 0000-0000")
             $(".date-mask").mask("00/00/0000")
             $(".cpf-mask").mask("000.000.000-00")
             $(".cnpj-mask").mask("00.000.000/0000-00")
-            $('.value-mask').mask('#.##0,00', { reverse: true });
+            $('.value-mask').mask('000.000.000.000.000,00', { reverse: true });
             $(".cep-mask").mask("00000-000")
+
+            $(".value-mask").focusout(function () {
+                if ($(this).val().length <= 2) {
+                    temp = $(this).val()
+                    var newNum = temp + ",00"
+                    $(this).val(newNum)
+                }
+            })
 
             $('[data-mask]').each((index, element) => {
                 var mask = $(element).data('mask');
@@ -300,23 +309,20 @@
             });
 
         removerPontoInicio($(".formatNumber").text())
-        function removerPontoInicio(str) {            
+        function removerPontoInicio(str) {
             if (str.charAt(0) === '.') {
                 $(".formatNumber").text(str.slice(1));
             }
         }
 
         function createArryDatas(objData) {
-            var arrDatas = [] 
+            var arrDatas = []
             $.each(objData, function (i, element) {
                 arrDatas.push(element.Name)
             });
 
             return arrDatas;
         }
-
-     
-
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")

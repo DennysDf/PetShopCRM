@@ -5,15 +5,15 @@ namespace PetShopCRM.Web.Reports;
 public class RevenueReport
 {
     private readonly DateTime dateLastMonth = DateTime.Now.AddMonths(-1);
-    public double GetQtdPayments(List<PaymentHistory> payments) => (double)payments
+    public decimal GetQtdPayments(List<PaymentHistory> payments) => (decimal)payments
             .Where(c => c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year)
             .Sum(c => c.Value);
 
-    private double GetQtdPaymentsLastMonth(List<PaymentHistory> payments) =>  (double)payments
+    private decimal GetQtdPaymentsLastMonth(List<PaymentHistory> payments) =>  (decimal)payments
             .Where(c => c.CreatedDate.Month == dateLastMonth.Month)
             .Sum(c => c.Value);
 
-    private bool CompareCurrentMonthWithLastMonth(double qtdPayments, double qtdPaymentsLastMonth) => qtdPayments > qtdPaymentsLastMonth;
+    private bool CompareCurrentMonthWithLastMonth(decimal qtdPayments, decimal qtdPaymentsLastMonth) => qtdPayments > qtdPaymentsLastMonth;
 
     public string GetTypeText(List<PaymentHistory> payments)
     {
@@ -36,14 +36,14 @@ public class RevenueReport
     private string GetArrow(bool compare) => compare ? "up" : "down";
 
 
-    public double GetPercent(List<PaymentHistory> payments)
+    public decimal GetPercent(List<PaymentHistory> payments)
     {
         var getQtdPayments = GetQtdPayments(payments);
         var getQtdPaymentsLastMonth = GetQtdPaymentsLastMonth(payments);
         return GetPercent(getQtdPayments, getQtdPaymentsLastMonth);
     }
 
-    private double GetPercent(double qtdPayments, double qtdPaymentsLastMonth) => Math.Round(((double)(qtdPayments - qtdPaymentsLastMonth) / qtdPaymentsLastMonth) * 100, 2);
+    private decimal GetPercent(decimal qtdPayments, decimal qtdPaymentsLastMonth) => Math.Round(((decimal)(qtdPayments - qtdPaymentsLastMonth) / qtdPaymentsLastMonth) * 100, 2);
 
-    private double GetPercentMonthLast(double getQtdPaymentsLastMonth, double getQtdPaymentsLastMonth2) => Math.Round(((double)(getQtdPaymentsLastMonth - getQtdPaymentsLastMonth2) / getQtdPaymentsLastMonth2) * 100, 2);
+    private decimal GetPercentMonthLast(decimal getQtdPaymentsLastMonth, decimal getQtdPaymentsLastMonth2) => Math.Round(((decimal)(getQtdPaymentsLastMonth - getQtdPaymentsLastMonth2) / getQtdPaymentsLastMonth2) * 100, 2);
 }

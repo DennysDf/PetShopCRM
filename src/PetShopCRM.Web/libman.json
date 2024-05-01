@@ -60,12 +60,7 @@
       "destination": "wwwroot/lib/tableexport.jquery.plugin/"
     },
     {
-      "library": "Chart.js@4.4.1",
-      "destination": "wwwroot/lib/Chart.js/"
-    },
-    {
-      "provider": "unpkg",
-      "library": "apexcharts@3.49.0",
+      "library": "apexcharts@3.48.0",
       "destination": "wwwroot/lib/apexcharts/"
     }
   ]

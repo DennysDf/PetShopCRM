@@ -16,6 +16,7 @@
         <label asp-for="DateBirth"></label>
         <input type="text" class="form-control date-mask" asp-for="DateBirth" placeholder="Escreva a Data de Nascimento..." autofocus />
         <span asp-validation-for="DateBirth"></span>
+        <span id="valida-data" class="text-danger fw-bold d-none">Data inválida.</span>
     </div>
 </div>
 <div class="row mt-2">
@@ -23,6 +24,7 @@
         <label asp-for="CPF"></label>
         <input type="text" class="form-control cpf-mask" asp-for="CPF" placeholder="Escreva o CPF..." autofocus />
         <span asp-validation-for="CPF"></span>
+        <span id="valida-cpf" class="text-danger fw-bold d-none">CPF inválido.</span>
     </div>
     <div class="col-sm-6">
         <div class="row">

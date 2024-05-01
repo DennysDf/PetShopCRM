@@ -63,7 +63,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+                    <button type="submit" id="btn-salve" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
                 </div>
             </form>
         </div>
@@ -100,11 +100,111 @@
             Ajax(id)
         })
 
+        function validarCampos(){
+            $("#CPF").keyup(function () {
+                var cpf = $(this).val()
+                if (cpf.length > 13) {
+                    if (!cpfValidar(cpf)) {
+                        $("#valida-cpf").removeClass("d-none")
+                        $("#btn-salve").attr("disabled", "true")
+                    } else {
+                        
+                        $("#valida-cpf").addClass("d-none")
+                        $("#btn-salve").removeAttr("disabled", "true")
+                    }
+
+                } else {
+                    $("#valida-cpf").addClass("d-none")
+                    $("#btn-salve").removeAttr("disabled", "true")
+                }
+            })
+
+            $("#DateBirth").keyup(function () {
+                var dataNasc = $(this).val()
+                if (dataNasc.length > 9) {
+                    if (!validarData(dataNasc)) {
+                        $("#valida-data").removeClass("d-none")
+                        $("#btn-salve").attr("disabled", "true")
+                    } else {
+                        $("#valida-data").addClass("d-none")
+                        $("#btn-salve").removeAttr("disabled", "true")
+                    }
+                }else{
+                    $("#valida-data").addClass("d-none")
+                    $("#btn-salve").removeAttr("disabled", "true")
+                }
+            })
+        }
+
+
+        function validarData(data) {
+            // Verifica se a data está no formato "dd/mm/aaaa"
+            let regexData = /^\d{2}\/\d{2}\/\d{4}$/;
+            if (!regexData.test(data)) {
+                return false;
+            }
+
+            // Extrai o dia, mês e ano da data
+            let partes = data.split('/');
+            let dia = parseInt(partes[0]);
+            let mes = parseInt(partes[1]);
+            let ano = parseInt(partes[2]);
+
+            // Verifica se o dia, mês e ano são válidos
+            if (isNaN(dia) || isNaN(mes) || isNaN(ano)) {
+                return false;
+            }
+
+            // Verifica se o mês está entre 1 e 12
+            if (mes < 1 || mes > 12) {
+                return false;
+            }
+
+            // Verifica se o dia está entre 1 e 31, dependendo do mês
+            if (dia < 1 || dia > diasNoMes(mes, ano)) {
+                return false;
+            }
+
+            // Data válida
+            return true;
+        }
+
+        // Função auxiliar para obter o número de dias em um determinado mês e ano
+        function diasNoMes(mes, ano) {
+            if (mes === 2) {
+                return (ano % 4 === 0 && (ano % 100 !== 0 || ano % 400 === 0)) ? 29 : 28;
+            } else if ([4, 6, 9, 11].includes(mes)) {
+                return 30;
+            } else {
+                return 31;
+            }
+        }
+
+
+
+        function cpfValidar(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.toString().length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            var result = true;
+            [9, 10].forEach(function (j) {
+                var soma = 0, r;
+                cpf.split(/(?=)/).splice(0, j).forEach(function (e, i) {
+                    soma += parseInt(e) * ((j + 2) - (i + 1));
+                });
+                r = soma % 11;
+                r = (r < 2) ? 0 : 11 - r;
+                if (r != cpf.substring(j, j + 1)) result = false;
+            });
+            return result;
+        }
+
+
         function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 maskInit();
                 changeCep();
+                validarCampos();
                 if (id != 0) {
                     $(".title").text("Editar Tutor")
                 } else {

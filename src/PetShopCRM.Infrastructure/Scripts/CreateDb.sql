@@ -34,6 +34,10 @@ CREATE TABLE Species (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL
 );
+GO
+INSERT Species VALUES('Cachorro',GETDATE(),null,1);
+INSERT Species VALUES('Gato',GETDATE(),null,1);
+GO
 CREATE TABLE Guardians (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(255) NOT NULL,

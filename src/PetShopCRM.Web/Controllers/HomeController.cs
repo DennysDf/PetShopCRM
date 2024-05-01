@@ -47,13 +47,13 @@ public class HomeController(
 
         var guardians = await guardianService.GetAllAsync();
 
-        ViewData["PercentGuardians"] = guardiansReport.GetPercent(guardians);
+        ViewData["PercentGuardians"] = guardians.Count > 0 ? guardiansReport.GetPercent(guardians) : 0;
 
-        ViewData["QtdGuardians"] = guardiansReport.GetQtdGuardians(guardians);
+        ViewData["QtdGuardians"] = guardians.Count > 0 ? guardiansReport.GetQtdGuardians(guardians) :0 ;
 
-        ViewData["TypeTextGuardians"] = guardiansReport.GetTypeText(guardians);
+        ViewData["TypeTextGuardians"] = guardians.Count > 0 ? guardiansReport.GetTypeText(guardians) : 0;
 
-        ViewData["ArrowGuardians"] = guardiansReport.GetArrow(guardians);
+        ViewData["ArrowGuardians"] = guardians.Count > 0 ? guardiansReport.GetArrow(guardians): 0;
 
     }
 
@@ -63,13 +63,13 @@ public class HomeController(
 
         var payments = await paymentService.GetAllCompleteAsync();
 
-        ViewData["PercentPayments"] = salesRepot.GetPercent(payments.Data);
+        ViewData["PercentPayments"] = payments.Data.Count > 0 ? salesRepot.GetPercent(payments.Data):0;
 
-        ViewData["QtdPayments"] = salesRepot.GetQtdPayments(payments.Data);
+        ViewData["QtdPayments"] = payments.Data.Count > 0 ?  salesRepot.GetQtdPayments(payments.Data):0;
 
-        ViewData["TypeTextPayments"] = salesRepot.GetTypeText(payments.Data);
+        ViewData["TypeTextPayments"] = payments.Data.Count > 0 ?  salesRepot.GetTypeText(payments.Data):0;
 
-        ViewData["ArrowPayments"] = salesRepot.GetArrow(payments.Data);
+        ViewData["ArrowPayments"] = payments.Data.Count > 0 ?  salesRepot.GetArrow(payments.Data):0;
     }
 
     public async Task CardFaturamento()
@@ -79,10 +79,10 @@ public class HomeController(
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data.Where(x => x.IsSuccess).ToList();
 
-        ViewData["QtdFaturamento"] = revenueReport.GetQtdPayments(payments);
-        ViewData["PercentFaturamento"] = revenueReport.GetPercent(payments);
-        ViewData["TypeTextFaturamento"] = revenueReport.GetTypeText(payments);
-        ViewData["ArrowFaturamento"] = revenueReport.GetArrow(payments);
+        ViewData["QtdFaturamento"] = payments.Count > 0 ? revenueReport.GetQtdPayments(payments):0;
+        ViewData["PercentFaturamento"] = payments.Count > 0 ? revenueReport.GetPercent(payments):0;
+        ViewData["TypeTextFaturamento"] = payments.Count > 0 ? revenueReport.GetTypeText(payments):0;
+        ViewData["ArrowFaturamento"] = payments.Count > 0 ? revenueReport.GetArrow(payments):0;
     }
 
     public async Task CardPet()
@@ -92,10 +92,10 @@ public class HomeController(
         var petsDTO = await petService.GetAllCompleteAsync();
         var pets = petsDTO.Data;
 
-        ViewData["QtdPets"] = petsReport.GetQtdPets(pets);
-        ViewData["PercentPets"] = petsReport.GetPercent(pets);
-        ViewData["TypeTextPets"] = petsReport.GetTypeText(pets);
-        ViewData["ArrowPets"] = petsReport.GetArrow(pets);
+        ViewData["QtdPets"] = petsDTO.Data.Count > 0 ? petsReport.GetQtdPets(pets) : 0;
+        ViewData["PercentPets"] = petsDTO.Data.Count > 0 ? petsReport.GetPercent(pets) : 0;
+        ViewData["TypeTextPets"] = petsDTO.Data.Count > 0 ?  petsReport.GetTypeText(pets) : 0;
+        ViewData["ArrowPets"] = petsDTO.Data.Count > 0 ? petsReport.GetArrow(pets) : 0;
 
     }
 

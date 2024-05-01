@@ -23,7 +23,8 @@ public class HomeController(
     ISpecieService specieService,
     IGuardianService guardianService,
     IPetService petService,
-    IPaymentService paymentService) : Controller
+    IPaymentService paymentService,
+    IPaymentHistoryService paymentHistoryService) : Controller
 {
 
     public async Task<IActionResult> Index()
@@ -35,6 +36,7 @@ public class HomeController(
         await ChartPieSpecie();
         await ChartFaturamentoAnual();
         await ChartFaturamentoAnualIndividual();
+        await ChartArea();
 
         return View();
     }
@@ -74,7 +76,7 @@ public class HomeController(
     {
         var revenueReport = new RevenueReport();
 
-        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data;
 
         ViewData["QtdFaturamento"] = revenueReport.GetQtdPayments(payments);
@@ -118,13 +120,13 @@ public class HomeController(
 
     public async Task ChartFaturamentoAnualIndividual()
     {
-        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data;
 
         var faturamentoAnual = payments.Select(c => new
         {
-            c.HealthPlan.Value,
-            c.HealthPlan.Name,
+            c.Value,
+            c.Payment.HealthPlan.Name,
             mes = c.CreatedDate.Month
         })
         .GroupBy(c => new { c.Name })
@@ -146,22 +148,22 @@ public class HomeController(
                 Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 11).Sum(s => s.Value))),
                 Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 12).Sum(s => s.Value)))
             }
-        }).ToList();
+        }).ToArray();
 
-        
 
-        ViewData["ObjFaturamentoAnual"] = JsonConvert.SerializeObject(faturamentoAnual.ToArray());
+
+        ViewData["ObjFaturamentoAnual"] = JsonConvert.SerializeObject(faturamentoAnual);
     }
 
     public async Task ChartFaturamentoAnual()
     {
 
-        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data;
 
         var faturamentoAnualIndividual = payments.Select(c => new
         {
-            c.HealthPlan.Value,
+            c.Value,
             Mes = c.CreatedDate.Month
         })
         .GroupBy(c => new { c.Mes })
@@ -201,6 +203,41 @@ public class HomeController(
 
         ViewData["ObjFaturamentoAnualIndividual"] = JsonConvert.SerializeObject(faturamentoAnualIndividual);
 
+    }
+
+    public async Task ChartArea()
+    {
+        var paymentsDTO = await paymentService.GetAllCompleteAsync();
+        var payments = paymentsDTO.Data;
+
+        var faturamentoAnual = payments.Select(c => new
+        {
+            c.HealthPlan.Value,
+            c.HealthPlan.Name,
+            mes = c.CreatedDate.Month
+        })
+        .GroupBy(c => new { c.Name })
+        .Select(c => new
+        {
+            Name = c.Key.Name,
+            Data = new int[]
+            {
+                        c.Where(s => s.mes == 1).Count(),
+                        c.Where(s => s.mes == 2).Count(),
+                        c.Where(s => s.mes == 3).Count(),
+                        c.Where(s => s.mes == 4).Count(),
+                        c.Where(s => s.mes == 5).Count(),
+                        c.Where(s => s.mes == 6).Count(),
+                        c.Where(s => s.mes == 7).Count(),
+                        c.Where(s => s.mes == 8).Count(),
+                        c.Where(s => s.mes == 9).Count(),
+                        c.Where(s => s.mes == 10).Count(),
+                        c.Where(s => s.mes == 11).Count(),
+                        c.Where(s => s.mes == 12).Count()
+            }
+        }).ToArray();
+
+        ViewData["ObjFaturamentoArea"] = JsonConvert.SerializeObject(faturamentoAnual);
     }
 
     [Authorize(policy: nameof(UserType.Admin))]

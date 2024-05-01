@@ -31,6 +31,18 @@ public class PaymentHistoryService(IUnitOfWork unitOfWork) : IPaymentHistoryServ
         return paymentHistories.OrderByDescending(x => x.CreatedDate).ToList();
     }
 
+    public async  Task<ResponseDTO<List<PaymentHistory>>> GetAllCompleteAsync()
+    {
+        var paymentHistory = unitOfWork.PaymentHistoryRepository.GetBy();
+
+        var result = paymentHistory
+            .Include(c => c.Payment)
+                .ThenInclude(c => c.HealthPlan)
+            .ToList();
+
+        return new ResponseDTO<List<PaymentHistory>>(result.Count > 0, "Nenhum resultado encontrado", result);
+    }
+
     public bool ValidateEvent(string eventName)
     {
         var response = External.PagarMe.Resources.EventDescription.ResourceManager.GetString(eventName);

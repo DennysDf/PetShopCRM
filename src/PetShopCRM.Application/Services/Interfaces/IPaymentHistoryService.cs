@@ -9,4 +9,5 @@ public interface IPaymentHistoryService
     Task<List<PaymentHistory>> GetAllAsync(int? paymentId = null);
     bool ValidateEvent(string eventName);
     Task<ResponseDTO<PaymentHistory?>> SaveAsync(string eventName, JsonElement data);
+    Task<ResponseDTO<List<PaymentHistory>>> GetAllCompleteAsync();
 }

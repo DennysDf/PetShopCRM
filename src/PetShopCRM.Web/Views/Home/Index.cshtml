@@ -342,7 +342,7 @@
                 }
             },
             title: {
-                text: 'Espécies',
+                text: 'Espécies por Pets cadastrados',
                 align: 'center'
             },
             dataLabels: {
@@ -364,22 +364,9 @@
     <script>
 
 
+
         var options = {
-            series: [{
-                name: "VetCard Green",
-                data: [15, 22, 28, 11, 19, 9, 27, 14, 8, 25, 18, 12]
-            },
-            {
-                name: "VetCard Gold",
-                data: [29, 10, 20, 26, 13, 7, 23, 17, 21, 16, 24, 30]
-
-            },
-            {
-                name: "VetCard Black",
-                data: [7, 30, 16, 12, 25, 19, 8, 14, 22, 11, 18, 27]
-
-            }
-            ],
+            series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoArea)'.toLowerCase()),
             chart: {
                 height: 380,
                 type: 'area',

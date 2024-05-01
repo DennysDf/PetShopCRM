@@ -21,10 +21,9 @@ public class PaymentController(
 {
     public async Task<IActionResult> Index()
     {
-        var paymentsDTO = await paymentService.GetAllCompleteAsync();
-        var payments = paymentsDTO.Data;
+        var paymentsDTO = await paymentService.GetAllCompleteAsync();        
 
-        return View(PaymentVM.ToList(payments.Data).OrderByDescending(x => x.Id).ToList());
+        return View(PaymentVM.ToList(paymentsDTO.Data).OrderByDescending(x => x.Id).ToList());
     }
 
     public async Task<IActionResult> Ajax()

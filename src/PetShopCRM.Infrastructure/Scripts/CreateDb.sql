@@ -108,6 +108,7 @@ INSERT INTO Configurations VALUES ('PagarMeUser', 'sk_747d8ddf31334d94b19617f3e4
 INSERT INTO Configurations VALUES ('PagarMePassword', '', 1, 1, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('SystemName', 'Vet Card', 1, 0, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('PagarMeDashboardUrl', '', 1, 1, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('PagarMeRenewRecurrence', 'false', 2, 1, GETDATE(), NULL, 1)
 
 go
 CREATE TABLE PaymentHistories (
@@ -116,6 +117,7 @@ CREATE TABLE PaymentHistories (
     IsSuccess BIT NOT NULL,
     [Event] VARCHAR(200) NOT NULL,
     [Value] DECIMAL(18, 2) NOT NULL,
+    ExternalId VARCHAR(200) NOT NULL,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,

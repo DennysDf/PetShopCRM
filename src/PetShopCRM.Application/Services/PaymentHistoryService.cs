@@ -66,6 +66,7 @@ public class PaymentHistoryService(IUnitOfWork unitOfWork) : IPaymentHistoryServ
 
         var paymentHistory = new PaymentHistory
         {
+            ExternalId = signatureId,
             IsSuccess = isSuccess,
             PaymentId = payment.Id,
             Value = parsedValue,

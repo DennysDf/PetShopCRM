@@ -17,13 +17,29 @@ public class PaymentController(
         IPaymentService paymentService,
         IPetService petService,
         IHealthPlanService healthPlanService,
-        IPaymentHistoryService paymentHistoryService) : Controller
+        IPaymentHistoryService paymentHistoryService,
+        IConfigurationService configurationService) : Controller
 {
     public async Task<IActionResult> Index()
     {
         var paymentsDTO = await paymentService.GetAllCompleteAsync();        
 
-        return View(PaymentVM.ToList(paymentsDTO.Data).OrderByDescending(x => x.Id).ToList());
+        var paymentsVM = PaymentVM.ToList(payments.Data).OrderByDescending(x => x.Id).ToList();
+
+        var configDashboardUrl = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeDashboardUrl);
+
+        if (configDashboardUrl != null && !string.IsNullOrEmpty(configDashboardUrl.Value))
+        {
+            var dashboardUri = new Uri(configDashboardUrl.Value);
+            var url = dashboardUri.GetLeftPart(UriPartial.Path);
+
+            for (int i = 0; i < paymentsVM.Count; i++)
+            {
+                paymentsVM[i].ExternalIdUrl = $"{url}subscriptions/{paymentsVM[i].ExternalId}/info";
+            }
+        }
+
+        return View(paymentsVM);
     }
 
     public async Task<IActionResult> Ajax()
@@ -68,7 +84,7 @@ public class PaymentController(
     {
         var success = await paymentService.CancelAsync(id);
 
-        if(success)
+        if (success)
             notificationService.Success(Resources.Text.PaymentDeleteSuccess);
         else
             notificationService.Error(Resources.Text.NotificationError);
@@ -78,7 +94,7 @@ public class PaymentController(
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Webhook([FromBody]WebhookDTO dto)
+    public async Task<IActionResult> Webhook([FromBody] WebhookDTO dto)
     {
         try
         {
@@ -89,7 +105,20 @@ public class PaymentController(
                 var result = await paymentHistoryService.SaveAsync(dto.Type, dto.Data);
 
                 if (result.Success && result.Data != null && result.Data.IsSuccess)
+                {
                     await paymentService.UpdateLastPaymentDateAndInstallmentAsync(result.Data.PaymentId, result.Data.CreatedDate);
+
+                    var payment = paymentService.GetById(result.Data.PaymentId);
+
+                    var config = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeRenewRecurrence);
+
+                    if (payment is { Installment: 12 } && config != null && config.Value.Equals("true", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await paymentService.CancelAsync(payment.Id);
+
+                        await paymentService.RenewAsync(payment, dto.Data);
+                    }
+                }
             }
 
         }
@@ -103,6 +132,21 @@ public class PaymentController(
     {
         var histories = await paymentHistoryService.GetAllAsync(paymentId);
 
-        return View(PaymentHistoryVM.ToList(histories));
+        var historiesVM = PaymentHistoryVM.ToList(histories);
+
+        var configDashboardUrl = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeDashboardUrl);
+
+        if (configDashboardUrl != null && !string.IsNullOrEmpty(configDashboardUrl.Value))
+        {
+            var dashboardUri = new Uri(configDashboardUrl.Value);
+            var url = dashboardUri.GetLeftPart(UriPartial.Path);
+
+            for (int i = 0; i < historiesVM.Count; i++)
+            {
+                historiesVM[i].ExternalIdUrl = $"{url}subscriptions/{historiesVM[i].ExternalId}/info";
+            }
+        }
+
+        return View(historiesVM);
     }
 }

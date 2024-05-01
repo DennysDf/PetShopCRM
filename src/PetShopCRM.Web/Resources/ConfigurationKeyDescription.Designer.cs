@@ -79,6 +79,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Ativar renovação automática do pagamento ao completar 12 parcelas.
+        /// </summary>
+        public static string PagarMeRenewRecurrence {
+            get {
+                return ResourceManager.GetString("PagarMeRenewRecurrence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário Pagar.me (usuário ou secret key).
         /// </summary>
         public static string PagarMeUser {

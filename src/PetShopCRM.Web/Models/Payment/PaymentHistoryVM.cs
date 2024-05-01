@@ -11,6 +11,8 @@ namespace PetShopCRM.Web.Models.Payment
         public string PlanName { get; set; }
         public string PetName { get; set; }
         public string GuardianName { get; set; }
+        public string ExternalId { get; set; }
+        public string ExternalIdUrl { get; set; }
 
         public static List<PaymentHistoryVM> ToList(List<Domain.Models.PaymentHistory> paymentHistories) => paymentHistories.Select(paymentHistory => new PaymentHistoryVM
         {
@@ -20,7 +22,8 @@ namespace PetShopCRM.Web.Models.Payment
             Value = paymentHistory.Value,
             PlanName = paymentHistory.Payment.HealthPlan.Name,
             PetName = paymentHistory.Payment.Pet.Name,
-            GuardianName = paymentHistory.Payment.Guardian.Name
+            GuardianName = paymentHistory.Payment.Guardian.Name,
+            ExternalId = paymentHistory.Payment.ExternalId
         }).ToList();
     }
 }

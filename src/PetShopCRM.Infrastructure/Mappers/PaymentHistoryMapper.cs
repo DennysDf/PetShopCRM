@@ -24,6 +24,9 @@ public class PaymentHistoryMapper : IEntityTypeConfiguration<PaymentHistory>
         builder.Property(x => x.PaymentId)
            .IsRequired();
 
+        builder.Property(x => x.ExternalId)
+            .IsRequired();
+
         builder.Property(x => x.IsSuccess)
             .IsRequired();
 

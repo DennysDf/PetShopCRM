@@ -123,6 +123,9 @@
   <data name="PagarMePassword" xml:space="preserve">
     <value>Senha Pagar.me (em branco caso use secret key)</value>
   </data>
+  <data name="PagarMeRenewRecurrence" xml:space="preserve">
+    <value>Ativar renovação automática do pagamento ao completar 12 parcelas</value>
+  </data>
   <data name="PagarMeUser" xml:space="preserve">
     <value>Usuário Pagar.me (usuário ou secret key)</value>
   </data>

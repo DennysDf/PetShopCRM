@@ -3,6 +3,7 @@
 public class PaymentHistory : EntityBase
 {
     public int PaymentId { get; set; }
+    public string ExternalId { get; set; }
     public bool IsSuccess { get; set; }
     public string Event { get; set; }
     public decimal Value { get; set; }

@@ -29,6 +29,7 @@ public class PaymentVM
     public string Pet { get; set; }
     public string HealhPlan { get; set; }
     public string ExternalId { get; set; }
+    public string ExternalIdUrl { get; set; }
     public bool IsRecurrence { get; set; }
     public bool IsSuccess { get; set; }
     public bool IsActive { get; set; }
@@ -50,7 +51,7 @@ public class PaymentVM
             LastPayment = x.LastPayment,
             IsSuccess = x.IsSuccess,
             IsActive = x.Active,
-            Pet = x.Pet.Name,
+            Pet = $"{x.Pet.Identifier} - {x.Pet.Name} - {x.Guardian.Name}",
             HealhPlan = x.HealthPlan.Name
         }).ToList();
     }

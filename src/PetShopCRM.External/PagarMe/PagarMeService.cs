@@ -115,4 +115,44 @@ public class PagarMeService : IPagarMeService
     {
         return _client.PayablesController.GetPayables(type: type, status: status, page: page, size: size);
     }
+
+    public GetSubscriptionResponse? RenewRecurrence(HealthPlan plan, string customerId, string cardId, string value)
+    {
+        try
+        {
+            var response = _client.SubscriptionsController.CreateSubscription(new CreateSubscriptionRequest
+            {
+                PaymentMethod = "credit_card",
+                Currency = "BRL",
+                Interval = "month",
+                IntervalCount = 1,
+                BillingType = "prepaid",
+                Installments = 12,
+                Quantity = 1,
+                StartAt = DateTime.Now.AddDays(30),
+                StatementDescriptor = plan.Name,
+                Description = plan.Description ?? plan.Name,
+                CustomerId = customerId,
+                CardId = cardId,
+                PricingScheme = new CreatePricingSchemeRequest
+                {
+                    SchemeType = "unit",
+                    Price = int.Parse(value)
+                },
+            });
+
+            return response;
+        }
+        catch (ApiException ex)
+        {
+
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
+        return null;
+    }
 }

@@ -4,12 +4,21 @@ using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
+using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
+using System.Text.Json;
 
 namespace PetShopCRM.Application.Services;
 
 public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeService) : IPaymentService
 {
+    public Payment? GetById(int id)
+    {
+        return unitOfWork.PaymentRepository.GetBy(x => x.Id == id)
+            .Include(x => x.HealthPlan)
+            .FirstOrDefault();
+    }
+
     public async Task<List<Payment>> GetAllAsync()
     {
         var payments = unitOfWork.PaymentRepository.GetBy().ToList();
@@ -99,5 +108,22 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         await unitOfWork.SaveChangesAsync();
 
         return result != null && deleted;
+    }
+
+    public async Task RenewAsync(Payment payment, JsonElement data)
+    {
+        var subscriptionId = data.GetProperty("invoice").GetProperty("subscriptionId").GetString();
+        var customerId = data.GetProperty("customer").GetProperty("id").GetString();
+        var cardId = data.GetProperty("last_transaction").GetProperty("card").GetProperty("id").GetString();
+        var value = data.GetProperty("amount").GetInt32().ToString();
+
+        _ = pagarMeService.CancelSubscription(subscriptionId);
+        var resultRenew = pagarMeService.RenewRecurrence(payment.HealthPlan, customerId, cardId, value);
+
+        payment.ExternalId = resultRenew.Id;
+        payment.Active = true;
+
+        await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
+        await unitOfWork.SaveChangesAsync();
     }
 }

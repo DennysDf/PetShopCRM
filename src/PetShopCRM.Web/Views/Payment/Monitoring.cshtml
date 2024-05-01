@@ -4,36 +4,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <div class="table-responsive-xl">
-        <table id="table-teste" class="table table-sm table-striped bootstrap-table bg-white table-hover" data-toggle="table" data-search="true" data-pagination="true" data-show-export="true" data-page-list="[10  25  50  100  all]">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Id Pagamento</th>
-                    <th>Descrição</th>
-                    <th>Data/Hora</th>
-                    <th>Valor</th>
-                    <th>Plano de saúde</th>
-                    <th>Pet</th>
-                    <th>Tutor</th>
+<div class="table-responsive-xl">
+    <table id="table-teste" class="table table-sm table-striped bootstrap-table bg-white table-hover" data-toggle="table" data-search="true" data-pagination="true" data-show-export="true" data-page-list="[10  25  50  100  all]">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id Pagamento</th>
+                <th>Id Externo</th>
+                <th>Descrição</th>
+                <th>Data/Hora</th>
+                <th>Valor</th>
+                <th>Plano de saúde</th>
+                <th>Pet</th>
+                <th>Tutor</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            @foreach (var item in Model)
+            {
+                <tr class="bg-white">
+                    <td class="text-nowrap">@item.PaymentId</td>
+                    <td class="text-nowrap">
+                        @if (string.IsNullOrEmpty(item.ExternalIdUrl))
+                        {
+                            @item.ExternalId
+                        }
+                        else
+                        {
+                            <a href="@item.ExternalIdUrl" target="_blank" data-toggle="tooltip" title="Acessar assinatura no Pagar.Me" data-placement="left">
+                                @item.ExternalId
+                            </a>
+                        }
+                    </td>
+                    <td class="text-nowrap">@item.Description</td>
+                    <td class="text-nowrap">@item.Date.ToString()</td>
+                    <td class="text-nowrap">
+                        <b>R$ </b><span class="value-mask">@item.Value</span>
+                    </td>
+                    <td class="text-nowrap">@item.PlanName</td>
+                    <td class="text-nowrap">@item.PetName</td>
+                    <td class="text-nowrap">@item.GuardianName</td>
                 </tr>
-            </thead>
-            <tbody class="bg-white">
-                @foreach (var item in Model)
-                {
-                    <tr class="bg-white">
-                        <td class="text-nowrap">@item.PaymentId</td>
-                        <td class="text-nowrap">@item.Description</td>
-                        <td class="text-nowrap">@item.Date.ToString()</td>
-                        <td class="text-nowrap">
-                            <b>R$ </b><span class="value-mask">@item.Value</span>
-                        </td>
-                        <td class="text-nowrap">@item.PlanName</td>
-                        <td class="text-nowrap">@item.PetName</td>
-                        <td class="text-nowrap">@item.GuardianName</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>

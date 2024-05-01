@@ -106,24 +106,6 @@ namespace PetShopCRM.External.PagarMe.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento da fatura falhou..
-        /// </summary>
-        public static string invoice_payment_failed {
-            get {
-                return ResourceManager.GetString("invoice.payment_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento do pedido falhou..
-        /// </summary>
-        public static string order_payment_failed {
-            get {
-                return ResourceManager.GetString("order.payment_failed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Assinatura cancelada..
         /// </summary>
         public static string subscription_canceled {

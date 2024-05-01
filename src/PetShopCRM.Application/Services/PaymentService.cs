@@ -30,7 +30,6 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         return new ResponseDTO<List<Payment>>(result.Count > 0, "Nenhum resultado encontrado", result);
     }
 
-
     public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)
     {
         try
@@ -40,7 +39,7 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 
             var paymentResponse = pagarMeService.GenerateRecurrence(guardian, healthPan, card, billingAddress);
 
-            if (paymentResponse != null && paymentResponse.Status.Equals("Success", StringComparison.OrdinalIgnoreCase))
+            if (paymentResponse != null)
             {
                 var payment = new Payment
                 {
@@ -49,9 +48,10 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
                     PetId = petId,
                     HealthPlanId = healthPan.Id,
                     IsRecurrence = true,
-                    Installment = 1,
+                    Installment = 0,
                     FirstPayment = DateTime.Now,
-                    LastPayment = DateTime.Now
+                    LastPayment = DateTime.Now,
+                    IsSuccess = paymentResponse.Status.Equals("active", StringComparison.OrdinalIgnoreCase)
                 };
 
                 await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
@@ -71,5 +71,33 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
     public string GenerateWebhookUrl(string host)
     {
         return new Uri(new Uri(host), "/Payment/Webhook").AbsoluteUri;
+    }
+
+    public async Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date)
+    {
+        var payment = await unitOfWork.PaymentRepository.GetByIdAsync(id);
+
+        if(payment != null)
+        {
+            payment.LastPayment = date;
+            payment.Installment++;
+
+            await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
+            await unitOfWork.SaveChangesAsync();
+        }
+    }
+
+    public async Task<bool> CancelAsync(int id)
+    {
+        var payment = await unitOfWork.PaymentRepository.GetByIdAsync(id);
+
+        if (payment == null) return false;
+
+        var result = pagarMeService.CancelSubscription(payment.ExternalId);
+
+        var deleted = await unitOfWork.PaymentRepository.DeleteOrRestoreAsync(payment.Id);
+        await unitOfWork.SaveChangesAsync();
+
+        return result != null && deleted;
     }
 }

@@ -132,12 +132,6 @@
   <data name="charge.refunded" xml:space="preserve">
     <value>Cobrança extornada.</value>
   </data>
-  <data name="invoice.payment_failed" xml:space="preserve">
-    <value>Pagamento da fatura falhou.</value>
-  </data>
-  <data name="order.payment_failed" xml:space="preserve">
-    <value>Pagamento do pedido falhou.</value>
-  </data>
   <data name="subscription.canceled" xml:space="preserve">
     <value>Assinatura cancelada.</value>
   </data>

@@ -153,6 +153,9 @@
   <data name="PaymentAddSuccess" xml:space="preserve">
     <value>Pagamento adicionado com sucesso.</value>
   </data>
+  <data name="PaymentDeleteSuccess" xml:space="preserve">
+    <value>Pagamento cancelado com sucesso.</value>
+  </data>
   <data name="PetAddSucess" xml:space="preserve">
     <value>Pet castrado com sucesso.</value>
   </data>

@@ -59,15 +59,15 @@ public class HomeController(
     {
         var salesRepot = new SalesReport();
 
-        var payments = await paymentService.GetAllAsync();
+        var payments = await paymentService.GetAllCompleteAsync();
 
-        ViewData["PercentPayments"] = salesRepot.GetPercent(payments);
+        ViewData["PercentPayments"] = salesRepot.GetPercent(payments.Data);
 
-        ViewData["QtdPayments"] = salesRepot.GetQtdPayments(payments);
+        ViewData["QtdPayments"] = salesRepot.GetQtdPayments(payments.Data);
 
-        ViewData["TypeTextPayments"] = salesRepot.GetTypeText(payments);
+        ViewData["TypeTextPayments"] = salesRepot.GetTypeText(payments.Data);
 
-        ViewData["ArrowPayments"] = salesRepot.GetArrow(payments);
+        ViewData["ArrowPayments"] = salesRepot.GetArrow(payments.Data);
     }
 
     public async Task CardFaturamento()

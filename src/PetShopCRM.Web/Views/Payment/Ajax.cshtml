@@ -51,7 +51,7 @@
         <span asp-validation-for="Card.Cvv"></span>
     </div>
     <div class="col-sm-3 col-12">
-        <label asp-for="Card.Brand"></label>
+        <label asp-for="Card.Brand">Bandeira*:</label>
         <select asp-for="Card.Brand" class="form-select" asp-items="Model.Card.BrandList">
             <option disabled selected>Selecione</option>
         </select>

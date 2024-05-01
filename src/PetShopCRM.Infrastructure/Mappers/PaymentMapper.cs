@@ -50,6 +50,9 @@ public class PaymentMapper : IEntityTypeConfiguration<Payment>
         builder.Property(x => x.LastPayment)
             .IsRequired(false);
 
+        builder.Property(x => x.IsSuccess)
+            .IsRequired();
+
         builder.HasOne(x => x.Pet)
             .WithMany(x => x.Payments)
             .HasForeignKey(x => x.PetId)
@@ -64,8 +67,5 @@ public class PaymentMapper : IEntityTypeConfiguration<Payment>
             .WithMany(x => x.Payments)
             .HasForeignKey(x => x.HealthPlanId)
             .HasConstraintName("Payments_HealthPlans_HealthPlanId");
-
-        //Filter
-        builder.HasQueryFilter(x => x.Active);
     }
 }

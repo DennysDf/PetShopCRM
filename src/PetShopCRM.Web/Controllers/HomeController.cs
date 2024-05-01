@@ -148,13 +148,7 @@ public class HomeController(
             }
         }).ToList();
 
-        var teste = faturamentoAnual
-            .Select(c => new { 
-                Data = new Decimal[] 
-                {
-                    
-                }
-            }).ToList();
+        
 
         ViewData["ObjFaturamentoAnual"] = JsonConvert.SerializeObject(faturamentoAnual.ToArray());
     }
@@ -168,29 +162,42 @@ public class HomeController(
         var faturamentoAnualIndividual = payments.Select(c => new
         {
             c.HealthPlan.Value,
-            c.HealthPlan.Name,
-            mes = c.CreatedDate.Month
+            Mes = c.CreatedDate.Month
         })
-        .GroupBy(c => new { c.mes })
+        .GroupBy(c => new { c.Mes })
         .Select(c => new
         {
-            Name = c.Key.mes,
+            Mes = c.Key.Mes,
             Data = new Decimal[]
         {
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 1).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 2).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 3).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 4).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 5).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 6).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 7).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 8).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 9).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 10).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 11).Sum(s => s.Value))),
-            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.mes == 12).Sum(s => s.Value)))
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 1).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 2).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 3).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 4).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 5).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 6).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 7).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 8).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 9).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 10).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 11).Sum(s => s.Value))),
+            Decimal.Parse(string.Format("{0:0.00}", c.Where(s => s.Mes == 12).Sum(s => s.Value)))
         }
-        }).ToArray();
+        })
+        .Select(c => new
+        {
+            c.Data,
+            c.Mes
+
+        })
+        .GroupBy(c => c.Mes)
+        .Select(c => new
+        {
+            c.Key,
+            Valor = c.Sum(x => x.Data.Sum())
+        })
+        .ToArray();
+
 
         ViewData["ObjFaturamentoAnualIndividual"] = JsonConvert.SerializeObject(faturamentoAnualIndividual);
 

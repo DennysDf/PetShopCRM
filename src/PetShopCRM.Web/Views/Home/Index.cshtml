@@ -163,21 +163,32 @@
     @* Grafico de barras *@
     <script type="text/javascript">
 
-
         var objBancoFaturamentoAnual = JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnualIndividual)')
 
-        var arrNameFaturamentoAnual = [];
-        $.each(objBancoFaturamentoAnual, function (i, element) {            
-            arrNameFaturamentoAnual.push(element.Name)
-        });
+        var jsonComplete = completarKeys(objBancoFaturamentoAnual, 12)
+
+        function completarKeys(jsonArray, maxKey) {            
+            const resultado = Array.from({ length: maxKey }, (v, k) => ({ Key: k + 1, Valor: 0 }));
+
+            jsonArray.forEach(item => {
+                if (item.Key && item.Key <= maxKey) {
+                    resultado[item.Key - 1].Valor = item.Valor;
+                }
+            });
+
+            return resultado;
+        }
 
         var arrIndexFaturamentoAnual = [];
-        $.each(objBancoFaturamentoAnual, function (i, element) {
-            arrIndexFaturamentoAnual.push(element.Data)
+        $.each(jsonComplete, function (i, element) {
+            arrIndexFaturamentoAnual.push(element.Valor)
         });
 
         var options = {
-            series: arrIndexFaturamentoAnual,
+            series: [{
+                name: '',
+                data: arrIndexFaturamentoAnual
+            }],
             chart: {
                 type: 'bar',
                 height: 380
@@ -204,7 +215,7 @@
                 align: 'center'
             },
             xaxis: {
-                categories: arrNameFaturamentoAnual,
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 title: {
                     text: 'Meses'
                 }
@@ -229,6 +240,7 @@
         var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
         chart.render();
     </script>
+        
 
     @* Grafico de linhas *@
     <script type="text/javascript">

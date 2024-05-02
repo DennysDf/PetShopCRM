@@ -43,6 +43,7 @@ public class GuardiansReport()
     {
         var getQtdGuardians = GetQtdGuardians(guardians);
         var getQtdGuardiansLastMonth = GetQtdGuardiansLastMonth(guardians);
+        if (getQtdGuardiansLastMonth == 0) return 100;
         return GetPercent(getQtdGuardians, getQtdGuardiansLastMonth);
     }
 

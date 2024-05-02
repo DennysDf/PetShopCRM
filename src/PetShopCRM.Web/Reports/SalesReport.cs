@@ -40,6 +40,7 @@ public class SalesReport
     {
         var getQtdPayments = GetQtdPayments(payments);
         var getQtdPaymentsLastMonth = GetQtdPaymentsLastMonth(payments);
+        if (getQtdPaymentsLastMonth == 0) return 100;
         return GetPercent(getQtdPayments, getQtdPaymentsLastMonth);
     }
 

@@ -40,6 +40,7 @@ public class PetsReport
     {
         var getQtdPets = GetQtdPets(pets);
         var getQtdPetsLastMonth = GetQtdPetsLastMonth(pets);
+        if (getQtdPetsLastMonth == 0) return 100;
         return GetPercent(getQtdPets, getQtdPetsLastMonth);
     }
 

@@ -5,6 +5,7 @@ using PetShopCRM.Domain.Enums;
 using PetShopCRM.External;
 using PetShopCRM.Infrastructure;
 using PetShopCRM.Infrastructure.Settings;
+using PetShopCRM.Web.Handlers;
 using PetShopCRM.Web.Resources;
 using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
@@ -53,6 +54,8 @@ builder.Services.AddSignalR(options =>
 {
     options.EnableDetailedErrors = true;
 });
+
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 
 var app = builder.Build();
 

@@ -17,6 +17,7 @@ public static class Bootstrapper
         services.AddScoped<IPaymentService, PaymentService>();
         services.AddScoped<IConfigurationService, ConfigurationService>();
         services.AddScoped<IPaymentHistoryService, PaymentHistoryService>();
+        services.AddScoped<ILogService, LogService>();
 
         return services;
     }

@@ -127,3 +127,16 @@ CREATE TABLE PaymentHistories (
     CONSTRAINT PaymentHistories_Payments_PaymentId FOREIGN KEY (PaymentId) REFERENCES Payments(Id),
 );
 go
+CREATE TABLE Logs (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    [Type] varchar(100) NOT NULL,
+    [Message] varchar(2000),
+    Exception varchar(2000),
+    StackTrace varchar(8000),
+    InnerException varchar(2000),
+    InnerStackTrace varchar(8000),
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,
+);
+go

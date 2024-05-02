@@ -88,17 +88,14 @@ public class PagarMeService : IPagarMeService
 
             return response;
         }
-        catch (ApiException ex)
+        catch (ApiException)
         {
-
-        }
-        catch (Exception ex)
-        {
-
             throw;
         }
-
-        return null;
+        catch (Exception)
+        {
+            throw;
+        }
     }
 
     public GetSubscriptionResponse? CancelSubscription(string subscriptionId)
@@ -143,16 +140,13 @@ public class PagarMeService : IPagarMeService
 
             return response;
         }
-        catch (ApiException ex)
+        catch (ApiException)
         {
-
-        }
-        catch (Exception ex)
-        {
-
             throw;
         }
-
-        return null;
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

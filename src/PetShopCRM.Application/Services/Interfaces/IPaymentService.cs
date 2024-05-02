@@ -15,4 +15,5 @@ public interface IPaymentService
     Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date);
     Task<bool> CancelAsync(int id);
     Task RenewAsync(Payment payment, JsonElement data);
+    decimal GetValue();
 }

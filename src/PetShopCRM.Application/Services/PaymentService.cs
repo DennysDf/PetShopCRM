@@ -6,6 +6,7 @@ using PetShopCRM.External.PagarMe.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
+using System.Globalization;
 using System.Text.Json;
 
 namespace PetShopCRM.Application.Services;
@@ -126,4 +127,15 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
         await unitOfWork.SaveChangesAsync();
     }
+
+    public decimal GetValue()
+    {
+        var teste = pagarMeService.GetPayables();
+
+        var value = teste.Data.Sum( c => c.Amount).ToString() ?? "0000";
+
+        _ = decimal.TryParse(value[..^2] + "," + value[^2..], NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"), out decimal parsedValue);
+        return parsedValue;
+    } 
+
 }

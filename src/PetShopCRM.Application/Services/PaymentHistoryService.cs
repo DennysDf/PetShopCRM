@@ -5,6 +5,7 @@ using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -57,7 +58,7 @@ public class PaymentHistoryService(IUnitOfWork unitOfWork) : IPaymentHistoryServ
         var signatureId = GetSubscriptionId(eventName, data);
         var value = GetValue(eventName, data);
 
-        _ = decimal.TryParse(value[..^2] + "," + value[^2..], out decimal parsedValue);
+        _ = decimal.TryParse(value[..^2] + "," + value[^2..], NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"), out decimal parsedValue);
 
         var payment = unitOfWork.PaymentRepository.GetBy(x => x.ExternalId == signatureId).FirstOrDefault();
 

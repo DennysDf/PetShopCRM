@@ -38,6 +38,8 @@ public class HomeController(
         await ChartFaturamentoAnualIndividual();
         await ChartArea();
 
+        ViewData["Value"] = paymentService.GetValue();
+
         return View();
     }
 

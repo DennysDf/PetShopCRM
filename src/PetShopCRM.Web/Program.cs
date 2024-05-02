@@ -5,7 +5,7 @@ using PetShopCRM.Domain.Enums;
 using PetShopCRM.External;
 using PetShopCRM.Infrastructure;
 using PetShopCRM.Infrastructure.Settings;
-using PetShopCRM.Web.Handlers;
+using PetShopCRM.Web.Middlewares;
 using PetShopCRM.Web.Resources;
 using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
@@ -21,7 +21,7 @@ builder.Services.AddControllersWithViews()
     });
 
 builder.Services.AddDbContextPool<PetShopDbContext>(
-        options => options.UseSqlServer("name=ConnectionStrings:PetShopDb"));
+        options => options.UseSqlServer("name=ConnectionStrings:PetShopDbS"));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -55,8 +55,6 @@ builder.Services.AddSignalR(options =>
     options.EnableDetailedErrors = true;
 });
 
-builder.Services.AddExceptionHandler<ExceptionHandler>();
-
 var app = builder.Build();
 
 app.UseAuthentication();
@@ -76,6 +74,8 @@ app.UseCors(options =>
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseLogException();
 
 app.UseRouting();
 

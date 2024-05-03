@@ -130,9 +130,9 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 
     public decimal GetValue()
     {
-        var teste = pagarMeService.GetPayables();
+        var response = pagarMeService.GetAvailableValues();
 
-        var value = teste.Data.Sum( c => c.Amount).ToString() ?? "0000";
+        var value = response?.AvailableAmount?.ToString("0000") ?? "0000";
 
         _ = decimal.TryParse(value[..^2] + "," + value[^2..], NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"), out decimal parsedValue);
         return parsedValue;

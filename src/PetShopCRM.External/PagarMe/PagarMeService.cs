@@ -106,11 +106,18 @@ public class PagarMeService : IPagarMeService
         });
     }
 
-    //status: paid ou waiting_funds
-    //type: chargeback, refund, chargeback_refund ou credit
-    public ListPayablesResponse GetPayables(string? type = null, string? status = null, int? page = null, int? size = null)
+    public GetBalanceResponse? GetAvailableValues()
     {
-        return _client.PayablesController.GetPayables(type: type, status: status, page: page, size: size);
+        var recipients = _client.RecipientsController.GetRecipients();
+
+        if (recipients.Data.Count != 0)
+        {
+            var balance = _client.RecipientsController.GetBalance(recipients.Data.First().Id);
+
+            return balance;
+        }
+
+        return null;
     }
 
     public GetSubscriptionResponse? RenewRecurrence(HealthPlan plan, string customerId, string cardId, string value)

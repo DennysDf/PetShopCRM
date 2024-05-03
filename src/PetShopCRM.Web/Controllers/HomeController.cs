@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
+using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
@@ -24,11 +26,24 @@ public class HomeController(
     IGuardianService guardianService,
     IPetService petService,
     IPaymentService paymentService,
-    IPaymentHistoryService paymentHistoryService) : Controller
+    IPaymentHistoryService paymentHistoryService, 
+    IConfigurationService configurationService ) : Controller
 {
 
     public async Task<IActionResult> Index()
     {
+        var pets = await petService.GetAllAsync();
+
+        ViewData["Pets"] = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name));
+
+        var configDashboardUrl = configurationService.GetByKey(ConfigurationKey.PagarMeDashboardUrl);
+        if (configDashboardUrl != null && !string.IsNullOrEmpty(configDashboardUrl.Value))
+        {
+            var dashboardUri = new Uri(configDashboardUrl.Value);
+            var url = dashboardUri.GetLeftPart(UriPartial.Path);
+            ViewData["UrlBalance"] = $"{url}/balance";
+        }
+
         await CardGuardians();
         await CardVendas();
         await CardFaturamento();

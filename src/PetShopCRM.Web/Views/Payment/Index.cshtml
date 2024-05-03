@@ -71,7 +71,7 @@
 
 
 
-<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
+<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true" >
     <div class="modal-dialog" role="document" style="max-width:1000px!important">
         <div class="modal-content">
             <form asp-action="Index" method="post">
@@ -117,7 +117,7 @@
 </div>
 
 @section Scripts {
-    <script>
+    <script>       
         $("#modal-open, .edit").click(function () {
             var id = $(this).data("id");
             Ajax(id)

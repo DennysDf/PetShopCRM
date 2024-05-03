@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Services.Interfaces;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace PetShopCRM.Web.Controllers;
@@ -13,7 +15,7 @@ public class GuardianController(
         ILoginService loginService,
         INotificationService notificationService,
         IGuardianService guardianService, ILoggedUserService loggedUserService, IAddressService addressService,
-        IUpload upload, IPaymentHistoryService paymentHistoryService, IPaymentService paymentService) : Controller
+        IUpload upload, IPaymentHistoryService paymentHistoryService, IPaymentService paymentService, IPetService petService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -70,9 +72,17 @@ public class GuardianController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Details(int id)
-    {   
-        var guardian = await guardianService.GetByPetIdAsync(id);
+    public async Task<IActionResult> Details(int id = 0, int IdPet = 0)
+    {
+        var guardianId = id > 0 ? id:0;
+
+        if (IdPet != 0)
+        {
+            var pets = await petService.GetAllAsync();
+            guardianId = pets.FirstOrDefault(c => c.Id == IdPet).GuardianId;
+        }
+
+        var guardian = await guardianService.GetByPetIdAsync(guardianId);
 
         return View(guardian);
     }

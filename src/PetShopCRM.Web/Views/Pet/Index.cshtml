@@ -31,7 +31,11 @@
                 {
                     <tr class="bg-white">
                         <td>@item.Id</td>
-                        <td class="text-nowrap">@item.Name</td>
+                        <td class="text-nowrap">
+                            <a href="@Url.Action("Details","Guardian", new{ IdPet = item.Id })">
+                                @item.Name
+                            </a>
+                        </td>
                         <td class="text-nowrap valor">@item.Identifier</td>
                         <td class="text-nowrap">@item.Guardian</td>
                         <td class="text-nowrap">@item.Specie</td>
@@ -99,16 +103,20 @@
 </div>
 
 @section Scripts {
-    <script>
-        $("#modal-open, .edit").click(function () {
-            var id = $(this).data("id");
-            Ajax(id)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#modal-open, .edit").click(function () {
+                var id = $(this).data("id");
+                Ajax(id);
+            })
         })
+
+      
 
         function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-
+                select2Init();
                 if (id != 0) {
                     $(".title").text("Editar Pet")
                 } else {

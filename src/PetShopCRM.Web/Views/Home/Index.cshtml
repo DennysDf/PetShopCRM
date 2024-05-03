@@ -39,26 +39,61 @@
         content: "\f000e";
     }
 </style>
-<h1> @ViewBag.Value </h1>
+
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xl-3 col-lg-3">
+    <form asp-action="Details" asp-controller="Guardian" method="get">
+        
+    <div class="row mb-4 align-items-end justify-content-center">
+        <div class="col-sm-9">          
+            <select class="form-control select2" name="IdPet" asp-items="ViewBag.Pets">
+                <option selected disabled value="value">Pesquisar por pet...</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Ver detalhes </button>
+        </div>
+    </div>
+    </form>
+    <div class="row  justify-content-center">
+        <div class="col-xl-2 col-lg-2">
             <div class="card widget-flat">
                 <div class="card-body">
                     <div class="float-end">
-                        <i class="mdi mdi-account-multiple widget-icon"></i>
+                        <i class="mdi mdi-currency-usd widget-icon"></i>
                     </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Tutores</h5>
-                    <h3 class="mt-3 mb-3">@ViewBag.QtdGuardians</h3>
+                    <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Saldo no Pagar.me</h5>
+                    <h3 class="mt-3 mb-3">R$ @ViewBag.Value</h3>
+                    <p class="mb-0 text-muted">
+                        @if (ViewBag.UrlBalance != null)
+                        {
+                            <a target="_blank" href="@ViewBag.UrlBalance">Realizar saque.</a>
+                        }
+                        else
+                        {
+                            <br />
+                        }
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+
+        <div class="col-xl-2 col-lg-2">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        <i class="mdi mdi-currency-usd widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Growth">Tutores</h5>
+                    <h3 class="mt-3 mb-3"> @ViewBag.QtdGuardians </h3>
                     <p class="mb-0 text-muted">
                         <span class="text-@ViewBag.TypeTextGuardians me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGuardians-bold"></i>  @ViewBag.PercentGuardians %</span>
                         <span class="text-nowrap">Desde o último mês.</span>
                     </p>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div>
 
-        <div class="col-xl-3 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
             <div class="card widget-flat">
                 <div class="card-body">
                     <div class="float-end">
@@ -74,7 +109,7 @@
             </div> <!-- end card-->
         </div>
 
-        <div class="col-xl-3 col-lg-3">
+        <div class="col-xl-2 col-lg-2">
             <div class="card widget-flat">
                 <div class="card-body">
                     <div class="float-end">
@@ -86,29 +121,28 @@
                         <span class="text-@ViewBag.TypeTextPayments me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPayments-bold"></i>  @ViewBag.PercentPayments %</span>
                         <span class="text-nowrap">Desde o último mês.</span>
                     </p>
-                </div> <!
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div>
-
-    <div class="col-xl-3 col-lg-3">
-        <div class="card widget-flat">
-            <div class="card-body">
-                <div class="float-end">
-                    <i class="mdi mdi-currency-usd widget-icon"></i>
                 </div>
-                <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
-                <h3 class="mt-3 mb-3">R$ <span class="value-mask formatNumber"> @ViewBag.QtdFaturamento </span> </h3>
-                <p class="mb-0 text-muted">
-                    <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
-                    <span class="text-nowrap">Desde o último mês.</span>
-                </p>
             </div> <!-- end card-body-->
         </div> <!-- end card-->
+
+        <div class="col-xl-2 col-lg-2">
+            <div class="card widget-flat">
+                <div class="card-body">
+                    <div class="float-end">
+                        <i class="mdi mdi-currency-usd widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
+                    <h3 class="mt-3 mb-3">R$ <span class="value-mask formatNumber"> @ViewBag.QtdFaturamento </span> </h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
+                        <span class="text-nowrap">Desde o último mês.</span>
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
     </div>
-
-
 </div>
+
 <div class="row">
     <div class="col-12 text-center">
         <div class="card-header justify-content-between align-items-center">
@@ -168,7 +202,7 @@
 
         var jsonComplete = completarKeys(objBancoFaturamentoAnual, 12)
 
-        function completarKeys(jsonArray, maxKey) {            
+        function completarKeys(jsonArray, maxKey) {
             const resultado = Array.from({ length: maxKey }, (v, k) => ({ Key: k + 1, Valor: 0 }));
 
             jsonArray.forEach(item => {
@@ -241,7 +275,7 @@
         var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
         chart.render();
     </script>
-        
+
 
     @* Grafico de linhas *@
     <script type="text/javascript">

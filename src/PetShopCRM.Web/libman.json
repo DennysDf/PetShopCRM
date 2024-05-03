@@ -62,6 +62,10 @@
     {
       "library": "apexcharts@3.48.0",
       "destination": "wwwroot/lib/apexcharts/"
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2/"
     }
   ]
 }

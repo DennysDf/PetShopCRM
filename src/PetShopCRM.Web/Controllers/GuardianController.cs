@@ -13,7 +13,7 @@ public class GuardianController(
         ILoginService loginService,
         INotificationService notificationService,
         IGuardianService guardianService, ILoggedUserService loggedUserService, IAddressService addressService,
-        IUpload upload) : Controller
+        IUpload upload, IPaymentHistoryService paymentHistoryService, IPaymentService paymentService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -67,5 +67,31 @@ public class GuardianController(
     {
         var address = await addressService.GetByCEP(CEP);
         return JsonSerializer.Serialize(address.Data);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {   
+        var guardian = await guardianService.GetByPetIdAsync(id);
+
+        return View(guardian);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AjaxDetails(int id)
+    {
+        var paymentHistory = new List<PaymentHistory?>();
+
+        var payment = await paymentService.GetAllCompleteAsync(id);
+
+        foreach (var item in payment.Data)
+        {
+            var paymentHistoryTemp = await paymentHistoryService.GetAllAsync(item.Id);
+            paymentHistory.AddRange(paymentHistoryTemp);
+        }
+
+        var payments = new PaymentsListsVM();
+
+        return View(payments.GetPayments(payment.Data, paymentHistory));
     }
 }

@@ -24,6 +24,8 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
         var result = pets
             .Include(x => x.Guardian)
             .Include(x => x.Specie)
+            .Include(c => c.Payments.Where(x => x.IsSuccess && x.Active))
+                   .ThenInclude(x => x.HealthPlan)
             .ToList();
 
         return new ResponseDTO<List<Pet>>(result.Count > 0, "Nenhum resultado encontrado", result);
@@ -50,5 +52,18 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
         var delete = await unitOfWork.PetRepository.DeleteOrRestoreAsync(id);
         await unitOfWork.SaveChangesAsync();
         return delete;
+    }
+    public async Task<ResponseDTO<List<Pet>>> GetPetByGuardian(int id)
+    {
+        var pets = unitOfWork.PetRepository.GetBy();
+
+        var result = pets
+            .Include(x => x.Guardian)
+            .Include(x => x.Specie)
+            .Include(c => c.Payments.Where(x => x.IsSuccess && x.Active))
+                   .ThenInclude(x => x.HealthPlan)
+            .ToList();
+
+        return new ResponseDTO<List<Pet>>(result.Count > 0, "Nenhum resultado encontrado", result);
     }
 }

@@ -136,7 +136,6 @@
             })
         }
 
-
         function validarData(data) {
             // Verifica se a data está no formato "dd/mm/aaaa"
             let regexData = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -180,8 +179,6 @@
             }
         }
 
-
-
         function cpfValidar(cpf) {
             cpf = cpf.replace(/\D/g, '');
             if (cpf.toString().length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -197,7 +194,6 @@
             });
             return result;
         }
-
 
         function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {

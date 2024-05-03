@@ -10,4 +10,8 @@ public interface IGuardianService
     Task<Guardian> AddOrUpdateAsync(Guardian guardin);
     Task<ResponseDTO<Guardian>> GetByIdAsync(int id);
     Task<bool> DeleteAsync(int id);
+    Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync();
+
+    Task<Guardian?> GetByPetIdAsync(int id);
+
 }

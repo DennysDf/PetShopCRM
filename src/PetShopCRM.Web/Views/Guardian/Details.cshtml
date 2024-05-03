@@ -1,0 +1,108 @@
+﻿@model Guardian
+@{
+}
+
+<div class="container">
+    <div class="col-12 text-center">
+        <div class="card-header justify-content-between align-items-center">
+            <h3 class="header-title">Tutor</h3>
+        </div>
+    </div>
+    <div class="row m-15 justify-content-center ">
+        <div class="col-2"></div>
+        <div class="col-sm-12 col-md-4">
+            <b>Nome: </b>
+            <span>@Model.Name</span>
+        </div>
+        <div class=" col-sm-12 col-md-4">
+            <b>CPF: </b>
+            <span>@Model.CPF</span>
+        </div>
+    </div>
+
+    <div class="row m-15 justify-content-center ">
+        <div class="col-2"></div>
+        <div class=" col-sm-12 col-md-4">
+            <b>Telefone: </b>
+            <span>@Model.Phone</span>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <b>Endereço: </b>
+            <span>@Model.City, @Model.Address </span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-12 text-center">
+        <div class="card-header justify-content-between align-items-center">
+            <h3 class="header-title">Pets</h3>
+        </div>
+    </div>
+
+
+    <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Chip</th>
+                <th>Espécie</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            @foreach (var item in Model.Pets)
+            {
+                <tr class="bg-white">
+                    <td class="text-nowrap"><a href="#" class="show-details" data-id="@item.Id">@item.Name </a> </td>
+                    <td class="text-nowrap">@item.Identifier</td>
+                    <td class="text-nowrap">@item.Specie.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form asp-action="Index" method="post">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title title">Pagamentos</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                    <button type="submit" id="btn-salve" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".show-details").click(function () {
+                var id = $(this).data("id");
+                Ajax(id)
+            })
+
+            function Ajax(id) {
+                $.post('@Url.Action("AjaxDetails")', { "id": id }, function (response) {
+                    $("#modal-body").html(response);
+                    $("#modal").modal("show");
+                })
+            }
+        })
+
+  
+
+    </script>
+}

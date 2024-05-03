@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Application.DTOs.Guardian;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Polly.Bulkhead;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetShopCRM.Application.Services;
 
@@ -21,6 +23,13 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
         var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active);
 
         return guardians.ToList();
+    }
+
+    public async Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync()
+    {
+        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active).Include(c => c.Pets).ToList();
+
+        return new ResponseDTO<List<Guardian>>(guardians.Count > 0, "Nenhum resultado encontrado", guardians);
     }
 
     public async Task<Guardian> AddOrUpdateAsync(Guardian model)
@@ -48,4 +57,9 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
         return delete;
     }
  
+    public async Task<Guardian?> GetByPetIdAsync(int id)
+    {
+        var guardian = await unitOfWork.GuardianRepository.GetByPetIdAsync(id);
+        return guardian;
+    }
 }

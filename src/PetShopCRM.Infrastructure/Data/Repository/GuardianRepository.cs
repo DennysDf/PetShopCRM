@@ -10,6 +10,13 @@ public class GuardianRepository(PetShopDbContext context) : RepositoryBase<Guard
     {
         var guardian = GetBy(x => x.Pets.Any(s => s.Id == petId))
             .Include(x => x.Pets)
+                .ThenInclude(c => c.Payments)
+                    .ThenInclude(c => c.PaymentHistories)
+            .Include(x => x.Pets)
+                .ThenInclude(c => c.Payments)
+                    .ThenInclude(c => c.HealthPlan)
+            .Include(x => x.Pets)
+                .ThenInclude(c => c.Specie)
             .FirstOrDefault();
 
         return guardian;

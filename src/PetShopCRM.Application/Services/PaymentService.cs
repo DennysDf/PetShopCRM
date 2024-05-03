@@ -27,17 +27,16 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         return payments;
     }
 
-    public async Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync()
+    public async Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync(int idPet = 0)
     {
-        var payments = unitOfWork.PaymentRepository.GetBy();
-
-        var result = payments
-            .Include(x => x.Guardian)
+        var payments = unitOfWork.PaymentRepository.GetBy().Include(x => x.Guardian)
             .Include(x => x.Pet)
-            .Include(x => x.HealthPlan)
-            .ToList();
+            .Include(x => x.HealthPlan).AsQueryable(); 
 
-        return new ResponseDTO<List<Payment>>(result.Count > 0, "Nenhum resultado encontrado", result);
+        if (idPet != 0)
+            payments = payments.Where(c => c.PetId == idPet);
+
+        return new ResponseDTO<List<Payment>>(payments.ToList().Count > 0, "Nenhum resultado encontrado", payments.ToList());
     }
 
     public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)

@@ -48,7 +48,7 @@
                     <td class="text-nowrap">@item.Pet</td>
                     <td class="text-nowrap">@item.HealhPlan</td>
                     <td class="text-nowrap">@item.Installment</td>
-                    <td class="text-nowrap">@(item.LastPayment?.ToString() ?? "-")</td>
+                    <td class="text-nowrap">@(item.LastPayment?.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")) ?? "-")</td>
                     <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">@(item.IsSuccess ? "Sucesso" : "Erro")</td>
                     <td class="text-nowrap">@(item.IsActive ? "Ativo" : "Cancelado")</td>
                     <td class="text-nowrap text-right" width="15">

@@ -13,7 +13,7 @@ public class PaymentsListsVM()
     {
         this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.ExternalId, Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name }).ToList();
 
-        this.ListPaymentsHistories = paymentHistories.Select(c => new PaymentsHistoryVM { PaymentId = c.ExternalId, Date = c.CreatedDate.ToString(), Event = c.Event, Value = c.Value }).ToList();
+        this.ListPaymentsHistories = paymentHistories.Select(c => new PaymentsHistoryVM { PaymentId = c.ExternalId, Date = c.CreatedDate.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), Event = c.Event, Value = c.Value }).ToList();
 
         return new PaymentsListsVM() { ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
     }

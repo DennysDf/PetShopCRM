@@ -11,8 +11,9 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
 {
     public async Task<List<Pet>> GetAllAsync()
     {
-        var pets = unitOfWork.PetRepository.GetBy()
-            .Include(x => x.Guardian);
+        var pets = unitOfWork.PetRepository.GetBy()             
+            .Include(x => x.Guardian)
+            .OrderBy(c => c.Name);
 
         return pets.ToList();
     }
@@ -26,6 +27,7 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
             .Include(x => x.Specie)
             .Include(c => c.Payments.Where(x => x.IsSuccess && x.Active))
                    .ThenInclude(x => x.HealthPlan)
+            .OrderBy(c => c.Name)
             .ToList();
 
         return new ResponseDTO<List<Pet>>(result.Count > 0, "Nenhum resultado encontrado", result);

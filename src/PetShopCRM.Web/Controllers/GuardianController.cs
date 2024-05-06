@@ -74,15 +74,15 @@ public class GuardianController(
     [HttpGet]
     public async Task<IActionResult> Details(int id = 0, int IdPet = 0)
     {
-        var guardianId = id > 0 ? id:0;
+        var petId = IdPet > 0 ? IdPet : 0;
 
-        if (IdPet != 0)
+        if (id != 0)
         {
-            var pets = await petService.GetAllAsync();
-            guardianId = pets.FirstOrDefault(c => c.Id == IdPet).GuardianId;
+            var guardians = await guardianService.GetAllAsync();
+            petId = guardians.FirstOrDefault(c => c.Id == id).Pets.FirstOrDefault().Id;
         }
 
-        var guardian = await guardianService.GetByPetIdAsync(guardianId);
+        var guardian = await guardianService.GetByPetIdAsync(petId);
 
         return View(guardian);
     }

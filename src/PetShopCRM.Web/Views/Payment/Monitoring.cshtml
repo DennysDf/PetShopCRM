@@ -36,7 +36,7 @@
                         }
                     </td>
                     <td class="text-nowrap">@item.Description</td>
-                    <td class="text-nowrap">@item.Date.ToString()</td>
+                    <td class="text-nowrap">@item.Date.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</td>
                     <td class="text-nowrap">
                         <b>R$ </b><span class="value-mask">@item.Value</span>
                     </td>

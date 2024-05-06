@@ -20,14 +20,14 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
 
     public async Task<List<Guardian>> GetAllAsync()
     {   
-        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active);
+        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active).OrderBy(c => c.Name);
 
         return guardians.ToList();
     }
 
     public async Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync()
     {
-        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active).Include(c => c.Pets).ToList();
+        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active).Include(c => c.Pets).OrderBy(c => c.Name).ToList();
 
         return new ResponseDTO<List<Guardian>>(guardians.Count > 0, "Nenhum resultado encontrado", guardians);
     }

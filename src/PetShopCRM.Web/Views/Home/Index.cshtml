@@ -42,17 +42,17 @@
 
 <div class="container-fluid">
     <form asp-action="Details" asp-controller="Guardian" method="get">
-        
-    <div class="row mb-4 align-items-end justify-content-center">
-        <div class="col-sm-9">          
-            <select class="form-control select2" name="IdPet" asp-items="ViewBag.Pets">
-                <option selected disabled value="value">Pesquisar por pet...</option>
-            </select>
+
+        <div class="row mb-4 align-items-end justify-content-center">
+            <div class="col-sm-9">
+                <select class="form-control select2" name="IdPet" id="IdPet" asp-items="ViewBag.Pets">
+                    <option selected value="0">Pesquisar por pet...</option>
+                </select>
+            </div>
+            <div class="col-sm-1 mt-4 text-center">
+                <button disabled type="submit" id="details" class="btn btn-info"><i class="fa fa-search"></i> Ver detalhes </button>
+            </div>
         </div>
-        <div class="col-sm-1">
-            <button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Ver detalhes </button>
-        </div>
-    </div>
     </form>
     <div class="row  justify-content-center">
         <div class="col-xl-2 col-lg-2">
@@ -191,10 +191,26 @@
     </div>
 </div>
 
-</div>
+
 
 
 @section Scripts {
+    
+    <script type="text/javascript">
+        $("#IdPet").change(function () { 
+            if($(this).val() == 0){
+                $("#details").attr("disabled","true")
+            }else{
+                $("#details").removeAttr("disabled")
+            }
+        })
+
+
+
+
+
+    </script>
+
     @* Grafico de barras *@
     <script type="text/javascript">
 
@@ -275,7 +291,6 @@
         var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
         chart.render();
     </script>
-
 
     @* Grafico de linhas *@
     <script type="text/javascript">
@@ -397,9 +412,6 @@
 
     @* Grafico de area *@
     <script>
-
-
-
         var options = {
             series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoArea)'.toLowerCase()),
             chart: {

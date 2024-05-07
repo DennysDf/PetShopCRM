@@ -31,7 +31,9 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
     {
         var payments = unitOfWork.PaymentRepository.GetBy().Include(x => x.Guardian)
             .Include(x => x.Pet)
-            .Include(x => x.HealthPlan).AsQueryable(); 
+                .ThenInclude(x => x.Specie)
+            .Include(x => x.HealthPlan)            
+            .AsQueryable(); 
 
         if (idPet != 0)
             payments = payments.Where(c => c.PetId == idPet);

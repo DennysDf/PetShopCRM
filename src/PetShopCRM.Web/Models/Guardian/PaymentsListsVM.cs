@@ -6,16 +6,24 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 public class PaymentsListsVM()
 {
+    public string Name { get; set; }
+    public string Identifier { get; set; }
+    public string Specie { get; set; }
+
     public List<PaymentsVM> ListPayments { get; set; }
     public List<PaymentsHistoryVM> ListPaymentsHistories { get; set; }
 
-    public PaymentsListsVM GetPayments(List<PetShopCRM.Domain.Models.Payment?> payments, List<PaymentHistory?> paymentHistories)
+    public PaymentsListsVM GetPayments(List<PetShopCRM.Domain.Models.Payment?> payments, List<PaymentHistory?> paymentHistories, Pet pet)
     {
+        var name = pet.Name;
+        var identifier = pet.Identifier;
+        var specie = pet.Specie.Name;
+
         this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.ExternalId, Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name }).ToList();
 
         this.ListPaymentsHistories = paymentHistories.Select(c => new PaymentsHistoryVM { PaymentId = c.ExternalId, Date = c.CreatedDate.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), Event = c.Event, Value = c.Value }).ToList();
 
-        return new PaymentsListsVM() { ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
+        return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier,  ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
     }
 }
 

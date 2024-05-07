@@ -99,6 +99,7 @@
             function Ajax(id) {
                 $.post('@Url.Action("AjaxDetails")', { "id": id }, function (response) {
                     $("#modal-body").html(response);
+                    maskInit();
                     $("#modal").modal("show");
                 })
             }

@@ -78,8 +78,8 @@ public class GuardianController(
 
         if (id != 0)
         {
-            var guardians = await guardianService.GetAllAsync();
-            petId = guardians.FirstOrDefault(c => c.Id == id).Pets.FirstOrDefault().Id;
+            var guardians = await guardianService.GetAllCompleteAsync();
+            petId = guardians.Data.FirstOrDefault(c => c.Id == id).Pets.FirstOrDefault().Id;
         }
 
         var guardian = await guardianService.GetByPetIdAsync(petId);
@@ -91,7 +91,8 @@ public class GuardianController(
     public async Task<IActionResult> AjaxDetails(int id)
     {
         var paymentHistory = new List<PaymentHistory?>();
-
+        var petDTO = await petService.GetAllCompleteAsync();
+        var pet = petDTO.Data.FirstOrDefault(c => c.Id == id);
         var payment = await paymentService.GetAllCompleteAsync(id);
 
         foreach (var item in payment.Data)
@@ -102,6 +103,6 @@ public class GuardianController(
 
         var payments = new PaymentsListsVM();
 
-        return View(payments.GetPayments(payment.Data, paymentHistory));
+        return View(payments.GetPayments(payment.Data, paymentHistory, pet));
     }
 }

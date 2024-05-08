@@ -123,11 +123,24 @@ public class PaymentBillingAddressVM
     [DisplayName("Código Postal (CEP)")]
     public string ZipCode { get; set; }
 
+    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Bairro")]
+    public string Neighborhood { get; set; }
+
+    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Complemento")]
+    public string Unit { get; set; }
+
+    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Número")]
+    public string Number { get; set; }
+
+
     public BillingAddressDTO? ToDTO()
     {
         if (!HasBillingAddress)
             return null;
 
-        return new BillingAddressDTO(Address, City, State, Country, ZipCode);
+        return new BillingAddressDTO(Address, City, State, Country, ZipCode, Unit, Neighborhood, Number);
     }
 }

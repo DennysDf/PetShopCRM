@@ -49,8 +49,16 @@ public class GuardianVM
     [DisplayName("CEP")]
     public string CEP { get; set; }
 
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Bairro")]
     public string Neighborhood { get; set; }
+
+    [DisplayName("Complemento")]
+    public string? Unit { get; set; }
+
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Número")]
+    public string Number { get; set; }
 
 
 
@@ -66,12 +74,15 @@ public class GuardianVM
             Country = guardian.Country,
             State = guardian.State,
             City = guardian.City,
-            Neighborhood = guardian.Neighborhood
+            Neighborhood = guardian.Neighborhood,
+            Email = guardian.Email, 
+            Unit = guardian.Unit,
+            Number = guardian.Number,
         }).ToList();
 
-    public Domain.Models.Guardian ToModel() => new Domain.Models.Guardian() { Id = this.Id, Name = this.Name, Address = this.Address, CPF = this.CPF, DateBirth = this.DateBirth, Phone = this.Phone, CEP = this.CEP, Country = this.Country, State = this.State, City = this.City, Neighborhood = this.Neighborhood };
+    public Domain.Models.Guardian ToModel() => new Domain.Models.Guardian() { Id = this.Id, Name = this.Name, Address = this.Address, CPF = this.CPF, DateBirth = this.DateBirth, Phone = this.Phone, CEP = this.CEP, Country = this.Country, State = this.State, City = this.City, Neighborhood = this.Neighborhood, Email = this.Email, Unit = this.Unit, Number = this.Number };
 
-    public GuardianVM ToVM(Domain.Models.Guardian model) => new GuardianVM { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone, CEP = model.CEP, Country = model.Country, State = model.State, City = model.City, Neighborhood = model.Neighborhood };
+    public GuardianVM ToVM(Domain.Models.Guardian model) => new GuardianVM { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone, CEP = model.CEP, Country = model.Country, State = model.State, City = model.City, Neighborhood = model.Neighborhood , Email = model.Email, Unit = model.Unit , Number = model.Number };
     
 
 }

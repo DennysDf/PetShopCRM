@@ -51,6 +51,8 @@ CREATE TABLE Guardians (
     City NVARCHAR(255),
     CEP NVARCHAR(9),
     Neighborhood NVARCHAR(100),
+    Unit NVARCHAR(100),
+    Number NVARCHAR(100),
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL

@@ -96,10 +96,27 @@
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-sm-12">
+        <div class="col-sm-9">
             <label asp-for="BillingAddress.Address"></label>
-            <input type="text" class="form-control" asp-for="BillingAddress.Address" />
+            <input type="text" class="form-control" asp-for="BillingAddress.Address" placeholder="Escreva o Endereço..." autofocus/>
             <span asp-validation-for="BillingAddress.Address"></span>
+        </div>
+        <div class="col-sm-3">
+            <label asp-for="BillingAddress.Number"></label>
+            <input type="text" class="form-control" asp-for="BillingAddress.Number" placeholder="Escreva o Número..." autofocus />
+            <span asp-validation-for="BillingAddress.Number"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <label asp-for="BillingAddress.Neighborhood"></label>
+            <input type="text" class="form-control" asp-for="BillingAddress.Neighborhood" placeholder="Escreva o Bairro..." autofocus />
+            <span asp-validation-for="BillingAddress.Neighborhood"></span>
+        </div>
+        <div class="col-sm-6">
+            <label asp-for="BillingAddress.Unit"></label>
+            <input type="text" class="form-control" asp-for="BillingAddress.Unit" placeholder="Escreva o complemento..." autofocus />
+            <span asp-validation-for="BillingAddress.Unit"></span>
         </div>
     </div>
 </div>

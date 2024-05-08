@@ -31,7 +31,7 @@ public class PagarMeService : IPagarMeService
     {
         var phone = guardian.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
         var planValue = plan.Value.ToString("#.00").Replace(".", "").Replace(",", "");
-
+        var address = billingAddress != null ? $"{billingAddress.Number}, {billingAddress.Address}, {billingAddress.Neighborhood}" : $"{guardian.Number}, {guardian.Address}, {guardian.Neighborhood}";
         try
         {
             var response = _client.SubscriptionsController.CreateSubscription(new CreateSubscriptionRequest
@@ -46,7 +46,7 @@ public class PagarMeService : IPagarMeService
                 Customer = new CreateCustomerRequest
                 {
                     Name = guardian.Name,
-                    Email = guardian.Email ?? "teste@gmail.com",
+                    Email = guardian.Email,
                     Document = guardian.CPF.Replace(".", "").Replace("-", ""),
                     DocumentType = "CPF",
                     Type = "individual",
@@ -70,7 +70,8 @@ public class PagarMeService : IPagarMeService
                     Brand = card.Brand.ToString(),
                     BillingAddress = new CreateAddressRequest
                     {
-                        Line1 = billingAddress?.Address ?? guardian.Address,
+                        Line1 = address,
+                        Line2 = billingAddress?.Unit ?? guardian.Unit,
                         City = billingAddress?.City ?? guardian.City,
                         Country = billingAddress?.Country ?? guardian.Country,
                         State = billingAddress?.State ?? guardian.State,

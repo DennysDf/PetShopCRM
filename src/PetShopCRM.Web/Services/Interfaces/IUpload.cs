@@ -3,6 +3,7 @@
 public interface IUpload
 {    
     void SavePhotoProfile(IFormFile file, int id);
+    void SavePhotoPet(IFormFile file, int id);
     void Save(string directory, IFormFile file, int id);
     string GetNameFile(IFormFile file);
 }

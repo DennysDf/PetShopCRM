@@ -20,6 +20,21 @@ public class Upload :IUpload
         }       
     }
 
+    public void SavePhotoPet(IFormFile file, int id)
+    {
+        if (file != null)
+        {
+            var directory = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Upload\\Pet\\{id}");
+
+            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+
+            using (var stream = new FileStream(Path.Combine(directory, Path.GetFileName(file.FileName)), FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+        }
+    }
+
     public void Save(string directory, IFormFile file, int id)
     {
         if (file != null)

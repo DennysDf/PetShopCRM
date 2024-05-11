@@ -42,7 +42,7 @@ public class PagarMeService : IPagarMeService
                 IntervalCount = 1,
                 BillingType = "prepaid",
                 Installments = 12,
-                StatementDescriptor = plan.Name,
+                StatementDescriptor = plan.Name.Split("-")[1],
                 Customer = new CreateCustomerRequest
                 {
                     Name = guardian.Name,

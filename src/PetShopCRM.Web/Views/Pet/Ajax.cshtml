@@ -14,7 +14,7 @@
     </div>
     <div class="col-sm-6">
         <label asp-for="Identifier"></label>
-        <input type="text" class="form-control" asp-for="Identifier" placeholder="Escreva o número do chip..." autofocus />
+        <input type="text" class="form-control" asp-for="Identifier" placeholder="Escreva o chip..." autofocus />
         <span asp-validation-for="Identifier"></span>
     </div>
  
@@ -36,5 +36,54 @@
             <option disabled selected>Selecione</option>
         </select>
         <span asp-validation-for="SpecieId"></span>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-4">
+        <label asp-for="Sexy"></label>
+        <select asp-for="Sexy" class="form-control" data-dropdown-parent="#modal">
+            <option selected value="0">Selecione</option>
+            <option value="M">Macho</option>
+            <option value="F">Femea</option>
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="Color"></label>
+        <input type="text" asp-for="Color" class="form-control" placeholder="Escreva a cor..."  />
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="Breed"></label>
+        <input type="text" asp-for="Breed" class="form-control" placeholder="Escreva a raça..."  />
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-4">
+        <label asp-for="Age"></label>
+        <input type="text" asp-for="Age" class="form-control" placeholder="Escreva a idade..."  />
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="Weight"></label>
+        <input type="text" asp-for="Weight" class="form-control value-mask" placeholder="Escreva o peso em Kg..." />
+    </div>
+    <div class="col-sm-4">
+        <label asp-for="Spayed"></label>
+        <select asp-for="Spayed" class="form-control" data-dropdown-parent="#modal">
+            <option selected value="2">Selecione</option>
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-6">
+        <label asp-for="Photo"></label>
+        <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
+        <input type="hidden" asp-for="UrlPhoto" />
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-sm-12">
+        <label asp-for="Obs"></label>
+        <textarea asp-for="Obs" class="form-control"></textarea>
     </div>
 </div>

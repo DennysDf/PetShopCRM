@@ -45,5 +45,30 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
 
         //Filter
         builder.HasQueryFilter(x => x.Active);
+
+        builder.Property(x => x.Sexy)
+            .IsRequired(false);
+
+        builder.Property(x => x.Color)
+            .IsRequired(false);
+
+        builder.Property(x => x.Weight)
+            .IsRequired(false);
+
+        builder.Property(x => x.Age)
+            .IsRequired(false);
+
+        builder.Property(x => x.Breed)
+            .IsRequired(false);
+
+        builder.Property(x => x.Obs)
+            .IsRequired(false);
+
+        builder.Property(x => x.Spayed)
+            .IsRequired(false);
+
+        builder.Property(x => x.UrlPhoto)
+            .IsRequired(false);
+
     }
 }

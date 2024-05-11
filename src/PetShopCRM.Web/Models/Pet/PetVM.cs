@@ -27,8 +27,32 @@ public class PetVM
     public int SpecieId { get; set; }
     public string Specie { get; set; }
 
+    [DisplayName("Sexo")]
+    public string? Sexy { get; set; }
+
+    [DisplayName("Cor")]
+    public string? Color { get; set; }
+
+    [DisplayName("Peso")]
+    public string? Weight { get; set; }
+
+    [DisplayName("Idade")]
+    public string? Age { get; set; }
+
+    [DisplayName("Raça")]
+    public string? Breed { get; set; }
+
+    [DisplayName("Observação")]
+    public string? Obs { get; set; }
+
+    [DisplayName("É cadastrado?")]
+    public int? Spayed { get; set; }    
+    public string UrlPhoto { get; set; }
+    [DisplayName("Foto")]
+    public IFormFile? Photo { get; set; }
     public SelectList GuardianList { get; set; }
     public SelectList SpecieList { get; set; }
+    public int LastUpdate { get; set; }
 
 
     public static List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM
@@ -39,10 +63,42 @@ public class PetVM
         Identifier = pet.Identifier,
         SpecieId = pet.SpecieId,
         Guardian = pet.Guardian?.Name ?? string.Empty,
-        Specie = pet.Specie?.Name ?? string.Empty
+        Specie = pet.Specie?.Name ?? string.Empty,
+        UrlPhoto = pet.UrlPhoto
     }).ToList();
 
-    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId  };
+    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null , Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto, UpdatedDateImg = this.Photo != null ? DateTime.Now : null };
 
-    public PetVM ToVM(Domain.Models.Pet model) => new() { Id = model.Id, Name = model.Name, GuardianId = model.GuardianId, Identifier = model.Identifier, SpecieId = model.SpecieId };
+    public PetVM ToVM(Domain.Models.Pet model) 
+    {
+        var pet = new PetVM(); ;
+        pet.Id = model.Id;
+        pet.Name = model.Name;
+        pet.GuardianId = model.GuardianId;
+        pet.Identifier = model.Identifier;
+        pet.SpecieId = model.SpecieId;
+        pet.Sexy = model.Sexy; 
+        pet.Age = model.Age;
+        pet.Weight = model.Weight;
+        pet.Color = model.Color;
+        pet.Obs = model.Obs;
+        pet.Breed = model.Breed;
+        pet.Spayed = model.Spayed == null ? 2 : (bool)model.Spayed ? 1 : 0 ;
+        pet.UrlPhoto = model.UrlPhoto;
+
+        if (model.UpdatedDateImg != null) 
+        {
+            var dataRetroativa = model.UpdatedDateImg;
+            // Calcula a diferença
+            TimeSpan diferenca = DateTime.Now.Subtract((DateTime)dataRetroativa);
+            // Obtém a quantidade total de dias como um número inteiro
+            int totalDias = (int)diferenca.TotalDays;
+            pet.LastUpdate = totalDias;
+        }
+
+
+        return pet;
+        
+    } 
 }
+

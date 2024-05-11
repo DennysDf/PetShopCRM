@@ -9,6 +9,7 @@ public class PaymentsListsVM()
     public string Name { get; set; }
     public string Identifier { get; set; }
     public string Specie { get; set; }
+    public string Guardian { get; set; }
 
     public List<PaymentsVM> ListPayments { get; set; }
     public List<PaymentsHistoryVM> ListPaymentsHistories { get; set; }
@@ -18,12 +19,13 @@ public class PaymentsListsVM()
         var name = pet.Name;
         var identifier = pet.Identifier;
         var specie = pet.Specie.Name;
+        var guardian = pet.Guardian.Name;
 
         this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.ExternalId, Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name }).ToList();
 
         this.ListPaymentsHistories = paymentHistories.Select(c => new PaymentsHistoryVM { PaymentId = c.ExternalId, Date = c.CreatedDate.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), Event = c.Event, Value = c.Value }).ToList();
 
-        return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier,  ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
+        return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier, Guardian = guardian, ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
     }
 }
 

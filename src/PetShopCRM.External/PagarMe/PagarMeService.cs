@@ -27,9 +27,9 @@ public class PagarMeService : IPagarMeService
             .Build();
     }
 
-    public GetSubscriptionResponse? GenerateRecurrence(Guardian guardian, HealthPlan plan, CardDTO card, BillingAddressDTO? billingAddress = null)
+    public GetSubscriptionResponse? GenerateRecurrence(Guardian guardian, HealthPlan plan, CardDTO card, BillingAddressDTO? billingAddress = null, CustomerDTO? customer = null)
     {
-        var phone = guardian.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
+        var phone = (customer?.Phone ?? guardian.Phone).Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Trim();
         var planValue = plan.Value.ToString("#.00").Replace(".", "").Replace(",", "");
         var address = billingAddress != null ? $"{billingAddress.Number}, {billingAddress.Address}, {billingAddress.Neighborhood}" : $"{guardian.Number}, {guardian.Address}, {guardian.Neighborhood}";
         try
@@ -42,12 +42,12 @@ public class PagarMeService : IPagarMeService
                 IntervalCount = 1,
                 BillingType = "prepaid",
                 Installments = 1,
-                StatementDescriptor = plan.Name.Split("-")[1],
+                StatementDescriptor = plan.Name.Contains('-') ? plan.Name.Split("-")[1] : plan.Name,
                 Customer = new CreateCustomerRequest
                 {
-                    Name = guardian.Name,
-                    Email = guardian.Email,
-                    Document = guardian.CPF.Replace(".", "").Replace("-", ""),
+                    Name = customer?.Name ?? guardian.Name,
+                    Email = customer?.Email ?? guardian.Email,
+                    Document = (customer?.CPF ?? guardian.CPF).Replace(".", "").Replace("-", ""),
                     DocumentType = "CPF",
                     Type = "individual",
                     Phones = new CreatePhonesRequest

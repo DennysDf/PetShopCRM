@@ -6,7 +6,7 @@ namespace PetShopCRM.External.PagarMe.Interfaces;
 
 public interface IPagarMeService
 {
-    GetSubscriptionResponse? GenerateRecurrence(Guardian guardian, HealthPlan plan, CardDTO card, BillingAddressDTO? billingAddress = null);
+    GetSubscriptionResponse? GenerateRecurrence(Guardian guardian, HealthPlan plan, CardDTO card, BillingAddressDTO? billingAddress = null, CustomerDTO? customer = null);
     GetSubscriptionResponse? CancelSubscription(string subscriptionId);
     GetBalanceResponse? GetAvailableValues();
     GetSubscriptionResponse? RenewRecurrence(HealthPlan plan, string customerId, string cardId, string value);

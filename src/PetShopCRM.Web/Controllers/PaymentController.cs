@@ -58,6 +58,10 @@ public class PaymentController(
             BillingAddress = new PaymentBillingAddressVM
             {
                 HasBillingAddress = false
+            },
+            Customer = new PaymentCustomerVM
+            {
+                HasCustomer = false
             }
         };
 
@@ -67,7 +71,7 @@ public class PaymentController(
     [HttpPost]
     public async Task<IActionResult> Index(PaymentVM model)
     {
-        var result = await paymentService.GenerateAsync(model.PetId, model.HealthPlanId, model.Card.ToDTO(), model.BillingAddress.ToDTO());
+        var result = await paymentService.GenerateAsync(model.PetId, model.HealthPlanId, model.Card.ToDTO(), model.BillingAddress.ToDTO(), model.Customer.ToDTO());
 
         var paymentSuccess = result.Data != null && result.Data.IsSuccess;
 

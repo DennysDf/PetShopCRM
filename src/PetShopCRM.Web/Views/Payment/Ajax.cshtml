@@ -27,6 +27,7 @@
         <label asp-for="Card.Number"></label>
         <input type="text" class="form-control" asp-for="Card.Number" data-mask="0000 0000 0000 0000" />
         <span asp-validation-for="Card.Number"></span>
+        <span id="valida-card" class="text-danger fw-bold d-none">Cartão inválido.</span>
     </div>
     <div class="col-sm-6 col-12">
         <label asp-for="Card.HolderName"></label>
@@ -58,6 +59,53 @@
         <span asp-validation-for="Card.Brand"></span>
     </div>
 </div>
+<hr />
+<div class="row mt-2">
+    <div class="col-12">
+        <label class="form-check-label" asp-for="Customer.HasCustomer"></label>
+        <div class="form-check form-check-inline ml-3">
+            <input class="form-check-inline" type="radio" asp-for="Customer.HasCustomer" id="radioCustomer1" value="true" onclick="$('.divCustomer').removeClass('d-none')">
+            <label class="form-check-label" for="radioCustomer1">Sim</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-inline" type="radio" asp-for="Customer.HasCustomer" id="radioCustomer2" value="false" onclick="$('.divCustomer').addClass('d-none')">
+            <label class="form-check-label" for="radioCustomer2">Não</label>
+        </div>
+    </div>
+</div>
+<div class="d-none divCustomer">
+    <div class="row">
+        <input type="hidden" asp-for="Id" />
+        <div class=" col-sm-8">
+            <label asp-for="Customer.Name"></label>
+            <input type="text" class="form-control" asp-for="Customer.Name" />
+            <span asp-validation-for="Customer.Name"></span>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="Customer.CPF"></label>
+            <input type="text" class="form-control cpf-mask" asp-for="Customer.CPF" />
+            <span asp-validation-for="Customer.CPF"></span>
+            <span id="valida-cpf" class="text-danger fw-bold d-none">CPF inválido.</span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-sm-6">
+            <label asp-for="Customer.Email"></label>
+            <input type="text" class="form-control" asp-for="Customer.Email" />
+            <span asp-validation-for="Customer.Email"></span>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-12">
+                    <label asp-for="Customer.Phone"></label>
+                    <input type="text" class="form-control phone-mask" asp-for="Customer.Phone" />
+                    <span asp-validation-for="Customer.Phone"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
 <div class="row mt-2">
     <div class="col-12">
         <label class="form-check-label" asp-for="BillingAddress.HasBillingAddress"></label>

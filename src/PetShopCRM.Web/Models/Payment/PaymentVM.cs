@@ -4,6 +4,10 @@ using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Web.Util;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics.Metrics;
+using System.Net;
+using System.Reflection.Emit;
 
 namespace PetShopCRM.Web.Models.Payment;
 
@@ -21,6 +25,7 @@ public class PaymentVM
 
     public PaymentCardVM Card { get; set; }
     public PaymentBillingAddressVM BillingAddress { get; set; }
+    public PaymentCustomerVM Customer { get; set; }
 
     public SelectList PetList { get; set; }
     public SelectList HealthPlanList { get; set; }
@@ -143,4 +148,37 @@ public class PaymentBillingAddressVM
 
         return new BillingAddressDTO(Address, City, State, Country, ZipCode, Unit, Neighborhood, Number);
     }
+}
+
+public class PaymentCustomerVM
+{
+    [DisplayName("Informações pessoais diferentes do tutor?")]
+    [ValidateNever]
+    public bool HasCustomer { get; set; }
+
+    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Nome")]
+    public string Name { get; set; }
+
+    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("CPF")]
+    public string CPF { get; set; }
+
+    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Telefone")]
+    public string Phone { get; set; }
+
+    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [EmailAddress(ErrorMessage = ValidationKeysUtil.Email)]
+    [DisplayName("E-mail")]
+    public string Email { get; set; }
+
+    public CustomerDTO? ToDTO()
+    {
+        if (!HasCustomer)
+            return null;
+
+        return new CustomerDTO(Name, CPF, Phone, Email);
+    }
+
 }

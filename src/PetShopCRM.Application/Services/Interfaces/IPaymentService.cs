@@ -9,7 +9,7 @@ public interface IPaymentService
 {
     Payment? GetById(int id);
     Task<List<Payment>> GetAllAsync();
-    Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null);
+    Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null, CustomerDTO? customer = null);
     string GenerateWebhookUrl(string host);
     Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync(int idPet = 0);
     Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date);

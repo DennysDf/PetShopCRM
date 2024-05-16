@@ -42,14 +42,14 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         return new ResponseDTO<List<Payment>>(payments.ToList().Count > 0, "Nenhum resultado encontrado", payments.ToList());
     }
 
-    public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null)
+    public async Task<ResponseDTO<Payment?>> GenerateAsync(int petId, int healthPlanId, CardDTO card, BillingAddressDTO? billingAddress = null, CustomerDTO? customer = null)
     {
         try
         {
             var guardian = await unitOfWork.GuardianRepository.GetByPetIdAsync(petId);
             var healthPan = await unitOfWork.HealthPlansRepository.GetByIdAsync(healthPlanId);
 
-            var paymentResponse = pagarMeService.GenerateRecurrence(guardian, healthPan, card, billingAddress);
+            var paymentResponse = pagarMeService.GenerateRecurrence(guardian, healthPan, card, billingAddress, customer);
 
             if (paymentResponse != null)
             {

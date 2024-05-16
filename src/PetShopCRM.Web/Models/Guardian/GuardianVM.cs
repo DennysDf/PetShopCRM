@@ -85,9 +85,11 @@ public class GuardianVM
 
     public Domain.Models.User ToModelUser()
     {
+        var cpf = this.CPF.Replace(".", "").Replace("-", "");
+
         var user = new Domain.Models.User()
         {
-            Name = this.Name, CPF = this.CPF.Replace(".","").Replace("-",""), Email = this.Email,  Type = UserType.Guardian, Phone = this.Phone, Login = this.CPF, Password = "vetcard123"
+            Name = this.Name, CPF = this.CPF, Email = this.Email,  Type = UserType.Guardian, Phone = this.Phone, Login = cpf, Password = "vetcard123"
 
         };
         return user;

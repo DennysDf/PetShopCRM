@@ -32,9 +32,7 @@
                     <tr class="bg-white">
                         <td>@item.Id</td>
                         <td>
-                            <a href="@Url.Action("Details","Guardian", new{ Id = item.Id })" target="_blank" >
-                                @item.Name
-                            </a>
+                            @item.Name
                         </td>
                         <td class="text-nowrap">@item.City, @item.State, @item.Address</td>
                         <td class="text-nowrap">@item.Phone</td>

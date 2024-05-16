@@ -34,7 +34,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy(nameof(UserType.Admin), x => x.RequireRole(nameof(UserType.Admin)))
-    .AddPolicy(nameof(UserType.General), x => x.RequireRole(nameof(UserType.Admin), nameof(UserType.General)));
+    .AddPolicy(nameof(UserType.General), x => x.RequireRole(nameof(UserType.Admin), nameof(UserType.General)))
+    .AddPolicy(nameof(UserType.Guardian), x => x.RequireRole(nameof(UserType.Guardian)));
 
 builder.Services.Configure<AppSettings>(builder.Configuration);
 

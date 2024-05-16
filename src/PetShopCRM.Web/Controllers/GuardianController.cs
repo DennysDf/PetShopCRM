@@ -15,7 +15,7 @@ public class GuardianController(
         ILoginService loginService,
         INotificationService notificationService,
         IGuardianService guardianService, ILoggedUserService loggedUserService, IAddressService addressService,
-        IUpload upload, IPaymentHistoryService paymentHistoryService, IPaymentService paymentService, IPetService petService) : Controller
+        IUpload upload, IPaymentHistoryService paymentHistoryService, IPaymentService paymentService, IPetService petService, IUserService userService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -49,6 +49,12 @@ public class GuardianController(
         var message = model.Id != 0 ? Resources.Text.GuardianUpdateSucess : Resources.Text.GuardianAddSucess;
         model.Country = "BR";
         await guardianService.AddOrUpdateAsync(model.ToModel());
+        
+        if (model.Id == 0) 
+        {
+            await userService.AddOrUpdateAsync(model.ToModelUser());
+            //adicionar envio de email com login e senha.
+        }
 
         notificationService.Success(message);
         

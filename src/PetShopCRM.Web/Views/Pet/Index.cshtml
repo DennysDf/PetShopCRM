@@ -40,15 +40,17 @@
                 @foreach (var item in Model)
                 {
                     <tr class="bg-white">
+                        <td width="25">
                         @if (item.UrlPhoto != null)
                         {
-                            <td width="25"> <a href="#" data-id="@item.Id" data-toggle="modal" data-target="#modal-img">  <img src="~/Upload/Pet/@item.Id/@item.UrlPhoto" width="20" /></a> </td>
+                            <a href="#" data-id="@item.Id" data-toggle="modal" data-target="#modal-img">  <img src="~/Upload/Pet/@item.Id/@item.UrlPhoto" width="20" /></a> 
                         }
-                        else
-                        {
 
-                            <td class="text-nowrap valor" width="25">@item.Identifier</td>
+                        @if (item.Identifier != null)
+                        {
+                            @item.Identifier
                         }
+                        </td>
                         <td class="text-nowrap">
                             <a href="@Url.Action("Details","Guardian", new{ IdPet = item.Id })" target="_blank">
                                 @item.Name

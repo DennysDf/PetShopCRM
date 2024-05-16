@@ -138,6 +138,9 @@
   <data name="PetNotFound" xml:space="preserve">
     <value>Pet não encontrado.</value>
   </data>
+  <data name="ProcedureNotFound" xml:space="preserve">
+    <value>Procedimento não encontrado.</value>
+  </data>
   <data name="SpecieNotFound" xml:space="preserve">
     <value>Espécie não encontrada.</value>
   </data>

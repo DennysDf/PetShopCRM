@@ -205,6 +205,33 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento castrado com sucesso..
+        /// </summary>
+        public static string ProcedureAddSucess {
+            get {
+                return ResourceManager.GetString("ProcedureAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento apagada com sucesso..
+        /// </summary>
+        public static string ProcedureDeleteSucess {
+            get {
+                return ResourceManager.GetString("ProcedureDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento atualizado com sucesso..
+        /// </summary>
+        public static string ProcedureUpdateSucess {
+            get {
+                return ResourceManager.GetString("ProcedureUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie castrada com sucesso..
         /// </summary>
         public static string SpecieAddSucess {

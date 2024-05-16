@@ -106,16 +106,35 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                    <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
-                        <b class="logo-icon ">
-                            <img src="~/imagens/logo-mini.svg" width="60" height="55" alt="homepage" style="padding-left:8px" class="light-logo" />
-                        </b>
-                        <span class="logo-text text-center">
-                            <span class="accordionsa">
-                                <img src="~/imagens/vet-card.svg" width="180" height="60" alt="homepage" class="light-logo" />
+      
+
+                    @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
+                    {
+                        <a class="navbar-brand" href="@Url.Action("Index","Home")" style="padding:0!important">
+                            <b class="logo-icon ">
+                                <img src="~/imagens/logo-mini.svg" width="60" height="55" alt="homepage" style="padding-left:8px" class="light-logo" />
+                            </b>
+                            <span class="logo-text text-center">
+                                <span class="accordionsa">
+                                    <img src="~/imagens/vet-card.svg" width="180" height="60" alt="homepage" class="light-logo" />
+                                </span>
                             </span>
-                        </span>
-                    </a>
+                        </a>
+                    }
+                    @if (loggedUser.Role == nameof(UserType.Guardian))
+                    {
+                        <a class="navbar-brand" href="@Url.Action("Guardian","Home")" style="padding:0!important">
+                            <b class="logo-icon ">
+                                <img src="~/imagens/logo-mini.svg" width="60" height="55" alt="homepage" style="padding-left:8px" class="light-logo" />
+                            </b>
+                            <span class="logo-text text-center">
+                                <span class="accordionsa">
+                                    <img src="~/imagens/vet-card.svg" width="180" height="60" alt="homepage" class="light-logo" />
+                                </span>
+                            </span>
+                        </a>
+                    }
+
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
@@ -166,7 +185,7 @@
 
                                 <a class="dropdown-item" href="@Url.Action("Profile","User")"><i class="ti-user m-r-5 m-l-5"></i> Meu Perfil</a>
                                 <div class="dropdown-divider"></div>
-
+                         
                                 <a class="dropdown-item" href="@Url.Action("Logout", "User")"><i class="text-danger fa fa-power-off m-r-5 m-l-5"></i> Sair</a>
                                 <div class="dropdown-divider"></div>
                             </div>
@@ -179,32 +198,58 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Pagamentos </span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="@Url.Action("Index","Payment")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Vender/Cancelar </span></a></li>
-                                <li class="sidebar-item"><a href="@Url.Action("Monitoring","Payment")" class="sidebar-link"><i class="fa-solid fa-table-columns"></i><span class="hide-menu">  Monitoramento </span></a></li>
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
-                        <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
-                        <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
-                        <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
-                        <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a></li>
 
-
-                        @if (loggedUser.Role == nameof(UserType.Admin))
+                        @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
                         {
                             <li class="sidebar-item">
-                                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
+                            </li>
+                        }
+
+                        @if (loggedUser.Role == nameof(UserType.Guardian))
+                        {
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Guardian","Home")" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu"> Home</span></a>
+                            </li>
+                        }
+
+                        @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
+                        { 
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Pagamentos </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
-                                    <li class="sidebar-item"><a href="@Url.Action("AddUser","User")" class="sidebar-link"><i class="fa fa-user"></i><span class="hide-menu"> Usuários </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Payment")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Vender/Cancelar </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("Monitoring","Payment")" class="sidebar-link"><i class="fa-solid fa-table-columns"></i><span class="hide-menu">  Monitoramento </span></a></li>
                                 </ul>
                             </li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>                            
+
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a>
+                                <ul aria-expanded="false" class="collapse  first-level">
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Planos </span></a></li>                                    
+                                    <li class="sidebar-item"><a href="@Url.Action("Procedures","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i><span class="hide-menu"> Procedimentos </span></a></li>                                    
+                                </ul>
+                            </li>
+
+                            @if (loggedUser.Role == nameof(UserType.Admin))
+                            {
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu"> Administrador </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item"><a href="@Url.Action("Index","Configuration")" class="sidebar-link"><i class="fa fa-cogs"></i><span class="hide-menu"> Configurações </span></a></li>
+                                        <li class="sidebar-item"><a href="@Url.Action("AddUser","User")" class="sidebar-link"><i class="fa fa-user"></i><span class="hide-menu"> Usuários </span></a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                        }
+                        @if (loggedUser.Role == nameof(UserType.Guardian))
+                        {
+                            
                         }
                     </ul>
                 </nav>

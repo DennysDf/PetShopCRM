@@ -37,14 +37,28 @@ namespace PetShopCRM.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     var response = await userService.ValidateAsync(userLogin.ToDTO());
-
+                    var user = response.Data;
                     if (response.Success)
                     {
-                        await loginService.LoginAsync(response.Data);
+                        await loginService.LoginAsync(user);
+                        var locale = string.Empty;
+
+                        switch (user.Type)
+                        {
+                            case UserType.Admin:
+                                locale = "Index";
+                                break;
+                            case UserType.General:
+                                locale = "Index";
+                                break;
+                            case UserType.Guardian:
+                                locale = "Guardian";
+                                break;                            
+                        }
 
                         notificationService.Success(Resources.Text.UserLogged);
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction(locale, "Home");
                     }
                 }
 

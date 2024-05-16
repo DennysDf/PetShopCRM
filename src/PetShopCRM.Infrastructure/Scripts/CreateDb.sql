@@ -61,7 +61,7 @@ CREATE TABLE Pets (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(255) NOT NULL,
     GuardianId INT NOT NULL,
-    Identifier NVARCHAR(255),
+    Identifier NVARCHAR(255) NULL,
     SpecieId INT NOT NULL,
     Sexy NVARCHAR(20),
     Color NVARCHAR(20),
@@ -87,6 +87,11 @@ CREATE TABLE HealthPlans (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL
 );
+GO
+INSERT INTO HealthPlans VALUES ('VetCard - Green', 29.99, 'Plano Básico', GETDATE(), NULL, 1);
+INSERT INTO HealthPlans VALUES ('VetCard - Gold', 89.99, 'Plano Básico', GETDATE(), NULL, 1);
+INSERT INTO HealthPlans VALUES ('VetCard - Black', 199.90, 'Plano Básico', GETDATE(), NULL, 1);
+GO
 CREATE TABLE Payments (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     ExternalId NVARCHAR(255) NOT NULL,
@@ -150,4 +155,35 @@ CREATE TABLE Logs (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,
 );
+GO
+CREATE TABLE Groups (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Description NVARCHAR(255) NOT NULL,
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL
+);
 go
+CREATE TABLE Benefits (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    [Procedure] NVARCHAR(255) NOT NULL,
+    GroupId INT,    
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,
+    CONSTRAINT Benefit_Group_GroupId FOREIGN KEY (GroupId) REFERENCES Groups(Id)    
+);
+go
+CREATE TABLE BenefitsHealthPlans (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,    
+    Coparticipation DECIMAL(18, 2) NOT NULL,
+    AnnualLimit INT,
+    Lack INT,    
+    HealthPlanId INT,
+    BenefitId INT,
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,    
+    CONSTRAINT BenefitHealthPlans_HealthPlan_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id),
+    CONSTRAINT BenefitHealthPlans_Benefit_BenefitId FOREIGN KEY (BenefitId) REFERENCES Benefits(Id)
+);

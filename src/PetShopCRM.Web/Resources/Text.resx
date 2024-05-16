@@ -165,6 +165,15 @@
   <data name="PetUpdateSucess" xml:space="preserve">
     <value>Clínica atualizada com sucesso.</value>
   </data>
+  <data name="ProcedureAddSucess" xml:space="preserve">
+    <value>Procedimento castrado com sucesso.</value>
+  </data>
+  <data name="ProcedureDeleteSucess" xml:space="preserve">
+    <value>Procedimento apagada com sucesso.</value>
+  </data>
+  <data name="ProcedureUpdateSucess" xml:space="preserve">
+    <value>Procedimento atualizado com sucesso.</value>
+  </data>
   <data name="SpecieAddSucess" xml:space="preserve">
     <value>Espécie castrada com sucesso.</value>
   </data>

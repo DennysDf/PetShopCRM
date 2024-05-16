@@ -85,7 +85,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+                    <button type="submit" id="btn-salve" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
                 </div>
             </form>
         </div>
@@ -123,12 +123,48 @@
             Ajax(id)
         })
 
+        function validarCampos() {
+            $("#Customer_CPF").keyup(function () {
+                var cpf = $(this).val()
+                if (cpf.length > 13) {
+                    if (!cpfValidar(cpf)) {
+                        $("#valida-cpf").removeClass("d-none")
+                        $("#btn-salve").attr("disabled", "true")
+                    } else {
+
+                        $("#valida-cpf").addClass("d-none")
+                        $("#btn-salve").removeAttr("disabled", "true")
+                    }
+                } else {
+                    $("#valida-cpf").addClass("d-none")
+                    $("#btn-salve").removeAttr("disabled", "true")
+                }
+            })
+        }
+
+        function cpfValidar(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.toString().length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            var result = true;
+            [9, 10].forEach(function (j) {
+                var soma = 0, r;
+                cpf.split(/(?=)/).splice(0, j).forEach(function (e, i) {
+                    soma += parseInt(e) * ((j + 2) - (i + 1));
+                });
+                r = soma % 11;
+                r = (r < 2) ? 0 : 11 - r;
+                if (r != cpf.substring(j, j + 1)) result = false;
+            });
+            return result;
+        }
+
         function Ajax(id) {
             $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 maskInit();
                 changeCep()
-                // ValideCard()
+                validarCampos();
+                ValideCard();
                 if (id != 0) {
                     $(".title").text("Editar Pet")
                 } else {
@@ -174,14 +210,20 @@
             })
         }
         function ValideCard() {
-            $("#Card_Number").change(function () {
+            $("#Card_Number").keyup(function () {
                 var card = $(this).val()
                 if (card.length > 18 ) {
                     if (!validarNumeroCartao(card)) {
-                        alert("cartao invalido")
+                        $("#valida-card").removeClass("d-none")
+                        $("#btn-salve").attr("disabled", "true")
                     } else {
                         $("#Card_Brand").val(identificarBandeiraCartao(card)).change()
+                        $("#valida-card").addClass("d-none")
+                        $("#btn-salve").removeAttr("disabled", "true")
                     }
+                } else {
+                    $("#valida-card").addClass("d-none")
+                    $("#btn-salve").removeAttr("disabled", "true")
                 }
             });
         }
@@ -235,7 +277,7 @@
             } else if (/^(384100|384140|384160)[0-9]{10}$/.test(numero)) {
                 return 'credz';
             } else {
-                return 'Desconhecida';
+                return '';
             }
         }
      

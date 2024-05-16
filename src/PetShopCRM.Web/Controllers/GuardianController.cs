@@ -37,7 +37,7 @@ public class GuardianController(
         }
         else
         {
-            //COLOCAR MENSAGEM DE ERRO AQUI
+            notificationService.Send(Domain.Enums.NotificationType.Error, guardianDTO.Message, loggedUserService.Id);
         }
 
         return View(guardianVM);

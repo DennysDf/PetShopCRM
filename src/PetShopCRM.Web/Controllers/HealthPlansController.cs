@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
-using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.HealthPlans;
-using PetShopCRM.Web.Models.Pet;
 using PetShopCRM.Web.Services.Interfaces;
-using System.Text.RegularExpressions;
 
 namespace PetShopCRM.Web.Controllers;
 
@@ -88,7 +84,6 @@ public class HealthPlansController(
 
         var groups = await groupService.GetAllAsync();
         proceduresVM.GroupList = new SelectList(groups.Select(c => new { c.Id, Name = c.Description }).ToList(), "Id", "Name");
-        
 
         return View(proceduresVM);
     }

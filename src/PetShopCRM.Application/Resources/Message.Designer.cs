@@ -124,6 +124,15 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento não encontrado..
+        /// </summary>
+        internal static string ProcedureNotFound {
+            get {
+                return ResourceManager.GetString("ProcedureNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie não encontrada..
         /// </summary>
         internal static string SpecieNotFound {

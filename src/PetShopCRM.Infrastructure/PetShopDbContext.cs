@@ -16,6 +16,9 @@ public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbCo
     public DbSet<Configuration> Configurations { get; set; }
     public DbSet<PaymentHistory> PaymentHistories { get; set; }
     public DbSet<Log> Logs { get; set; }
+    public DbSet<Benefit> Benefits { get; set; }
+    public DbSet<Group> Groups { get; set; }
+    public DbSet<BenefitHealthPlan> BenefitsHealthPlans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -1,13 +1,13 @@
-﻿@model ICollection<HealthPlansVM>
+﻿@model ICollection<ProceduresVM>
 @{
-    ViewData["Title"] = "Plano de Saúde";
+    ViewData["Title"] = "Procedimentos";
 }
 
 <div class="row mb-3 ">
     <div class="col-12 text-center">
         <button data-id="0" id="modal-open" class="btn btn-success">
             <i class="fa fa-plus-circle"></i>
-            <b>Incluir Plano de Saúde</b>
+            <b>Incluir Procedimento</b>
         </button>
     </div>
 </div>
@@ -19,8 +19,8 @@
                 <tr>
                     <th data-field="id" width="15">#</th>
                     <th>Nome</th>
-                    <th>Valor</th>
-                    <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th>
+                    <th>Grupo</th>
+                    <th class="text-center" data-field="operate" data-events="operateEvents"> </th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -28,15 +28,9 @@
                 {
                     <tr class="bg-white">
                         <td>@item.Id</td>
-                        <td class="text-nowrap">
-                            <a href="@Url.Action("Benefits","HealthPlans", new{ Id = item.Id })" >
-                                @item.Name
-                            </a>
-                        </td>
-                        <td class="text-nowrap ">
-                            <b>R$ </b><span class="value-mask">@item.Value</span>
-                        </td>
-                        <td class="text-nowrap text-right" width="15">
+                        <td>@item.Name</td>
+                        <td>@item.Group</td>
+                        <td class="text-nowrap text-right">
                             <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
                                 <i class="fa fa-times text-danger"> </i>
                             </a>
@@ -56,9 +50,9 @@
 <div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form asp-action="Index" method="post">
+            <form asp-action="Procedures" method="post">
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title title">Cadastrar Material</h5>
+                    <h5 class="modal-title title"></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -86,7 +80,7 @@
             </div>
             <div class="modal-body">
                 <span class="font-weight-bold font-18">
-                    Tem certeza que deseja apagar este Plano de Saúde?
+                    Tem certeza que deseja apagar este Procedimento?
                     <input type="hidden" id="del-evento" />
                 </span>
             </div>
@@ -106,13 +100,13 @@
         })
 
         function Ajax(id) {
-            $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
+            $.post('@Url.Action("AjaxProcedures")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
-                maskInit();
+                select2Init();
                 if (id != 0) {
-                    $(".title").text("Editar Plano de Saúde")
+                    $(".title").text("Editar Procedimento")
                 } else {
-                    $(".title").text("Cadastrar Plano de Saúde")
+                    $(".title").text("Cadastrar Procedimento")
                 }
                 $("#modal").modal("show");
             })

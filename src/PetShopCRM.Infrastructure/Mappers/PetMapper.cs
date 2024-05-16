@@ -28,23 +28,10 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
             .IsRequired();
 
         builder.Property(x => x.Identifier)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(x => x.SpecieId)
             .IsRequired();
-
-        builder.HasOne(x => x.Guardian)
-            .WithMany(x => x.Pets)
-            .HasForeignKey(x => x.GuardianId)
-            .HasConstraintName("Pets_Guardians_GuardianId");
-
-        builder.HasOne(x => x.Specie)
-            .WithMany(x => x.Pets)
-            .HasForeignKey(x => x.SpecieId)
-            .HasConstraintName("Pets_Species_SpecieId");
-
-        //Filter
-        builder.HasQueryFilter(x => x.Active);
 
         builder.Property(x => x.Sexy)
             .IsRequired(false);
@@ -70,5 +57,17 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
         builder.Property(x => x.UrlPhoto)
             .IsRequired(false);
 
+        builder.HasOne(x => x.Guardian)
+            .WithMany(x => x.Pets)
+            .HasForeignKey(x => x.GuardianId)
+            .HasConstraintName("Pets_Guardians_GuardianId");
+
+        builder.HasOne(x => x.Specie)
+            .WithMany(x => x.Pets)
+            .HasForeignKey(x => x.SpecieId)
+            .HasConstraintName("Pets_Species_SpecieId");
+
+        //Filter
+        builder.HasQueryFilter(x => x.Active);
     }
 }

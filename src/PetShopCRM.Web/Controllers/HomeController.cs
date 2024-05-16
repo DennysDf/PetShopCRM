@@ -11,6 +11,7 @@ using PetShopCRM.Web.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Payment;
 using PetShopCRM.Web.Reports;
+using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.SignalHubs;
 using Polly.Bulkhead;
 using System.Diagnostics;
@@ -27,9 +28,12 @@ public class HomeController(
     IPetService petService,
     IPaymentService paymentService,
     IPaymentHistoryService paymentHistoryService, 
-    IConfigurationService configurationService ) : Controller
+    IConfigurationService configurationService,
+    ILoggedUserService loggedUserService) : Controller
 {
 
+    [Authorize(policy: nameof(UserType.Admin))]
+    [Authorize(policy: nameof(UserType.General))]
     public async Task<IActionResult> Index()
     {
         var pets = await petService.GetAllAsync();
@@ -58,7 +62,7 @@ public class HomeController(
         return View();
     }
 
-    public async Task CardGuardians()
+    private async Task CardGuardians()
     {
         var guardiansReport = new GuardiansReport();
 
@@ -74,7 +78,7 @@ public class HomeController(
 
     }
 
-    public async Task CardVendas()
+    private async Task CardVendas()
     {
         var salesRepot = new SalesReport();
 
@@ -89,7 +93,7 @@ public class HomeController(
         ViewData["ArrowPayments"] = payments.Data.Count > 0 ?  salesRepot.GetArrow(payments.Data):0;
     }
 
-    public async Task CardFaturamento()
+    private async Task CardFaturamento()
     {
         var revenueReport = new RevenueReport();
 
@@ -102,7 +106,7 @@ public class HomeController(
         ViewData["ArrowFaturamento"] = payments.Count > 0 ? revenueReport.GetArrow(payments):0;
     }
 
-    public async Task CardPet()
+    private async Task CardPet()
     {
         var petsReport = new PetsReport();
 
@@ -116,7 +120,7 @@ public class HomeController(
 
     }
 
-    public async Task ChartPieSpecie()
+    private async Task ChartPieSpecie()
     {
         var petsDTO = await petService.GetAllCompleteAsync();
         var pets = petsDTO.Data;
@@ -135,7 +139,7 @@ public class HomeController(
         .ToArray());
     }
 
-    public async Task ChartFaturamentoAnualIndividual()
+    private async Task ChartFaturamentoAnualIndividual()
     {
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data.Where(x => x.IsSuccess);
@@ -172,7 +176,7 @@ public class HomeController(
         ViewData["ObjFaturamentoAnual"] = JsonConvert.SerializeObject(faturamentoAnual);
     }
 
-    public async Task ChartFaturamentoAnual()
+    private async Task ChartFaturamentoAnual()
     {
 
         var paymentsDTO = await paymentHistoryService.GetAllCompleteAsync();
@@ -222,7 +226,7 @@ public class HomeController(
 
     }
 
-    public async Task ChartArea()
+    private async Task ChartArea()
     {
         var paymentsDTO = await paymentService.GetAllCompleteAsync();
         var payments = paymentsDTO.Data.Where(x => x.IsSuccess);
@@ -255,6 +259,14 @@ public class HomeController(
         }).ToArray();
 
         ViewData["ObjFaturamentoArea"] = JsonConvert.SerializeObject(faturamentoAnual);
+    }
+
+    [Authorize(policy: nameof(UserType.Guardian))]
+    public async Task<IActionResult> Guardian()
+    {
+        var id = loggedUserService.Id;
+
+        return View();
     }
 
     [Authorize(policy: nameof(UserType.Admin))]

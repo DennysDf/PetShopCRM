@@ -67,7 +67,7 @@ public class PetVM
         UrlPhoto = pet.UrlPhoto
     }).ToList();
 
-    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null , Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto, UpdatedDateImg = this.Photo != null ? DateTime.Now : null };
+    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null , Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto };
 
     public PetVM ToVM(Domain.Models.Pet model) 
     {

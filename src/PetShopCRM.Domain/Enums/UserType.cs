@@ -3,5 +3,6 @@
 public enum UserType
 {
     Admin,
-    General
+    General,
+    Guardian
 }

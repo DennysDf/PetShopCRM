@@ -14,6 +14,8 @@ public interface IUnitOfWork : IDisposable
     IConfigurationRepository ConfigurationRepository {  get; }
     IPaymentHistoryRepository PaymentHistoryRepository {  get; }
     ILogRepository LogRepository {  get; }
+    IProcedureRepository ProcedureRepository {  get; }
+    IGroupRespository GroupRespository {  get; }
 
     Task<int> SaveChangesAsync();
 }

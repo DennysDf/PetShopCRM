@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.Clinic;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Pet;
@@ -53,17 +54,32 @@ public class PetController(
     public async Task<IActionResult> Index(PetVM model)
     {
         var message = model.Id != 0 ? Resources.Text.PetUpdateSucess : Resources.Text.PetAddSucess;
+        Pet? pet;
+
+        if (model.Id != 0)
+        {
+            var petDTO =  await petService.GetByIdAsync(model.Id);
+            pet = petDTO.Data;
+        }
+        else
+        {
+            pet = model.ToModel();
+        }
 
         var photo = model.UrlPhoto;
+        pet.UrlPhoto = model.Photo == null ? photo : upload.GetNameFile(model.Photo);
 
-        model.UrlPhoto = model.Photo == null ? photo : upload.GetNameFile(model.Photo ?? null);
+        if (model.Photo != null)
+        {
+            pet.UpdatedDateImg = DateTime.Now;
+        }
 
-        var pet = await petService.AddOrUpdateAsync(model.ToModel());
+        pet = await petService.AddOrUpdateAsync(pet);
 
         if (model.Photo != null) 
         {
             upload.SavePhotoPet(model.Photo, pet.Id);
-        }          
+        }
 
         notificationService.Success(message);
 

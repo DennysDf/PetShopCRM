@@ -46,20 +46,20 @@ public class PetVM
     public string? Obs { get; set; }
 
     [DisplayName("É cadastrado?")]
-    public int? Spayed { get; set; }    
+    public int? Spayed { get; set; }
     public string UrlPhoto { get; set; }
     [DisplayName("Foto")]
     public IFormFile? Photo { get; set; }
     public SelectList GuardianList { get; set; }
     public SelectList SpecieList { get; set; }
     public int LastUpdate { get; set; }
-
+    public bool ShowReportImgUpdate { get; set; }
 
     public static List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM
     {
         Id = pet.Id,
-        Name = pet.Name,                
-        GuardianId  = pet.GuardianId,   
+        Name = pet.Name,
+        GuardianId = pet.GuardianId,
         Identifier = pet.Identifier,
         SpecieId = pet.SpecieId,
         Guardian = pet.Guardian?.Name ?? string.Empty,
@@ -67,9 +67,29 @@ public class PetVM
         UrlPhoto = pet.UrlPhoto
     }).ToList();
 
-    public Domain.Models.Pet ToModel() => new () { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null , Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto };
+    public Domain.Models.Pet ToModel() => new() { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null, Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto, ShowReportImgUpdate = this.ShowReportImgUpdate };
 
-    public PetVM ToVM(Domain.Models.Pet model) 
+    public Domain.Models.Pet ToModel(Domain.Models.Pet model)
+    {
+        model.Id = this.Id;
+        model.Name = this.Name ?? model.Name;
+        model.GuardianId = this.GuardianId;
+        model.Identifier = this.Identifier;
+        model.SpecieId = this.SpecieId;
+        model.Sexy = this.Sexy != "0" ? this.Sexy : model.Sexy;
+        model.Age = this.Age ?? model.Age;
+        model.Breed = this.Breed ?? model.Breed;
+        model.Color = this.Color ?? model.Color;
+        model.Obs = this.Obs ?? model.Obs;
+        model.Spayed = this.Spayed.HasValue ? (this.Spayed == 1 ? true : (this.Spayed == 0 ? false : (bool?)null)) : model.Spayed;
+        model.Weight = this.Weight ?? model.Weight;
+        model.UrlPhoto = this.UrlPhoto ?? model.UrlPhoto;
+        model.ShowReportImgUpdate = this.ShowReportImgUpdate;
+        return model;
+    }
+
+
+    public PetVM ToVM(Domain.Models.Pet model)
     {
         var pet = new PetVM(); ;
         pet.Id = model.Id;
@@ -77,16 +97,17 @@ public class PetVM
         pet.GuardianId = model.GuardianId;
         pet.Identifier = model.Identifier;
         pet.SpecieId = model.SpecieId;
-        pet.Sexy = model.Sexy; 
+        pet.Sexy = model.Sexy;
         pet.Age = model.Age;
         pet.Weight = model.Weight;
         pet.Color = model.Color;
         pet.Obs = model.Obs;
         pet.Breed = model.Breed;
-        pet.Spayed = model.Spayed == null ? 2 : (bool)model.Spayed ? 1 : 0 ;
+        pet.Spayed = model.Spayed == null ? 2 : (bool)model.Spayed ? 1 : 0;
         pet.UrlPhoto = model.UrlPhoto;
+        pet.ShowReportImgUpdate = model.ShowReportImgUpdate ?? false;
 
-        if (model.UpdatedDateImg != null) 
+        if (model.UpdatedDateImg != null)
         {
             var dataRetroativa = model.UpdatedDateImg;
             // Calcula a diferença
@@ -98,7 +119,9 @@ public class PetVM
 
 
         return pet;
-        
-    } 
+
+    }
+
 }
+
 

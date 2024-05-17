@@ -36,18 +36,7 @@ public class HomeController(
     [Authorize(policy: nameof(UserType.General))]
     public async Task<IActionResult> Index()
     {
-        var pets = await petService.GetAllAsync();
-
-        ViewData["Pets"] = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name));
-
-        var configDashboardUrl = configurationService.GetByKey(ConfigurationKey.PagarMeDashboardUrl);
-        if (configDashboardUrl != null && !string.IsNullOrEmpty(configDashboardUrl.Value))
-        {
-            var dashboardUri = new Uri(configDashboardUrl.Value);
-            var url = dashboardUri.GetLeftPart(UriPartial.Path);
-            ViewData["UrlBalance"] = $"{url}/balance";
-        }
-
+        await SearchPet();
         await CardGuardians();
         await CardVendas();
         await CardFaturamento();
@@ -56,10 +45,34 @@ public class HomeController(
         await ChartFaturamentoAnual();
         await ChartFaturamentoAnualIndividual();
         await ChartArea();
-
-        ViewData["Value"] = paymentService.GetValue();
+        UrlBalance();
+        Balance();
 
         return View();
+    }
+
+    private void UrlBalance()
+    {
+        var configDashboardUrl = configurationService.GetByKey(ConfigurationKey.PagarMeDashboardUrl);
+        if (configDashboardUrl != null && !string.IsNullOrEmpty(configDashboardUrl.Value))
+        {
+            var dashboardUri = new Uri(configDashboardUrl.Value);
+            var url = dashboardUri.GetLeftPart(UriPartial.Path);
+            ViewData["UrlBalance"] = $"{url}/balance";
+        }
+    }
+
+    private async Task SearchPet()
+    {
+        var pets = await petService.GetAllAsync();
+
+        ViewData["Pets"] = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name));
+
+    }
+
+    private void Balance()
+    {
+        ViewData["Value"] = paymentService.GetValue();
     }
 
     private async Task CardGuardians()

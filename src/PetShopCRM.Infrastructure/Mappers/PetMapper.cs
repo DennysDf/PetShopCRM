@@ -57,6 +57,12 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
         builder.Property(x => x.UrlPhoto)
             .IsRequired(false);
 
+        builder.Property(x => x.UpdatedDateImg)
+            .IsRequired(false);
+
+        builder.Property(x => x.ShowReportImgUpdate)
+            .HasDefaultValue(false);            
+
         builder.HasOne(x => x.Guardian)
             .WithMany(x => x.Pets)
             .HasForeignKey(x => x.GuardianId)

@@ -111,17 +111,6 @@ public class PaymentController(
                 if (result.Success && result.Data != null && result.Data.IsSuccess)
                 {
                     await paymentService.UpdateLastPaymentDateAndInstallmentAsync(result.Data.PaymentId, result.Data.CreatedDate);
-
-                    var payment = paymentService.GetById(result.Data.PaymentId);
-
-                    var config = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeRenewRecurrence);
-
-                    if (payment is { Installment: 12 } && config != null && config.Value.Equals("true", StringComparison.OrdinalIgnoreCase))
-                    {
-                        await paymentService.CancelAsync(payment.Id);
-
-                        await paymentService.RenewAsync(payment, dto.Data);
-                    }
                 }
             }
 

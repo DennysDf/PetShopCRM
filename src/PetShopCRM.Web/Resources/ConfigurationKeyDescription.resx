@@ -129,6 +129,15 @@
   <data name="PagarMeUser" xml:space="preserve">
     <value>Usuário Pagar.me (usuário ou secret key)</value>
   </data>
+  <data name="SmtpPassword" xml:space="preserve">
+    <value>Senha para envio de e-mail</value>
+  </data>
+  <data name="SmtpSenderEmail" xml:space="preserve">
+    <value>E-mail usado para remetente</value>
+  </data>
+  <data name="SmtpUser" xml:space="preserve">
+    <value>Usuário para envio de e-mail</value>
+  </data>
   <data name="SystemName" xml:space="preserve">
     <value>Nome do sistema</value>
   </data>

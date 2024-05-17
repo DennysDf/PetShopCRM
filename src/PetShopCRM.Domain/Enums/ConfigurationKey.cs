@@ -5,6 +5,8 @@ public enum ConfigurationKey
     PagarMeUser = 0,
     PagarMePassword = 1,
     PagarMeDashboardUrl = 3,
-    PagarMeRenewRecurrence = 4,
-    SystemName = 2
+    SystemName = 2,
+    SmtpUser = 4,
+    SmtpPassword = 5,
+    SmtpSenderEmail = 6,
 }

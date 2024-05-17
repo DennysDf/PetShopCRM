@@ -97,6 +97,33 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha para envio de e-mail.
+        /// </summary>
+        public static string SmtpPassword {
+            get {
+                return ResourceManager.GetString("SmtpPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail usado para remetente.
+        /// </summary>
+        public static string SmtpSenderEmail {
+            get {
+                return ResourceManager.GetString("SmtpSenderEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário para envio de e-mail.
+        /// </summary>
+        public static string SmtpUser {
+            get {
+                return ResourceManager.GetString("SmtpUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Nome do sistema.
         /// </summary>
         public static string SystemName {

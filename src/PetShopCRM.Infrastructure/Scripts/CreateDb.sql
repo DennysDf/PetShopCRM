@@ -128,7 +128,9 @@ INSERT INTO Configurations VALUES ('PagarMeUser', 'sk_747d8ddf31334d94b19617f3e4
 INSERT INTO Configurations VALUES ('PagarMePassword', '', 1, 1, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('SystemName', 'Vet Card', 1, 0, GETDATE(), NULL, 1)
 INSERT INTO Configurations VALUES ('PagarMeDashboardUrl', '', 1, 1, GETDATE(), NULL, 1)
-INSERT INTO Configurations VALUES ('PagarMeRenewRecurrence', 'false', 2, 1, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('SmtpUser', '', 1, 2, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('SmtpPassword', '', 1, 2, GETDATE(), NULL, 1)
+INSERT INTO Configurations VALUES ('SmtpSenderEmail', '', 1, 2, GETDATE(), NULL, 1)
 go
 CREATE TABLE PaymentHistories (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,

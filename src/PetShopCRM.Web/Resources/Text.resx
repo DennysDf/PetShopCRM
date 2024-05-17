@@ -126,6 +126,21 @@
   <data name="ClinicUpdateSucess" xml:space="preserve">
     <value>Clínica atualizada com sucesso.</value>
   </data>
+  <data name="EmailPasswordNotFound" xml:space="preserve">
+    <value>Senha para envio de e-mail não configurado.</value>
+  </data>
+  <data name="EmailSenderNotFound" xml:space="preserve">
+    <value>Remetente de e-mail não configurado.</value>
+  </data>
+  <data name="EmailSuccess" xml:space="preserve">
+    <value>E-mail enviado com sucesso.</value>
+  </data>
+  <data name="EmailUserAndPasswordNotFound" xml:space="preserve">
+    <value>Usuário e senha para envio de e-mail não configurado.</value>
+  </data>
+  <data name="EmailUserNotFound" xml:space="preserve">
+    <value>Usuário para envio de e-mail não configurado.</value>
+  </data>
   <data name="GuardianAddSucess" xml:space="preserve">
     <value>Tutor castrado com sucesso.</value>
   </data>

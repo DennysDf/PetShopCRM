@@ -113,23 +113,6 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         return result != null && deleted;
     }
 
-    public async Task RenewAsync(Payment payment, JsonElement data)
-    {
-        var subscriptionId = data.GetProperty("invoice").GetProperty("subscriptionId").GetString();
-        var customerId = data.GetProperty("customer").GetProperty("id").GetString();
-        var cardId = data.GetProperty("last_transaction").GetProperty("card").GetProperty("id").GetString();
-        var value = data.GetProperty("amount").GetInt32().ToString();
-
-        _ = pagarMeService.CancelSubscription(subscriptionId);
-        var resultRenew = pagarMeService.RenewRecurrence(payment.HealthPlan, customerId, cardId, value);
-
-        payment.ExternalId = resultRenew.Id;
-        payment.Active = true;
-
-        await unitOfWork.PaymentRepository.AddOrUpdateAsync(payment);
-        await unitOfWork.SaveChangesAsync();
-    }
-
     public decimal GetValue()
     {
         var response = pagarMeService.GetAvailableValues();

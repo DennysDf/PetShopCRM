@@ -2,11 +2,11 @@
 
 public class AppSettings
 {
-    public AppSettingsPagarMe PagarMe { get; set; }
+    public AppSettingsSmtp Smtp { get; set; }
 }
 
-public class AppSettingsPagarMe
+public class AppSettingsSmtp
 {
-    public string User { get; set; }
-    public string Password { get; set; }
+    public string Host { get; set; }
+    public int Port { get; set; }
 }

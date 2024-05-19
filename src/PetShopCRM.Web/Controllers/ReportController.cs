@@ -5,10 +5,10 @@ namespace PetShopCRM.Web.Controllers;
 
 public class ReportController(IPetService petService) : Controller
 {
-    public IActionResult Index()
+    public IActionResult UpdateImg()
     {
-        var teste = petService.GetPetsForUpdateImg();
+        var pets = petService.GetPetsForUpdateImg().OrderByDescending(c => c.Days).ToList();
 
-        return View(teste);
+        return View(pets);
     }
 }

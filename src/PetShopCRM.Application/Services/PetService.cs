@@ -5,6 +5,7 @@ using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 using PetShopCRM.Infrastructure.DTOs.Report;
+using System.Text.RegularExpressions;
 
 namespace PetShopCRM.Application.Services;
 
@@ -78,7 +79,7 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
             .Include(c => c.Guardian)
             .Include(x => x.Specie)
             .Where(c => c.Active && c.UrlPhoto != null && (c.ShowReportImgUpdate ?? false))
-            .Select(c => new PetUpdateImgDTO(c.Name,c.Guardian.Name, ((DateTime)c.UpdatedDateImg - DateTime.Now).Days, (DateTime)c.UpdatedDateImg)).ToList();
+            .Select(c => new PetUpdateImgDTO(c.Id, c.Name, c.Guardian.Name, (DateTime.Now - (DateTime)c.UpdatedDateImg).Days, (DateTime)c.UpdatedDateImg, "55"+ Regex.Replace(c.Guardian.Phone, @"\D", "") )).ToList();
 
         return result;
     }

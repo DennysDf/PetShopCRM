@@ -54,7 +54,7 @@ public static class CryptographyHelper
     public static string DecryptStringFromBase64(this string encryptedBase64)
     {
         byte[] encryptedBytes = Convert.FromBase64String(encryptedBase64);
-        return DecryptString(encryptedBytes, _aes   Key, _aesIV);
+        return DecryptString(encryptedBytes, _aesKey, _aesIV);
     }
 
     // Método para criptografar um número usando RSA

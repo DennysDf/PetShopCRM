@@ -3,3 +3,5 @@
 public record PetDTO(int Id, string Name, string Guardian, string Identifier, string Specie);
 
 public record PetSpecieDTO(string Name, int Index);
+public record PetUpdateImgDTO(int Id, string Name, string Guardiam, int Days, DateTime LastUpdate, string Phone);
+

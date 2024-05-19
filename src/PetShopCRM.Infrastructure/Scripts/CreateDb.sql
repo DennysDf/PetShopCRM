@@ -71,6 +71,7 @@ CREATE TABLE Pets (
     Obs NVARCHAR(2000),
     Spayed BIT NULL,
     UrlPhoto NVARCHAR(2000),
+    ShowReportImgUpdate BIT default 0,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     UpdatedDateImg DATETIME2,

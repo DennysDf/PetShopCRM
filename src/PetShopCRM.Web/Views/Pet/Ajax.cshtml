@@ -74,12 +74,16 @@
         </select>
     </div>
 </div>
-<div class="row mt-2">
+<div class="row mt-2 align-items-end">
     <div class="col-sm-6">
         <label asp-for="Photo"></label>
         <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
         <input type="hidden" asp-for="UrlPhoto" />
     </div>
+    <div class="col-sm-6">      
+        <label  asp-for="ShowReportImgUpdate" class="">Incluir no relatório de imagens atualizadas?</label>
+        <input class="" type="checkbox" asp-for="ShowReportImgUpdate">    
+    </div
 </div>
 <div class="row mt-2">
     <div class="col-sm-12">

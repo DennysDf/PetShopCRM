@@ -18,7 +18,8 @@ public class PaymentController(
         IPetService petService,
         IHealthPlanService healthPlanService,
         IPaymentHistoryService paymentHistoryService,
-        IConfigurationService configurationService) : Controller
+        IConfigurationService configurationService,
+        IEmailService emailService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -77,8 +78,14 @@ public class PaymentController(
 
         if (!result.Success || !paymentSuccess)
             notificationService.Error(result.Message);
-        else
+        else 
+        { 
             notificationService.Success(Resources.Text.PaymentAddSuccess);
+            var pay = await paymentService.GetAllCompleteAsync(result.Data.Id);
+            var model2 = pay.Data.First();
+            await emailService.SendAsync(model2.Guardian.Email,"Bem vindo ao Plano de Saúde Pet VetCard.", $"<p>Prezado(a) {model2.Guardian.Name},<p>Esperamos que você e seu amado pet estejam bem.<p>É com grande satisfação que informamos que a compra do plano de saúde para o seu pet foi realizada com sucesso! Agradecemos pela confiança em nossos serviços e estamos felizes em tê-lo como nosso cliente.<p><strong>Detalhes do Plano Adquirido:</strong><ul><li><strong>Plano:</strong> {model2.HealthPlan.Name}</ul><p>Para visualizar todos os benefícios que o seu plano oferece, por favor, clique <a href=http://vetcard.com.br/ >aqui</a>.<p>Caso tenha alguma dúvida ou necessite de assistência, não hesite em entrar em contato conosco. Estamos à disposição para ajudar no que for necessário.<p>Mais uma vez, agradecemos pela sua compra e esperamos que você e seu pet tenham uma excelente experiência com o VetCard.<p>Atenciosamente,<p>Equipe VetCard", true);
+            
+        }
 
         return RedirectToAction("Index");
     }

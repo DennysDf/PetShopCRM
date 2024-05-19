@@ -4,6 +4,8 @@ using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
+using PetShopCRM.Infrastructure.DTOs.Report;
+using System.Text.RegularExpressions;
 
 namespace PetShopCRM.Application.Services;
 
@@ -67,5 +69,18 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
             .ToList();
 
         return new ResponseDTO<List<Pet>>(result.Count > 0, "Nenhum resultado encontrado", result);
+    }
+
+    public  List<PetUpdateImgDTO>? GetPetsForUpdateImg()
+    {
+        var pets = unitOfWork.PetRepository.GetBy();
+
+        var result = pets
+            .Include(c => c.Guardian)
+            .Include(x => x.Specie)
+            .Where(c => c.Active && c.UrlPhoto != null && (c.ShowReportImgUpdate ?? false))
+            .Select(c => new PetUpdateImgDTO(c.Id, c.Name, c.Guardian.Name, (DateTime.Now - (DateTime)c.UpdatedDateImg).Days, (DateTime)c.UpdatedDateImg, "55"+ Regex.Replace(c.Guardian.Phone, @"\D", "") )).ToList();
+
+        return result;
     }
 }

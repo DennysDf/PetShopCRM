@@ -17,6 +17,7 @@ public class Pet : EntityBase
     public bool? Spayed { get; set; }
     public string UrlPhoto { get; set; }
     public DateTime? UpdatedDateImg { get; set; }
+    public bool? ShowReportImgUpdate { get; set; }
 
     public virtual Guardian Guardian { get; set; }
     public virtual Specie Specie { get; set; }

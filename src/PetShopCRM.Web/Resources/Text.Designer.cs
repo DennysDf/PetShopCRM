@@ -313,6 +313,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário criado..
+        /// </summary>
+        public static string UserCreate {
+            get {
+                return ResourceManager.GetString("UserCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário apagado com sucesso..
         /// </summary>
         public static string UserDeleteSucess {

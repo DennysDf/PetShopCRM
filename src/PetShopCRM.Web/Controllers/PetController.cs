@@ -59,13 +59,13 @@ public class PetController(
         if (model.Id != 0)
         {
             var petDTO =  await petService.GetByIdAsync(model.Id);
-            pet = petDTO.Data;
+            pet = model.ToModel(petDTO.Data);
         }
         else
         {
             pet = model.ToModel();
         }
-
+        
         var photo = model.UrlPhoto;
         pet.UrlPhoto = model.Photo == null ? photo : upload.GetNameFile(model.Photo);
 

@@ -84,4 +84,21 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
         await unitOfWork.SaveChangesAsync();
         return delete;
     }
+
+    public ResponseDTO<User> GetUserByCPForEmail(string model)
+    {
+        var users = unitOfWork.UserRepository.GetBy();
+        var user = users.Where(c => (c.Login == model || c.Email == model) && c.Active);
+        User userModel = null;
+        var email = string.Empty;
+
+        if (user.Any())
+        {
+            userModel = user.First();
+            email = userModel.Email;            
+        }
+
+        return new ResponseDTO<User>(user.Any(), email, userModel);
+
+    }
 }

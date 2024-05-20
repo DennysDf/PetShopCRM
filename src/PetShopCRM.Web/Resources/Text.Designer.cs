@@ -340,6 +340,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha atualizada com sucesso..
+        /// </summary>
+        public static string UserPassawordUpdate {
+            get {
+                return ResourceManager.GetString("UserPassawordUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário atualizado com sucesso..
         /// </summary>
         public static string UserUpdateSucess {

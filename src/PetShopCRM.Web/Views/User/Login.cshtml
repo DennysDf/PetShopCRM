@@ -1,7 +1,7 @@
 ﻿@model UserLoginVM
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";    
 }
 <style>
     .texto-com-borda {
@@ -29,14 +29,36 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text p-3"><i class="fas fa-lock fa-fw"></i></span>
                 </div>
-                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Digite sua senha">
+                <div class="input-group-append">
+                    <span class="input-group-text p-3 color-eye">
+                        <i class="fa fa-fw fa-eye toggle-password" id="toggle-password"></i>
+                    </span>
+                </div>
             </div>
             <span asp-validation-for="Password" class="text-danger texto-com-borda"></span>
-        </div>
-        <a href="#" class="txt-white">Esqueceu sua senha?</a>
+        </div>    
+        <a href="@Url.Action("RestorePassword")" class="txt-white">Esqueceu sua senha?</a>
         <div class="separator"></div>
         <div class="login-button">
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#toggle-password').click(function () {
+                let input = $('#Password');
+                let icon = $(this);
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+        });
+    </script>
+}

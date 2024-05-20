@@ -1,4 +1,5 @@
 ﻿using Azure;
+using EmailHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +20,7 @@ namespace PetShopCRM.Web.Controllers
         ILoginService loginService,
         INotificationService notificationService,
         IUserService userService, ILoggedUserService loggedUserService,
-        IUpload upload) : Controller
+        IUpload upload, IEmailService emailService) : Controller
     {
         [HttpGet]
         [AllowAnonymous]
@@ -33,33 +34,30 @@ namespace PetShopCRM.Web.Controllers
         public async Task<IActionResult> Login(UserLoginVM userLogin)
         {
             try
-            {
-                if (ModelState.IsValid)
+            {                
+                var response = await userService.ValidateAsync(userLogin.ToDTO());
+                var user = response.Data;
+                if (response.Success)
                 {
-                    var response = await userService.ValidateAsync(userLogin.ToDTO());
-                    var user = response.Data;
-                    if (response.Success)
+                    await loginService.LoginAsync(user);
+                    var locale = string.Empty;
+
+                    switch (user.Type)
                     {
-                        await loginService.LoginAsync(user);
-                        var locale = string.Empty;
-
-                        switch (user.Type)
-                        {
-                            case UserType.Admin:
-                                locale = "Index";
-                                break;
-                            case UserType.General:
-                                locale = "Index";
-                                break;
-                            case UserType.Guardian:
-                                locale = "Guardian";
-                                break;                            
-                        }
-
-                        notificationService.Success(Resources.Text.UserLogged);
-
-                        return RedirectToAction(locale, "Home");
+                        case UserType.Admin:
+                            locale = "Index";
+                            break;
+                        case UserType.General:
+                            locale = "Index";
+                            break;
+                        case UserType.Guardian:
+                            locale = "Guardian";
+                            break;                            
                     }
+
+                    notificationService.Success(Resources.Text.UserLogged);
+
+                    return RedirectToAction(locale, "Home");
                 }
 
                 ModelState.TryAddModelError(nameof(userLogin.Login), Resources.ValidationMessages.UserNotFound);
@@ -169,6 +167,59 @@ namespace PetShopCRM.Web.Controllers
             return RedirectToAction("AddUser");
         }
 
+        [AllowAnonymous]
+        public IActionResult RestorePassword()
+        {
+
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<string> RestorePassword(string login)
+        {   
+            var userDTO = userService.GetUserByCPForEmail(login.ExtractCpfNumbers());
+            var message = "Usuário não contrato, digite o CPF ou e-mail usando no momento do cadastro.";
+
+            if (userDTO.Success)
+            {
+                var model = userDTO.Data;
+                var email = model.Email;
+                message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";
+                var id = model.Id.EncryptNumberAsBase64();
+                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"http://plano.vetcard.com.br/User/RestorePasswordExternal?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
+            }
+
+            return message;
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult RestorePasswordExternal(string id)
+        {
+            return View(new UserLoginVM() { Id = id});
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> RestorePasswordExternal(UserLoginVM model)
+        {
+            var id = model.Id.DecryptNumberFromBase64();
+
+            var userDTO = await userService.GetUserByIdAsync(id);
+
+            if (userDTO.Success)
+            {
+                var user = userDTO.Data;
+                user.Password = model.PasswordNew;
+                await userService.AddOrUpdateAsync(user);
+                notificationService.Success(Resources.Text.UserPassawordUpdate);
+            }
+            else
+                notificationService.Error();
+
+            return RedirectToAction("Login");
+        }
         public bool ValidatePassword(int id )
         {
             return true;

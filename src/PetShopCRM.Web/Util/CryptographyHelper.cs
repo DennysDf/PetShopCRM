@@ -33,13 +33,14 @@ public static class CryptographyHelper
     public static string EncryptNumberAsBase64(this int number)
     {
         byte[] encryptedBytes = EncryptNumber(number, _publicKey);
-        return Convert.ToBase64String(encryptedBytes);
+        return UrlEncodeBase64(Convert.ToBase64String(encryptedBytes));
     }
 
     // Método para decriptografar um número usando RSA a partir de Base64
     public static int DecryptNumberFromBase64(this string encryptedBase64)
     {
-        byte[] encryptedBytes = Convert.FromBase64String(encryptedBase64);
+        string decodedBase64 = UrlDecodeBase64(encryptedBase64);
+        byte[] encryptedBytes = Convert.FromBase64String(decodedBase64);
         return DecryptNumber(encryptedBytes, _privateKey);
     }
 
@@ -47,13 +48,14 @@ public static class CryptographyHelper
     public static string EncryptStringAsBase64(this string plainText)
     {
         byte[] encryptedBytes = EncryptString(plainText, _aesKey, _aesIV);
-        return Convert.ToBase64String(encryptedBytes);
+        return UrlEncodeBase64(Convert.ToBase64String(encryptedBytes));
     }
 
     // Método para decriptografar uma string usando AES a partir de Base64
     public static string DecryptStringFromBase64(this string encryptedBase64)
     {
-        byte[] encryptedBytes = Convert.FromBase64String(encryptedBase64);
+        string decodedBase64 = UrlDecodeBase64(encryptedBase64);
+        byte[] encryptedBytes = Convert.FromBase64String(decodedBase64);
         return DecryptString(encryptedBytes, _aesKey, _aesIV);
     }
 
@@ -122,5 +124,16 @@ public static class CryptographyHelper
                 }
             }
         }
+    }
+
+    // Métodos auxiliares para codificação e decodificação de Base64 para URLs
+    private static string UrlEncodeBase64(string base64)
+    {
+        return base64.Replace('+', '-').Replace('/', '_').Replace('=', ',');
+    }
+
+    private static string UrlDecodeBase64(string base64)
+    {
+        return base64.Replace('-', '+').Replace('_', '/').Replace(',', '=');
     }
 }

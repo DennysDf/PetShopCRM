@@ -18,4 +18,5 @@ public interface IUserService
     Task<User> AddOrUpdateAsync(User model);
 
     Task<bool> DeleteAsync(int id);
+    ResponseDTO<User> GetUserByCPForEmail(string model);
 }

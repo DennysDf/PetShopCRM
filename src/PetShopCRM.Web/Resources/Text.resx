@@ -210,6 +210,9 @@
   <data name="UserLogged" xml:space="preserve">
     <value>Login realizado com sucesso</value>
   </data>
+  <data name="UserPassawordUpdate" xml:space="preserve">
+    <value>Senha atualizada com sucesso.</value>
+  </data>
   <data name="UserUpdateSucess" xml:space="preserve">
     <value>Usuário atualizado com sucesso.</value>
   </data>

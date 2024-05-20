@@ -15,6 +15,18 @@ public class UserLoginVM
     [DisplayName("Senha")]
     public string Password { get; set; }
 
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [MinLength(6, ErrorMessage = ValidationKeysUtil.SizeMin)]
+    [DisplayName("Nova senha")]
+    public string PasswordNew { get; set; }
+
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [Compare(nameof(PasswordNew), ErrorMessage = ValidationKeysUtil.ComparePassword)]
+    [DisplayName("Confirme a senha")]
+    public string ConfirmPassword { get; set; }
+
+    public string Id { get; set; }
+
     public UserLoginDTO ToDTO()
     {
         return new UserLoginDTO(Login, Password);

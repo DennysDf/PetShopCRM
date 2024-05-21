@@ -161,7 +161,7 @@ CREATE TABLE Logs (
     Active BIT NOT NULL,
 );
 GO
-CREATE TABLE Groups (
+CREATE TABLE ProcedureGroups (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Description NVARCHAR(255) NOT NULL,
     CreatedDate DATETIME2 NOT NULL,
@@ -169,26 +169,26 @@ CREATE TABLE Groups (
     Active BIT NOT NULL
 );
 go
-CREATE TABLE Benefits (
+CREATE TABLE [Procedures] (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-    [Procedure] NVARCHAR(255) NOT NULL,
-    GroupId INT,    
+    Description NVARCHAR(255) NOT NULL,
+    ProcedureGroupId INT,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,
-    CONSTRAINT Benefit_Group_GroupId FOREIGN KEY (GroupId) REFERENCES Groups(Id)    
+    CONSTRAINT Procedures_ProcedureGroups_ProcedureGroupId FOREIGN KEY (ProcedureGroupId) REFERENCES ProcedureGroups(Id)
 );
 go
-CREATE TABLE BenefitsHealthPlans (
-    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,    
+CREATE TABLE ProcedureHealthPlans (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Coparticipation DECIMAL(18, 2) NOT NULL,
     AnnualLimit INT,
-    Lack INT,    
-    HealthPlanId INT,
-    BenefitId INT,
+    Lack INT NOT NULL,
+    HealthPlanId INT NOT NULL,
+    ProcedureId INT NOT NULL,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
-    Active BIT NOT NULL,    
-    CONSTRAINT BenefitHealthPlans_HealthPlan_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id),
-    CONSTRAINT BenefitHealthPlans_Benefit_BenefitId FOREIGN KEY (BenefitId) REFERENCES Benefits(Id)
+    Active BIT NOT NULL,
+    CONSTRAINT ProcedureHealthPlans_HealthPlan_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id),
+    CONSTRAINT ProcedureHealthPlans_Procedures_ProcedureId FOREIGN KEY (ProcedureId) REFERENCES [Procedures](Id)
 );

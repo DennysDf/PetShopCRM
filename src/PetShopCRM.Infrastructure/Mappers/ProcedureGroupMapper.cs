@@ -1,17 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PetShopCRM.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PetShopCRM.Infrastructure.Mappers;
 
-public class GroupMapper : IEntityTypeConfiguration<Group>
+public class ProcedureGroupMapper : IEntityTypeConfiguration<ProcedureGroup>
 {
-    public void Configure(EntityTypeBuilder<Group> builder)
+    public void Configure(EntityTypeBuilder<ProcedureGroup> builder)
     {
         //EnttityBase
         builder.HasKey(x => x.Id);
@@ -28,8 +23,5 @@ public class GroupMapper : IEntityTypeConfiguration<Group>
         //Benefit
         builder.Property(x => x.Description)
                .IsRequired();
-
-        //Filter
-        builder.HasQueryFilter(x => x.Active);
     }
 }

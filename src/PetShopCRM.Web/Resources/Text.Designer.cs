@@ -61,7 +61,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica castrada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica cadastrada com sucesso..
         /// </summary>
         public static string ClinicAddSucess {
             get {
@@ -133,7 +133,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor castrado com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor cadastrado com sucesso..
         /// </summary>
         public static string GuardianAddSucess {
             get {
@@ -160,7 +160,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Plano de Saúde castrado com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Plano de Saúde cadastrado com sucesso..
         /// </summary>
         public static string HealthPlanAddSucess {
             get {
@@ -223,7 +223,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet castrado com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet cadastrado com sucesso..
         /// </summary>
         public static string PetAddSucess {
             get {
@@ -250,7 +250,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento castrado com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento cadastrado com sucesso..
         /// </summary>
         public static string ProcedureAddSucess {
             get {
@@ -259,11 +259,47 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento apagada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento apagado com sucesso..
         /// </summary>
         public static string ProcedureDeleteSucess {
             get {
                 return ResourceManager.GetString("ProcedureDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Grupo de procedimento cadastrado com sucesso..
+        /// </summary>
+        public static string ProcedureGroupAddSucess {
+            get {
+                return ResourceManager.GetString("ProcedureGroupAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Grupo de procedimento apagado com sucesso..
+        /// </summary>
+        public static string ProcedureGroupDeleteSucess {
+            get {
+                return ResourceManager.GetString("ProcedureGroupDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Grupo de procedimento atualizado com sucesso..
+        /// </summary>
+        public static string ProcedureGroupUpdateSucess {
+            get {
+                return ResourceManager.GetString("ProcedureGroupUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Vínculos do procedimento atualizados com sucesso..
+        /// </summary>
+        public static string ProcedureHealthPlanSuccess {
+            get {
+                return ResourceManager.GetString("ProcedureHealthPlanSuccess", resourceCulture);
             }
         }
         
@@ -277,7 +313,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie castrada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie cadastrada com sucesso..
         /// </summary>
         public static string SpecieAddSucess {
             get {
@@ -304,7 +340,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário castrado com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário cadastrado com sucesso..
         /// </summary>
         public static string UserAddSucess {
             get {

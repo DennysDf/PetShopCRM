@@ -19,7 +19,7 @@ public static class Bootstrapper
         services.AddScoped<IPaymentHistoryService, PaymentHistoryService>();
         services.AddScoped<ILogService, LogService>();
         services.AddScoped<IProcedureService, ProcedureService>();
-        services.AddScoped<IGroupService, GroupService>();
+        services.AddScoped<IProcedureGroupService, ProcedureGroupService>();
 
         return services;
     }

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ClinicAddSucess" xml:space="preserve">
-    <value>Clínica castrada com sucesso.</value>
+    <value>Clínica cadastrada com sucesso.</value>
   </data>
   <data name="ClinicDeleteSucess" xml:space="preserve">
     <value>Clínica apagada com sucesso.</value>
@@ -142,7 +142,7 @@
     <value>Usuário para envio de e-mail não configurado.</value>
   </data>
   <data name="GuardianAddSucess" xml:space="preserve">
-    <value>Tutor castrado com sucesso.</value>
+    <value>Tutor cadastrado com sucesso.</value>
   </data>
   <data name="GuardianDeleteSucess" xml:space="preserve">
     <value>Tutor apagado com sucesso.</value>
@@ -151,7 +151,7 @@
     <value>Tutor atualizado com sucesso.</value>
   </data>
   <data name="HealthPlanAddSucess" xml:space="preserve">
-    <value>Plano de Saúde castrado com sucesso.</value>
+    <value>Plano de Saúde cadastrado com sucesso.</value>
   </data>
   <data name="HealthPlanDeleteSucess" xml:space="preserve">
     <value>Plano de Saúde apagada com sucesso.</value>
@@ -172,7 +172,7 @@
     <value>Pagamento cancelado com sucesso.</value>
   </data>
   <data name="PetAddSucess" xml:space="preserve">
-    <value>Pet castrado com sucesso.</value>
+    <value>Pet cadastrado com sucesso.</value>
   </data>
   <data name="PetDeleteSucess" xml:space="preserve">
     <value>Pet apagado com sucesso.</value>
@@ -181,16 +181,28 @@
     <value>Pet atualizado com sucesso.</value>
   </data>
   <data name="ProcedureAddSucess" xml:space="preserve">
-    <value>Procedimento castrado com sucesso.</value>
+    <value>Procedimento cadastrado com sucesso.</value>
   </data>
   <data name="ProcedureDeleteSucess" xml:space="preserve">
-    <value>Procedimento apagada com sucesso.</value>
+    <value>Procedimento apagado com sucesso.</value>
+  </data>
+  <data name="ProcedureGroupAddSucess" xml:space="preserve">
+    <value>Grupo de procedimento cadastrado com sucesso.</value>
+  </data>
+  <data name="ProcedureGroupDeleteSucess" xml:space="preserve">
+    <value>Grupo de procedimento apagado com sucesso.</value>
+  </data>
+  <data name="ProcedureGroupUpdateSucess" xml:space="preserve">
+    <value>Grupo de procedimento atualizado com sucesso.</value>
+  </data>
+  <data name="ProcedureHealthPlanSuccess" xml:space="preserve">
+    <value>Vínculos do procedimento atualizados com sucesso.</value>
   </data>
   <data name="ProcedureUpdateSucess" xml:space="preserve">
     <value>Procedimento atualizado com sucesso.</value>
   </data>
   <data name="SpecieAddSucess" xml:space="preserve">
-    <value>Espécie castrada com sucesso.</value>
+    <value>Espécie cadastrada com sucesso.</value>
   </data>
   <data name="SpecieDeleteSucess" xml:space="preserve">
     <value>Espécie apagada com sucesso.</value>
@@ -199,7 +211,7 @@
     <value>Espécie atualizada com sucesso.</value>
   </data>
   <data name="UserAddSucess" xml:space="preserve">
-    <value>Usuário castrado com sucesso.</value>
+    <value>Usuário cadastrado com sucesso.</value>
   </data>
   <data name="UserCreate" xml:space="preserve">
     <value>Usuário criado.</value>

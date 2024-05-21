@@ -2,6 +2,26 @@ CREATE DATABASE PetShopDb;
 GO
 USE PetShopDb
 GO
+CREATE TABLE Guardians (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Name NVARCHAR(255) NOT NULL,
+    DateBirth NVARCHAR(20),
+    CPF NVARCHAR(14),
+    Phone NVARCHAR(20),
+    Email NVARCHAR(255),
+    Address NVARCHAR(255),
+    Country NVARCHAR(5),
+    State NVARCHAR(2),
+    City NVARCHAR(255),
+    CEP NVARCHAR(9),
+    Neighborhood NVARCHAR(100),
+    Unit NVARCHAR(100),
+    Number NVARCHAR(100),
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL
+);
+GO
 CREATE TABLE Users (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(255) NOT NULL,
@@ -40,25 +60,6 @@ GO
 INSERT Species VALUES('Cachorro',GETDATE(),null,1);
 INSERT Species VALUES('Gato',GETDATE(),null,1);
 GO
-CREATE TABLE Guardians (
-    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-    Name NVARCHAR(255) NOT NULL,
-    DateBirth NVARCHAR(20),
-    CPF NVARCHAR(14),
-    Phone NVARCHAR(20),
-    Email NVARCHAR(255),
-    Address NVARCHAR(255),
-    Country NVARCHAR(5),
-    State NVARCHAR(2),
-    City NVARCHAR(255),
-    CEP NVARCHAR(9),
-    Neighborhood NVARCHAR(100),
-    Unit NVARCHAR(100),
-    Number NVARCHAR(100),
-    CreatedDate DATETIME2 NOT NULL,
-    UpdatedDate DATETIME2,
-    Active BIT NOT NULL
-);
 CREATE TABLE Pets (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(255) NOT NULL,
@@ -114,7 +115,7 @@ CREATE TABLE Payments (
     CONSTRAINT Payments_HealthPlans_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id)
 );
 go
-INSERT INTO Users VALUES ('Administrador', 0, 'admin', '123', NULL, NULL,NULL, NULL, GETDATE(), NULL, 1);
+INSERT INTO Users VALUES ('Administrador', 0, 'admin', '123',NULL, NULL, NULL,NULL, NULL, GETDATE(), NULL, 1);
 go
 CREATE TABLE Configurations (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,

@@ -187,6 +187,7 @@ CREATE TABLE ProcedureHealthPlans (
     Lack INT NOT NULL,
     HealthPlanId INT NOT NULL,
     ProcedureId INT NOT NULL,
+    Observation VARCHAR(500),
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,

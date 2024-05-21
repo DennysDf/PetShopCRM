@@ -31,8 +31,9 @@ public class ProcedureHealthPlanVM
             Lack = x.Lack,
             HealthPlanName = x.HealthPlan.Name,
             HealthPlanValue = x.HealthPlan.Value,
+            Observation = x.Observation,
             HasValue = x.Active
-        }).ToList()
+        }).OrderBy(x => x.HealthPlanId).ToList()
     }).ToList();
 
     public ProcedureHealthPlanVM ToVM(Domain.Models.Procedure model) => new()
@@ -49,8 +50,9 @@ public class ProcedureHealthPlanVM
             HealthPlanId = x.HealthPlan.Id,
             HealthPlanName = x.HealthPlan.Name,
             HealthPlanValue = x.HealthPlan.Value,
+            Observation = x.Observation,
             HasValue = x.Active
-        }).ToList()
+        }).OrderBy(x => x.HealthPlanId).ToList()
     };
 
     public Domain.Models.Procedure ToModel(Domain.Models.Procedure procedure)
@@ -99,6 +101,7 @@ public class ProcedureHealthPlanListVM
 
     public string HealthPlanName { get; set; }
     public decimal HealthPlanValue { get; set; }
+    public string? Observation { get; set; }
 
     public ProcedureHealthPlan ToModel(ProcedureHealthPlan procedureHealthPlan)
     {
@@ -107,6 +110,7 @@ public class ProcedureHealthPlanListVM
         procedureHealthPlan.Coparticipation = CoparticipationFrontEnd.StringToDecimal();
         procedureHealthPlan.Lack = Lack ?? 0;
         procedureHealthPlan.HealthPlanId = HealthPlanId;
+        procedureHealthPlan.Observation = Observation;
         procedureHealthPlan.Active = HasValue;
 
         return procedureHealthPlan;

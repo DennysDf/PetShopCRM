@@ -24,11 +24,12 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 table-responsive">
         <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
             <thead class="thead-dark">
                 <tr>
                     <th>Plano</th>
+                    <th>Observação</th>
                     <th>Coparticipação</th>
                     <th>Limite anual</th>
                     <th>Carência (dias)</th>
@@ -41,6 +42,9 @@
                     <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HasValue" />
                     <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HealthPlanId" />
                     <td>@Model.ProcedureHealthPlanList[i].HealthPlanName</td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="ProcedureHealthPlanList[i].Observation" placeholder="Observação" autofocus />
+                    </td>
                     <td>
                         <input type="text" class="form-control value-mask" asp-for="ProcedureHealthPlanList[i].CoparticipationFrontEnd" placeholder="Coparticipação" autofocus />
                         <span asp-validation-for="ProcedureHealthPlanList[i].CoparticipationFrontEnd"></span>

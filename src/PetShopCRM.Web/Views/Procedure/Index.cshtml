@@ -1,4 +1,4 @@
-﻿@model ICollection<ProceduresVM>
+﻿@model ICollection<ProcedureVM>
 @{
     ViewData["Title"] = "Procedimentos";
 }
@@ -28,7 +28,7 @@
                 {
                     <tr class="bg-white">
                         <td>@item.Id</td>
-                        <td>@item.Name</td>
+                        <td>@item.Description</td>
                         <td>@item.Group</td>
                         <td class="text-nowrap text-right">
                             <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
@@ -50,7 +50,7 @@
 <div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form asp-action="Procedures" method="post">
+            <form asp-action="Index" method="post">
                 <div class="modal-header bg-dark text-white">
                     <h5 class="modal-title title"></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -100,7 +100,7 @@
         })
 
         function Ajax(id) {
-            $.post('@Url.Action("AjaxProcedures")', { "id": id }, function (response) {
+            $.post('@Url.Action("AjaxIndex")', { "id": id }, function (response) {
                 $("#modal-body").html(response);
                 select2Init();
                 if (id != 0) {
@@ -113,7 +113,7 @@
         }
 
         $("#confirm-del").click(function () {
-            window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
+            window.location.href = "@Url.Action("DeleteProcedure")?id=" + $("#del-evento").val();
         });
 
         var $table = $('#table')

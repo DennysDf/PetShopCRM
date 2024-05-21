@@ -1,0 +1,94 @@
+﻿@model ProcedureHealthPlanVM
+
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-sm-8">
+        <label asp-for="ProcedureId"></label>
+        <select asp-for="ProcedureId" class="form-control select2" data-dropdown-parent="#modal" asp-items="Model.ProcedureList">
+            <option disabled selected>Selecione</option>
+        </select>
+        <span asp-validation-for="ProcedureId"></span>
+    </div>
+    <div class="col-sm-4">
+        @foreach (var item in Model.ProcedureHealthPlanList.OrderBy(x => x.HealthPlanId))
+        {
+            <div class="form-check form-check-inline ml-3">
+                <input class="form-check-inline" type="checkbox" name="HealthPlan-@item.HealthPlanId" id="HealthPlan-@item.HealthPlanId" value="@item.HealthPlanId" @(item.HasValue ? "checked" : "") @(Model.ProcedureId == 0 ? "disabled" : "")>
+                <label class="form-check-label" for="HealthPlan-@item.HealthPlanId">@item.HealthPlanName - <b>R$ </b><span class="value-mask">@item.HealthPlanValue</span></label>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Plano</th>
+                    <th>Coparticipação</th>
+                    <th>Limite anual</th>
+                    <th>Carência (dias)</th>
+                </tr>
+            </thead>
+            @for (var i = 0; i < Model.ProcedureHealthPlanList.Count; i++)
+            {
+                <tr class="d-none HealthPlan-@Model.ProcedureHealthPlanList[i].HealthPlanId">
+                    <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].Id" />
+                    <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HasValue" />
+                    <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HealthPlanId" />
+                    <td>@Model.ProcedureHealthPlanList[i].HealthPlanName</td>
+                    <td>
+                        <input type="text" class="form-control value-mask" asp-for="ProcedureHealthPlanList[i].CoparticipationFrontEnd" placeholder="Coparticipação" autofocus />
+                        <span asp-validation-for="ProcedureHealthPlanList[i].CoparticipationFrontEnd"></span>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="ProcedureHealthPlanList[i].AnnualLimit" placeholder="Limite anual" autofocus />
+                        <span asp-validation-for="ProcedureHealthPlanList[i].AnnualLimit"></span>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" asp-for="ProcedureHealthPlanList[i].Lack" placeholder="Carência (dias)" autofocus />
+                        <span asp-validation-for="ProcedureHealthPlanList[i].Lack"></span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        function ToggleTr() {
+            $.each($('input[name^=HealthPlan]:checked'), function (index, element) {
+                $('tr.HealthPlan-' + element.value).removeClass('d-none');
+                $('tr.HealthPlan-' + element.value).find('input[name*=".HasValue"]').val('True')
+            });
+
+            $.each($('input[name^=HealthPlan]:not(:checked)'), function (index, element) {
+                $('tr.HealthPlan-' + element.value).addClass('d-none');
+                $('tr.HealthPlan-' + element.value).find('input[name*=".HasValue"]').val('False')
+            });
+        }
+
+        ToggleTr();
+
+        $('input[name^=HealthPlan]').on('change', ToggleTr);
+
+        $('input[name*=HealthPlan]').on('change', ToggleTr);
+
+        $('input[name="ProcedureId"]').on('change', function () {
+            var value = $(this).val();
+
+            Ajax(value);
+        });
+
+        $('select[name="ProcedureId"]').on('change', function (event, element) {
+            AjaxProcHealthPlan(this.value);
+        });
+    });
+</script>
+
+@await Html.PartialAsync("_ValidationScriptsPartial")

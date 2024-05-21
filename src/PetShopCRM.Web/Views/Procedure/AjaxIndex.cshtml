@@ -1,16 +1,15 @@
-﻿@model ProceduresVM
-@await Html.PartialAsync("_ValidationScriptsPartial")
+﻿@model ProcedureVM
+
 @{
     Layout = null;
 }
 
-
 <div class="row">
     <input type="hidden" asp-for="Id" />
     <div class=" col-sm-6">
-        <label asp-for="Name"></label>
-        <input type="text" class="form-control" asp-for="Name" placeholder="Escreva o procedimento..." autofocus />
-        <span asp-validation-for="Name"></span>
+        <label asp-for="Description"></label>
+        <input type="text" class="form-control" asp-for="Description" placeholder="Escreva o procedimento..." autofocus />
+        <span asp-validation-for="Description"></span>
     </div>
     <div class="col-sm-6">
         <label asp-for="GroupId"></label>
@@ -20,3 +19,5 @@
         <span asp-validation-for="GroupId"></span>
     </div>
 </div>
+
+@await Html.PartialAsync("_ValidationScriptsPartial")

@@ -20,7 +20,7 @@ public class ProcedureHealthPlanMapper : IEntityTypeConfiguration<ProcedureHealt
         builder.Property(x => x.Active)
             .IsRequired();
 
-        //Benefit
+        //ProcedureHealthPlan
         builder.Property(x => x.Coparticipation)
            .IsRequired();
 
@@ -35,6 +35,9 @@ public class ProcedureHealthPlanMapper : IEntityTypeConfiguration<ProcedureHealt
 
         builder.Property(x => x.ProcedureId)
             .IsRequired();
+
+        builder.Property(x => x.Observation)
+            .IsRequired(false);
 
         builder.HasOne(x => x.HealthPlan)
             .WithMany(x => x.ProcedureHealthPlans)

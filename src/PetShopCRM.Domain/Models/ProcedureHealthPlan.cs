@@ -5,6 +5,7 @@ public class ProcedureHealthPlan : EntityBase
     public decimal Coparticipation { get; set; }
     public int? AnnualLimit { get; set; }
     public int Lack { get; set; }
+    public string Observation { get; set; }
     public int HealthPlanId { get; set; }
     public int ProcedureId { get; set; }
     

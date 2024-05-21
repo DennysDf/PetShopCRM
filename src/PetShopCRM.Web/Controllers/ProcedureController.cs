@@ -158,6 +158,8 @@ public class ProcedureController(
             procedureId,
             "Group.Name");
 
+        procedureHealthPlanVM.ProcedureHealthPlanList = procedureHealthPlanVM.ProcedureHealthPlanList.OrderBy(x => x.HealthPlanId).ToList();
+
         return View(procedureHealthPlanVM);
     }
 

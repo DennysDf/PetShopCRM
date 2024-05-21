@@ -185,9 +185,8 @@ namespace PetShopCRM.Web.Controllers
             {
                 var model = userDTO.Data;
                 var email = model.Email;
-                message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";
-                var id = model.Id.EncryptNumberAsBase64();
-                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"http://plano.vetcard.com.br/User/RestorePasswordExternal?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
+                message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";                
+                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/User/RestorePasswordExternal?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
             }
 
             return message;
@@ -220,9 +219,11 @@ namespace PetShopCRM.Web.Controllers
 
             return RedirectToAction("Login");
         }
-        public bool ValidatePassword(int id )
+        public async Task<bool> ValidatePassword(string password)
         {
-            return true;
+            var userDTO = await userService.GetUserByIdAsync(loggedUserService.Id);         
+
+            return userDTO.Data.Password == password;
         }
     }
 }

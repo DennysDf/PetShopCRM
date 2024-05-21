@@ -232,7 +232,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica apagada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet apagado com sucesso..
         /// </summary>
         public static string PetDeleteSucess {
             get {
@@ -241,7 +241,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica atualizada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet atualizado com sucesso..
         /// </summary>
         public static string PetUpdateSucess {
             get {

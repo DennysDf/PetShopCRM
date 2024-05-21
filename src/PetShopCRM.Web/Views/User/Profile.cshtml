@@ -39,6 +39,7 @@
         <div class="col-sm-6">
             <label asp-for="Password"></label> <small>Para atualizar a senha confirme a senha atual.</small>
             <input asp-for="Password" type="password" class="form-control" placeholder="Senha atual..." />
+            <span asp-validation-for="Password"></span>
         </div>
     </div>
     <div class="row mt-1">

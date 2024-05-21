@@ -175,10 +175,10 @@
     <value>Pet castrado com sucesso.</value>
   </data>
   <data name="PetDeleteSucess" xml:space="preserve">
-    <value>Clínica apagada com sucesso.</value>
+    <value>Pet apagado com sucesso.</value>
   </data>
   <data name="PetUpdateSucess" xml:space="preserve">
-    <value>Clínica atualizada com sucesso.</value>
+    <value>Pet atualizado com sucesso.</value>
   </data>
   <data name="ProcedureAddSucess" xml:space="preserve">
     <value>Procedimento castrado com sucesso.</value>

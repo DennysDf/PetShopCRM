@@ -12,4 +12,6 @@ public class User : EntityBase
     public string Phone { get; set; }
     public string CPF { get; set; }
     public string UrlPhoto { get; set; }
+    public int? GuardianId { get; set; }
+    public Guardian Guardian { get; set; }
 }

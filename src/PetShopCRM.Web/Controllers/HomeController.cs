@@ -10,6 +10,7 @@ using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Payment;
+using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Reports;
 using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.SignalHubs;
@@ -277,9 +278,13 @@ public class HomeController(
     [Authorize(policy: nameof(UserType.Guardian))]
     public async Task<IActionResult> Guardian()
     {
-        var id = loggedUserService.Id;
+        var userDTO = await userService.GetUserByIdAsync(loggedUserService.Id);
+        var petsDTO = await guardianService.GetAllCompleteAsync((int)userDTO.Data.GuardianId);
+        var guardian = petsDTO.Data.FirstOrDefault();
+        var pets = guardian.Pets.ToList();
+        var userGuardianVM = new UserGuardianVM().ToViewModel(pets);
 
-        return View();
+        return View(userGuardianVM);
     }
 
     [Authorize(policy: nameof(UserType.Admin))]

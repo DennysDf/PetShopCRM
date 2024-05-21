@@ -12,9 +12,11 @@ CREATE TABLE Users (
     Phone NVARCHAR(20),
     CPF NVARCHAR(14),
     UrlPhoto NVARCHAR(255),
+    GuardianId INT NULL,
     CreatedDate DATETIME2 NOT NULL,
     UpdatedDate DATETIME2,
-    Active BIT NOT NULL
+    Active BIT NOT NULL,
+    CONSTRAINT User_Guardians_GuardianId FOREIGN KEY (GuardianId) REFERENCES Guardians(Id)
 );
 CREATE TABLE Clinics (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,

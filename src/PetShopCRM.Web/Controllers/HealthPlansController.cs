@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Web.Models.HealthPlans;
+using PetShopCRM.Web.Models.Procedure;
 using PetShopCRM.Web.Services.Interfaces;
 
 namespace PetShopCRM.Web.Controllers;
@@ -12,7 +13,7 @@ public class HealthPlansController(
         ILoginService loginService,
         INotificationService notificationService,
         IHealthPlanService healthPlanService, ILoggedUserService loggedUserService,
-        IUpload upload, IProcedureService proceduresService, IGroupService groupService) : Controller
+        IUpload upload, IProcedureService proceduresService, IProcedureGroupService groupService) : Controller
 {
 
     public async Task<IActionResult> Index()
@@ -66,16 +67,17 @@ public class HealthPlansController(
     {
         var benefits = await proceduresService.GetAllAsync();
 
-        var benefitsVMList = new ProceduresVM().ToList(benefits);
+        var benefitsVMList = new ProcedureVM().ToList(benefits);
 
         return View(benefitsVMList);
 
     }
+
     public async Task<IActionResult> AjaxProcedures(int Id = 0)
     {
 
         var procedures = await proceduresService.GetByIdAsync(Id);        
-        var proceduresVM = new ProceduresVM();
+        var proceduresVM = new ProcedureVM();
 
         if (procedures.Success)
         {
@@ -89,7 +91,7 @@ public class HealthPlansController(
     }
 
     [HttpPost]
-    public async Task<IActionResult> Procedures(ProceduresVM model)
+    public async Task<IActionResult> Procedures(ProcedureVM model)
     {
         var message = model.Id != 0 ? Resources.Text.ProcedureUpdateSucess : Resources.Text.ProcedureAddSucess;        
         await proceduresService.AddOrUpdateAsync(model.ToModel());

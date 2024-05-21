@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PetShopCRM.Infrastructure.Mappers;
 
-public class BenefitsMapper : IEntityTypeConfiguration<Benefit>
+public class ProcedureMapper : IEntityTypeConfiguration<Procedure>
 {
-    public void Configure(EntityTypeBuilder<Benefit> builder)
+    public void Configure(EntityTypeBuilder<Procedure> builder)
     {
         //EnttityBase
         builder.HasKey(x => x.Id);
@@ -25,16 +25,16 @@ public class BenefitsMapper : IEntityTypeConfiguration<Benefit>
         builder.Property(x => x.Active)
             .IsRequired();
 
-        //Benefit     
-        builder.Property(x => x.Procedure)
+        //Procedure     
+        builder.Property(x => x.Description)
            .IsRequired();
 
-        builder.Property(x => x.GroupId)
+        builder.Property(x => x.ProcedureGroupId)
            .IsRequired();
 
-        builder.HasOne(x => x.Group)
-            .WithMany(x => x.Benefits)
-            .HasForeignKey(x => x.GroupId)
-            .HasConstraintName("Benefit_Group_GroupId");
+        builder.HasOne(x => x.ProcedureGroup)
+            .WithMany(x => x.Procedures)
+            .HasForeignKey(x => x.ProcedureGroupId)
+            .HasConstraintName("Procedures_ProcedureGroups_ProcedureGroupId");
     }
 }

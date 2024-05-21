@@ -2,6 +2,6 @@
 
 namespace PetShopCRM.Infrastructure.Data.Repository.Interfaces;
 
-public interface IProcedureRepository : IRepositoryBase<Procedure>
+public interface IProcedureHealthPlanRepository : IRepositoryBase<ProcedureHealthPlan>
 {
 }

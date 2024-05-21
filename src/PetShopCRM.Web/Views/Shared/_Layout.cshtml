@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" sizes="32x32" href="~/imagens/logo png/logo-mini.png">
-    <title>VetCard - @ViewData["Title"] </title>    
+    <title>VetCard - @ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/AlertifyJS/css/alertify.min.css" />
     <link rel="stylesheet" href="~/lib/AlertifyJS/css/themes/bootstrap.min.css" />
@@ -177,7 +177,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-      
+
 
                     @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
                     {
@@ -211,26 +211,6 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav float-left mr-auto">
                         <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
-                 @*        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search position-absolute" method="get" asp-action="Listar" asp-controller="Clientes">
-                                <select class="form-control">
-                                    <option>adf asdf sadfsdaf sad</option>
-                                    <option>adf asdf sadfsdaf sad</option>
-                                    <option>adf asdf sadfsdaf sad</option>
-                                    <option>adf asdf sadfsdaf sad</option>
-                                    <option>adf asdf sadfsdaf sad</option>
-                                    <option>adf asdf sadfsdaf sad</option>
-                                </select>
-                            </form>
-                        </li> *@
-
-                    @*     <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search position-absolute" method="get" asp-action="Listar" asp-controller="Clientes">
-                                <input name="id" type="text" class="form-control" placeholder="Pesquisar Paciente..."> <a class="srh-btn"><i class="ti-close"></i></a>
-                            </form>
-                        </li> *@
                     </ul>
                     <ul class="navbar-nav float-right d-flex  align-items-center">
                         <li class="nav-item dropdown ">
@@ -256,7 +236,7 @@
 
                                 <a class="dropdown-item" href="@Url.Action("Profile","User")"><i class="ti-user m-r-5 m-l-5"></i> Meu Perfil</a>
                                 <div class="dropdown-divider"></div>
-                         
+
                                 <a class="dropdown-item" href="@Url.Action("Logout", "User")"><i class="text-danger fa fa-power-off m-r-5 m-l-5"></i> Sair</a>
                                 <div class="dropdown-divider"></div>
                             </div>
@@ -285,7 +265,7 @@
                         }
 
                         @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
-                        { 
+                        {
                             <li class="sidebar-item">
                                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-credit-card"></i><span class="hide-menu"> Pagamentos </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
@@ -296,13 +276,15 @@
                             <li class="sidebar-item"><a href="@Url.Action("Index","Pet")" class="sidebar-link"><i class="fa-solid fa-dog"></i><span class="hide-menu"> Pets </span></a></li>
                             <li class="sidebar-item"><a href="@Url.Action("Index","Clinic")" class="sidebar-link"><i class="fa-solid fa-house-chimney-medical"></i><span class="hide-menu">  Clínicas </span></a></li>
                             <li class="sidebar-item"><a href="@Url.Action("Index","Guardian")" class="sidebar-link"><i class="fa-solid fa-user-group"></i><span class="hide-menu">  Tutores </span></a></li>
-                            <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>                            
+                            <li class="sidebar-item"><a href="@Url.Action("Index","Specie")" class="sidebar-link"><i class="fa-solid fa-dna"></i><span class="hide-menu">  Espécies </span></a></li>
 
                             <li class="sidebar-item">
                                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Planos </span></a></li>                                    
-                                    <li class="sidebar-item"><a href="@Url.Action("Procedures","HealthPlans")" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i><span class="hide-menu"> Procedimentos </span></a></li>                                    
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Planos </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("Index","Procedure")" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i><span class="hide-menu"> Procedimentos </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("Group","Procedure")" class="sidebar-link"><i class="fa-solid fa-table-cells-large"></i><span class="hide-menu"> Grupos de procedimento </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("HealthPlan","Procedure")" class="sidebar-link"><i class="fa-solid fa-link"></i><span class="hide-menu"> Vincular procedimentos </span></a></li>
                                 </ul>
                             </li>
 
@@ -328,7 +310,7 @@
                         }
                         @if (loggedUser.Role == nameof(UserType.Guardian))
                         {
-                            
+
                         }
                     </ul>
                 </nav>
@@ -377,7 +359,7 @@
     <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
     <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
-    <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script>        
+    <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script>
     <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
     <script src="~/lib/select2/js/i18n/pt-br.min.js"></script>
     <script src="~/lib/bootstrap-table/src/locale/bootstrap-table-pt-br.js"></script>
@@ -411,7 +393,7 @@
             $(".cpf-mask").mask("000.000.000-00")
             $(".cnpj-mask").mask("00.000.000/0000-00")
             $('.value-mask').mask('000.000.000.000.000,00', { reverse: true });
-            $(".cep-mask").mask("00000-000")            
+            $(".cep-mask").mask("00000-000")
             $(".value-mask").focusout(function () {
                 if ($(this).val().length <= 2) {
                     temp = $(this).val()
@@ -428,8 +410,8 @@
             select2Init();
         }
 
-        function select2Init(){
-            $(".select2").select2({ width: '100%', language: "pt-BR" })            
+        function select2Init() {
+            $(".select2").select2({ width: '100%', language: "pt-BR" })
         }
 
         select2Init();
@@ -478,7 +460,7 @@
         }
 
         $(".select2").select2();
-     
+
 
     </script>
     @await RenderSectionAsync("Scripts", required: false)

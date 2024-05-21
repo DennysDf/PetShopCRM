@@ -35,15 +35,12 @@ public class NotificationService(IHubContext<NotificationHub> hubContext) : INot
 
     public static string GenerateNotification(NotificationType? type, string message)
     {
-        if(type == NotificationType.Error)
-            return $"alertify.error('{message}')";
-
-        if (type == NotificationType.Information)
-            return $"alertify.success('{message}')";
-
-        if(type == NotificationType.Warning)
-            return $"alertify.warning('{message}')";
-
-        return $"alertify.notify('{message}', 'warning', 5);";
+        return type switch
+        {
+            NotificationType.Error => $"alertify.error('{message}')",
+            NotificationType.Information => $"alertify.success('{message}')",
+            NotificationType.Warning => $"alertify.warning('{message}')",
+            _ => $"alertify.notify('{message}', 'warning', 5);"
+        };
     }
 }

@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Web.Models.Payment;
+using PetShopCRM.Web.Services;
 using PetShopCRM.Web.Services.Interfaces;
 
 namespace PetShopCRM.Web.Controllers;
@@ -19,7 +21,8 @@ public class PaymentController(
         IHealthPlanService healthPlanService,
         IPaymentHistoryService paymentHistoryService,
         IConfigurationService configurationService,
-        IEmailService emailService) : Controller
+        IEmailService emailService,
+        ILoggedUserService loggedUserService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -91,7 +94,7 @@ public class PaymentController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int id, string route = null)
     {
         var success = await paymentService.CancelAsync(id);
 
@@ -99,6 +102,12 @@ public class PaymentController(
             notificationService.Success(Resources.Text.PaymentDeleteSuccess);
         else
             notificationService.Error(Resources.Text.NotificationError);
+
+        if (route != null)
+        {
+            var petId = paymentService.GetById(id).PetId;
+            return RedirectToAction("DetailsHealthPlan", "Guardian", new { Id = petId });
+        }
 
         return RedirectToAction("Index");
     }
@@ -130,6 +139,8 @@ public class PaymentController(
     [HttpGet]
     public async Task<IActionResult> Monitoring(int? paymentId = null)
     {
+        ViewData["Route"] = loggedUserService.Role == UserType.Guardian.ToString() ? "Guardian" : "Index";
+
         var histories = await paymentHistoryService.GetAllAsync(paymentId);
 
         var historiesVM = PaymentHistoryVM.ToList(histories);

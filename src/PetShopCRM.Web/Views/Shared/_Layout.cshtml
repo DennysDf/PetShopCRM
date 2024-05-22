@@ -1,4 +1,11 @@
-﻿@using PetShopCRM.Web.Services.Interfaces
+﻿@{
+    var route = "Index";
+    if (ViewBag.Route != null)
+    {
+        route = "Guardian";
+    }
+}
+@using PetShopCRM.Web.Services.Interfaces
 @using PetShopCRM.Web.Util
 @using PetShopCRM.Domain.Enums
 @inject ILoggedUserService loggedUser
@@ -282,9 +289,10 @@
                                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-heart-pulse"></i><span class="hide-menu">  Planos de Saúde </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a href="@Url.Action("Index","HealthPlans")" class="sidebar-link"><i class="fa fa-dollar"></i><span class="hide-menu"> Planos </span></a></li>
+                                    <li class="sidebar-item"><a href="@Url.Action("HealthPlan","Procedure")" class="sidebar-link"><i class="fa-solid fa-link"></i><span class="hide-menu"> Vincular procedimentos </span></a></li>
                                     <li class="sidebar-item"><a href="@Url.Action("Index","Procedure")" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i><span class="hide-menu"> Procedimentos </span></a></li>
                                     <li class="sidebar-item"><a href="@Url.Action("Group","Procedure")" class="sidebar-link"><i class="fa-solid fa-table-cells-large"></i><span class="hide-menu"> Grupos de procedimento </span></a></li>
-                                    <li class="sidebar-item"><a href="@Url.Action("HealthPlan","Procedure")" class="sidebar-link"><i class="fa-solid fa-link"></i><span class="hide-menu"> Vincular procedimentos </span></a></li>
+                                    
                                 </ul>
                             </li>
 
@@ -323,7 +331,7 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="@Url.Action($"{route}","Home")">Home</a></li>
                                     @Html.Raw(ViewBag.Caminho)
                                 </ol>
                             </nav>

@@ -90,6 +90,7 @@ namespace PetShopCRM.Web.Controllers
 
         public async Task<IActionResult> Profile()
         {
+            ViewData["Route"] = loggedUserService.Role == UserType.Guardian.ToString() ? "Guardian" : "Index";
             var user = await userService.GetUserByIdAsync(loggedUserService.Id);
             var profile =  new ProfileVM();
             profile.ToViewModel(user.Data);

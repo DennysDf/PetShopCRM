@@ -42,13 +42,13 @@
                                             <th>Plano</th>
                                             <th>Coparticipação</th>
                                             <th>Limite anual</th>
-                                            <th>Carência</th>
+                                            <th>Carência </th>
                                         </tr>
                                     </thead>
                                     @foreach(var vinculo in item.ProcedureHealthPlanList)
                                     {
                                         <tr>
-                                            <td>@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>
+                                            <td class="text-nowrap">@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>
                                             <td><b>R$ </b><span class="value-mask">@vinculo.Coparticipation</span></td>
                                             <td>@(vinculo.AnnualLimit?.ToString() ?? "Ilimitado")</td>
                                             <td>@vinculo.Lack dias</td>

@@ -10,6 +10,7 @@ using PetShopCRM.Web.Models.Clinic;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Pet;
 using PetShopCRM.Web.Services.Interfaces;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace PetShopCRM.Web.Controllers;
@@ -39,8 +40,7 @@ public class PetController(
         {
             petVM = petVM.ToVM(petDTO.Data);
         }
-            
-
+        
         var guardians = guardianService.GetAllAsync().Result.ToList();
         petVM.GuardianList = new SelectList(guardians.Select(c => new { c.Id, c.Name }).OrderBy(c => c.Name).ToList(), "Id", "Name");
 
@@ -82,6 +82,12 @@ public class PetController(
         }
 
         notificationService.Success(message);
+
+        if (model.Route.Equals("Guardian"))
+        {
+            return RedirectToAction("Details", "Guardian", new { IdPet = model.Id });
+        }
+
 
         return RedirectToAction("Index");
     }

@@ -19,7 +19,7 @@ public class ProcedureService(IUnitOfWork unitOfWork) : IProcedureService
         return procedures;
     }
 
-    public async Task<List<Procedure>> GetAllWithHealthPlansAsync()
+    public async Task<List<Procedure>> GetAllWithHealthPlansAsync(int id = 0)
     {
         var procedures = await unitOfWork.ProcedureRepository
             .GetBy(x => x.Active)
@@ -27,7 +27,7 @@ public class ProcedureService(IUnitOfWork unitOfWork) : IProcedureService
             .Include(c => c.ProcedureHealthPlans.Where(x => x.Active))
                 .ThenInclude(x => x.HealthPlan)
             .OrderBy(c => c.Description)
-            .Where(x => x.ProcedureHealthPlans.Any(x => x.Active))
+            .Where(x => x.ProcedureHealthPlans.Any(x => x.Active ))
             .ToListAsync();
 
         return procedures;

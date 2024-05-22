@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-
+<input type="hidden" asp-for="Route" />
 <div class="row">
     <input type="hidden" asp-for="Id" />
     <div class=" col-sm-6">
@@ -80,7 +80,7 @@
         <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
         <input type="hidden" asp-for="UrlPhoto" />
     </div>
-    <div class="col-sm-6">      
+    <div class="col-sm-6" id="show-report">      
         <label  asp-for="ShowReportImgUpdate" class="">Incluir no relatório de imagens atualizadas?</label>
         <input class="" type="checkbox" asp-for="ShowReportImgUpdate">    
     </div

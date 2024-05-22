@@ -159,6 +159,9 @@
   <data name="HealthPlanUpdateSucess" xml:space="preserve">
     <value>Plano de Saúde atualizado com sucesso.</value>
   </data>
+  <data name="MessegeUpdateImg" xml:space="preserve">
+    <value>Há fotos de pets com mais de 30 dias sem atualização.</value>
+  </data>
   <data name="NotificationError" xml:space="preserve">
     <value>Erro ao executar ação</value>
   </data>

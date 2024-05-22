@@ -38,7 +38,7 @@
                 @foreach (var item in groups)
                 {
                     <tr class="">
-                        <th colspan="4" class="bg-dark border-3 border-dark-subtle font-bold text-center text-white">@item</th>
+                        <th colspan="4" class="bg-dark border-2 border-dark-subtle font-bold text-center text-white">@item</th>
                     </tr>
                     @foreach (var proc in Model.ListHealthPlansProcedures.Where(c => c.Group.Equals(item)))
                     {

@@ -49,7 +49,8 @@
                                     @foreach(var vinculo in item.ProcedureHealthPlanList)
                                     {
                                         <tr>
-                                            <td class="text-nowrap">@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>
+
+                                            <td class="text-nowrap">@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>                                            
                                             <td>@vinculo.Observation</td>
                                             <td><b>R$ </b><span class="value-mask">@vinculo.Coparticipation</span></td>
                                             <td>@(vinculo.AnnualLimit?.ToString() ?? "Ilimitado")</td>

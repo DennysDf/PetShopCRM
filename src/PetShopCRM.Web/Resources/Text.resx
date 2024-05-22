@@ -159,6 +159,9 @@
   <data name="HealthPlanUpdateSucess" xml:space="preserve">
     <value>Plano de Saúde atualizado com sucesso.</value>
   </data>
+  <data name="MessegeUpdateImg" xml:space="preserve">
+    <value>Há fotos de pets com mais de 30 dias sem atualização.</value>
+  </data>
   <data name="NotificationError" xml:space="preserve">
     <value>Erro ao executar ação</value>
   </data>
@@ -175,10 +178,10 @@
     <value>Pet cadastrado com sucesso.</value>
   </data>
   <data name="PetDeleteSucess" xml:space="preserve">
-    <value>Clínica apagada com sucesso.</value>
+    <value>Pet apagado com sucesso.</value>
   </data>
   <data name="PetUpdateSucess" xml:space="preserve">
-    <value>Clínica atualizada com sucesso.</value>
+    <value>Pet atualizado com sucesso.</value>
   </data>
   <data name="ProcedureAddSucess" xml:space="preserve">
     <value>Procedimento cadastrado com sucesso.</value>

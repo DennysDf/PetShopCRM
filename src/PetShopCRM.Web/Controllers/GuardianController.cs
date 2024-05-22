@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Services;
@@ -82,6 +83,7 @@ public class GuardianController(
     [HttpGet]
     public async Task<IActionResult> Details(int id = 0, int IdPet = 0)
     {
+        ViewData["Route"] = loggedUserService.Role == UserType.Guardian.ToString() ? "Guardian" : "Index";
         var petId = IdPet > 0 ? IdPet : 0;
 
         if (id != 0)
@@ -95,8 +97,8 @@ public class GuardianController(
         return View(guardian);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> AjaxDetails(int id)
+    [HttpGet]
+    public async Task<IActionResult> DetailsHealthPlan(int id)
     {
         var paymentHistory = new List<PaymentHistory?>();
         var petDTO = await petService.GetAllCompleteAsync();

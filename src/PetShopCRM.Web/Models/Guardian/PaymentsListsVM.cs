@@ -21,11 +21,9 @@ public class PaymentsListsVM()
         var specie = pet.Specie.Name;
         var guardian = pet.Guardian.Name;
 
-        this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.ExternalId, Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name }).ToList();
+        this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.Id.ToString() , Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name, IsSuccess = c.IsSuccess, IsActive = c.Active  }).ToList();
 
-        this.ListPaymentsHistories = paymentHistories.Select(c => new PaymentsHistoryVM { PaymentId = c.ExternalId, Date = c.CreatedDate.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), Event = c.Event, Value = c.Value }).ToList();
-
-        return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier, Guardian = guardian, ListPayments = ListPayments, ListPaymentsHistories = ListPaymentsHistories };
+        return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier, Guardian = guardian, ListPayments = ListPayments, };
     }
 }
 
@@ -35,6 +33,8 @@ public class PaymentsVM()
     public string Name { get; set; }
     public decimal Value { get; set; }
     public string Installment { get; set; }
+    public bool IsSuccess { get; set; }
+    public bool IsActive { get; set; }
 
 }
 

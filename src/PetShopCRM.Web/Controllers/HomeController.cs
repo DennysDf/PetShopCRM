@@ -10,6 +10,7 @@ using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models;
 using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.Payment;
+using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Reports;
 using PetShopCRM.Web.Services.Interfaces;
 using PetShopCRM.Web.SignalHubs;
@@ -29,7 +30,8 @@ public class HomeController(
     IPaymentService paymentService,
     IPaymentHistoryService paymentHistoryService, 
     IConfigurationService configurationService,
-    ILoggedUserService loggedUserService) : Controller
+    ILoggedUserService loggedUserService,
+    INotificationService notificationService) : Controller
 {
 
     [Authorize(policy: nameof(UserType.Admin))]
@@ -47,8 +49,29 @@ public class HomeController(
         await ChartArea();
         UrlBalance();
         Balance();
+        await AlertUpdateImg();
 
         return View();
+    }
+
+    private async Task AlertUpdateImg(int guardianId = 0)
+    {
+        var petsDTO = await petService.GetAllCompleteAsync();
+
+        if (petsDTO.Success)
+        {
+            var pets = petsDTO.Data.Where(c => c.Active && c.UrlPhoto != null && (c.ShowReportImgUpdate ?? false) && (DateTime.Now - (DateTime)c.UpdatedDateImg).Days > 30);
+
+            if (guardianId != 0)
+                pets = pets.Where(c => c.GuardianId == guardianId);
+
+            if (pets.Any())
+            {
+                ViewData["AlertUpdateImg"] = true;
+
+                notificationService.Error(Resources.Text.MessegeUpdateImg);
+            }
+        }
     }
 
     private void UrlBalance()
@@ -277,9 +300,15 @@ public class HomeController(
     [Authorize(policy: nameof(UserType.Guardian))]
     public async Task<IActionResult> Guardian()
     {
-        var id = loggedUserService.Id;
+        var userDTO = await userService.GetUserByIdAsync(loggedUserService.Id);
+        var petsDTO = await guardianService.GetAllCompleteAsync((int)userDTO.Data.GuardianId);
+        var guardian = petsDTO.Data.FirstOrDefault();
+        var pets = guardian.Pets.ToList();
+        await AlertUpdateImg((int)userDTO.Data.GuardianId);
+        var userGuardianVM = new UserGuardianVM().ToViewModel(pets);
+        ViewData["GuardianId"] = (int)userDTO.Data.GuardianId;
 
-        return View();
+        return View(userGuardianVM);
     }
 
     [Authorize(policy: nameof(UserType.Admin))]

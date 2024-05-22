@@ -8,5 +8,6 @@ public interface IHealthPlanService
     Task<List<HealthPlan>> GetAllAsync();
     Task<HealthPlan> AddOrUpdateAsync(HealthPlan guardin);
     Task<ResponseDTO<HealthPlan>> GetByIdAsync(int id);
+    Task<ResponseDTO<List<HealthPlan>>> GetAllCompleteAsync(int id = 0);
     Task<bool> DeleteAsync(int id);
 }

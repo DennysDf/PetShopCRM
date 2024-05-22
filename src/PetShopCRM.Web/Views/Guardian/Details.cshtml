@@ -3,6 +3,14 @@
     ViewData["Title"] = "Detalhes";
     ViewData["Caminho"] = "<li>Detalhes</li>";
 }
+<style type="text/css">
+    #imagemNoModal {
+        max-width: 80%;
+        height: auto;
+        display: block; /* Adicionado para centralizar a imagem caso seja menor que o modal */
+        margin: 0 auto; /* Adicionado para centralizar a imagem caso seja menor que o modal */
+    }
+</style>
 
 <div class="container">
     <div class="col-12 text-center">
@@ -30,7 +38,7 @@
         </div>
         <div class="col-sm-12 col-md-6">
             <b>Endereço: </b>
-            <span>@Model.City, @Model.Address </span>
+            <span>@Model.City, @Model.Address, @Model.Number </span>
         </div>
     </div>
 </div>
@@ -42,40 +50,62 @@
         </div>
     </div>
 
-
-    <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Chip</th>
-                <th>Espécie</th>
-            </tr>
-        </thead>
-        <tbody class="bg-white">
-            @foreach (var item in Model.Pets)
-            {
-                <tr class="bg-white">
-                    <td class="text-nowrap"><a href="#" class="show-details" data-id="@item.Id">@item.Name </a> </td>
-                    <td class="text-nowrap">@item.Identifier</td>
-                    <td class="text-nowrap">@item.Specie.Name</td>
+    <div class="table-responsive-xl">
+        <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th width="15px" >Chip</th>
+                    <th>Nome</th>
+                    <th>Espécie</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="bg-white">
+                @foreach (var item in Model.Pets)
+                {
+                    <tr class="bg-white">
+                        <td class="text-nowrap" width="15px">
+                            @if (item.UrlPhoto != null)
+                            {
+                                <a href="#" data-id="@item.Id" data-toggle="modal" data-target="#modal-img">  <img src="~/Upload/Pet/@item.Id/@item.UrlPhoto" width="40" /></a>
+                            }
+
+                            @if (item.Identifier != null)
+                            {
+                                @item.Identifier
+                            }
+
+                        </td>
+                        <td class="text-nowrap">@item.Name </td>
+                        <td class="text-nowrap">@item.Specie.Name</td>
+                        <td class="text-nowrap  text-right">
+                            <a class="edit" href="#" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                <i class="text-dark fa fa-pencil-alt"></i>
+                            </a>
+
+                            <a href="@Url.Action("DetailsHealthPlan",new { Id = item.Id })" class="show-details" data-id="@item.Id" data-toggle="tooltip" title="Plano de saúde" data-placement="left">
+                                <i class="text-dark fa-solid fa-heart-pulse"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
-<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
+<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal-pet" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form asp-action="Index" method="post">
+            <form asp-action="Index" asp-controller="Pet" method="post" enctype="multipart/form-data">
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title title">Pagamentos</h5>
+                    <h5 class="modal-title title">Editar Pet</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="modal-body">
+                <div class="modal-body" id="modal-body-pet">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
@@ -86,26 +116,122 @@
     </div>
 </div>
 
+<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form asp-action="Index" method="post" enctype="multipart/form-data">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title title" id="title-pet"></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" role="dialog" data-bs-backdrop="static" id="modal-img" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title title"></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="row justify-content-center text-center m-1">
+                    <div class="col-sm-6">
+                        <b>Nome:</b> <span id="name-pet"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <b>Chip:</b> <span id="chip-pet"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-center text-center m-1">
+                    <div class="col-sm-6">
+                        <b>Espécie: </b> <span id="specie-pet"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <b>Tutor: </b> <span id="guardian-pet"></span>
+                    </div>
+                </div>
+                <b></b>
+                <img src="" id="imagemNoModal" style="width: 60%;" alt="Imagem em tamanho real">
+                <br />
+                <div class="row justify-content-center text-center ">
+                    <div class="col-sm-8">
+                        <b>Foto atualizada há <span id="days-last-update"></span> dias atrás. </b>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section Scripts {
     <script type="text/javascript">
-
         $(document).ready(function () {
             $(".show-details").click(function () {
                 var id = $(this).data("id");
                 Ajax(id)
+                
             })
 
             function Ajax(id) {
-                $.post('@Url.Action("AjaxDetails")', { "id": id }, function (response) {
+                $.post('@Url.Action("DetailsHealthPlan")', { "id": id }, function (response) {
                     $("#modal-body").html(response);
                     maskInit();
                     $("#modal").modal("show");
                 })
             }
+
+            $(".edit").click(function () {
+                var id = $(this).data("id");
+                AjaxPet(id);
+            })
+
+            function AjaxPet(id) {
+                $.post('@Url.Action("Ajax", "Pet")', { "id": id }, function (response) {
+                    $("#modal-body-pet").html(response);
+                    select2Init();
+                    maskInit();
+                    $("#Identifier").attr("readonly", true)
+                    $("#Route").val("Guardian")
+                    $("#GuardianId").attr("readonly", true)
+                    $("#show-report").addClass("d-none")
+                    $("#modal-pet").modal("show");
+                })
+            }
+
+            $('a[data-toggle="modal"]').click(function (event) {
+                var id = $(this).data("id")
+                var imagemSrc = $(this).find('img').attr('src');
+                $('#imagemNoModal').attr('src', imagemSrc);
+                $.get('@Url.Action("AjaxiImgPet","Pet")', { "id": id }, function (response) {
+                    var pet = JSON.parse(response)
+                    $("#name-pet").text(pet.Name)
+                    $("#specie-pet").text(pet.Specie)
+                    $("#chip-pet").text(pet.Identifier)
+                    $("#guardian-pet").text(pet.Guardian)
+                    $("#days-last-update").text(pet.LastUpdate)
+                    $("#modal-img").modal("show");
+                })
+            });
+
+        
         })
-
-  
-
     </script>
 }

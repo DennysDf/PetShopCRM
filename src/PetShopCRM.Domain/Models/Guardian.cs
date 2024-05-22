@@ -19,4 +19,5 @@ public  class Guardian : EntityBase
 
     public virtual ICollection<Pet> Pets { get; set; }
     public virtual ICollection<Payment> Payments { get; set; }
+    public virtual ICollection<User> Users { get; set; }
 }

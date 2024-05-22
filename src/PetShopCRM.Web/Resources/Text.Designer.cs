@@ -187,6 +187,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Há fotos de pets com mais de 30 dias sem atualização..
+        /// </summary>
+        public static string MessegeUpdateImg {
+            get {
+                return ResourceManager.GetString("MessegeUpdateImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao executar ação.
         /// </summary>
         public static string NotificationError {
@@ -232,7 +241,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica apagada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet apagado com sucesso..
         /// </summary>
         public static string PetDeleteSucess {
             get {
@@ -241,7 +250,7 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica atualizada com sucesso..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pet atualizado com sucesso..
         /// </summary>
         public static string PetUpdateSucess {
             get {

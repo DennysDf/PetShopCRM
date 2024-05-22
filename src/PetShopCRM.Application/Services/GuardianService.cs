@@ -25,11 +25,21 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
         return guardians.ToList();
     }
 
-    public async Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync()
+    public async Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync(int id = 0)
     {
-        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active).Include(c => c.Pets).OrderBy(c => c.Name).ToList();
+        var guardians = unitOfWork.GuardianRepository.GetBy(x => x.Active)
+            .Include(c => c.Pets)
+                .ThenInclude(c => c.Specie)
+            .Include(c => c.Pets)
+                .ThenInclude(c => c.Payments)
+                    .ThenInclude(c => c.HealthPlan)
+            .OrderBy(c => c.Name)
+            .AsQueryable();
 
-        return new ResponseDTO<List<Guardian>>(guardians.Count > 0, "Nenhum resultado encontrado", guardians);
+        if (id != 0)
+            guardians = guardians.Where(c => c.Id == id);
+
+        return new ResponseDTO<List<Guardian>>(guardians.ToList().Count > 0, "Nenhum resultado encontrado", guardians.ToList());
     }
 
     public async Task<Guardian> AddOrUpdateAsync(Guardian model)

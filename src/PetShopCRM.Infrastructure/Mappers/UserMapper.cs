@@ -43,7 +43,15 @@ public class UserMapper : IEntityTypeConfiguration<User>
         builder.Property(x => x.UrlPhoto)
             .IsRequired(false);
 
+        builder.Property(x => x.GuardianId)
+            .IsRequired(false);
+
         //Filter
         builder.HasQueryFilter(x => x.Active);
+
+        builder.HasOne(x => x.Guardian)
+         .WithMany(x => x.Users)
+         .HasForeignKey(x => x.GuardianId)
+         .HasConstraintName("User_Guardians_GuardianId");
     }
 }

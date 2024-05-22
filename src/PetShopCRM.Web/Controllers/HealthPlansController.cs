@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Web.Models.HealthPlans;
 using PetShopCRM.Web.Models.Procedure;
@@ -109,4 +110,16 @@ public class HealthPlansController(
         return RedirectToAction("Index");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Benefits(int id)
+    {
+        var healthPlanDTO = await healthPlanService.GetAllCompleteAsync(id);
+        var listHealthPlansProceduresVM = new HealthPlansProcedureVM();
+
+        if (healthPlanDTO.Success) { 
+            listHealthPlansProceduresVM = listHealthPlansProceduresVM.ToVM(healthPlanDTO.Data.First());
+        }
+
+        return View(listHealthPlansProceduresVM);
+    }
 }

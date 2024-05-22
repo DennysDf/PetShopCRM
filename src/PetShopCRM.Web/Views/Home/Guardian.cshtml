@@ -1,63 +1,66 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ICollection<UserGuardianVM>
 @{
     ViewData["Title"] = "Início";
 }
+  <style>
+    .card-link {
+        color: inherit;
+        text-decoration: none;
+    }
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                 alt="Hollywood Sign on The Hill" />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                </p>
-            </div>
+        .card-link:hover {
+            text-decoration: none;
+        }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-img-top {
+        width: 100%; /* faz a imagem ocupar toda a largura do card */
+        height: auto; /* mantém a proporção da imagem */
+        max-height: 300px; /* altura máxima da imagem */
+        object-fit: cover; /* cobre a área do container sem distorcer a imagem */
+    }
+
+  </style>
+
+@if (ViewBag.AlertUpdateImg != null)
+{
+    <div class="row align-items-right justify-content-center mb-3">
+        <div class="col-sm-2">
+            <a href="@Url.Action("Details","Guardian", new{Id = ViewBag.GuardianId})" class="btn btn-danger text-white">Acessar a página de detalhes para atualizar foto.</a>
         </div>
     </div>
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top"
-                 alt="Palm Springs Road" />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                </p>
-            </div>
+}
+
+<div class="row justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <a href="@Url.Action("Details", "Guardian", new {IdPet = item.Id})" class="card-link">
+                <div class="card mb-4">
+                    @if(item.Url != null){
+                        <img src="~/Upload/Pet/@item.Id/@item.Url" class="card-img-top" alt="Imagem do Pet">
+                    }
+                    
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><i class="fas fa-paw"></i> @item.Name</h5>
+                        <div class="row text-center">
+                            <div class="col">
+                                <p class="card-text"><i class="fas fa-microchip"></i> <strong>Chip:</strong> @item.Identifier</p>
+                                <p class="card-text"><i class="fas fa-dog"></i> <strong>Espécie:</strong> @item.Specie</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text"><i class="fas fa-venus-mars"></i> <strong>Sexo:</strong> @item.Sexy</p>
+                                <p class="card-text"><i class="fas fa-notes-medical"></i> <strong>Plano de Saúde:</strong> @item.HealthPlan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top"
-                 alt="Los Angeles Skyscrapers" />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
-                 alt="Skyscrapers" />
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                    This is a longer card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                </p>
-            </div>
-        </div>
-    </div>
+    }
 </div>

@@ -53,6 +53,7 @@ public class PetVM
     public SelectList GuardianList { get; set; }
     public SelectList SpecieList { get; set; }
     public int LastUpdate { get; set; }
+    public string Route { get; set; }
     public bool ShowReportImgUpdate { get; set; }
 
     public static List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM

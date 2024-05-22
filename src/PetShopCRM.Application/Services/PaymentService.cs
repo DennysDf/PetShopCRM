@@ -105,12 +105,12 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 
         if (payment == null) return false;
 
-        var result = pagarMeService.CancelSubscription(payment.ExternalId);
+        //var result = pagarMeService.CancelSubscription(payment.ExternalId);
 
         var deleted = await unitOfWork.PaymentRepository.DeleteOrRestoreAsync(payment.Id);
         await unitOfWork.SaveChangesAsync();
 
-        return result != null && deleted;
+        return true != null && deleted;
     }
 
     public decimal GetValue()

@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{20677023-9308-407C-A60B-4C7547D3926C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Procedimentos por plano.xlsx = Procedimentos por plano.xlsx
 		README.md = README.md
 	EndProjectSection
 EndProject

@@ -92,10 +92,6 @@ CREATE TABLE HealthPlans (
     Active BIT NOT NULL
 );
 GO
-INSERT INTO HealthPlans VALUES ('VetCard - Green', 29.99, 'Plano Básico', GETDATE(), NULL, 1);
-INSERT INTO HealthPlans VALUES ('VetCard - Gold', 89.99, 'Plano Básico', GETDATE(), NULL, 1);
-INSERT INTO HealthPlans VALUES ('VetCard - Black', 199.90, 'Plano Básico', GETDATE(), NULL, 1);
-GO
 CREATE TABLE Payments (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     ExternalId NVARCHAR(255) NOT NULL,
@@ -183,6 +179,7 @@ go
 CREATE TABLE ProcedureHealthPlans (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Coparticipation DECIMAL(18, 2) NOT NULL,
+    CoparticipationUnit VARCHAR(200) NOT NULL,
     AnnualLimit INT,
     Lack INT NOT NULL,
     HealthPlanId INT NOT NULL,

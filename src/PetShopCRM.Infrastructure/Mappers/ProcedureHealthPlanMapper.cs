@@ -24,6 +24,10 @@ public class ProcedureHealthPlanMapper : IEntityTypeConfiguration<ProcedureHealt
         builder.Property(x => x.Coparticipation)
            .IsRequired();
 
+        builder.Property(x => x.CoparticipationUnit)
+            .IsRequired()
+            .HasConversion<string>();
+
         builder.Property(x => x.AnnualLimit)
            .IsRequired(false);
 

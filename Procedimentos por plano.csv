@@ -1,0 +1,229 @@
+Vacinas;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Vacina polivalente;R$ 20,00;4;2 dias;Valor;Procedures_VacinaPolivalente
+Vacina raiva;R$ 20,00;1;2 dias;Valor;Procedures_VacinaRaiva
+Vacina triplice / quadrupla;R$ 20,00;3;2 dias;Valor;Procedures_VacinaTriplice
+Vacina quintupla;R$ 50,00;2;2 dias;Valor;Procedures_VacinaQuintupla
+Vacina gripe/pneumonia;R$ 30,00;2;2 dias;Valor;Procedures_VacinaGripePneumonia
+;;;;;
+Exames laboratoriais;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Hemograma;R$ 0,00;10;60 dias;Valor;Procedures_Hemograma
+Alanina aminotransferase (tgp / alt);R$ 0,00;10;60 dias;Valor;Procedures_AlaninaAminotransferase
+Creatinina;R$ 0,00;10;60 dias;Valor;Procedures_Creatinina
+Fosfatase alcalina (fa);R$ 22,00;10;60 dias;Valor;Procedures_FosfataseAlcalina
+Uréia;R$ 22,00;10;60 dias;Valor;Procedures_Ureia
+Urinalise;R$ 22,00;10;60 dias;Valor;Procedures_Urinalise
+Pesquisa de ectoparasitas pele;R$ 0,00;10;60 dias;Valor;Procedures_PesquisaEctoparasitasPele
+Pes de ectoparasitas ouvido;R$ 22,00;10;60 dias;Valor;Procedures_PesquisaEctoparasitasOuvido
+Glicose;R$ 22,00;10;60 dias;Valor;Procedures_Glicose
+Triglicerideos;R$ 22,00;10;60 dias;Valor;Procedures_Triglicerideos
+Albumina;R$ 22,00;10;60 dias;Valor;Procedures_Albumina
+Colesterol;R$ 22,00;10;60 dias;Valor;Procedures_Colesterol
+Potassio;R$ 22,00;10;60 dias;Valor;Procedures_Potassio
+Sodio;R$ 22,00;10;60 dias;Valor;Procedures_Sodio
+Frutosamina;R$ 22,00;10;60 dias;Valor;Procedures_Frutosamina
+Pesquisa de hematozoarios;R$ 22,00;10;60 dias;Valor;Procedures_PesquisaHematozoarios
+Glicemia fita;R$ 22,00;10;60 dias;Valor;Procedures_GlicemiaFita
+Cloro;R$ 22,00;10;60 dias;Valor;Procedures_Cloro
+Magnesio;R$ 22,00;10;60 dias;Valor;Procedures_Magnesio
+Ferro;R$ 22,00;10;60 dias;Valor;Procedures_Ferro
+Amilase;R$ 22,00;10;60 dias;Valor;Procedures_Amilase
+Amonia;R$ 22,00;10;60 dias;Valor;Procedures_Amonia
+Hematocrito;R$ 22,00;10;60 dias;Valor;Procedures_Hematocrito
+Proteinas totais e fracoes;R$ 22,00;10;60 dias;Valor;Procedures_ProteinasTotaisFracoes
+Ck;R$ 22,00;10;60 dias;Valor;Procedures_CK
+Coleta por cistosentese;R$ 22,00;10;60 dias;Valor;Procedures_ColetaCistosentese
+Babesia igg;R$ 100,00;10;60 dias;Valor;Procedures_BabesiaIgg
+Babesia igm;R$ 100,00;10;60 dias;Valor;Procedures_BabesiaIgm
+Erliquia sp igm;R$ 50,00;10;60 dias;Valor;Procedures_Erliquia
+Fiv e felv imunocromatografico;R$ 50,00;10;60 dias;Valor;Procedures_Fiv
+Parvovirus igg;R$ 50,00;10;60 dias;Valor;Procedures_Parvovirus
+Cinomose igg;R$ 50,00;10;60 dias;Valor;Procedures_CinomoseIgg
+Cinomose igm;R$ 50,00;10;60 dias;Valor;Procedures_CinomoseIgm
+;;;;;
+Procedimentos clinicos;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Coleta de material p/ exames cobertos;R$ 0,00;10;60 dias;Valor;Procedures_ColetaMaterialExames
+Aplicação de Injeção Subcutânea ou Intramuscular (SC / IM) - Com Medicação;R$ 20,00;10;60 dias;Valor;Procedures_AplicacaoInjecaoSCIM
+Curativo Simples;R$ 0,00;10;60 dias;Valor;Procedures_CurativoSimples
+SUTURA PELE SIMPLES;R$ 0,00;10;60 dias;Valor;Procedures_SuturaPeleSimples
+DRENAGEM DE ABSCESSO;R$ 50,00;10;60 dias;Valor;Procedures_DrenagemAbscesso
+SOROTERAPIA/FLUIDOTERAPIA;R$ 60,00;10;60 dias;Valor;Procedures_SoroterapiaFluidoterapia
+DESOBSTRUCAO URETRAL;R$ 50,00;10;60 dias;Valor;Procedures_DesobstrucaoUretral
+Aplicação (IV) - Com Medicação;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_AplicacaoIV
+Fluidoterapia (Solução Coloidal);R$ 60,00;Ilimitado;45 dias;Valor;Procedures_FluidoterapiaColoidal
+Fluidoterapia (Solução Hipertonica ou Manitol);R$ 60,00;Ilimitado;45 dias;Valor;Procedures_FluidoterapiaHipertonicaManitol
+Reanimacao;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_Reanimacao
+Limpeza e Debridamento;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_LimpezaDebridamento
+Retirada de Anzol TOPICO;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_RetiradaAnzolTopico
+Amputação de unha;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_AmputacaoUnha
+Lavagem Gástrica;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_LavagemGastrica
+Carvão Ativado + Lavagem Gástrica;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_CarvaoAtivadoLavagemGastrica
+Lavagem Vesical;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_LavagemVesical
+Inalação -15 minutos;R$ 20,00;Ilimitado;45 dias;Valor;Procedures_Inalacao
+Sedação / tranquilização;R$ 80,00;Ilimitado;45 dias;Valor;Procedures_SedacaoTranquilizacao
+Retirada de miíase (retirada de bicheiras);R$ 60,00;Ilimitado;45 dias;Valor;Procedures_RetiradaMiase
+Oxigenoterapia até 30 MINUTOS;R$ 30,00;Ilimitado;45 dias;Valor;Procedures_Oxigenoterapia
+Curativo complexo;R$ 30,00;Ilimitado;45 dias;Valor;Procedures_CurativoComplexo
+Ressecção de Verruga;R$ 100,00;Ilimitado;45 dias;Valor;Procedures_ResseccaoVerruga
+Lavagem Intestinal;R$ 30,00;Ilimitado;45 dias;Valor;Procedures_LavagemIntestinal
+Imobilização de fraturas simples;R$ 100,00;Ilimitado;45 dias;Valor;Procedures_ImobilizacaoFraturasSimples
+Abdominocentese;R$ 40,00;Ilimitado;45 dias;Valor;Procedures_Abdominocentese
+Toracocentese;R$ 50,00;Ilimitado;45 dias;Valor;Procedures_Toracocentese
+Remoção espinhos (ouriços);R$ 90,00;Ilimitado;45 dias;Valor;Procedures_RemocaoEspinhosOuriços
+Pericardiocentese;R$ 300,00;Ilimitado;45 dias;Valor;Procedures_Pericardiocentese
+Teste de Fluoresceína + Jones UNILATERAL;R$ 12,00;Ilimitado;60 dias;Valor;Procedures_TesteFluoresceinaJonesUnilateral
+Teste de Schirmer bilateral;R$ 15,00;15;60 dias;Valor;Procedures_TesteSchirmerBilateral
+Teste Rosa Bengala bilateral;R$ 15,00;15;60 dias;Valor;Procedures_TesteRosaBengalaBilateral
+Colírio Anestésico unilateral;R$ 15,00;Ilimitado;60 dias;Valor;Procedures_ColirioAnestesicounilateral
+Sessão de Quimioterapia;R$ 80,00;20;60 dias;Valor;Procedures_SessaoQuimioterapia
+Debridamento de córnea com swab;R$ 50,00;15;60 dias;Valor;Procedures_DebridamentoCorneaSwab
+Flushing;R$ 50,00;Ilimitado;60 dias;Valor;Procedures_Flushing
+Epilação Mecânica;R$ 100,00;15;60 dias;Valor;Procedures_EpilacaoMecanica
+;;;;;
+Exames de Imagem;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Acompanhamento/RETORNO ultrassonográfico abdominal;R$ 80,00;7;60 dias;Valor;Procedures_AcompanhamentoRetornoUltrassonograficoAbdominal
+Raio-x (por posição / projeção);R$ 80,00;7;60 dias;Valor;Procedures_RaioXPorPosicaoProjecao
+Ultrassonografia abdominal;R$ 80,00;7;60 dias;Valor;Procedures_UltrassonografiaAbdominal
+Raio-x Plantão (por posição / projeção);R$ 100,00;7;60 dias;Valor;Procedures_RaioXPlantaoPorPosicaoProjecao
+Ultrassonografia ocular bilateral;R$ 80,00;7;60 dias;Valor;Procedures_UltrassonografiaOcularBilateral
+Ultrassonografia Encefálica;R$ 80,00;7;60 dias;Valor;Procedures_UltrassonografiaEncefalica
+Ultrassonografia Articular;R$ 80,00;7;60 dias;Valor;Procedures_UltrassonografiaArticular
+Ultrassonografia abdominal Plantão;R$ 100,00;7;60 dias;Valor;Procedures_UltrassonografiaAbdominalPlantao
+Ultrassonografia Cervical;R$ 80,00;7;60 dias;Valor;Procedures_UltrassonografiaCervical
+;;;;;
+Anestesias;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Anestesia local;R$ 20,00;Ilimitado;120 dias;Valor;Procedures_AnestesiaLocal
+Anestesia geral ambulatorial (intravenosa);R$ 100,00;3;120 dias;Valor;Procedures_AnestesiaGeralAmbulatorialIntravenosa
+Bloqueios Regionais;R$ 55,00;3;120 dias;Valor;Procedures_BloqueiosRegionais
+Anestesia Inalatória - Grupo 1(ATE 10KG);R$ 150,00;3;120 dias;Valor;Procedures_AnestesiaInalatoriaGrupo1
+Anestesia Inalatória - Grupo 2(10 A 20KG);R$ 200,00;3;120 dias;Valor;Procedures_AnestesiaInalatoriaGrupo2
+Anestesia inalatória - Grupo 3 (20 A 40KG);R$ 250,00;3;120 dias;Valor;Procedures_AnestesiaInalatoriaGrupo3
+;;;;;
+Exames Cardiológicos;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Aferição de pressão arterial;R$ 15,00;5;60 dias;Valor;Procedures_AfericaoPressaoArterial
+Eletrocardiograma;R$ 40,00;2;60 dias;Valor;Procedures_Eletrocardiograma
+Ecodopplercardiograma;R$ 80,00;2;60 dias;Valor;Procedures_Ecodopplercardiograma
+;;;;;
+Internação;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Day Care Até 12h;R$ 60,00;10;120 dias;Valor;Procedures_DayCareAte12h
+Internação 24 Horas;R$ 150,00;10;120 dias;Valor;Procedures_Internacao24Horas
+Internação Semi-Intensiva;R$ 200,00;10;120 dias;Valor;Procedures_InternacaoSemiIntensiva
+;;;;;
+Transfusão;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Teste de compatibilidade;R$ 40,00;Ilimitado;120 dias;Valor;Procedures_TesteCompatibilidade
+Taxa para transfusão sanguínea;R$ 80,00;15;120 dias;Valor;Procedures_TaxaTransfusaoSanguinea
+Bolsa plasma fresco congelado;R$ 90,00;Ilimitado;120 dias;Valor;Procedures_BolsaPlasmaFrescoCongelado
+Bolsa concentrado de plaquetas;R$ 120,00;Ilimitado;120 dias;Valor;Procedures_BolsaConcentradoPlaquetas
+Bolsa concentrado de hemácias;R$ 150,00;Ilimitado;120 dias;Valor;Procedures_BolsaConcentradoHemacias
+Bolsa sangue total;R$ 150,00;Ilimitado;120 dias;Valor;Procedures_BolsaSangueTotal
+;;;;;
+Cirurgias Gênitourinárias;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Ablação da Bolsa Escrotal;20%;3;120 dias;Porcentagem;Procedures_AblacaoBolsaEscrotal
+Prolapso de Uretra;20%;3;120 dias;Porcentagem;Procedures_ProlapsoUretra
+Castração macho;0%;1;120 dias;Porcentagem;Procedures_CastracaoMacho
+Cistotomia (cirurgia de bexiga);20%;3;120 dias;Porcentagem;Procedures_Cistotomia
+Pólipo vaginal;20%;3;120 dias;Porcentagem;Procedures_PolipoVaginal
+Ovário Remanescente;20%;3;1 20 dias;Porcentagem;Procedures_OvarioRemanescente
+Cistorrafia;20%;3;120 dias;Porcentagem;Procedures_Cistorrafia
+Ureterostomia;20%;3;120 dias;Porcentagem;Procedures_Ureterostomia
+Piometra de coto uterino;20%;3;120 dias;Porcentagem;Procedures_PiometraCotoUterino
+Castração fêmea;0%;1;120 dias;Porcentagem;Procedures_CastracaoFemea
+Uretrostomia (cirurgia de uretra);20%;3;120 dias;Porcentagem;Procedures_Uretrostomia
+Ovariohisterectomia Terapêutica (piometra);20%;3;120 dias;Porcentagem;Procedures_OvariohisterectomiaTerapêutica
+Prolapso de Útero - Redução Cirúrgica;20%;3;120 dias;Porcentagem;Procedures_ProlapsoUteroReducaoCirurgica
+Ureterostomia Bilateral;20%;3;120 dias;Porcentagem;Procedures_UreterostomiaBilateral
+Penectomia (retirada do pênis);20%;3;120 dias;Porcentagem;Procedures_Penectomia
+Mastectomia total (neoplasia mamária - câncer de mama);20%;3;120 dias;Porcentagem;Procedures_MastectomiaTotal
+Neoplasia mamária cadeia bilateral (câncer de mama);20%;3;120 dias;Porcentagem;Procedures_NeoplasiaMamariaCadeiaBilateral
+Castração Criptorquida;20%;3;120 dias;Porcentagem;Procedures_CastracaoCriptorquida
+;;;;;
+Cirurgias Auriculares;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Lavagem otológica;20%;3;120 dias;Porcentagem;Procedures_LavagemOtologica
+Excisão de Polipo Otológico;20%;3;120 dias;Porcentagem;Procedures_ExcisaoPolipoOtologico
+Conchectomia terapêutica;20%;3;120 dias;Porcentagem;Procedures_ConchectomiaTerapeutica
+Otohematoma - tratamento cirúrgico;20%;3;120 dias;Porcentagem;Procedures_OtohematomaTratamentoCirurgico
+;;;;;
+Cirurgias Gerais;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Bloco Cirúrgico;20%;3;120 dias;Porcentagem;Procedures_BlocoCirurgico
+Biópsia linfonodo - coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaLinfonodoColeta
+Ressecção de Prega Cutânea Facial;20%;3;120 dias;Porcentagem;Procedures_ResseccaoPregaCutaneaFacial
+Biópsia tríade felina - coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaTriadeFelinaColeta
+Nodulectomia P;20%;3;120 dias;Porcentagem;Procedures_NodulectomiaP
+Biópsia gástrica - Coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaGastricaColeta
+Biópsia Intestinal - Coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaIntestinalColeta
+Biopsia ossea - coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaOsseaColeta
+Rejeição sutura (musculatura e pele);20%;3;120 dias;Porcentagem;Procedures_RejeicaoSuturaMusculaturaPele
+Nodulectomia M;20%;3;120 dias;Porcentagem;Procedures_NodulectomiaM
+Linfadenectomia;20%;3;120 dias;Porcentagem;Procedures_Linfadenectomia
+Laparotomia exploratória;20%;3;120 dias;Porcentagem;Procedures_LaparotomiaExploratoria
+Evisceração;20%;3;120 dias;Porcentagem;Procedures_Evisceracao
+Ablação glândula adanal;20%;3;120 dias;Porcentagem;Procedures_AbalacaoGlandulaAdanal
+Biópsia Hepática - coleta;20%;3;120 dias;Porcentagem;Procedures_BiopsiaHepaticaColeta
+Taxa de Anaplastia (retalho);20%;3;120 dias;Porcentagem;Procedures_TaxaAnaplastiaRetalho
+Nodulectomia G;20%;3;120 dias;Porcentagem;Procedures_NodulectomiaG
+Eventração;20%;3;120 dias;Porcentagem;Procedures_Eventracao
+Adicional anestesia plantão;20%;3;120 dias;Porcentagem;Procedures_AdicionalAnestesiaPlantao
+Adicional de cirurgia plantão;20%;3;120 dias;Porcentagem;Procedures_AdicionalCirurgiaPlantao
+;;;;;
+Cirurgias Bucofaciais;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Osteossíntese Mandibular;20%;3;120 dias;Porcentagem;Procedures_OsteossinteseMandibular
+;;;;;
+Cirurgias Ortopédicas;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Amputação de falange;20%;3;120 dias;Porcentagem;Procedures_AmputacaoFalange
+Amputação de membros;20%;3;120 dias;Porcentagem;Procedures_AmputacaoMembros
+Retirada de implantes ortopédicos;20%;3;120 dias;Porcentagem;Procedures_RetiradaImplantesOrtopedicos
+Retirada de fixador externo;20%;3;120 dias;Porcentagem;Procedures_RetiradaFixadorExterno
+Osteossíntese;20%;3;120 dias;Porcentagem;Procedures_Osteossintese
+;;;;;
+Herniorrafia;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Hérnia Umbilical;20%;3;120 dias;Porcentagem;Procedures_HerniaUmbilical
+Hérnia Perineal;20%;3;120 dias;Porcentagem;Procedures_HerniaPerineal
+Hérnia inguinal;20%;3;120 dias;Porcentagem;Procedures_HerniaInguinal
+Hérnia Diafragmática;20%;3;120 dias;Porcentagem;Procedures_HerniaDiafragmatica
+;;;;;
+Cirurgias Oculares;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Correção de entrópio ou ectrópio unilateral;20%;3;120 dias;Porcentagem;Procedures_CorrecaoEntropioEctropioUnilateral
+Enucleação (retirada do globo ocular);20%;3;120 dias;Porcentagem;Procedures_EnucleacaoRetiradaGloboOcular
+Redução Protrusão Globo Ocular;20%;3;120 dias;Porcentagem;Procedures_ReducaoProtrusaoGloboOcular
+Excisão da glândula de terceira pálpebra;20%;3;120 dias;Porcentagem;Procedures_ExcisaoGlandulaTerceiraPalpebra
+Reposição da glândula de terceira pálpebra;20%;3;120 dias;Porcentagem;Procedures_ReposicaoGlandulaTerceiraPalpebra
+Excisão de Neoplasia Palpebral com Reconstrução;20%;3;120 dias;Porcentagem;Procedures_ExcisaoNeoplasiaPalpebralReconstrucao
+Tarsorrafia;20%;3;120 dias;Porcentagem;Procedures_Tarsorrafia
+Eversão da Cartilagem da Terceira Pálpebra;20%;3;120 dias;Porcentagem;Procedures_EversaoCartilagemTerceiraPalpebra
+Correção para Úlcera de Córnea;20%;3;120 dias;Porcentagem;Procedures_CorrecaoUlceraCornea
+Correção de Triquíase,  Distiquíase e/ou Cílios ectópicos;20%;3;120 dias;Porcentagem;Procedures_CorrecaoTriquiaseDistiquiaseCiliosEctopicos
+;;;;;
+Cirurgias digestivas;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Enterectomia;20%;3;120 dias;Porcentagem;Procedures_Enterectomia
+Prolapso de Reto - Redução;20%;3;120 dias;Porcentagem;Procedures_ProlapsoRetoReducao
+Esofagotomia para retirada de corpo estranho;20%;3;120 dias;Porcentagem;Procedures_EsofagotomiaRetiradaCorpoEstranho
+Gastrostomia / Gastrotomia;20%;3;120 dias;Porcentagem;Procedures_GastrostomiaGastrotomia
+Esplenectomia;20%;3;120 dias;Porcentagem;Procedures_Esplenectomia
+Sialoadenectomia;20%;3;120 dias;Porcentagem;Procedures_Sialoadenectomia
+Gastrectomia Parcial;20%;3;120 dias;Porcentagem;Procedures_GastrectomiaParcial
+Enterotomia;20%;3;120 dias;Porcentagem;Procedures_Enterotomia
+Enteroanastomose;20%;3;120 dias;Porcentagem;Procedures_Enteroanastomose
+Colonopexia;20%;3;120 dias;Porcentagem;Procedures_Colonopexia
+Prolapso de Reto - Amputação;20%;3;120 dias;Porcentagem;Procedures_ProlapsoRetoAmputacao
+Torção/Dilatação Gástrica - Redução e Gastropexia;20%;3;120 dias;Porcentagem;Procedures_TorcaoDilatacaoGastricaReducaoGastropexia
+Torção/Dilatação Gástrica – Redução,  Gastropexia,  Gastrectomia Parcial e Esplenectomia;20%;3;120 dias;Porcentagem;Procedures_TorcaoDilatacaoGastricaReducaoGastropexiaGastrectomiaParcialEsplenectomia
+;;;;;
+Serviços;;;;;
+Procedimentos;Coparticipação;Limite anuais;Carencia;Unidade;Variável
+Microchipagem;R$ 0,00;Ilimitado;0 dias;Valor;Procedures_Microchipagem
+Locação de sala para atendimento volante;R$ 50,00;Ilimitado;60 dias;Valor;Procedures_LocacaoSalaAtendimentoVolante

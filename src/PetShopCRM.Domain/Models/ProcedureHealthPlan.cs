@@ -1,8 +1,11 @@
-﻿namespace PetShopCRM.Domain.Models;
+﻿using PetShopCRM.Domain.Enums;
+
+namespace PetShopCRM.Domain.Models;
 
 public class ProcedureHealthPlan : EntityBase
 {
     public decimal Coparticipation { get; set; }
+    public ProcedureCoparticipationUnit CoparticipationUnit { get; set; }
     public int? AnnualLimit { get; set; }
     public int Lack { get; set; }
     public string Observation { get; set; }

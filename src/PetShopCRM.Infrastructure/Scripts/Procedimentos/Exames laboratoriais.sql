@@ -140,6 +140,11 @@ INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [Upd
 OUTPUT Inserted.ID INTO @Procedures_BabesiaIgg
 VALUES ('Babesia igg', (SELECT ID FROM @ProcedureGroups_ExamesLaboratoriais), GETDATE(), NULL, 1)
 
+DECLARE @Procedures_BabesiaIgm table (ID int)
+INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
+OUTPUT Inserted.ID INTO @Procedures_BabesiaIgm
+VALUES ('Babesia igm', (SELECT ID FROM @ProcedureGroups_ExamesLaboratoriais), GETDATE(), NULL, 1)
+
 DECLARE @Procedures_Erliquia table (ID int)
 INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
 OUTPUT Inserted.ID INTO @Procedures_Erliquia

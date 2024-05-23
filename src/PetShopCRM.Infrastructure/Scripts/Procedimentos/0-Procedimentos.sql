@@ -1,3 +1,29 @@
+--Consulta clinico geral
+DECLARE @ProcedureGroups_ConsultaClinicoGeral table (ID int)
+INSERT INTO ProcedureGroups ([Description], [CreatedDate], [UpdatedDate], [Active]) 
+OUTPUT Inserted.ID INTO @ProcedureGroups_ConsultaClinicoGeral
+VALUES ('Consulta com clinico geral', GETDATE(), NULL, 1)
+
+DECLARE @Procedures_Consulta8as18 table (ID int)
+INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
+OUTPUT Inserted.ID INTO @Procedures_Consulta8as18
+VALUES ('Consulta das 08:00 às 18:00', (SELECT ID FROM @ProcedureGroups_ConsultaClinicoGeral), GETDATE(), NULL, 1)
+
+DECLARE @Procedures_Consulta18as00 table (ID int)
+INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
+OUTPUT Inserted.ID INTO @Procedures_Consulta18as00
+VALUES ('Consulta clinico geral das 18:00 ás 00:00 horas', (SELECT ID FROM @ProcedureGroups_ConsultaClinicoGeral), GETDATE(), NULL, 1)
+
+DECLARE @Procedures_ConsultaPediatricaDefinicaoProtocoloVacinal table (ID int)
+INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
+OUTPUT Inserted.ID INTO @Procedures_ConsultaPediatricaDefinicaoProtocoloVacinal
+VALUES ('Consulta pediatrica para definição de protocolo vacinal', (SELECT ID FROM @ProcedureGroups_ConsultaClinicoGeral), GETDATE(), NULL, 1)
+
+DECLARE @Procedures_Retornos8as18 table (ID int)
+INSERT INTO [Procedures] ([Description], [ProcedureGroupId], [CreatedDate], [UpdatedDate], [Active])
+OUTPUT Inserted.ID INTO @Procedures_Retornos8as18
+VALUES ('Retornos das 8:00 as 18:00 horas', (SELECT ID FROM @ProcedureGroups_ConsultaClinicoGeral), GETDATE(), NULL, 1)
+
 --Anestesias
 DECLARE @ProcedureGroups_Anestesias table (ID int)
 INSERT INTO ProcedureGroups ([Description], [CreatedDate], [UpdatedDate], [Active]) 
@@ -1034,6 +1060,18 @@ VALUES ('VetCard - Black', 199.90, 'Plano Básico', GETDATE(), NULL, 1)
 
 --Green
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(30.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(30.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta18as00), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(30.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_ConsultaPediatricaDefinicaoProtocoloVacinal), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 30, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Retornos8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(20.00, 4, 2, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_VacinaPolivalente), GETDATE(), NULL, 1, NULL, 'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
@@ -1068,6 +1106,18 @@ VALUES(10.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Proc
 
 
 --Gold
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(20.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(20.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta18as00), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(20.00, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_ConsultaPediatricaDefinicaoProtocoloVacinal), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 30, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Retornos8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(20.00,4,2,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_VacinaPolivalente),GETDATE(),NULL,1,NULL,'Value')
 
@@ -1423,9 +1473,6 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_MastectomiaTotal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_MastectomiaTotal),GETDATE(),NULL,1,NULL,'Percent')
-
-INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_NeoplasiaMamariaCadeiaBilateral),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
@@ -1610,6 +1657,18 @@ VALUES(50.00,0,60,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_
 
 
 --Black
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Consulta18as00), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 0, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_ConsultaPediatricaDefinicaoProtocoloVacinal), GETDATE(), NULL, 1, NULL, 'Value')
+
+INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
+VALUES(0, NULL, 30, (SELECT ID FROM @HealthPlan_Green), (SELECT ID FROM @Procedures_Retornos8as18), GETDATE(), NULL, 1, NULL, 'Value')
+
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(20,4,2,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_VacinaPolivalente),GETDATE(),NULL,1,NULL,'Value')
 

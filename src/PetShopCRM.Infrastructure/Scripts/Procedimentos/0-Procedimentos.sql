@@ -1685,13 +1685,13 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(30,2,2,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_VacinaGripePneumonia),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Hemograma),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Hemograma),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AlaninaAminotransferase),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AlaninaAminotransferase),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Creatinina),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Creatinina),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_FosfataseAlcalina),GETDATE(),NULL,1,NULL,'Value')
@@ -1703,7 +1703,7 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Urinalise),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PesquisaEctoparasitasPele),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PesquisaEctoparasitasPele),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(22,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PesquisaEctoparasitasOuvido),GETDATE(),NULL,1,NULL,'Value')
@@ -1769,31 +1769,31 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BabesiaIgm),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Erliquia),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Erliquia),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Fiv),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Fiv),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Parvovirus),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Parvovirus),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CinomoseIgg),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CinomoseIgg),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CinomoseIgm),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CinomoseIgm),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(10,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ColetaMaterialExames),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ColetaMaterialExames),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(20,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AplicacaoInjecaoSCIM),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(20,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CurativoSimples),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CurativoSimples),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(80,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_SuturaPeleSimples),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_SuturaPeleSimples),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(50,10,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_DrenagemAbscesso),GETDATE(),NULL,1,NULL,'Value')
@@ -1874,10 +1874,10 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(12,NULL,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TesteFluoresceinaJonesUnilateral),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(15,NULL,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TesteSchirmerBilateral),GETDATE(),NULL,1,NULL,'Value')
+VALUES(15,15,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TesteSchirmerBilateral),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(15,NULL,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TesteRosaBengalaBilateral),GETDATE(),NULL,1,NULL,'Value')
+VALUES(15,15,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TesteRosaBengalaBilateral),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(15,NULL,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ColirioAnestesicounilateral),GETDATE(),NULL,1,NULL,'Value')
@@ -1943,10 +1943,10 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(15,5,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AfericaoPressaoArterial),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(100,2,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Eletrocardiograma),GETDATE(),NULL,1,NULL,'Value')
+VALUES(40,2,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Eletrocardiograma),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(200,2,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Ecodopplercardiograma),GETDATE(),NULL,1,NULL,'Value')
+VALUES(80,2,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Ecodopplercardiograma),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(60,10,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_DayCareAte12h),GETDATE(),NULL,1,NULL,'Value')
@@ -1976,232 +1976,232 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(150,NULL,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BolsaSangueTotal),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AblacaoBolsaEscrotal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AblacaoBolsaEscrotal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoUretra),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoUretra),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoMacho),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(0,1,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoMacho),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Cistotomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Cistotomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PolipoVaginal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PolipoVaginal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OvarioRemanescente),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OvarioRemanescente),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Cistorrafia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Cistorrafia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Ureterostomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Ureterostomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PiometraCotoUterino),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_PiometraCotoUterino),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoFemea),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(0,1,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoFemea),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Uretrostomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Uretrostomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OvariohisterectomiaTerapêutica),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OvariohisterectomiaTerapêutica),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoUteroReducaoCirurgica),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoUteroReducaoCirurgica),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_UreterostomiaBilateral),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_UreterostomiaBilateral),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Penectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Penectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_MastectomiaTotal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_MastectomiaTotal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NeoplasiaMamariaCadeiaBilateral),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NeoplasiaMamariaCadeiaBilateral),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoCriptorquida),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CastracaoCriptorquida),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LavagemOtologica),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LavagemOtologica),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoPolipoOtologico),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoPolipoOtologico),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ConchectomiaTerapeutica),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ConchectomiaTerapeutica),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OtohematomaTratamentoCirurgico),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OtohematomaTratamentoCirurgico),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BlocoCirurgico),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BlocoCirurgico),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaLinfonodoColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaLinfonodoColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ResseccaoPregaCutaneaFacial),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ResseccaoPregaCutaneaFacial),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaTriadeFelinaColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaTriadeFelinaColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaP),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaP),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaGastricaColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaGastricaColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaIntestinalColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaIntestinalColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaOsseaColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaOsseaColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RejeicaoSuturaMusculaturaPele),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RejeicaoSuturaMusculaturaPele),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaM),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaM),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Linfadenectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Linfadenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LaparotomiaExploratoria),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LaparotomiaExploratoria),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Evisceracao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Evisceracao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AbalacaoGlandulaAdanal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AbalacaoGlandulaAdanal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaHepaticaColeta),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_BiopsiaHepaticaColeta),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TaxaAnaplastiaRetalho),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TaxaAnaplastiaRetalho),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaG),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_NodulectomiaG),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Eventracao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Eventracao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AdicionalAnestesiaPlantao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AdicionalAnestesiaPlantao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AdicionalCirurgiaPlantao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AdicionalCirurgiaPlantao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OsteossinteseMandibular),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_OsteossinteseMandibular),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AmputacaoFalange),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AmputacaoFalange),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AmputacaoMembros),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_AmputacaoMembros),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RetiradaImplantesOrtopedicos),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RetiradaImplantesOrtopedicos),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RetiradaFixadorExterno),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_RetiradaFixadorExterno),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Osteossintese),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Osteossintese),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaUmbilical),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaUmbilical),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaPerineal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaPerineal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaInguinal),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaInguinal),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaDiafragmatica),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_HerniaDiafragmatica),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoEntropioEctropioUnilateral),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoEntropioEctropioUnilateral),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EnucleacaoRetiradaGloboOcular),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EnucleacaoRetiradaGloboOcular),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ReducaoProtrusaoGloboOcular),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ReducaoProtrusaoGloboOcular),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoGlandulaTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoGlandulaTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ReposicaoGlandulaTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ReposicaoGlandulaTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoNeoplasiaPalpebralReconstrucao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ExcisaoNeoplasiaPalpebralReconstrucao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Tarsorrafia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Tarsorrafia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EversaoCartilagemTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EversaoCartilagemTerceiraPalpebra),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoUlceraCornea),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoUlceraCornea),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoTriquiaseDistiquiaseCiliosEctopicos),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_CorrecaoTriquiaseDistiquiaseCiliosEctopicos),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enterectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enterectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoRetoReducao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoRetoReducao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EsofagotomiaRetiradaCorpoEstranho),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_EsofagotomiaRetiradaCorpoEstranho),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_GastrostomiaGastrotomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_GastrostomiaGastrotomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Esplenectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Esplenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Sialoadenectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Sialoadenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_GastrectomiaParcial),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_GastrectomiaParcial),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enterotomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enterotomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enteroanastomose),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Enteroanastomose),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Colonopexia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Colonopexia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoRetoAmputacao),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_ProlapsoRetoAmputacao),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexiaGastrectomiaParcialEsplenectomia),GETDATE(),NULL,1,NULL,'Percent')
+VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexiaGastrectomiaParcialEsplenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(69.00,0,0,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,0,0,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
 VALUES(50.00,0,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LocacaoSalaAtendimentoVolante),GETDATE(),NULL,1,NULL,'Value')

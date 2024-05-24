@@ -179,7 +179,7 @@ namespace PetShopCRM.Web.Controllers
         [HttpPost]
         public async Task<string> RestorePassword(string login)
         {   
-            var userDTO = userService.GetUserByCPForEmail(login.ExtractCpfNumbers());
+            var userDTO = userService.GetUserByCPForEmail(login.FormatCpf());
             var message = "Usuário não contrato, digite o CPF ou e-mail usando no momento do cadastro.";
 
             if (userDTO.Success)

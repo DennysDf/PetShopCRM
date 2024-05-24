@@ -46,7 +46,7 @@
                             <td>@proc.Procedure</td>
                             <td> <b>R$ </b> <span class="value-mask">@proc.Coparticipation </span></td>
                             <td>@(proc.AnnualLimit?.ToString() ?? "Ilimitado")</td>
-                            <td>@proc.Lack dias</td>
+                            <td class="text-nowrap">@proc.Lack dias</td>
                         </tr>
                     }
                 }

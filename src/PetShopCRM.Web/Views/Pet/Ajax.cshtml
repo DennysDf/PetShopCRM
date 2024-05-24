@@ -79,11 +79,25 @@
         <label asp-for="Photo"></label>
         <input type="file" asp-for="Photo" class="form-control" accept="image/*" />
         <input type="hidden" asp-for="UrlPhoto" />
+        <span asp-validation-for="Photo"></span>
     </div>
+
+     <div class="col-6">
+         <label  asp-for="ShowReportImgUpdate" class="form-check-label">Incluir no relatório de imagens atualizadas?</label>   <br />     
+        <div class="form-check form-check-inline ml-3">
+            <input class="form-check-inline" type="radio" asp-for="ShowReportImgUpdate" id="radioCustomer1" value="true">
+            <label class="form-check-label" for="radioCustomer1">Sim</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-inline" type="radio" asp-for="ShowReportImgUpdate" id="radioCustomer2" value="false">
+            <label class="form-check-label" for="radioCustomer2">Não</label>
+        </div>
+    </div>
+@* 
     <div class="col-sm-6" id="show-report">      
         <label  asp-for="ShowReportImgUpdate" class="">Incluir no relatório de imagens atualizadas?</label>
         <input class="" type="checkbox" asp-for="ShowReportImgUpdate">    
-    </div
+    </div *@
 </div>
 <div class="row mt-2">
     <div class="col-sm-12">
@@ -91,3 +105,6 @@
         <textarea asp-for="Obs" class="form-control"></textarea>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

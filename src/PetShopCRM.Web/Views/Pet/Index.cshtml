@@ -194,7 +194,7 @@
                 $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
                     $("#modal-body").html(response);
                     select2Init();
-                    maskInit();
+                    maskInit();          
                     if (id != 0) {
                         $("#title-pet").text("Editar Pet")
                     } else {
@@ -219,7 +219,8 @@
                     $("#del-evento").val(id)
                     $("#delete").modal("show")
                 }
-            }
+            }     
+
         })
     </script>
 }

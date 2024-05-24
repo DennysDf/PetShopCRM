@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using PetShopCRM.Web.Models.Clinic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PetShopCRM.Web.Models.Pet;
 
@@ -18,9 +20,11 @@ public class PetVM
     public int GuardianId { get; set; }
     public string Guardian { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [DisplayName("Chip")]
-    public string Identifier { get; set; }
+    [DisplayName("Foto")]    
+    public IFormFile? Photo { get; set; }
+
+    [DisplayName("Identificador")]
+    public string? Identifier { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Espécie")]
@@ -47,13 +51,13 @@ public class PetVM
 
     [DisplayName("É cadastrado?")]
     public int? Spayed { get; set; }
-    public string UrlPhoto { get; set; }
-    [DisplayName("Foto")]
-    public IFormFile? Photo { get; set; }
+    public string UrlPhoto { get; set; }    
     public SelectList GuardianList { get; set; }
     public SelectList SpecieList { get; set; }
     public int LastUpdate { get; set; }
     public string Route { get; set; }
+
+    [ValidateNever]
     public bool ShowReportImgUpdate { get; set; }
 
     public static List<PetVM> ToList(List<Domain.Models.Pet> listClinic) => listClinic.Select(pet => new PetVM

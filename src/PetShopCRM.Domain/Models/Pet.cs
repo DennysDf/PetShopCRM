@@ -23,4 +23,5 @@ public class Pet : EntityBase
     public virtual Specie Specie { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; }
+    public virtual ICollection<Record> Records { get; set; }
 }

@@ -191,3 +191,21 @@ CREATE TABLE ProcedureHealthPlans (
     CONSTRAINT ProcedureHealthPlans_HealthPlan_HealthPlanId FOREIGN KEY (HealthPlanId) REFERENCES HealthPlans(Id),
     CONSTRAINT ProcedureHealthPlans_Procedures_ProcedureId FOREIGN KEY (ProcedureId) REFERENCES [Procedures](Id)
 );
+GO
+CREATE TABLE Records (
+    Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Date  DATETIME2 NOT NULL,
+    ProcedureHealthPlanId INT NOT NULL,
+    PetId INT NOT NULL,
+    ReasonConsultation VARCHAR(500) NULL,
+    ClinicalHistory VARCHAR(500) NULL,
+    PhysicalExam VARCHAR(500) NULL,
+    Diagnosis VARCHAR(500) NULL,
+    Prescription VARCHAR(500) NULL,
+    Observation VARCHAR(500) NULL,
+    CreatedDate DATETIME2 NOT NULL,
+    UpdatedDate DATETIME2,
+    Active BIT NOT NULL,
+    CONSTRAINT Record_ProceduresHealthPlans_ProcedureHealthPlanId FOREIGN KEY (ProcedureHealthPlanId) REFERENCES ProcedureHealthPlans(Id),
+    CONSTRAINT Record_Pets_PetId FOREIGN KEY (PetId) REFERENCES Pets(Id)
+);

@@ -19,6 +19,7 @@ public class PetShopDbContext(DbContextOptions<PetShopDbContext> options) : DbCo
     public DbSet<Procedure> Procedures { get; set; }
     public DbSet<ProcedureGroup> ProcedureGroups { get; set; }
     public DbSet<ProcedureHealthPlan> ProcedureHealthPlans { get; set; }
+    public DbSet<Record> Records { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

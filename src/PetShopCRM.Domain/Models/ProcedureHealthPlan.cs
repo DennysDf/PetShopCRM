@@ -14,4 +14,5 @@ public class ProcedureHealthPlan : EntityBase
     
     public virtual HealthPlan HealthPlan { get; set; }
     public virtual Procedure Procedure { get; set; }
+    public virtual ICollection<Record> Records { get; set; }
 }

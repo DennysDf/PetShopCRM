@@ -1,6 +1,7 @@
 ﻿@model ICollection<ConfigurationVM>
 @{
     ViewData["Title"] = "Configurações";
+    ViewData["Caminho"] = "<li>Configurações</li>";
 }
 
 @if(Model.Any(x => x.Group == PetShopCRM.Domain.Enums.ConfigurationGroup.System))

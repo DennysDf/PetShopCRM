@@ -1,0 +1,64 @@
+﻿@model RecordVM
+@{
+    ViewData["Title"] = "Prontuário";
+    ViewData["Caminho"] = "<li>Prontuário</li>";
+}
+<div class="container">
+    <form asp-action=""method="post">
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="PetId">Pet:</label>
+                <select asp-for="PetId" asp-items="Model.ListPets" class="form-control select2">
+                    <option selected disabled>Selecione o pet</option>
+                </select>
+                <span asp-validation-for="PetId"></span>
+            </div>           
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="ProcedureHealthPlanId">Procedimento:</label>
+                <select asp-for="ProcedureHealthPlanId" asp-items="Model.ListProcedureHealthPlan" class="form-control select2">
+                    <option selected disabled>Selecione o procedimento</option>
+                </select>
+                <span asp-validation-for="ProcedureHealthPlanId"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="Date"></label>
+                <input asp-for="Date" type="date" class="form-control">
+                <span asp-validation-for="Date"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ReasonConsultation">Motivo da Consulta</label>
+            <textarea class="form-control" asp-for="ReasonConsultation" rows="3" placeholder="Descreva o motivo da consulta"></textarea>
+            <span asp-validation-for="ReasonConsultation"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ClinicalHistory">Histórico Clínico</label>
+            <textarea class="form-control" asp-for="ClinicalHistory" rows="3" placeholder="Descreva o histórico clínico do pet"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhysicalExam">Exame Físico</label>
+            <textarea class="form-control" asp-for="PhysicalExam" rows="3" placeholder="Descreva os achados do exame físico"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Diagnosis">Diagnóstico</label>
+            <textarea class="form-control" asp-for="Diagnosis" rows="3" placeholder="Descreva o diagnóstico"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Prescription">Prescrição</label>
+            <textarea class="form-control" asp-for="Prescription" rows="3" placeholder="Descreva a prescrição"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Observation">Observações</label>
+            <textarea class="form-control" asp-for="Observation" rows="3" placeholder="Observações adicionais"></textarea>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-2">
+                <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>

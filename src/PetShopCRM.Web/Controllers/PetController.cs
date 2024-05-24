@@ -83,7 +83,7 @@ public class PetController(
 
         notificationService.Success(message);
 
-        if (model.Route.Equals("Guardian"))
+        if (model.Route != null)
         {
             return RedirectToAction("Details", "Guardian", new { IdPet = model.Id });
         }
@@ -118,6 +118,12 @@ public class PetController(
         notificationService.Success(Resources.Text.PetDeleteSucess);
 
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public bool ValidateShowReport(bool ShowReportImgUpdate)
+    {
+        return !ShowReportImgUpdate;
     }
 
 }

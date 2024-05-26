@@ -8,7 +8,7 @@ public class Record : EntityBase
     public string PhysicalExam { get; set; }
     public string Diagnosis { get; set; }
     public string Prescription { get; set; }
-    public string Observation { get;}
+    public string Observation { get; set; }
     public int ProcedureHealthPlanId { get; set; }
     public int PetId { get; set; }
     public ProcedureHealthPlan ProcedureHealthPlan { get; set; }

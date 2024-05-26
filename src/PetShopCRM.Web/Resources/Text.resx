@@ -204,6 +204,12 @@
   <data name="ProcedureUpdateSucess" xml:space="preserve">
     <value>Procedimento atualizado com sucesso.</value>
   </data>
+  <data name="RecordAddSucess" xml:space="preserve">
+    <value>Prontuário adicionado com sucesso.</value>
+  </data>
+  <data name="RecordUpdateSucess" xml:space="preserve">
+    <value>Prontuário atualizado com sucesso.</value>
+  </data>
   <data name="SpecieAddSucess" xml:space="preserve">
     <value>Espécie cadastrada com sucesso.</value>
   </data>

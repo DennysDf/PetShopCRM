@@ -21,7 +21,7 @@ public class PaymentsListsVM()
         var specie = pet.Specie.Name;
         var guardian = pet.Guardian.Name;
 
-        this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.Id.ToString() , Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name, IsSuccess = c.IsSuccess, IsActive = c.Active  }).ToList();
+        this.ListPayments = payments.Select(c => new PaymentsVM { Id = c.HealthPlanId.ToString() , Installment = c.Installment.ToString(), Value = c.HealthPlan.Value, Name = c.HealthPlan.Name, IsSuccess = c.IsSuccess, IsActive = c.Active  }).ToList();
 
         return new PaymentsListsVM() { Name = name, Specie = specie, Identifier = identifier, Guardian = guardian, ListPayments = ListPayments, };
     }

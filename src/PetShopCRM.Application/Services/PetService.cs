@@ -90,7 +90,7 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
             .Include(x => x.Guardian)
             .Include(x => x.Payments)
                 .ThenInclude(c => c.HealthPlan)
-            .Where(c => c.Payments.Count > 0)
+            .Where(c => c.Payments.Where(c => c.IsSuccess && c.Active).Any())
             .OrderBy(c => c.Name);
 
         return pets.ToList();

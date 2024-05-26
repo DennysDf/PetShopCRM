@@ -11,7 +11,5 @@ public interface IGuardianService
     Task<ResponseDTO<Guardian>> GetByIdAsync(int id);
     Task<bool> DeleteAsync(int id);
     Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync(int id = 0);
-
     Task<Guardian?> GetByPetIdAsync(int id);
-
 }

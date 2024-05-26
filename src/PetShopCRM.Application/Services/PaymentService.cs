@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Payments;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Interfaces;
@@ -29,7 +30,8 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
 
     public async Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync(int idPet = 0)
     {
-        var payments = unitOfWork.PaymentRepository.GetBy().Include(x => x.Guardian)
+        var payments = unitOfWork.PaymentRepository.GetBy()
+            .Include(x => x.Guardian)
             .Include(x => x.Pet)
                 .ThenInclude(x => x.Specie)
             .Include(x => x.HealthPlan)    
@@ -123,4 +125,11 @@ public class PaymentService(IUnitOfWork unitOfWork, IPagarMeService pagarMeServi
         return parsedValue;
     } 
 
+    public PlanDateCreateDTO GetPlanByPet(int id)
+    {
+        var payments = unitOfWork.PaymentRepository.GetBy();
+        var planDateCreateDTO = payments.Where(c => c.PetId == id && c.IsSuccess && c.Active).Select(c => new PlanDateCreateDTO(c.HealthPlanId, c.CreatedDate)).First();
+
+        return planDateCreateDTO;
+    }
 }

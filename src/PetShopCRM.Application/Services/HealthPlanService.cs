@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Payments;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork;
@@ -32,7 +34,7 @@ public class HealthPlanService(IUnitOfWork unitOfWork) : IHealthPlanService
         return new ResponseDTO<HealthPlan>(model != null, Resources.Message.GuardianNotFound, model);
     }
 
-    public async Task<ResponseDTO<List<HealthPlan>>> GetAllCompleteAsync(int id = 0)
+    public ResponseDTO<List<HealthPlan>> GetAllCompleteAsync(int id = 0)
     {
         var healthPlans = unitOfWork.HealthPlansRepository.GetBy(x => x.Active)
             .Include(c => c.ProcedureHealthPlans)                
@@ -45,11 +47,12 @@ public class HealthPlanService(IUnitOfWork unitOfWork) : IHealthPlanService
 
         return new ResponseDTO<List<HealthPlan>>(healthPlans.ToList().Count > 0, "Nenhum resultado encontrado", healthPlans.ToList());
     }
-
     public async Task<bool> DeleteAsync(int id)
     {
         var delete = await unitOfWork.HealthPlansRepository.DeleteOrRestoreAsync(id);
         await unitOfWork.SaveChangesAsync();
         return delete;
     }
+
+
 }

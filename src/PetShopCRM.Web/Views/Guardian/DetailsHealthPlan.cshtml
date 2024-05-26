@@ -1,6 +1,7 @@
 ﻿@model PaymentsListsVM
 @{
-    
+    ViewData["Title"] = "Plano de Saúde";
+    ViewData["Caminho"] = "<li>Detalhes</li><li>Plano de Saúde</li>";
 }
 
 <div class="container">
@@ -108,8 +109,9 @@
 
     <script type="text/javascript">
 
-        var $table = $('#table')
 
+
+        var $table = $('#table')
 
         $(".deletar").click(function () {            
             var id = $(this).data("id")

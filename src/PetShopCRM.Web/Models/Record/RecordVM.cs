@@ -8,6 +8,7 @@ namespace PetShopCRM.Web.Models.Record;
 
 public class RecordVM
 {
+    public int Id { get; set; }
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Data do atendimento")]
     public DateTime Date { get; set; }
@@ -41,10 +42,22 @@ public class RecordVM
 
     public SelectList ListProcedureHealthPlan { get; set; }
 
-    [Required(ErrorMessage = ValidationKeysUtil.Required)]
-    [DisplayName("Pets")]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]    
     public SelectList ListPets { get; set; }
+    public int HealthPlanId { get; set; }
+    public SelectList ListHealthPlan { get; set; }
 
-   
 
+    public PetShopCRM.Domain.Models.Record ToModel(RecordVM model) => new Domain.Models.Record() 
+    { 
+        ClinicalHistory = this.ClinicalHistory,
+        PhysicalExam = this.PhysicalExam,
+        Diagnosis = this.Diagnosis,
+        Prescription = this.Prescription,
+        Date = this.Date,
+        PetId = this.PetId,
+        Observation = this.Observation,
+        ReasonConsultation = this.ReasonConsultation,
+        ProcedureHealthPlanId = this.ProcedureHealthPlanId
+    };
 }

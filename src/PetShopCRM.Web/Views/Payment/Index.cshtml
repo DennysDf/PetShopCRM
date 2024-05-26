@@ -1,15 +1,15 @@
 ﻿@model ICollection<PaymentVM>
 @{
     ViewData["Title"] = "Pagamento";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Caminho"] = "<li>Pagamento</li>";
 }
 
 <div class="row mb-3 ">
     <div class="col-12 text-center">
-        <button data-id="0" id="modal-open" class="btn btn-success">
+        <a asp-action="Form" class="btn btn-success">
             <i class="fa fa-plus-circle"></i>
             <b>Incluir Pagamento</b>
-        </button>
+        </a>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
                 <th>Plano de saúde</th>
                 <th>Parcela Atual</th>
                 <th>Últ. Pagamento</th>
-                <th>Criado com:</th>
+                <th>Pagamento:</th>
                 <th>Situação</th>
                 <th width="15" class="text-center" data-field="operate" data-events="operateEvents"></th>
             </tr>
@@ -34,9 +34,9 @@
                 <tr class="bg-white">
                     <td>@item.Id</td>
                     <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">
-                        @if (string.IsNullOrEmpty(item.ExternalIdUrl))
+                        @if (string.IsNullOrEmpty(item.ExternalIdUrl) || item.ExternalId == null)
                         {
-                            @item.ExternalId
+                            @(item.ExternalId ?? "-")
                         }
                         else
                         {
@@ -49,7 +49,7 @@
                     <td class="text-nowrap">@item.HealhPlan</td>
                     <td class="text-nowrap">@item.Installment</td>
                     <td class="text-nowrap">@(item.LastPayment?.ToString(System.Globalization.CultureInfo.GetCultureInfo("pt-BR")) ?? "-")</td>
-                    <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">@(item.IsSuccess ? "Sucesso" : "Erro")</td>
+                    <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">@(item.ExternalId == null ? "Aguardando checkout" : item.IsSuccess ? "Sucesso" : "Erro")</td>
                     <td class="text-nowrap">@(item.IsActive ? "Ativo" : "Cancelado")</td>
                     <td class="text-nowrap text-right" width="15">
                         <a href="@Url.Action("Monitoring", "Payment", new { paymentId = item.Id })" target="_blank" data-toggle="tooltip" title="Monitorar" data-placement="left">
@@ -68,30 +68,6 @@
         </tbody>
     </table>
 </div>
-
-
-
-<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-width:1000px!important">
-        <div class="modal-content">
-            <form asp-action="Index" method="post">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title title">Cadastrar Material</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
-                    <button type="submit" id="btn-salve" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 <div class="modal" style="padding-top:120px" role="dialog" id="delete" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
@@ -117,170 +93,18 @@
 </div>
 
 @section Scripts {
-    <script>
-        $("#modal-open, .edit").click(function () {
-            var id = $(this).data("id");
-            Ajax(id)
-        })
-
-        function validarCampos() {
-            $("#Customer_CPF").keyup(function () {
-                var cpf = $(this).val()
-                if (cpf.length > 13) {
-                    if (!cpfValidar(cpf)) {
-                        $("#valida-cpf").removeClass("d-none")
-                        $("#btn-salve").attr("disabled", "true")
-                    } else {
-
-                        $("#valida-cpf").addClass("d-none")
-                        $("#btn-salve").removeAttr("disabled", "true")
-                    }
-                } else {
-                    $("#valida-cpf").addClass("d-none")
-                    $("#btn-salve").removeAttr("disabled", "true")
-                }
-            })
-        }
-
-        function cpfValidar(cpf) {
-            cpf = cpf.replace(/\D/g, '');
-            if (cpf.toString().length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-            var result = true;
-            [9, 10].forEach(function (j) {
-                var soma = 0, r;
-                cpf.split(/(?=)/).splice(0, j).forEach(function (e, i) {
-                    soma += parseInt(e) * ((j + 2) - (i + 1));
-                });
-                r = soma % 11;
-                r = (r < 2) ? 0 : 11 - r;
-                if (r != cpf.substring(j, j + 1)) result = false;
-            });
-            return result;
-        }
-
-        function Ajax(id) {
-            $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
-                $("#modal-body").html(response);
-                maskInit();
-                changeCep()
-                validarCampos();
-                ValideCard();
-                if (id != 0) {
-                    $(".title").text("Editar Pet")
-                } else {
-                    $(".title").text("Cadastrar Pagamento")
-                }
-                $("#modal").modal("show");
-            })
-        }
-
+    <script type="text/javascript">
         $("#confirm-del").click(function () {
             window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
         });
 
         var $table = $('#table')
         window.operateEvents = {
-            'click .edit': function (e, value, row, index) {
-                var id = [row.id]
-                Ajax(id)
-            },
             'click .deletar': function (e, value, row, index) {
                 var id = [row.id]
                 $("#del-evento").val(id)
                 $("#delete").modal("show")
             }
         }
-
-        function changeCep() {
-            $("#BillingAddress_ZipCode").keyup(function () {
-                if (($(this).val().length) == 9) {
-                    $.getJSON('@Url.Action("GetAddressByCEP", "Guardian")', { "CEP": $(this).val() }, function (response) {
-                        console.log(response)
-                        $("#BillingAddress_City").val(response.city)
-                        $("#BillingAddress_State").val(response.state)
-                        $("#BillingAddress_Address").val(response.street)
-                        $("#BillingAddress_Country").val("BR")
-                    })
-                } else {
-                    $("#BillingAddress_City").val("")
-                    $("#BillingAddress_State").val("")
-                    $("#BillingAddress_Address").val("")
-                    $("#BillingAddress_Country").val("")
-                }
-            })
-        }
-        function ValideCard() {
-            $("#Card_Number").keyup(function () {
-                var card = $(this).val()
-                if (card.length > 18 ) {
-                    if (!validarNumeroCartao(card)) {
-                        $("#valida-card").removeClass("d-none")
-                        $("#btn-salve").attr("disabled", "true")
-                    } else {
-                        $("#Card_Brand").val(identificarBandeiraCartao(card)).change()
-                        $("#valida-card").addClass("d-none")
-                        $("#btn-salve").removeAttr("disabled", "true")
-                    }
-                } else {
-                    $("#valida-card").addClass("d-none")
-                    $("#btn-salve").removeAttr("disabled", "true")
-                }
-            });
-        }
-
-        function validarNumeroCartao(numero) {
-            // Remova todos os espaços do número do cartão
-            numero = numero.replace(/\s+/g, '');
-
-            // Algoritmo de Luhn para verificar a validade do número do cartão
-            var soma = 0;
-            var alternar = false;
-            for (var i = numero.length - 1; i >= 0; i--) {
-                var n = parseInt(numero.charAt(i), 10);
-                if (alternar) {
-                    n *= 2;
-                    if (n > 9) {
-                        n -= 9;
-                    }
-                }
-                soma += n;
-                alternar = !alternar;
-            }
-
-            // Se a soma não for múltiplo de 10, o cartão é inválido
-            return soma % 10 === 0;
-        }
-
-        function identificarBandeiraCartao(numero) {
-            // Remova todos os espaços do número do cartão
-            numero = numero.replace(/\s+/g, '');
-
-            // Identificação da bandeira do cartão
-            if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(numero)) {
-                return 'visa';
-            } else if (/^5[1-5][0-9]{14}$/.test(numero)) {
-                return 'mastercard';
-            } else if (/^3[47][0-9]{13}$/.test(numero)) {
-                return 'American Express';
-            } else if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(numero)) {
-                return 'Discover';
-            } else if (/^(5067|4576|4011)[0-9]{12}$/.test(numero)) {
-                return 'elo';
-            } else if (/^(636368|438935|504175|451416|636297)[0-9]{10}$/.test(numero)) {
-                return 'elo';
-            } else if (/^(627780)[0-9]{12}$/.test(numero)) {
-                return 'hipercard';
-            } else if (/^(637095|637568|637599|637609|637612)[0-9]{10}$/.test(numero)) {
-                return 'sorocred';
-            } else if (/^(603182)[0-9]{10}$/.test(numero)) {
-                return 'banescard';
-            } else if (/^(384100|384140|384160)[0-9]{10}$/.test(numero)) {
-                return 'credz';
-            } else {
-                return '';
-            }
-        }
-     
-
     </script>
 }

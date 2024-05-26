@@ -22,7 +22,7 @@ namespace PetShopCRM.Application.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Message {
+    public class Message {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PetShopCRM.Application.Resources {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PetShopCRM.Application.Resources.Message", typeof(Message).Assembly);
@@ -51,7 +51,7 @@ namespace PetShopCRM.Application.Resources {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Clínica não encontrada..
         /// </summary>
-        internal static string ClinicNotFound {
+        public static string ClinicNotFound {
             get {
                 return ResourceManager.GetString("ClinicNotFound", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao atualizar configuração..
         /// </summary>
-        internal static string ConfigurationErrorUpdate {
+        public static string ConfigurationErrorUpdate {
             get {
                 return ResourceManager.GetString("ConfigurationErrorUpdate", resourceCulture);
             }
@@ -81,16 +81,61 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Configuração atualizada com sucesso..
         /// </summary>
-        internal static string ConfigurationSuccessUpdate {
+        public static string ConfigurationSuccessUpdate {
             get {
                 return ResourceManager.GetString("ConfigurationSuccessUpdate", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha para envio de e-mail não configurado..
+        /// </summary>
+        public static string EmailPasswordNotFound {
+            get {
+                return ResourceManager.GetString("EmailPasswordNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Remetente de e-mail não configurado..
+        /// </summary>
+        public static string EmailSenderNotFound {
+            get {
+                return ResourceManager.GetString("EmailSenderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail enviado com sucesso..
+        /// </summary>
+        public static string EmailSuccess {
+            get {
+                return ResourceManager.GetString("EmailSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário e senha para envio de e-mail não configurado..
+        /// </summary>
+        public static string EmailUserAndPasswordNotFound {
+            get {
+                return ResourceManager.GetString("EmailUserAndPasswordNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário para envio de e-mail não configurado..
+        /// </summary>
+        public static string EmailUserNotFound {
+            get {
+                return ResourceManager.GetString("EmailUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor não encontrado..
         /// </summary>
-        internal static string GuardianNotFound {
+        public static string GuardianNotFound {
             get {
                 return ResourceManager.GetString("GuardianNotFound", resourceCulture);
             }
@@ -99,7 +144,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Falha na integração de pagamento..
         /// </summary>
-        internal static string PaymentIntegrationFailed {
+        public static string PaymentIntegrationFailed {
             get {
                 return ResourceManager.GetString("PaymentIntegrationFailed", resourceCulture);
             }
@@ -108,7 +153,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento não encontrado..
         /// </summary>
-        internal static string PaymentNotFound {
+        public static string PaymentNotFound {
             get {
                 return ResourceManager.GetString("PaymentNotFound", resourceCulture);
             }
@@ -117,7 +162,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Pet não encontrado..
         /// </summary>
-        internal static string PetNotFound {
+        public static string PetNotFound {
             get {
                 return ResourceManager.GetString("PetNotFound", resourceCulture);
             }
@@ -126,7 +171,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Procedimento não encontrado..
         /// </summary>
-        internal static string ProcedureNotFound {
+        public static string ProcedureNotFound {
             get {
                 return ResourceManager.GetString("ProcedureNotFound", resourceCulture);
             }
@@ -135,7 +180,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie não encontrada..
         /// </summary>
-        internal static string SpecieNotFound {
+        public static string SpecieNotFound {
             get {
                 return ResourceManager.GetString("SpecieNotFound", resourceCulture);
             }
@@ -144,7 +189,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário inválido.
         /// </summary>
-        internal static string UserInvalid {
+        public static string UserInvalid {
             get {
                 return ResourceManager.GetString("UserInvalid", resourceCulture);
             }
@@ -153,7 +198,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário não encontrado..
         /// </summary>
-        internal static string UserNotFound {
+        public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
@@ -162,7 +207,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário atualizado com sucesso..
         /// </summary>
-        internal static string UserSucessUpdate {
+        public static string UserSucessUpdate {
             get {
                 return ResourceManager.GetString("UserSucessUpdate", resourceCulture);
             }
@@ -171,7 +216,7 @@ namespace PetShopCRM.Application.Resources {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário válido.
         /// </summary>
-        internal static string UserValid {
+        public static string UserValid {
             get {
                 return ResourceManager.GetString("UserValid", resourceCulture);
             }

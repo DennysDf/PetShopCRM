@@ -5,9 +5,8 @@ using PetShopCRM.Application.DTOs;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Enums;
 using PetShopCRM.Infrastructure.Settings;
-using PetShopCRM.Web.Services.Interfaces;
 
-namespace PetShopCRM.Web.Services;
+namespace PetShopCRM.Application.Services;
 
 public class EmailService(IOptions<AppSettings> appSettings, IConfigurationService configurationService) : IEmailService
 {
@@ -27,7 +26,7 @@ public class EmailService(IOptions<AppSettings> appSettings, IConfigurationServi
             var configSenderEmail = configurationService.GetByKey(ConfigurationKey.SmtpSenderEmail);
 
             if (string.IsNullOrEmpty(configSenderEmail?.Value))
-                return new ResponseDTO<bool>(false, Resources.Text.EmailSenderNotFound, false);
+                return new ResponseDTO<bool>(false, Resources.Message.EmailSenderNotFound, false);
 
             var configSystemName = configurationService.GetByKey(ConfigurationKey.SystemName);
 
@@ -43,7 +42,7 @@ public class EmailService(IOptions<AppSettings> appSettings, IConfigurationServi
             await smtpClient.SendAsync(mailMessage);
             await smtpClient.DisconnectAsync(true);
 
-            return new ResponseDTO<bool>(true, Resources.Text.EmailSuccess, true);
+            return new ResponseDTO<bool>(true, Resources.Message.EmailSuccess, true);
         }
         catch (Exception ex)
         {
@@ -67,7 +66,7 @@ public class EmailService(IOptions<AppSettings> appSettings, IConfigurationServi
             return new ResponseDTO<bool>(false, validateResult.Message, false);
 
         await smtpClient.AuthenticateAsync(configEmailUser?.Value, configEmailPassword?.Value);
-        
+
         return new ResponseDTO<bool>(true, string.Empty, true);
     }
 
@@ -75,17 +74,17 @@ public class EmailService(IOptions<AppSettings> appSettings, IConfigurationServi
     {
         if (string.IsNullOrEmpty(user) && string.IsNullOrEmpty(password))
         {
-            return (false, Resources.Text.EmailUserAndPasswordNotFound);
+            return (false, Resources.Message.EmailUserAndPasswordNotFound);
         }
 
         if (string.IsNullOrEmpty(user))
         {
-            return (false, Resources.Text.EmailUserNotFound);
+            return (false, Resources.Message.EmailUserNotFound);
         }
 
         if (string.IsNullOrEmpty(password))
         {
-            return (false, Resources.Text.EmailPasswordNotFound);
+            return (false, Resources.Message.EmailPasswordNotFound);
         }
 
         return (true, string.Empty);

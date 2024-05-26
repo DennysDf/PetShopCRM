@@ -7,3 +7,13 @@ label:has(+ input[data-val-required])::after {
     content: "*:";
     font-weight: bold;
 }
+
+label:has(+ select:not([data-val-required]))::after {
+    content: ":";
+    font-weight: bold;
+}
+
+label:has(+ select[data-val-required])::after {
+    content: "*:";
+    font-weight: bold;
+}

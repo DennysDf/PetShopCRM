@@ -4,10 +4,6 @@ using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Web.Util;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Diagnostics.Metrics;
-using System.Net;
-using System.Reflection.Emit;
 
 namespace PetShopCRM.Web.Models.Payment;
 
@@ -64,6 +60,10 @@ public class PaymentVM
 
 public class PaymentCardVM
 {
+    [DisplayName("Deseja preencher os dados do cartão? (Caso 'Não', envia link para o tutor)")]
+    [ValidateNever]
+    public bool HasCard { get; set; }
+
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Número do cartao")]
     public string Number { get; set; }
@@ -96,8 +96,11 @@ public class PaymentCardVM
 
     public SelectList BrandList { get; set; }
 
-    public CardDTO ToDTO()
+    public CardDTO? ToDTO()
     {
+        if (!HasCard)
+            return null;
+
         return new CardDTO(Number, HolderName, ExpirationMonth, ExpirationYear, Cvv, Brand.Value);
     }
 }

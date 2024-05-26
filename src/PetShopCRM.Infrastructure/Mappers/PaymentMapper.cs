@@ -27,7 +27,7 @@ public class PaymentMapper : IEntityTypeConfiguration<Payment>
 
         //Payment
         builder.Property(x => x.ExternalId)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(x => x.PetId)
             .IsRequired();

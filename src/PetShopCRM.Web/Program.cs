@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application;
+using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Enums;
 using PetShopCRM.External;
 using PetShopCRM.Infrastructure;
@@ -39,7 +40,7 @@ builder.Services.AddAuthorizationBuilder()
 
 builder.Services.Configure<AppSettings>(builder.Configuration);
 
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddRepositories();
 builder.Services.AddServices();
 builder.Services.AddExternalServices();
@@ -50,7 +51,7 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<ILoggedUserService, LoggedUserService>();
 builder.Services.AddScoped<IUpload, Upload>();
 builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IWebContext, WebContext>();
 
 builder.Services.AddSignalR(options =>
 {

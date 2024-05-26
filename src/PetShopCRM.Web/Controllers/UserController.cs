@@ -20,7 +20,7 @@ namespace PetShopCRM.Web.Controllers
         ILoginService loginService,
         INotificationService notificationService,
         IUserService userService, ILoggedUserService loggedUserService,
-        IUpload upload, IEmailService emailService) : Controller
+        IUpload upload, IEmailService emailService, IWebContext webContext) : Controller
     {
         [HttpGet]
         [AllowAnonymous]
@@ -187,7 +187,7 @@ namespace PetShopCRM.Web.Controllers
                 var model = userDTO.Data;
                 var email = model.Email;
                 message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";                
-                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/User/RestorePasswordExternal?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
+                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{webContext.GenerateUrl("User", "RestorePasswordExternal")}?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
             }
 
             return message;

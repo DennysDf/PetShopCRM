@@ -43,114 +43,114 @@
 <div class="container-fluid">
     @if (ViewBag.AlertUpdateImg != null)
     {
-        <div class="row align-items-right justify-content-center">
+        <div class="row mb-3 align-items-right justify-content-center">
             <div class="col-sm-2">
                 <a href="@Url.Action("UpdateImg","Report")" class="btn btn-danger text-white">Acessar relatório de imagens atualizadas.</a>
             </div>
         </div>
     }
 
-    <form asp-action="Details" asp-controller="Guardian" method="get">
+<form asp-action="Details" asp-controller="Guardian" method="get">
 
-        <div class="row mb-4 align-items-end justify-content-center">
-            <div class="col-sm-9">
-                <select class="form-control select2" name="IdPet" id="IdPet" asp-items="ViewBag.Pets">
-                    <option selected value="0">Pesquisar por pet...</option>
-                </select>
-            </div>
-            <div class="col-sm-1 mt-4 text-center">
-                <button disabled type="submit" id="details" class="btn btn-info"><i class="fa fa-search"></i> Ver detalhes </button>
-            </div>
+    <div class="row mb-4 align-items-end justify-content-center">
+        <div class="col-sm-11">
+            <select class="form-control select2" name="IdPet" id="IdPet" asp-items="ViewBag.Pets">
+                <option selected value="0">Pesquisar por pet...</option>
+            </select>
         </div>
-    </form>
-    <div class="row  justify-content-center">
+        <div class="col-sm-1 mt-4 text-center">
+            <button disabled type="submit" id="details" class="btn btn-info"><i class="fa fa-search"></i> Ver detalhes </button>
+        </div>
+    </div>
+</form>
+<div class="row  justify-content-center">
 
-        <div class="col-xl-2 col-lg-2">
-            <div class="card widget-flat">
-                <div class="card-body">
-                    <div class="float-end">
-                        <i class="mdi mdi-currency-usd widget-icon"></i>
-                    </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Saldo no Pagar.me</h5>
-                    <h3 class="mt-3 mb-3">R$ @ViewBag.Value</h3>
-                    <p class="mb-0 text-muted">
+    <div class="col">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-currency-usd widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Saldo no Pagar.me</h5>
+                <h3 class="mt-3 mb-3">R$ @ViewBag.Value</h3>
+                <p class="mb-0 text-muted">
                         @if (ViewBag.UrlBalance != null)
                         {
-                            <a target="_blank" href="@ViewBag.UrlBalance">Realizar saque.</a>
+                        <a target="_blank" href="@ViewBag.UrlBalance">Realizar saque.</a>
                         }
                         else
                         {
-                            <br />
+                        <br />
                         }
-                    </p>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col -->
-
-        <div class="col-xl-2 col-lg-2">
-            <div class="card widget-flat">
-                <div class="card-body">
-                    <div class="float-end">
-                        <i class="mdi mdi-currency-usd widget-icon"></i>
-                    </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Growth">Tutores</h5>
-                    <h3 class="mt-3 mb-3"> @ViewBag.QtdGuardians </h3>
-                    <p class="mb-0 text-muted">
-                        <span class="text-@ViewBag.TypeTextGuardians me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGuardians-bold"></i>  @ViewBag.PercentGuardians %</span>
-                        <span class="text-nowrap">Desde o último mês.</span>
-                    </p>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div>
-
-        <div class="col-xl-2 col-lg-2">
-            <div class="card widget-flat">
-                <div class="card-body">
-                    <div class="float-end">
-                        <i class="fa-solid fa-dog widget-icon"></i>
-                    </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Growth">Pets</h5>
-                    <h3 class="mt-3 mb-3"> @ViewBag.QtdPets </h3>
-                    <p class="mb-0 text-muted">
-                        <span class="text-@ViewBag.TypeTextPets me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPets-bold"></i>  @ViewBag.PercentPets %</span>
-                        <span class="text-nowrap">Desde o último mês.</span>
-                    </p>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div>
-
-        <div class="col-xl-2 col-lg-2">
-            <div class="card widget-flat">
-                <div class="card-body">
-                    <div class="float-end">
-                        <i class="mdi mdi-cart-plus widget-icon"></i>
-                    </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Vendas</h5>
-                    <h3 class="mt-3 mb-3">@ViewBag.QtdPayments</h3>
-                    <p class="mb-0 text-muted">
-                        <span class="text-@ViewBag.TypeTextPayments me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPayments-bold"></i>  @ViewBag.PercentPayments %</span>
-                        <span class="text-nowrap">Desde o último mês.</span>
-                    </p>
-                </div>
+                </p>
             </div> <!-- end card-body-->
         </div> <!-- end card-->
+    </div> <!-- end col -->
 
-        <div class="col-xl-2 col-lg-2">
-            <div class="card widget-flat">
-                <div class="card-body">
-                    <div class="float-end">
-                        <i class="mdi mdi-currency-usd widget-icon"></i>
-                    </div>
-                    <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
-                    <h3 class="mt-3 mb-3">R$ <span class="value-mask formatNumber"> @ViewBag.QtdFaturamento </span> </h3>
-                    <p class="mb-0 text-muted">
-                        <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
-                        <span class="text-nowrap">Desde o último mês.</span>
-                    </p>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div>
+    <div class="col">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-currency-usd widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Growth">Tutores</h5>
+                <h3 class="mt-3 mb-3"> @ViewBag.QtdGuardians </h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextGuardians me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowGuardians-bold"></i>  @ViewBag.PercentGuardians %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
     </div>
+
+    <div class="col">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="fa-solid fa-dog widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Growth">Pets</h5>
+                <h3 class="mt-3 mb-3"> @ViewBag.QtdPets </h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextPets me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPets-bold"></i>  @ViewBag.PercentPets %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div>
+
+    <div class="col">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-cart-plus widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Vendas</h5>
+                <h3 class="mt-3 mb-3">@ViewBag.QtdPayments</h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextPayments me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowPayments-bold"></i>  @ViewBag.PercentPayments %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div>
+        </div> <!-- end card-body-->
+    </div> <!-- end card-->
+
+    <div class="col">
+        <div class="card widget-flat">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="mdi mdi-currency-usd widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0" title="Average Revenue">Faturamento</h5>
+                <h3 class="mt-3 mb-3">R$ <span class="value-mask formatNumber"> @ViewBag.QtdFaturamento </span> </h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-@ViewBag.TypeTextFaturamento me-2"><i class="mdi mdi-arrow-@ViewBag.ArrowFaturamento-bold"></i>  @ViewBag.PercentFaturamento %</span>
+                    <span class="text-nowrap">Desde o último mês.</span>
+                </p>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div>
+</div>
 </div>
 
 <div class="row">
@@ -207,261 +207,258 @@
 @section Scripts {
 
     <script type="text/javascript">
-        $(function () {
-            $("#IdPet").change(function () {
-                if ($(this).val() == 0) {
-                    $("#details").attr("disabled", "true")
-                } else {
-                    $("#details").removeAttr("disabled")
-                }
-            });
-        });
+        $("#IdPet").change(function () {
+            if ($(this).val() == 0) {
+                $("#details").attr("disabled", "true")
+            } else {
+                $("#details").removeAttr("disabled")
+            }
+        })
     </script>
 
     @* Grafico de barras *@
     <script type="text/javascript">
-        $(function () {
-            var objBancoFaturamentoAnual = JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnualIndividual)')
 
-            var jsonComplete = completarKeys(objBancoFaturamentoAnual, 12)
+        var objBancoFaturamentoAnual = JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnualIndividual)')
 
-            function completarKeys(jsonArray, maxKey) {
-                const resultado = Array.from({ length: maxKey }, (v, k) => ({ Key: k + 1, Valor: 0 }));
+        var jsonComplete = completarKeys(objBancoFaturamentoAnual, 12)
 
-                jsonArray.forEach(item => {
-                    if (item.Key && item.Key <= maxKey) {
-                        resultado[item.Key - 1].Valor = item.Valor;
-                    }
-                });
+        function completarKeys(jsonArray, maxKey) {
+            const resultado = Array.from({ length: maxKey }, (v, k) => ({ Key: k + 1, Valor: 0 }));
 
-                return resultado;
-            }
-
-            var arrIndexFaturamentoAnual = [];
-            $.each(jsonComplete, function (i, element) {
-                arrIndexFaturamentoAnual.push(element.Valor)
+            jsonArray.forEach(item => {
+                if (item.Key && item.Key <= maxKey) {
+                    resultado[item.Key - 1].Valor = item.Valor;
+                }
             });
 
-            var options = {
-                series: [{
-                    name: '',
-                    data: arrIndexFaturamentoAnual
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 380
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '55%',
-                        endingShape: 'rounded'
+            return resultado;
+        }
 
-                    },
+        var arrIndexFaturamentoAnual = [];
+        $.each(jsonComplete, function (i, element) {
+            arrIndexFaturamentoAnual.push(element.Valor)
+        });
+
+        var options = {
+            series: [{
+                name: '',
+                data: arrIndexFaturamentoAnual
+            }],
+            chart: {
+                type: 'bar',
+                height: 380
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+
                 },
-                colors: ['#AABD24'],
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    show: true,
-                    width: 2,
-                    colors: ['#AABD24']
-                },
+            },
+            colors: ['#AABD24'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['#AABD24']
+            },
+            title: {
+                text: 'Faturamento por plano (todos os planos) - ' + YearNow(),
+                align: 'center'
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 title: {
-                    text: 'Faturamento por plano (todos os planos) - ' + YearNow(),
-                    align: 'center'
-                },
-                xaxis: {
-                    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    title: {
-                        text: 'Meses'
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'R$'
-                    }
-                },
-                fill: {
-                    opacity: 1
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return formatarNumeroBrasileiro(val)
-                        }
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'R$'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return formatarNumeroBrasileiro(val)
                     }
                 }
-            };
+            }
+        };
 
-            var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
-            chart.render();
-        });
+        var chart = new ApexCharts(document.querySelector("#chart-bar"), options);
+        chart.render();
     </script>
 
     @* Grafico de linhas *@
     <script type="text/javascript">
-        $(function () {
-            var options = {
-                series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnual)'.toLowerCase()),
-                chart: {
-                    height: 380,
-                    type: 'line',
-                    zoom: {
-                        enabled: false
-                    }
+
+        var options = {
+            series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoAnual)'.toLowerCase()),
+            chart: {
+                height: 380,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'smooth'
+            },
+            colors: ['#AABD24', '#D4AF37', '#292929'],
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opts) {
+                    return formatarNumeroBrasileiro(val)
                 },
-                stroke: {
-                    curve: 'smooth'
+            },
+            title: {
+                text: 'Faturamento por plano (Individual) - ' + YearNow(),
+                align: 'center'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
                 },
-                colors: ['#AABD24', '#D4AF37', '#292929'],
-                dataLabels: {
-                    enabled: true,
-                    formatter: function (val, opts) {
-                        return formatarNumeroBrasileiro(val)
-                    },
-                },
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 title: {
-                    text: 'Faturamento por plano (Individual) - ' + YearNow(),
-                    align: 'center'
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'R$'
                 },
-                grid: {
-                    row: {
-                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                        opacity: 0.5
-                    },
-                },
-                xaxis: {
-                    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    title: {
-                        text: 'Meses'
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'R$'
-                    },
 
-                },
-                tooltip: {
-                    y: {
-                        formatter: function (val) {
-                            return formatarNumeroBrasileiro(val)
-                        }
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return formatarNumeroBrasileiro(val)
                     }
-                },
-            };
+                }
+            },
+        };
 
-            var chart = new ApexCharts(document.querySelector("#chart-line"), options);
-            chart.render();
-        });
+        var chart = new ApexCharts(document.querySelector("#chart-line"), options);
+        chart.render();
+
+
+
     </script>
 
     @* Species -  Grafico de pizza *@
     <script type="text/javascript">
-        $(function () {
-            var objBanco = JSON.parse('@Html.Raw(ViewBag.ObjSpecies)')
 
-            var arrName = [];
-            $.each(objBanco, function (i, element) {
-                arrName.push(element.Name)
-            });
+        var objBanco = JSON.parse('@Html.Raw(ViewBag.ObjSpecies)')
 
-            var arrIndex = [];
-            $.each(objBanco, function (i, element) {
-                arrIndex.push(element.Index)
-            });
-
-            var options = {
-                series: arrIndex,
-                chart: {
-                    type: 'pie',
-                    height: 380,
-                    zoom: {
-                        enabled: false
-                    }
-                },
-
-                labels: arrName,
-                theme: {
-                    monochrome: {
-                        color: '#AABD24',
-                        enabled: true
-                    }
-                },
-                plotOptions: {
-                    pie: {
-                        dataLabels: {
-                            offset: -5
-                        }
-                    }
-                },
-                title: {
-                    text: 'Espécies por Pets cadastrados',
-                    align: 'center'
-                },
-                dataLabels: {
-                    formatter(val, opts) {
-                        const name = opts.w.globals.labels[opts.seriesIndex]
-                        return [name, val.toFixed(1) + '%']
-                    }
-                },
-                legend: {
-                    show: false
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart-pie"), options);
-            chart.render();
+        var arrName = [];
+        $.each(objBanco, function (i, element) {
+            arrName.push(element.Name)
         });
+
+        var arrIndex = [];
+        $.each(objBanco, function (i, element) {
+            arrIndex.push(element.Index)
+        });
+
+        var options = {
+            series: arrIndex,
+            chart: {
+                type: 'pie',
+                height: 380,
+                zoom: {
+                    enabled: false
+                }
+            },
+
+            labels: arrName,
+            theme: {
+                monochrome: {
+                    color: '#AABD24',
+                    enabled: true
+                }
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        offset: -5
+                    }
+                }
+            },
+            title: {
+                text: 'Espécies por Pets cadastrados',
+                align: 'center'
+            },
+            dataLabels: {
+                formatter(val, opts) {
+                    const name = opts.w.globals.labels[opts.seriesIndex]
+                    return [name, val.toFixed(1) + '%']
+                }
+            },
+            legend: {
+                show: false
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-pie"), options);
+        chart.render();
     </script>
 
     @* Grafico de area *@
     <script>
-        $(function () {
-            var options = {
-                series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoArea)'.toLowerCase()),
-                chart: {
-                    height: 380,
-                    type: 'area',
-                    zoom: {
-                        enabled: false
-                    }
-                },
-                stroke: {
-                    curve: 'straight'
-                },
+        var options = {
+            series: JSON.parse('@Html.Raw(ViewBag.ObjFaturamentoArea)'.toLowerCase()),
+            chart: {
+                height: 380,
+                type: 'area',
+                zoom: {
+                    enabled: false
+                }
+            },
+            stroke: {
+                curve: 'straight'
+            },
 
+            title: {
+                text: 'Vendas por plano - ' + YearNow(),
+                align: 'center'
+            },
+            xaxis: {
+                categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 title: {
-                    text: 'Vendas por plano - ' + YearNow(),
-                    align: 'center'
+                    text: 'Meses'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Qtd.'
                 },
-                xaxis: {
-                    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                    title: {
-                        text: 'Meses'
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'Qtd.'
-                    },
 
-                },
-                tooltip: {
-                    followCursor: true
-                },
-                theme: {
-                    monochrome: {
-                        color: '#AABD24',
-                        enabled: true
-                    }
-                },
-            }
-            var chart = new ApexCharts(document.querySelector("#chart-area"), options);
-            chart.render();
-        });
+            },
+            tooltip: {
+                followCursor: true
+            },
+            theme: {
+                monochrome: {
+                    color: '#AABD24',
+                    enabled: true
+                }
+            },
+        }
+        var chart = new ApexCharts(document.querySelector("#chart-area"), options);
+        chart.render();
+
     </script>
 
 }

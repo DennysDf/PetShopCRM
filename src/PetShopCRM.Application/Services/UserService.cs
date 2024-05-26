@@ -88,7 +88,7 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
     public ResponseDTO<User> GetUserByCPForEmail(string model)
     {
         var users = unitOfWork.UserRepository.GetBy();
-        var user = users.Where(c => (c.Login == model || c.Email == model) && c.Active);
+        var user = users.Where(c => (c.CPF == model || c.Email == model) && c.Active);
         User userModel = null;
         var email = string.Empty;
 

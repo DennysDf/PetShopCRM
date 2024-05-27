@@ -51,6 +51,31 @@ public class PaymentHistoryService(IUnitOfWork unitOfWork) : IPaymentHistoryServ
         return response != null;
     }
 
+    public async Task ProcessRefundAsync(string eventName, JsonElement data)
+    {
+        var signatureId = GetSubscriptionId(eventName, data);
+        var value = GetValue(eventName, data);
+
+        _ = decimal.TryParse(value[..^2] + "," + value[^2..], NumberStyles.Currency, CultureInfo.GetCultureInfo("pt-BR"), out decimal parsedValue);
+
+        var payment = unitOfWork.PaymentRepository.GetBy(x => x.ExternalId == signatureId)
+            .Include(x => x.PaymentHistories)
+            .FirstOrDefault();
+
+        if (payment != null)
+        {
+            var history = payment.PaymentHistories.LastOrDefault(x => x.IsSuccess && x.Value == parsedValue);
+
+            if (history != null)
+            {
+                history.IsSuccess = false;
+
+                await unitOfWork.PaymentHistoryRepository.AddOrUpdateAsync(history);
+                await unitOfWork.SaveChangesAsync();
+            }
+        }
+    }
+
     public async Task<ResponseDTO<PaymentHistory?>> SaveAsync(string eventName, JsonElement data)
     {
         var isSuccess = eventName.Equals("charge.paid");
@@ -76,6 +101,9 @@ public class PaymentHistoryService(IUnitOfWork unitOfWork) : IPaymentHistoryServ
 
         await unitOfWork.PaymentHistoryRepository.AddOrUpdateAsync(paymentHistory);
         await unitOfWork.SaveChangesAsync();
+
+        if (eventName.Equals("charge.refunded"))
+            await ProcessRefundAsync(eventName, data);
 
         return new ResponseDTO<PaymentHistory?>(true, string.Empty, paymentHistory);
     }

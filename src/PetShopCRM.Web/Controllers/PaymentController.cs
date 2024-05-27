@@ -159,7 +159,7 @@ public class PaymentController(
     [AllowAnonymous]
     public async Task<IActionResult> Checkout(string refId)
     {
-        var paymentId = 6;//refId.DecryptNumberFromBase64();
+        var paymentId = refId.DecryptNumberFromBase64();
 
         var payment = paymentService.GetById(paymentId);
         var pets = await petService.GetAllAsync();

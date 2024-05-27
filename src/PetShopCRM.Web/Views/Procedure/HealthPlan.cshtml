@@ -47,15 +47,24 @@
                                             <th>Carência </th>
                                         </tr>
                                     </thead>
-                                    @foreach(var vinculo in item.ProcedureHealthPlanList)
+                                    @foreach (var vinculo in item.ProcedureHealthPlanList)
                                     {
                                         <tr>
 
-                                            <td class="text-nowrap">@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>                                            
+                                            <td class="text-nowrap">@vinculo.HealthPlanName - <b>R$ </b><span class="value-mask">@vinculo.HealthPlanValue</span></td>
                                             <td>@vinculo.Observation</td>
-                                            <td><b>R$ </b><span class="value-mask">@vinculo.Coparticipation</span></td>
-                                            <td>@(vinculo.AnnualLimit?.ToString() ?? "Ilimitado")</td>
-                                            <td>@vinculo.Lack dias</td>
+                                            <td>
+                                                @if (vinculo.CoparticipationUnit == PetShopCRM.Domain.Enums.ProcedureCoparticipationUnit.Value)
+                                                {
+                                                    <b>R$ </b><span class="value-mask">@vinculo.Coparticipation</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="value-mask">@vinculo.Coparticipation</span><b>%</b>
+                                                }
+                                                </td>
+                                                <td>@(vinculo.AnnualLimit?.ToString() ?? "Ilimitado")</td>
+                                            <td class="nowrap">@vinculo.Lack dias</td>
                                         </tr>
                                     }
                                 </table>
@@ -74,7 +83,7 @@
 </div>
 
 <div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" style="min-width: 80%" role="document">
         <div class="modal-content">
             <form asp-action="HealthPlan" method="post">
                 <div class="modal-header bg-dark text-white">

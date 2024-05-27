@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
+using PetShopCRM.Domain.Enums;
+using PetShopCRM.External.PagarMe.Models;
 using PetShopCRM.Web.Models.Procedure;
 using PetShopCRM.Web.Services.Interfaces;
 using System.Text.RegularExpressions;
@@ -157,6 +159,8 @@ public class ProcedureController(
             "Text",
             procedureId,
             "Group.Name");
+
+        procedureHealthPlanVM.ProcedureUnitList = new SelectList(EnumUtil.ToList<ProcedureCoparticipationUnit>(), "Key", "Value");
 
         procedureHealthPlanVM.ProcedureHealthPlanList = procedureHealthPlanVM.ProcedureHealthPlanList.OrderBy(x => x.HealthPlanId).ToList();
 

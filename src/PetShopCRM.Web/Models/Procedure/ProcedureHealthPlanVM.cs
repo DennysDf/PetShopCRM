@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using PetShopCRM.Domain.Enums;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Util;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ public class ProcedureHealthPlanVM
     public int ProcedureId { get; set; }
     public List<ProcedureHealthPlanListVM> ProcedureHealthPlanList { get; set; }
     public SelectList ProcedureList { get; set; }
+    public SelectList ProcedureUnitList { get; set; }
 
     public string ProcedureName { get; set; }
     public string ProcedureGroup { get; set; }
@@ -32,7 +34,9 @@ public class ProcedureHealthPlanVM
             HealthPlanName = x.HealthPlan.Name,
             HealthPlanValue = x.HealthPlan.Value,
             Observation = x.Observation,
-            HasValue = x.Active
+            HasValue = x.Active,
+            CoparticipationUnit = x.CoparticipationUnit,
+            HealthPlanId = x.HealthPlanId
         }).OrderBy(x => x.HealthPlanId).ToList()
     }).ToList();
 
@@ -51,7 +55,8 @@ public class ProcedureHealthPlanVM
             HealthPlanName = x.HealthPlan.Name,
             HealthPlanValue = x.HealthPlan.Value,
             Observation = x.Observation,
-            HasValue = x.Active
+            HasValue = x.Active,
+            CoparticipationUnit = x.CoparticipationUnit
         }).OrderBy(x => x.HealthPlanId).ToList()
     };
 
@@ -102,6 +107,7 @@ public class ProcedureHealthPlanListVM
     public string HealthPlanName { get; set; }
     public decimal HealthPlanValue { get; set; }
     public string? Observation { get; set; }
+    public ProcedureCoparticipationUnit CoparticipationUnit { get; set; }
 
     public ProcedureHealthPlan ToModel(ProcedureHealthPlan procedureHealthPlan)
     {
@@ -112,6 +118,7 @@ public class ProcedureHealthPlanListVM
         procedureHealthPlan.HealthPlanId = HealthPlanId;
         procedureHealthPlan.Observation = Observation;
         procedureHealthPlan.Active = HasValue;
+        procedureHealthPlan.CoparticipationUnit = CoparticipationUnit;
 
         return procedureHealthPlan;
     }

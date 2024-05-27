@@ -44,7 +44,15 @@
                     {
                         <tr>
                             <td>@proc.Procedure</td>
-                            <td> <b>R$ </b> <span class="value-mask">@proc.Coparticipation </span></td>
+                            <td>
+                                @if (proc.CoparticipationUnit == PetShopCRM.Domain.Enums.ProcedureCoparticipationUnit.Value)
+                                {
+                                    <b>R$ </b><span class="value-mask">@proc.Coparticipation</span>
+                                }
+                                else
+                                {
+                                    <span class="value-mask">@proc.Coparticipation</span><b>%</b>
+                                }
                             <td>@(proc.AnnualLimit?.ToString() ?? "Ilimitado")</td>
                             <td class="text-nowrap">@proc.Lack dias</td>
                         </tr>

@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel;
-using System;
-using System.Reflection;
 
 public static class EnumUtil
 {

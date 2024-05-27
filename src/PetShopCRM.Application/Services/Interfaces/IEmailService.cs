@@ -1,6 +1,6 @@
 ﻿using PetShopCRM.Application.DTOs;
 
-namespace PetShopCRM.Web.Services.Interfaces;
+namespace PetShopCRM.Application.Services.Interfaces;
 
 public interface IEmailService
 {

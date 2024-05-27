@@ -38,7 +38,7 @@ namespace PetShopCRM.Web.Controllers
 
         private void LoadViewBags()
         {
-            ViewBag.PagarMeUrlWebhook = paymentService.GenerateWebhookUrl($"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}");
+            ViewBag.PagarMeUrlWebhook = paymentService.GenerateWebhookUrl();
         }
     }
 }

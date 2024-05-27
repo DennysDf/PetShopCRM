@@ -94,7 +94,7 @@ CREATE TABLE HealthPlans (
 GO
 CREATE TABLE Payments (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-    ExternalId NVARCHAR(255) NOT NULL,
+    ExternalId NVARCHAR(255),
     PetId INT NOT NULL,
     GuardianId INT NOT NULL,
     HealthPlanId INT NOT NULL,

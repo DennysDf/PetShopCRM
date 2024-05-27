@@ -98,9 +98,11 @@
         .select2-container .select2-selection--single {
             height: 35px !important;
         }
+
         apexcharts-svg {
             overflow: visible !important;
-        }  
+        }
+
         <style >
         /* The container */
         .checked-plus {
@@ -168,7 +170,7 @@
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);
-        }    
+        }
     </style>
 </head>
 <body>
@@ -294,14 +296,14 @@
                                     <li class="sidebar-item"><a href="@Url.Action("HealthPlan","Procedure")" class="sidebar-link"><i class="fa-solid fa-link"></i><span class="hide-menu"> Vincular procedimentos </span></a></li>
                                     <li class="sidebar-item"><a href="@Url.Action("Index","Procedure")" class="sidebar-link"><i class="fa-solid fa-clipboard-list"></i><span class="hide-menu"> Procedimentos </span></a></li>
                                     <li class="sidebar-item"><a href="@Url.Action("Group","Procedure")" class="sidebar-link"><i class="fa-solid fa-table-cells-large"></i><span class="hide-menu"> Grupos de procedimento </span></a></li>
-                                    
+
                                 </ul>
                             </li>
 
                             <li class="sidebar-item">
                                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa-solid fa-table-list"></i><span class="hide-menu">  Relatórios </span></a>
                                 <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="@Url.Action("UpdateImg","Report")" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i><span class="hide-menu">Imagens Atualizadas</span></a></li>                                    
+                                    <li class="sidebar-item"><a href="@Url.Action("UpdateImg","Report")" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i><span class="hide-menu">Imagens Atualizadas</span></a></li>
                                 </ul>
                             </li>
 
@@ -351,6 +353,8 @@
     </div>
     <!--Container Main end-->
     <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/js/i18n/pt-br.min.js"></script>
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/AlertifyJS/alertify.min.js"></script>
@@ -364,22 +368,24 @@
     <script src="~/js/sidebarmenu.js" asp-append-version="true"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
     <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js" asp-append-version="true"></script>
     <script src="~/lib/tableexport.jquery.plugin/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap-table/dist/extensions/export/bootstrap-table-export.min.js" asp-append-version="true"></script>
     <script src="~/lib/apexcharts/apexcharts.min.js" asp-append-version="true"></script>
-    <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
-    <script src="~/lib/select2/js/i18n/pt-br.min.js"></script>
     <script src="~/lib/bootstrap-table/src/locale/bootstrap-table-pt-br.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            var ol = $(".breadcrumb > li");
-            $.each(ol, function (key, element) {
-                $(element).addClass("breadcrumb-item");
-            });
-        })
+        function YearNow() {
+            let dataAtual = new Date();
+            let anoAtual = dataAtual.getFullYear();
+            return anoAtual
+        }
+
+        var ol = $(".breadcrumb > li");
+        $.each(ol, function (key, element) {
+            $(element).addClass("breadcrumb-item");
+        });
 
         function formatarNumeroBrasileiro(numero) {
             var retorno = 0
@@ -388,13 +394,6 @@
             }
             return retorno
         }
-
-        function YearNow() {
-            let dataAtual = new Date();
-            let anoAtual = dataAtual.getFullYear();
-            return anoAtual
-        }
-
 
         function maskInit() {
             $(".phone-mask").mask("(00) 0 0000-0000")
@@ -409,14 +408,7 @@
                     var newNum = temp + ",00"
                     $(this).val(newNum)
                 }
-            })
-
-            $('[data-mask]').each((index, element) => {
-                var mask = $(element).data('mask');
-
-                $(element).mask(mask);
             });
-            select2Init();
         }
 
         function select2Init() {
@@ -424,7 +416,6 @@
         }
 
         select2Init();
-
         maskInit();
 
         $('.bootstrap-table').each(function () {
@@ -447,19 +438,19 @@
             NotificationUtil.Stack.Clear();
         }
 
-            signalRObject.execute('/Notification', function (connection) {
-                connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
-                    return console.error(err.toString());
-                });
-
-                connection.on('ReceiveNotificationAll', function (script) {
-                    eval(script);
-                });
-
-                connection.on('ReceiveNotificationUser', function (script) {
-                    eval(script);
-                });
+        signalRObject.execute('/Notification', function (connection) {
+            connection.invoke("joinGroup", '@loggedUser.Id').catch(function (err) {
+                return console.error(err.toString());
             });
+
+            connection.on('ReceiveNotificationAll', function (script) {
+                eval(script);
+            });
+
+            connection.on('ReceiveNotificationUser', function (script) {
+                eval(script);
+            });
+        });
 
         removerPontoInicio($(".formatNumber").text())
         function removerPontoInicio(str) {
@@ -467,12 +458,8 @@
                 $(".formatNumber").text(str.slice(1));
             }
         }
-
-        $(".select2").select2();
-
-
     </script>
-    @await RenderSectionAsync("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

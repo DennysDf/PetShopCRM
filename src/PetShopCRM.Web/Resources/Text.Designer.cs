@@ -88,51 +88,6 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha para envio de e-mail não configurado..
-        /// </summary>
-        public static string EmailPasswordNotFound {
-            get {
-                return ResourceManager.GetString("EmailPasswordNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Remetente de e-mail não configurado..
-        /// </summary>
-        public static string EmailSenderNotFound {
-            get {
-                return ResourceManager.GetString("EmailSenderNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a E-mail enviado com sucesso..
-        /// </summary>
-        public static string EmailSuccess {
-            get {
-                return ResourceManager.GetString("EmailSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário e senha para envio de e-mail não configurado..
-        /// </summary>
-        public static string EmailUserAndPasswordNotFound {
-            get {
-                return ResourceManager.GetString("EmailUserAndPasswordNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Usuário para envio de e-mail não configurado..
-        /// </summary>
-        public static string EmailUserNotFound {
-            get {
-                return ResourceManager.GetString("EmailUserNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Tutor cadastrado com sucesso..
         /// </summary>
         public static string GuardianAddSucess {
@@ -219,6 +174,15 @@ namespace PetShopCRM.Web.Resources {
         public static string PaymentAddSuccess {
             get {
                 return ResourceManager.GetString("PaymentAddSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pagamento adicionado e e-mail enviado com sucesso..
+        /// </summary>
+        public static string PaymentAndEmailAddSuccess {
+            get {
+                return ResourceManager.GetString("PaymentAndEmailAddSuccess", resourceCulture);
             }
         }
         

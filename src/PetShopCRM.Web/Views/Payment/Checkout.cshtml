@@ -1,0 +1,368 @@
+﻿@model PaymentVM
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "_LayoutLogin";
+
+    var healthPlan = ViewBag.HealthPlan as HealthPlan;
+    var pet = ViewBag.Pet as Pet;
+    var guardian = ViewBag.Guardian as Guardian;
+}
+
+<style type="text/css">
+    select[readonly] {
+        background: #eee;
+        pointer-events: none;
+        touch-action: none;
+    }
+
+    .login-container {
+        background-color: #eeeeee;
+        width: 95%;
+        max-width: 95%;
+        min-height: 95%;
+        padding-bottom: 60px;
+    }
+
+    body {
+        font-size: 0.900rem;
+    }
+
+    .field-validation-error {
+        font-weight: 700;
+        color: red;
+    }
+
+    label {
+        font-weight: 700;
+    }
+
+    input {
+        background-color: white !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #c4c4c4 !important;
+        border-radius: 2px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .divButtons {
+        position: fixed;
+        text-wrap: nowrap;
+        bottom: 5px;
+        width: 90%;
+    }
+</style>
+
+<div class="login-container">
+    <div class="row">
+        <div class="col-12 mb-2 p-2 text-bg-success text-center">
+            <label style="font-size: 1.2rem">Checkout VetCard</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-sm-12">
+            <form asp-action="Checkout" method="post" id="formPayment">
+                <partial name="_FormPartial" model="Model" />
+            </form>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+            <div class="d-none d-sm-block">
+                <div class="row">
+                    <div class="col-12 text-bg-dark text-center text-2">
+                        <label style="font-size: 1rem">Resumo do pedido</label>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12 text-bg-secondary text-center text-2">
+                        <label>Pet</label>
+                    </div>
+                </div>
+                @if (pet.Identifier != null)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Identificador:</label>
+                        </div>
+                        <div class="col-6">
+                            @pet.Identifier
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-6">
+                        <label>Nome:</label>
+                    </div>
+                    <div class="col-6">
+                        @pet.Name
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12 text-bg-secondary text-center text-2">
+                        <label>Tutor</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Nome:</label>
+                    </div>
+                    <div class="col-6">
+                        @guardian.Name
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label>E-mail:</label>
+                    </div>
+                    <div class="col-6">
+                        @guardian.Email
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12 text-bg-secondary text-center text-2">
+                        <label>Plano</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label>Nome:</label>
+                    </div>
+                    <div class="col-6">
+                        @healthPlan.Name
+                    </div>
+                </div>
+                @if (healthPlan.Description != null)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Detalhes:</label>
+                        </div>
+                        <div class="col-6">
+                            @healthPlan.Description
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-6">
+                        <label>Valor:</label>
+                    </div>
+                    <div class="col-6">
+                        R$ @healthPlan.Value
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-bg-secondary text-center text-2">
+                    <label>Termo de consentimento</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p>Estou ciente de todos os custos e os benefícios fornecidos pelo plano de saúde da VetCard para pets, além de concordar com uma cobrança recorrente no meu cartão de crédito no valor de <label>R$ @healthPlan.Value</label>, a ser cobrada 1 vez por mês a partir de hoje, dia <label>@DateTime.Now.ToDateBrazilMin()</label>.</p>
+                    <p>Para visualizar todos os benefícios que o seu plano oferece, por favor, clique <a href="http://vetcard.com.br/">aqui</a>.</p>
+                    <input type="checkbox" id="checkTermo" name="checkTermo" value="true" /> <label for="checkTermo">Marque para concordar!</label>
+                    <br />
+                    <span class="text-danger">Item obrigatório para finalizar</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function validarCampos() {
+            $("#Customer_CPF").keyup(function () {
+                var cpf = $(this).val()
+                if (cpf.length > 13) {
+                    if (!cpfValidar(cpf)) {
+                        $("#valida-cpf").show();
+                        $("#btn-salve").attr("disabled", "true")
+                    } else {
+
+                        $("#valida-cpf").hide();
+                        $("#btn-salve").removeAttr("disabled", "true")
+                    }
+                } else {
+                    $("#valida-cpf").hide();
+                    $("#btn-salve").removeAttr("disabled", "true")
+                }
+            })
+        }
+        function cpfValidar(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.toString().length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            var result = true;
+            [9, 10].forEach(function (j) {
+                var soma = 0, r;
+                cpf.split(/(?=)/).splice(0, j).forEach(function (e, i) {
+                    soma += parseInt(e) * ((j + 2) - (i + 1));
+                });
+                r = soma % 11;
+                r = (r < 2) ? 0 : 11 - r;
+                if (r != cpf.substring(j, j + 1)) result = false;
+            });
+            return result;
+        }
+        function changeCep() {
+            $("#BillingAddress_ZipCode").keyup(function () {
+                if (($(this).val().length) == 9) {
+                    $.getJSON('@Url.Action("GetAddressByCEP", "Guardian")', { "CEP": $(this).val() }, function (response) {
+                        $("#BillingAddress_City").val(response.city);
+                        $("#BillingAddress_State").val(response.state);
+                        $("#BillingAddress_Address").val(response.street);
+                        $("#BillingAddress_Country").val("BR");
+                    })
+                } else {
+                    $("#BillingAddress_City").val("");
+                    $("#BillingAddress_State").val("");
+                    $("#BillingAddress_Address").val("");
+                    $("#BillingAddress_Country").val("");
+                }
+            })
+        }
+        function ValideCard() {
+            $("#Card_Number").on('keyup', function () {
+                var card = $(this).val()
+                if (card.length > 18) {
+                    if (!validarNumeroCartao(card)) {
+                        $("#valida-card").show();
+                        $("#btn-salve").attr("disabled", "true");
+                    } else {
+                        $("#Card_Brand").val(identificarBandeiraCartao(card)).change();
+                        $("#valida-card").hide();
+                        $("#btn-salve").removeAttr("disabled", "true");
+                    }
+                } else {
+                    $("#valida-card").hide();
+                    $("#btn-salve").removeAttr("disabled", "true");
+                }
+            });
+        }
+        function validarNumeroCartao(numero) {
+            // Remova todos os espaços do número do cartão
+            numero = numero.replace(/\s+/g, '');
+
+            // Algoritmo de Luhn para verificar a validade do número do cartão
+            var soma = 0;
+            var alternar = false;
+            for (var i = numero.length - 1; i >= 0; i--) {
+                var n = parseInt(numero.charAt(i), 10);
+                if (alternar) {
+                    n *= 2;
+                    if (n > 9) {
+                        n -= 9;
+                    }
+                }
+                soma += n;
+                alternar = !alternar;
+            }
+
+            // Se a soma não for múltiplo de 10, o cartão é inválido
+            return soma % 10 === 0;
+        }
+        function identificarBandeiraCartao(numero) {
+            // Remova todos os espaços do número do cartão
+            numero = numero.replace(/\s+/g, '');
+
+            // Identificação da bandeira do cartão
+            if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(numero)) {
+                return 'visa';
+            } else if (/^5[1-5][0-9]{14}$/.test(numero)) {
+                return 'mastercard';
+            } else if (/^3[47][0-9]{13}$/.test(numero)) {
+                return 'American Express';
+            } else if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(numero)) {
+                return 'Discover';
+            } else if (/^(5067|4576|4011)[0-9]{12}$/.test(numero)) {
+                return 'elo';
+            } else if (/^(636368|438935|504175|451416|636297)[0-9]{10}$/.test(numero)) {
+                return 'elo';
+            } else if (/^(627780)[0-9]{12}$/.test(numero)) {
+                return 'hipercard';
+            } else if (/^(637095|637568|637599|637609|637612)[0-9]{10}$/.test(numero)) {
+                return 'sorocred';
+            } else if (/^(603182)[0-9]{10}$/.test(numero)) {
+                return 'banescard';
+            } else if (/^(384100|384140|384160)[0-9]{10}$/.test(numero)) {
+                return 'credz';
+            } else {
+                return '';
+            }
+        }
+
+        $(() => {
+            maskInit();
+            changeCep();
+            validarCampos();
+            ValideCard();
+
+            $('#btnSalvar').hide();
+            $('#btnProximo').show();
+            $('.divCard').show();
+            $('.divRadioCard').hide();
+            $('.divRadioCard').next('hr').hide();
+
+            $('#PetId').select2('destroy');
+            $('#HealthPlanId').select2('destroy');
+
+            $('#PetId').attr('readonly', true);
+            $('#HealthPlanId').attr('readonly', true);
+
+            $('.divInicio').addClass('d-sm-none d-flex');
+            $('.divInicio').next('hr').addClass('d-sm-none d-flex');
+
+            $('label[for="Card_Cvv"]').text("CVV");
+
+            $('#btnSalvar').attr('disabled', true);
+
+            $('input[name="Card.HasCard"][Value=true]').click();
+
+            $('#checkTermo').on('change', function () {
+                if($('#checkTermo').is(':checked')){
+                    $('#btnSalvar').removeAttr('disabled');
+                    $('#checkTermo').parent().find('span').hide();
+                }else{
+                    $('#btnSalvar').attr('disabled', true);
+                    $('#checkTermo').parent().find('span').show();
+                }
+            });
+
+            $('#btnProximo').on('click', function (e) {
+                e.preventDefault();
+
+                if ($('#formPayment').valid()) {
+                    $('#btnCancelar').hide();
+                    $('#btnProximo').hide();
+                    $('#btnVoltar').show();
+                    $('#btnSalvar').show();
+
+                    $('.divStep1').hide();
+                    $('.divStep2').show();
+                }
+            });
+
+            $('#btnVoltar').on('click', function (e) {
+                e.preventDefault();
+
+                $('input[name="Customer.HasCustomer"][value="false"]').click()
+                $('input[name="BillingAddress.HasBillingAddress"][value="false"]').click()
+
+                $('#btnCancelar').show();
+                $('#btnProximo').show();
+                $('#btnVoltar').hide();
+                $('#btnSalvar').hide();
+
+                $('.divStep1').show();
+                $('.divStep2').hide();
+            });
+        });
+    </script>
+}

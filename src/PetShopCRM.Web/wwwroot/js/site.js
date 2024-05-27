@@ -67,3 +67,16 @@ $(document).on('submit', 'form[ajax="true"]', function (e) {
         });
     }
 });
+
+jQuery.fn.extend({
+    show: function () {
+        this.removeClass('d-none');
+
+        return this;
+    },
+    hide: function () {
+        this.addClass('d-none');
+
+        return this;
+    }
+});

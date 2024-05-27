@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/lib/AlertifyJS/css/themes/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
     <style>
         .color-eye{
             background-color: #e9ecef !important;
@@ -22,11 +23,14 @@
 <body>
     @RenderBody()
     <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/js/i18n/pt-br.min.js"></script>
     <script src="~/lib/popper.js/umd/popper.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/AlertifyJS/alertify.min.js"></script>
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/js/SignalR.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery.mask/jquery.mask.min.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         @if (NotificationUtil.Stack.Count > 0)
@@ -38,6 +42,29 @@
             }
             NotificationUtil.Stack.Clear();
         }
+
+            function maskInit() {
+                $(".phone-mask").mask("(00) 0 0000-0000")
+                $(".date-mask").mask("00/00/0000")
+                $(".cpf-mask").mask("000.000.000-00")
+                $(".cnpj-mask").mask("00.000.000/0000-00")
+                $('.value-mask').mask('000.000.000.000.000,00', { reverse: true });
+                $(".cep-mask").mask("00000-000")
+                $(".value-mask").focusout(function () {
+                    if ($(this).val().length <= 2) {
+                        temp = $(this).val()
+                        var newNum = temp + ",00"
+                        $(this).val(newNum)
+                    }
+                });
+            }
+
+        function select2Init() {
+            $(".select2").select2({ width: '100%', language: "pt-BR" })
+        }
+
+        select2Init();
+        maskInit();
     </script>
     <script>
         $(function () {
@@ -47,6 +74,5 @@
     </script>
     @RenderSection("Scripts", required: false)
     @await Html.PartialAsync("_ValidationScriptsPartial")
-
 </body>
 </html>

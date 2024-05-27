@@ -156,6 +156,9 @@
   <data name="ProcedureNotFound" xml:space="preserve">
     <value>Procedimento não encontrado.</value>
   </data>
+  <data name="ProcedurePlanNotFound" xml:space="preserve">
+    <value>Procedimento do plano não encontrato.</value>
+  </data>
   <data name="SpecieNotFound" xml:space="preserve">
     <value>Espécie não encontrada.</value>
   </data>

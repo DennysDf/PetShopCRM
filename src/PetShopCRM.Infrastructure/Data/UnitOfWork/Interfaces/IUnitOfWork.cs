@@ -17,6 +17,7 @@ public interface IUnitOfWork : IDisposable
     IProcedureRepository ProcedureRepository {  get; }
     IProcedureGroupRepository ProcedureGroupRepository {  get; }
     IProcedureHealthPlanRepository ProcedureHealthPlanRepository {  get; }
+    IRecordRespository RecordRespository {  get; }
 
     Task<int> SaveChangesAsync();
 }

@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Payments;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 
 namespace PetShopCRM.Application.Services;
 
-public class ProcedureService(IUnitOfWork unitOfWork) : IProcedureService
+public class ProcedureService(IUnitOfWork unitOfWork, IPaymentService paymentService) : IProcedureService
 {
     public async Task<List<Procedure>> GetAllAsync()
     {
@@ -65,5 +66,5 @@ public class ProcedureService(IUnitOfWork unitOfWork) : IProcedureService
         await unitOfWork.SaveChangesAsync();
         return delete;
     }
-
+      
 }

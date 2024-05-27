@@ -1,4 +1,5 @@
 ﻿using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Payments;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.External.PagarMe.Models;
 
@@ -14,4 +15,5 @@ public interface IPaymentService
     Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date);
     Task<bool> CancelAsync(int id);
     decimal GetValue();
+    PlanDateCreateDTO GetPlanByPet(int id);
 }

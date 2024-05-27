@@ -111,9 +111,9 @@ public class HealthPlansController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Benefits(int id)
+    public IActionResult Benefits(int id)
     {
-        var healthPlanDTO = await healthPlanService.GetAllCompleteAsync(id);
+        var healthPlanDTO = healthPlanService.GetAllCompleteAsync(id);
         var listHealthPlansProceduresVM = new HealthPlansProcedureVM();
 
         if (healthPlanDTO.Success) { 

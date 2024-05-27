@@ -286,6 +286,24 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuário adicionado com sucesso..
+        /// </summary>
+        public static string RecordAddSucess {
+            get {
+                return ResourceManager.GetString("RecordAddSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuário atualizado com sucesso..
+        /// </summary>
+        public static string RecordUpdateSucess {
+            get {
+                return ResourceManager.GetString("RecordUpdateSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie cadastrada com sucesso..
         /// </summary>
         public static string SpecieAddSucess {

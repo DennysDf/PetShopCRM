@@ -20,6 +20,8 @@ public static class Bootstrapper
         services.AddScoped<ILogService, LogService>();
         services.AddScoped<IProcedureService, ProcedureService>();
         services.AddScoped<IProcedureGroupService, ProcedureGroupService>();
+        services.AddScoped<IProcedureHealthPlanService, ProcedureHealthPlanService>();
+        services.AddScoped<IRecordService, RecordService>();
         services.AddScoped<IEmailService, EmailService>();
 
         return services;

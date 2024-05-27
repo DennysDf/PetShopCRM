@@ -30,6 +30,7 @@
                 <tr>
                     <th>Plano</th>
                     <th>Observação</th>
+                    <th>Unidade</th>
                     <th>Coparticipação</th>
                     <th>Limite anual</th>
                     <th>Carência (dias)</th>
@@ -41,9 +42,12 @@
                     <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].Id" />
                     <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HasValue" />
                     <input type="hidden" asp-for="@Model.ProcedureHealthPlanList[i].HealthPlanId" />
-                    <td>@Model.ProcedureHealthPlanList[i].HealthPlanName</td>
+                    <td class="nowrap">@Model.ProcedureHealthPlanList[i].HealthPlanName</td>
                     <td>
                         <input type="text" class="form-control" asp-for="ProcedureHealthPlanList[i].Observation" placeholder="Observação" autofocus />
+                    </td>
+                    <td>
+                        <select class="form-control" asp-for="ProcedureHealthPlanList[i].CoparticipationUnit" asp-items="@Model.ProcedureUnitList" autofocus></select>
                     </td>
                     <td>
                         <input type="text" class="form-control value-mask" asp-for="ProcedureHealthPlanList[i].CoparticipationFrontEnd" placeholder="Coparticipação" autofocus />

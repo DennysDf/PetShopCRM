@@ -1,4 +1,5 @@
-﻿using PetShopCRM.Domain.Models;
+﻿using PetShopCRM.Domain.Enums;
+using PetShopCRM.Domain.Models;
 
 namespace PetShopCRM.Web.Models.HealthPlans;
 
@@ -25,7 +26,8 @@ public class ListHealthPlansProceduresVM
     public string Group { get; set; }
     public int? AnnualLimit { get; set; }
     public int? Lack { get; set; }
-    public string Coparticipation { get; set; }
+    public decimal Coparticipation { get; set; }
+    public ProcedureCoparticipationUnit CoparticipationUnit { get; set; }
 
     public List<ListHealthPlansProceduresVM?> ToList(HealthPlan healthPlan)
     {
@@ -36,10 +38,11 @@ public class ListHealthPlansProceduresVM
             listHealthPlansProcedures.Add(new ListHealthPlansProceduresVM() 
             { 
                 AnnualLimit = item.AnnualLimit,
-                Coparticipation = item.Coparticipation.ToString(),
+                Coparticipation = item.Coparticipation,
                 Group = item.Procedure.ProcedureGroup.Description,
                 Lack = item.Lack,
-                Procedure = item.Procedure.Description
+                Procedure = item.Procedure.Description,
+                CoparticipationUnit = item.CoparticipationUnit
             });
 
         }

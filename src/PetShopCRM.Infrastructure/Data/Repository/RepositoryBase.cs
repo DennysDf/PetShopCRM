@@ -131,4 +131,24 @@ public class RepositoryBase<T>(PetShopDbContext _context) : IRepositoryBase<T> w
 
         return true;
     }
+
+    public async Task<bool> DeletePermanentAsync(int id)
+    {
+        if (id == 0) throw new ArgumentNullException(nameof(id));
+
+        try
+        {
+            var entity = _context.Find<T>(id);
+
+            if (entity == null) throw new NullReferenceException(nameof(entity));
+
+            _context.Remove(entity);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+        return await Task.FromResult(true);
+    }
 }

@@ -12,5 +12,6 @@ public interface IRepositoryBase<T> where T : EntityBase
     Task<T> AddOrUpdateAsync(T entity);
     Task<List<T>> AddOrUpdateRangeAsync(List<T> entities);
     Task<bool> DeleteOrRestoreAsync(int id);
+    Task<bool> DeletePermanentAsync(int id);
 
 }

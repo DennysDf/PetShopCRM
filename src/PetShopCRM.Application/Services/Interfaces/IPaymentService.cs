@@ -13,6 +13,7 @@ public interface IPaymentService
     string GenerateWebhookUrl();
     Task<ResponseDTO<List<Payment>>> GetAllCompleteAsync(int idPet = 0);
     Task UpdateLastPaymentDateAndInstallmentAsync(int id, DateTime date);
+    Task<bool> DeleteAsync(int id);
     Task<bool> CancelAsync(int id);
     decimal GetValue();
     PlanDateCreateDTO GetPlanByPet(int id);

@@ -127,12 +127,20 @@ public class PaymentService(
 
         if (payment == null) return false;
 
-        //var result = pagarMeService.CancelSubscription(payment.ExternalId);
+        var result = pagarMeService.CancelSubscription(payment.ExternalId);
 
         var deleted = await unitOfWork.PaymentRepository.DeleteOrRestoreAsync(payment.Id);
         await unitOfWork.SaveChangesAsync();
 
-        return true != null && deleted;
+        return result != null && deleted;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var deleted = await unitOfWork.PaymentRepository.DeletePermanentAsync(id);
+        await unitOfWork.SaveChangesAsync();
+
+        return deleted;
     }
 
     public decimal GetValue()

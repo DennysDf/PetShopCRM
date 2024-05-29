@@ -27,7 +27,7 @@ public class PaymentController(
     {
         var paymentsDTO = await paymentService.GetAllCompleteAsync();
 
-        var paymentsVM = PaymentVM.ToList(paymentsDTO.Data).OrderByDescending(x => x.Id).ToList();
+        var paymentsVM = PaymentVM.ToList(paymentsDTO.Data, webContext).OrderByDescending(x => x.Id).ToList();
 
         var configDashboardUrl = configurationService.GetByKey(Domain.Enums.ConfigurationKey.PagarMeDashboardUrl);
 
@@ -103,6 +103,19 @@ public class PaymentController(
             var petId = paymentService.GetById(id).PetId;
             return RedirectToAction("DetailsHealthPlan", "Guardian", new { Id = petId });
         }
+
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> DeletePerm(int id)
+    {
+        var success = await paymentService.DeleteAsync(id);
+
+        if (success)
+            notificationService.Success(Resources.Text.PaymentDeleteSuccess);
+        else
+            notificationService.Error(Resources.Text.NotificationError);
 
         return RedirectToAction("Index");
     }

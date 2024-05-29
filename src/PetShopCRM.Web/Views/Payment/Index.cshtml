@@ -53,15 +53,27 @@
                     <td class="text-nowrap @(item.IsSuccess ? "" : "text-danger")">@(item.ExternalId == null ? "Aguardando checkout" : item.IsSuccess ? "Sucesso" : "Erro")</td>
                     <td class="text-nowrap">@(item.IsActive ? "Ativo" : "Cancelado")</td>
                     <td class="text-nowrap text-right" width="15">
-                        <a href="@Url.Action("Monitoring", "Payment", new { paymentId = item.Id })" target="_blank" data-toggle="tooltip" title="Monitorar" data-placement="left">
-                            <i class="text-dark fa-solid fa-table-columns"></i>
-                        </a>
-
-                        @if (item.IsSuccess && item.IsActive)
+                        @if(item.ExternalId == null)
                         {
-                            <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Cancelar" data-id="@item.Id">
-                                <i class="fa fa-times text-danger"> </i>
+                            <a class="mr-2" target="_blank" href="@item.GuardianPhoneMessage" data-toggle="tooltip" data-placement="left" title="Enviar mensagem." data-id="@item.Id">
+                                <i class="fa-brands fa-whatsapp text-success"></i>
                             </a>
+                            <a class="mr-2 deletarPermanente" href="#" data-toggle="tooltip" data-placement="left" title="Deletar" data-id="@item.Id">
+                                <i class="fa fa-trash text-danger"> </i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Monitoring", "Payment", new { paymentId = item.Id })" target="_blank" data-toggle="tooltip" title="Monitorar" data-placement="left">
+                                <i class="text-dark fa-solid fa-table-columns"></i>
+                            </a>
+
+                            @if ((item.IsSuccess && item.IsActive))
+                            {
+                                <a class="mr-2 deletar" href="#" data-toggle="tooltip" data-placement="left" title="Cancelar" data-id="@item.Id">
+                                    <i class="fa fa-times text-danger"> </i>
+                                </a>
+                            }
                         }
                     </td>
                 </tr>
@@ -93,10 +105,37 @@
     </div>
 </div>
 
+<div class="modal" style="padding-top:120px" role="dialog" id="deletePermanente" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fa fa-exclamation-triangle " style="color:yellow"></i>  ATENÇÃO <i style="color:yellow" class="fa fa-exclamation-triangle"></i></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="font-weight-bold font-18">
+                    Pagamento não iniciado. Deseja deletar permanentemente?
+                    <input type="hidden" id="delPerm-evento" />
+                </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                <button type="button" id="confirm-delPerm" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script type="text/javascript">
         $("#confirm-del").click(function () {
             window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
+        });
+
+        $("#confirm-delPerm").click(function () {
+            window.location.href = "@Url.Action("DeletePerm")?id=" + $("#delPerm-evento").val();
         });
 
         var $table = $('#table')
@@ -105,6 +144,11 @@
                 var id = [row.id]
                 $("#del-evento").val(id)
                 $("#delete").modal("show")
+            },
+            'click .deletarPermanente': function (e, value, row, index) {
+                var id = [row.id]
+                $("#delPerm-evento").val(id)
+                $("#deletePermanente").modal("show")
             }
         }
     </script>

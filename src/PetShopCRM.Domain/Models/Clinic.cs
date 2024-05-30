@@ -7,4 +7,5 @@ public class Clinic : EntityBase
     public string Phone { get; set; }
     public string Responsible { get; set; }
     public string CNPJ { get; set; }
+    public virtual ICollection<Record> Records { get; set; }
 }

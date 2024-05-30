@@ -1,11 +1,20 @@
 ﻿@model RecordVM
 @{
-    ViewData["Title"] = "Prontuário";
-    ViewData["Caminho"] = "<li>Prontuário</li>";
+    ViewData["Title"] = "Cadastrar Prontuário";
+    ViewData["Caminho"] = "<li>Prontuário</li><li>Cadastrar Prontuário</li>";
 }
 <div class="container-fluid">
     <form asp-action="Index" method="post">
         <input type="hidden" asp-for="Id" />
+        <div class="row">
+            <div class="col-sm-6">
+                <label asp-for="ClinicId"></label>
+                <select asp-for="ClinicId" asp-items="Model.ListClinics" class="form-control select2">
+                    <option selected disabled>Selecione a clínica</option>
+                </select>
+                <span asp-validation-for="ClinicId"></span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <label asp-for="PetId">Pet:</label>
@@ -82,7 +91,7 @@
                     var json = JSON.parse(response);
                     const procedures = json.$values.map(item => {
                         return {
-                            id: item.Procedure.Id,
+                            id: item.Id,
                             text: item.Procedure.Description
                         };
                     });

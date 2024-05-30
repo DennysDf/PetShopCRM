@@ -63,5 +63,10 @@ public class RecordMapper : IEntityTypeConfiguration<Record>
         .HasForeignKey(x => x.ProcedureHealthPlanId)
         .HasConstraintName("Record_ProceduresHealthPlans_ProcedureHealthPlanId");
 
+        builder.HasOne(x => x.Clinic)
+        .WithMany(x => x.Records)
+        .HasForeignKey(x => x.ClinicId)
+        .HasConstraintName("Record_Clinics_ClinicId");   
+
     }
 }

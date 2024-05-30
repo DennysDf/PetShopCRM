@@ -18,17 +18,21 @@ public class RecordController(  IPetService petService,
                                 IPaymentService paymentService,
                                 IHealthPlanService healthPlanService,
                                 IRecordService recordService,
-                                INotificationService notificationService) : Controller
+                                INotificationService notificationService,
+                                IClinicService clinicService) : Controller
 {
     public async Task<IActionResult> Index()
     {
         var pets = await petService.GetAllForPlansAsync();
         var healthPlan = await healthPlanService.GetAllAsync();
+        var clinics = await clinicService.GetAllAsync();
+        //var clinics = 
         var  recordVM = new RecordVM
         {
             ListPets = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name)),
             Date = DateTime.Now.ToDateBrazilMin().ToDateTime(),
-            ListHealthPlan = new SelectList(healthPlan.Select(c => new { c.Id, Name = $"{c.Name} - R$ {c.Value}" }).ToList(), nameof(HealthPlan.Id), nameof(HealthPlan.Name))
+            ListHealthPlan = new SelectList(healthPlan.Select(c => new { c.Id, Name = $"{c.Name} - R$ {c.Value}" }).ToList(), nameof(HealthPlan.Id), nameof(HealthPlan.Name)),
+            ListClinics = new SelectList(clinics.Select(c => new { c.Id, Name = $"{c.Name}" }).ToList(), nameof(Clinic.Id), nameof(Clinic.Name)),
         };
 
         return View(recordVM);
@@ -41,7 +45,7 @@ public class RecordController(  IPetService petService,
         var model = modelVM.ToModel(modelVM);
         await recordService.AddOrUpdateAsync(model);
         notificationService.Success(message);
-        return RedirectToAction("Index");
+        return RedirectToAction("List");
     }
 
     public async Task<string> GetProcedureByPet(int id)
@@ -64,4 +68,31 @@ public class RecordController(  IPetService petService,
 
         return json;
     }
+
+    public async Task<IActionResult> List()
+    {
+        var records = new List<Record>();
+        var recordsDTO = await recordService.GetAllCompleteAsync();
+        if (recordsDTO.Success)
+        {
+            records = recordsDTO.Data;
+        }
+
+        return View(records);
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var recordDTO = await recordService.GetAllCompleteAsync(id);
+        var recordVM = new RecordVM();
+
+        if (recordDTO.Success)
+        {
+            var record = recordDTO.Data;
+            recordVM = recordVM.ToVM(record);
+        }
+
+        return View(recordVM);
+    }
+
 }

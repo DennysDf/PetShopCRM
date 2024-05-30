@@ -11,6 +11,8 @@ public class Record : EntityBase
     public string Observation { get; set; }
     public int ProcedureHealthPlanId { get; set; }
     public int PetId { get; set; }
+    public int ClinicId { get; set; }
     public ProcedureHealthPlan ProcedureHealthPlan { get; set; }
     public Pet Pet { get; set; }
+    public Clinic Clinic { get; set; }
 }   

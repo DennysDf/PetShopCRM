@@ -1,4 +1,6 @@
-﻿using PetShopCRM.Application.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 using System;
@@ -18,5 +20,26 @@ public class RecordService(IUnitOfWork unitOfWork) : IRecordService
         await unitOfWork.RecordRespository.AddOrUpdateAsync(model);
         await unitOfWork.SaveChangesAsync();
         return model;
+    }
+
+    public async Task<ResponseDTO<List<Record>>> GetAllCompleteAsync(int id = 0)
+    {
+        var record = unitOfWork.RecordRespository.GetBy(x => x.Active)
+            .Include(c => c.Clinic)
+            .Include(c => c.Pet)
+                .ThenInclude(c => c.Specie)
+            .Include(c => c.Pet)
+                .ThenInclude(c => c.Guardian)
+            .Include(c => c.ProcedureHealthPlan)
+                .ThenInclude(c => c.Procedure)
+            .Include(c => c.ProcedureHealthPlan)
+                .ThenInclude(c => c.HealthPlan)
+            .OrderBy(c => c.Date)
+            .AsQueryable();
+
+        if (id != 0)
+            record = record.Where(c => c.Id == id);
+
+        return new ResponseDTO<List<Record>>(record.ToList().Count > 0, "Nenhum resultado encontrado", record.ToList());
     }
 }

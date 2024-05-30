@@ -1,0 +1,89 @@
+﻿@model ICollection<Record>
+@{
+    var modelList = Model.ToList();
+    ViewData["Title"] = "Prontuário";
+    ViewData["Caminho"] = "<li>Prontuário</li>";
+}
+
+
+<style>
+    .card-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+        .card-link:hover {
+            text-decoration: none;
+        }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-img-top {
+        width: 100%; /* faz a imagem ocupar toda a largura do card */
+        height: auto; /* mantém a proporção da imagem */
+        max-height: 300px; /* altura máxima da imagem */
+        object-fit: cover; /* cobre a área do container sem distorcer a imagem */
+    }
+
+</style>
+
+
+<div class="row mb-3 ">
+    <div class="col-12 text-center">
+        <a asp-action="Index" class="btn btn-success">
+            <i class="fa fa-plus-circle"></i>
+            <b>Incluir Prontuário</b>
+        </a>
+    </div>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <a href="@Url.Action("Details", new {Id = item.Id})" class="card-link">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><i class="fas fa-paw"></i> @item.Pet.Name</h5>
+                        <div class="row text-left">
+                            <div class="col">
+                                <p class="card-text"><i class="fa-solid fa-calendar-days"></i> <strong>Data:</strong> @item.Date.ToDateBrazilMin()</p>
+                                <p class="card-text"> <i class="fa-solid fa-house-chimney-medical"></i> <strong>Clínica:</strong> @item.Clinic.Name</p>
+                                <p class="card-text"><i class="fa-solid fa-clipboard"></i> <strong>Procedimento:</strong> @item.ProcedureHealthPlan.Procedure.Description</p>
+
+                                <p class="card-text"> <i class="fa-solid fa-hand-holding-medical"></i> <strong>Motivo da consulta:</strong> @item.ReasonConsultation</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@* 
+
+<div class="row">
+    <div class="timeline">
+    @foreach (var item in Model)
+    {       
+        <div class="col-sm-4">
+            <div class="evento">
+                <div class="descricao">
+                    <div class="data">@item.Date.ToDateBrazilMin()</div>
+                    <h3>@item.Pet.Name</h3>
+                    <p><b>Clínica:</b> @item.Clinic.Name</p>
+                    <p><b>Procedimento:</b> @item.ProcedureHealthPlan.Procedure.Description  </p>
+                    <p><b>Motivo da Consulta:</b> @item.ReasonConsultation</p>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div> *@

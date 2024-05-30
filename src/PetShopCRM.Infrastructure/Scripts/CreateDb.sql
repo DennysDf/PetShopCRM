@@ -49,6 +49,20 @@ CREATE TABLE Clinics (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL
 );
+GO
+SET IDENTITY_INSERT [dbo].[Clinics] ON 
+GO
+INSERT [dbo].[Clinics] ([Id], [Name], [Address], [Phone], [Responsible], [CNPJ], [CreatedDate], [UpdatedDate], [Active]) VALUES (1, N'Gato.cão - Recanto das Emas', N'Av. Potiguar, Q 203, L 39, Loja 01, Recanto das Emas - DF', N'(61) 9 3543-4603', N'Jhonny', N'11.111.111/1111-11', CAST(N'2024-05-28T00:13:09.7143874' AS DateTime2), CAST(N'2024-05-28T00:13:09.7142563' AS DateTime2), 1)
+GO
+INSERT [dbo].[Clinics] ([Id], [Name], [Address], [Phone], [Responsible], [CNPJ], [CreatedDate], [UpdatedDate], [Active]) VALUES (2, N'Gato.cão - Luziânia', N'Rua Dr. João Teixeira, Q 71B, LT 04 - Centro Luziânia - GO', N'(61) 9 3601-1062', N'Jhony', N'11.111.111/1111-11', CAST(N'2024-05-28T00:14:45.6244135' AS DateTime2), CAST(N'2024-05-28T00:14:45.6244122' AS DateTime2), 1)
+GO
+INSERT [dbo].[Clinics] ([Id], [Name], [Address], [Phone], [Responsible], [CNPJ], [CreatedDate], [UpdatedDate], [Active]) VALUES (3, N'HomeVet - Sobradinho', N'Q 08, Cl 29, loja 06, Sobradinho - DF', N'(61) 9 3970-7744', N'Allexis', N'11.111.111/1111-11', CAST(N'2024-05-28T00:16:09.6757184' AS DateTime2), CAST(N'2024-05-28T00:16:09.6757166' AS DateTime2), 1)
+GO
+INSERT [dbo].[Clinics] ([Id], [Name], [Address], [Phone], [Responsible], [CNPJ], [CreatedDate], [UpdatedDate], [Active]) VALUES (4, N'Home Vet', N'Q 2, Conjunto H, Lote 21, Setor Residencial Leste, Planaltina - DF', N'(61) 9 3308-4981', N'Allexis', N'11.111.111/1111-11', CAST(N'2024-05-28T00:17:24.3958237' AS DateTime2), CAST(N'2024-05-28T00:17:24.3958216' AS DateTime2), 1)
+GO
+SET IDENTITY_INSERT [dbo].[Clinics] OFF
+GO
+GO
 CREATE TABLE Species (
     Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     Name NVARCHAR(255) NOT NULL,
@@ -197,6 +211,7 @@ CREATE TABLE Records (
     Date  DATETIME2 NOT NULL,
     ProcedureHealthPlanId INT NOT NULL,
     PetId INT NOT NULL,
+    ClinicId INT NOT NULL,
     ReasonConsultation VARCHAR(500) NULL,
     ClinicalHistory VARCHAR(500) NULL,
     PhysicalExam VARCHAR(500) NULL,
@@ -207,5 +222,6 @@ CREATE TABLE Records (
     UpdatedDate DATETIME2,
     Active BIT NOT NULL,
     CONSTRAINT Record_ProceduresHealthPlans_ProcedureHealthPlanId FOREIGN KEY (ProcedureHealthPlanId) REFERENCES ProcedureHealthPlans(Id),
-    CONSTRAINT Record_Pets_PetId FOREIGN KEY (PetId) REFERENCES Pets(Id)
+    CONSTRAINT Record_Pets_PetId FOREIGN KEY (PetId) REFERENCES Pets(Id),
+    CONSTRAINT Record_Clinics_ClinicId FOREIGN KEY (ClinicId) REFERENCES Clinics(Id)
 );

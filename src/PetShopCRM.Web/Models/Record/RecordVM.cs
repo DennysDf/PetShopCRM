@@ -30,7 +30,7 @@ public class RecordVM
     public string? Prescription { get; set; }
 
     [DisplayName("Observações")]
-    public string? Observation { get; }
+    public string? Observation { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Procedimento")]
@@ -40,6 +40,13 @@ public class RecordVM
     [DisplayName("Pet")]
     public int PetId { get; set; }
 
+    public string Name { get; set; }
+    public string Identifier { get; set; }
+    public string Specie { get; set; }
+    public string Guardian { get; set; }
+    public string HealthPlan { get; set; }
+    public string Procedure { get; set; }
+    public string Clinic { get; set; }
     public SelectList ListProcedureHealthPlan { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]    
@@ -47,6 +54,10 @@ public class RecordVM
     public int HealthPlanId { get; set; }
     public SelectList ListHealthPlan { get; set; }
 
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [DisplayName("Clínica")]
+    public int ClinicId { get; set; }
+    public SelectList ListClinics { get; set; }
 
     public PetShopCRM.Domain.Models.Record ToModel(RecordVM model) => new Domain.Models.Record() 
     { 
@@ -58,6 +69,9 @@ public class RecordVM
         PetId = this.PetId,
         Observation = this.Observation,
         ReasonConsultation = this.ReasonConsultation,
-        ProcedureHealthPlanId = this.ProcedureHealthPlanId
+        ProcedureHealthPlanId = this.ProcedureHealthPlanId,
+        ClinicId = this.ClinicId
     };
+
+    public RecordVM ToVM(List<Domain.Models.Record> model) => model.Select(c => new RecordVM { Name = c.Pet.Name, Identifier = c.Pet.Identifier, Specie = c.Pet.Specie.Name, Guardian = c.Pet.Guardian.Name, ReasonConsultation = c.ReasonConsultation, Date = c.Date, Diagnosis = c.Diagnosis, ClinicalHistory = c.ClinicalHistory, Observation = c.Observation, Prescription = c.Prescription, PhysicalExam = c.PhysicalExam, Procedure = c.ProcedureHealthPlan.Procedure.Description, Clinic = c.Clinic.Name, HealthPlan = c.ProcedureHealthPlan.HealthPlan.Name }).First();
 }

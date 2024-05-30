@@ -11,4 +11,5 @@ namespace PetShopCRM.Application.Services.Interfaces;
 public interface IRecordService
 {
     Task<Record> AddOrUpdateAsync(Record record);
+    Task<ResponseDTO<List<Record>>> GetAllCompleteAsync(int id = 0);
 }

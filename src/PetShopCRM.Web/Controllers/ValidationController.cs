@@ -18,15 +18,15 @@ namespace PetShopCRM.Web.Controllers
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IActionResult UserCpfExists(string cpf, int id)
+        public bool UserCpfExists(string cpf, int id)
         {
             var userDTO = userService.GetUserByCPForEmail(cpf.FormatCpf());
 
             if ((id == 0 && userDTO?.Data != null) ||
                 (id != 0 && (userDTO?.Data != null && userDTO.Data.Id != id)))
-                return Json(false);
+                return false;
 
-            return Json(true);
+            return true;
         }
 
         [AcceptVerbs("GET", "POST")]

@@ -25,9 +25,9 @@
             </div>
             <div class="col-sm-6">
                 <label>Plano de Saúde:</label>
-                <select asp-for="HealthPlanId" asp-items="Model.ListHealthPlan" class="form-control" disabled>     
+                <select asp-for="HealthPlanId" asp-items="Model.ListHealthPlan" class="form-control" disabled>
                     <option selected disabled></option>
-                </select>                
+                </select>
             </div>
         </div>
         <div class="row">
@@ -89,33 +89,43 @@
             $.get('@Url.Action("GetProcedureByPet", "Record")', { "id": id })
                 .done(function (response) {
                     var json = JSON.parse(response);
-                    const procedures = json.$values.map(item => {
-                        return {
-                            id: item.Id,
-                            text: item.Procedure.Description
-                        };
-                    });
-
-                    $("#HealthPlanId").val(json.$values[0].HealthPlanId).change();
-
-                    procedures.unshift({
-                        id: '0',
-                        text: 'Selecione o procedimento',
-                        disabled: true,
-                        selected: true
-                    });
-
-                    const newJsonString = JSON.parse(JSON.stringify(procedures, null, 2));
-
-                    $('#ProcedureHealthPlanId').empty().select2({
-                        data: newJsonString,
-                        placeholder: 'Selecione um Plano de Saúde do Procedimento',
-                        allowClear: true
-                    });
+                    CreateSelectProcedure(response)
                 })
         });
 
+        @if (ViewBag.Procedures != null)
+        {
+            @: var response = @Html.Raw(ViewBag.Procedures)
+            @:CreateSelectProcedure(response);
 
+        }
+        
+
+            function CreateSelectProcedure(json) {           
+                const procedures = json.$values.map(item => {
+                    return {
+                        id: item.Id,
+                        text: item.Procedure.Description
+                    };
+                });
+
+                $("#HealthPlanId").val(json.$values[0].HealthPlanId).change();
+
+                procedures.unshift({
+                    id: '0',
+                    text: 'Selecione o procedimento',
+                    disabled: true,
+                    selected: true
+                });
+
+                const newJsonString = JSON.parse(JSON.stringify(procedures, null, 2));
+
+                $('#ProcedureHealthPlanId').empty().select2({
+                    data: newJsonString,
+                    placeholder: 'Selecione um Plano de Saúde do Procedimento',
+                    allowClear: true
+                });
+            }
 
     </script>
 }

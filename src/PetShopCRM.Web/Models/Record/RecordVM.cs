@@ -74,4 +74,22 @@ public class RecordVM
     };
 
     public RecordVM ToVM(List<Domain.Models.Record> model) => model.Select(c => new RecordVM { Name = c.Pet.Name, Identifier = c.Pet.Identifier, Specie = c.Pet.Specie.Name, Guardian = c.Pet.Guardian.Name, ReasonConsultation = c.ReasonConsultation, Date = c.Date, Diagnosis = c.Diagnosis, ClinicalHistory = c.ClinicalHistory, Observation = c.Observation, Prescription = c.Prescription, PhysicalExam = c.PhysicalExam, Procedure = c.ProcedureHealthPlan.Procedure.Description, Clinic = c.Clinic.Name, HealthPlan = c.ProcedureHealthPlan.HealthPlan.Name }).First();
+
+    public RecordVM ToVM(Domain.Models.Record model) 
+    {
+        var vm = new RecordVM();
+        vm.Date = model.Date;
+        vm.ClinicId = model.ClinicId;
+        vm.PetId = model.PetId;
+        vm.ProcedureHealthPlanId = model.ProcedureHealthPlanId;
+        vm.ReasonConsultation = model.ReasonConsultation;
+        vm.ClinicalHistory = model.ClinicalHistory;
+        vm.Observation = model.Observation;
+        vm.Diagnosis = model.Diagnosis;
+        vm.PhysicalExam = model.PhysicalExam;
+        vm.Prescription = model.Prescription;
+
+        return  vm;
+
+    }
 }

@@ -1,4 +1,7 @@
-﻿@model ICollection<Record>
+﻿@using PetShopCRM.Domain.Enums
+@using PetShopCRM.Web.Services.Interfaces
+@model ICollection<Record>
+@inject ILoggedUserService loggedUser
 @{
     var modelList = Model.ToList();
     ViewData["Title"] = "Prontuário";
@@ -30,26 +33,44 @@
     }
 
 </style>
-
-
-<div class="row mb-3 ">
-    <div class="col-12 text-center">
-        <a asp-action="Index" class="btn btn-success">
-            <i class="fa fa-plus-circle"></i>
-            <b>Incluir Prontuário</b>
-        </a>
+@if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
+{
+    <div class="row mb-3 ">
+        <div class="col-12 text-center">
+            <a asp-action="Index" class="btn btn-success">
+                <i class="fa fa-plus-circle"></i>
+                <b>Incluir Prontuário</b>
+            </a>
+        </div>
     </div>
-</div>
-
+}
 
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-md-4">
-            <a href="@Url.Action("Details", new {Id = item.Id})" class="card-link">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><i class="fas fa-paw"></i> @item.Pet.Name</h5>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col-11 text-center">
+                                <span class="text-center">
+                                    <i class="fas fa-paw"></i> @item.Pet.Name
+                                </span>
+                            </div>
+                            @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
+                            {
+                                <div class="col-1">
+                                    <a class="edit" href="@Url.Action("Index",new {Id = item.Id})" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                        <i class="text-dark fa fa-pencil-alt"></i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <a href="@Url.Action("Details", new {Id = item.Id})" class="card-link link-dark">
                         <div class="row text-left">
                             <div class="col">
                                 <p class="card-text"><i class="fa-solid fa-calendar-days"></i> <strong>Data:</strong> @item.Date.ToDateBrazilMin()</p>
@@ -57,22 +78,22 @@
                                 <p class="card-text"><i class="fa-solid fa-clipboard"></i> <strong>Procedimento:</strong> @item.ProcedureHealthPlan.Procedure.Description</p>
 
                                 <p class="card-text"> <i class="fa-solid fa-hand-holding-medical"></i> <strong>Motivo da consulta:</strong> @item.ReasonConsultation</p>
-                                
+
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
     }
 </div>
 
-@* 
+@*
 
 <div class="row">
     <div class="timeline">
     @foreach (var item in Model)
-    {       
+    {
         <div class="col-sm-4">
             <div class="evento">
                 <div class="descricao">

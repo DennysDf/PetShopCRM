@@ -12,4 +12,5 @@ public interface IGuardianService
     Task<bool> DeleteAsync(int id);
     Task<ResponseDTO<List<Guardian>>> GetAllCompleteAsync(int id = 0);
     Task<Guardian?> GetByPetIdAsync(int id);
+    ResponseDTO<Guardian> GetByCPForEmail(string model);
 }

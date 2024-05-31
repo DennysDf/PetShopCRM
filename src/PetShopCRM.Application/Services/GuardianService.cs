@@ -73,4 +73,21 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
         var guardian = await unitOfWork.GuardianRepository.GetByPetIdAsync(id);
         return guardian;
     }
+
+    public ResponseDTO<Guardian> GetByCPForEmail(string model)
+    {
+        var users = unitOfWork.GuardianRepository.GetBy();
+        var user = users.Where(c => (c.CPF == model || c.Email == model) && c.Active);
+        Guardian userModel = null;
+        var email = string.Empty;
+
+        if (user.Any())
+        {
+            userModel = user.First();
+            email = userModel.Email;
+        }
+
+        return new ResponseDTO<Guardian>(user.Any(), email, userModel);
+
+    }
 }

@@ -1,3 +1,38 @@
 ﻿<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/lib/select2/js/select2.min.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $.validator.addMethod("requiredif",
+        function (value, element, parameters) {
+            var requiredValue = $(element).data('val-requiredif-value');
+
+            if (value.trim() == "" && requiredValue) {
+                return false
+            } else {
+                return true
+            }
+        });
+
+    $.validator.unobtrusive.adapters.addBool("requiredif");
+
+    $.validator.addMethod("requiredifinput",
+        function (value, element, parameters) {
+            var propertyName = $(element).data('val-requiredifinput-propertyname');
+            var desiredValue = $(element).data('val-requiredifinput-desiredvalue');
+
+            var hasValue = false;
+
+            if (document.getElementById(propertyName).value)
+                hasValue = true;
+
+            if ((value.trim() == "") && (hasValue == (desiredValue == "True"))) {
+                $(element).attr('data-val-required', '');
+                return false
+            } else {
+                $(element).removeAttr('data-val-required');
+                return true
+            }
+        });
+
+    $.validator.unobtrusive.adapters.addBool("requiredifinput");
+</script>

@@ -15,11 +15,12 @@ public class ProfileVM
     [DisplayName("Nome")]
     public string Name { get; set; }
 
-    [Remote("ValidatePassword", "User",ErrorMessage = ValidationKeysUtil.ValidatePassword)]
+    [Remote("PasswordEqualsCurrent", "Validation",ErrorMessage = ValidationKeysUtil.ValidatePassword)]
     [DisplayName("Senha atual")]
     public string? Password { get; set; }
 
     [MinLength(6, ErrorMessage = ValidationKeysUtil.SizeMin)]
+    [RequiredIfInput(nameof(Password), true, ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Nova senha")]
     public string? PasswordNew { get; set; }
 

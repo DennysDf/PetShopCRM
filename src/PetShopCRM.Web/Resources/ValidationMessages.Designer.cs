@@ -88,6 +88,15 @@ namespace PetShopCRM.Web.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo Foto é obrigatório caso não tenha Identificador..
+        /// </summary>
+        public static string RequiredPetPhoto {
+            get {
+                return ResourceManager.GetString("RequiredPetPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Máximo de {1} caracteres..
         /// </summary>
         public static string SizeMax {
@@ -111,6 +120,15 @@ namespace PetShopCRM.Web.Resources {
         public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a CPF já existente..
+        /// </summary>
+        public static string ValidateCPF {
+            get {
+                return ResourceManager.GetString("ValidateCPF", resourceCulture);
             }
         }
         

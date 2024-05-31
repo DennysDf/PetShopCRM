@@ -20,7 +20,8 @@ public class PetVM
     public int GuardianId { get; set; }
     public string Guardian { get; set; }
 
-    [DisplayName("Foto")]    
+    [DisplayName("Foto")]
+    [RequiredIfInput(nameof(Identifier), false, ErrorMessage = ValidationKeysUtil.RequiredPetPhoto)]
     public IFormFile? Photo { get; set; }
 
     [DisplayName("Identificador")]

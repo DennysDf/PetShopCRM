@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.External.PagarMe.Models;
@@ -115,35 +116,35 @@ public class PaymentBillingAddressVM
     [ValidateNever]
     public bool HasBillingAddress { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Endereço")]
     public string Address { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Cidade")]
     public string City { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Estado")]
     public string State { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("País")]
     public string Country { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Código Postal (CEP)")]
     public string ZipCode { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Bairro")]
     public string Neighborhood { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Complemento")]
     public string Unit { get; set; }
 
-    [RequiredIfTrue(nameof(HasBillingAddress), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Número")]
     public string Number { get; set; }
 
@@ -163,19 +164,19 @@ public class PaymentCustomerVM
     [ValidateNever]
     public bool HasCustomer { get; set; }
 
-    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Nome")]
     public string Name { get; set; }
 
-    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("CPF")]
     public string CPF { get; set; }
 
-    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Telefone")]
     public string Phone { get; set; }
 
-    [RequiredIfTrue(nameof(HasCustomer), ErrorMessage = ValidationKeysUtil.Required)]
+    [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [EmailAddress(ErrorMessage = ValidationKeysUtil.Email)]
     [DisplayName("E-mail")]
     public string Email { get; set; }

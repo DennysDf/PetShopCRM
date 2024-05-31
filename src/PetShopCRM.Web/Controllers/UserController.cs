@@ -1,15 +1,9 @@
-﻿using Azure;
-using EmailHelper;
+﻿using EmailHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using PetShopCRM.Application.Services;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Enums;
-using PetShopCRM.Domain.Models;
-using PetShopCRM.External.PagarMe.Interfaces;
-using PetShopCRM.External.PagarMe.Models;
-using PetShopCRM.Web.Models.Guardian;
 using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Services.Interfaces;
 
@@ -34,7 +28,7 @@ namespace PetShopCRM.Web.Controllers
         public async Task<IActionResult> Login(UserLoginVM userLogin)
         {
             try
-            {                
+            {
                 var response = await userService.ValidateAsync(userLogin.ToDTO());
                 var user = response.Data;
                 if (response.Success)
@@ -52,7 +46,7 @@ namespace PetShopCRM.Web.Controllers
                             break;
                         case UserType.Guardian:
                             locale = "Guardian";
-                            break;                            
+                            break;
                     }
 
                     notificationService.Success(Resources.Text.UserLogged);
@@ -79,7 +73,7 @@ namespace PetShopCRM.Web.Controllers
             try
             {
                 await loginService.LogoutAsync();
-                
+
                 return RedirectToAction(nameof(Login));
             }
             catch (Exception)
@@ -92,7 +86,7 @@ namespace PetShopCRM.Web.Controllers
         {
             ViewData["Route"] = loggedUserService.Role == UserType.Guardian.ToString() ? "Guardian" : "Index";
             var user = await userService.GetUserByIdAsync(loggedUserService.Id);
-            var profile =  new ProfileVM();
+            var profile = new ProfileVM();
             profile.ToViewModel(user.Data);
 
             return View(profile);
@@ -107,28 +101,26 @@ namespace PetShopCRM.Web.Controllers
                 model.NamePhoto = upload.GetNameFile(model.Photo ?? null);
                 var response = await userService.UpdateAsync(model.ToDTO());
 
-                if (model.Photo != null)              
+                if (model.Photo != null)
                     upload.SavePhotoProfile(model.Photo, model.Id);
 
                 if (response.Success)
                 {
                     await loginService.LoginAsync(response.Data);
                     notificationService.Success(response.Message);
-                }                
+                }
                 else
                     notificationService.Error();
             }
 
-            
 
-            return RedirectToAction("Index","Home");
+
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> AddUser()
         {
             var users = await userService.GetAllAsync();
-
-            
 
             return View(AddUserVM.ToList(users));
         }
@@ -141,8 +133,8 @@ namespace PetShopCRM.Web.Controllers
             if (userDTO.Success)
                 userVM = userVM.ToVM(userDTO.Data);
 
-        var typeUsers = new SelectList(EnumUtil.ToList<UserType>(), "Key", "Value");
-        userVM.TyUserList = typeUsers;
+            var typeUsers = new SelectList(EnumUtil.ToList<UserType>().Where(x => (id == 0 && x.Key != UserType.Guardian) || (id != 0 && userDTO.Data != null && userDTO.Data.Type == UserType.Guardian) || (userDTO.Data != null && userDTO.Data.Type != UserType.Guardian && x.Key != UserType.Guardian)), "Key", "Value");
+            userVM.TyUserList = typeUsers;
 
             return View(userVM);
         }
@@ -151,7 +143,7 @@ namespace PetShopCRM.Web.Controllers
         public async Task<IActionResult> AddUser(AddUserVM model)
         {
             var message = model.Id != 0 ? Resources.Text.UserUpdateSucess : Resources.Text.UserAddSucess;
-            
+
             await userService.AddOrUpdateAsync(model.ToModel());
 
             notificationService.Success(message);
@@ -178,7 +170,7 @@ namespace PetShopCRM.Web.Controllers
         [AllowAnonymous]
         [HttpPost]
         public async Task<string> RestorePassword(string login)
-        {   
+        {
             var userDTO = userService.GetUserByCPForEmail(login.FormatCpf());
             var message = "Usuário não contrato, digite o CPF ou e-mail usando no momento do cadastro.";
 
@@ -186,7 +178,7 @@ namespace PetShopCRM.Web.Controllers
             {
                 var model = userDTO.Data;
                 var email = model.Email;
-                message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";                
+                message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";
                 await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{webContext.GenerateUrl("User", "RestorePasswordExternal")}?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
             }
 
@@ -197,7 +189,7 @@ namespace PetShopCRM.Web.Controllers
         [HttpGet]
         public IActionResult RestorePasswordExternal(string id)
         {
-            return View(new UserLoginVM() { Id = id});
+            return View(new UserLoginVM() { Id = id });
         }
 
         [AllowAnonymous]
@@ -219,12 +211,6 @@ namespace PetShopCRM.Web.Controllers
                 notificationService.Error();
 
             return RedirectToAction("Login");
-        }
-        public async Task<bool> ValidatePassword(string password)
-        {
-            var userDTO = await userService.GetUserByIdAsync(loggedUserService.Id);         
-
-            return userDTO.Data.Password == password;
         }
     }
 }

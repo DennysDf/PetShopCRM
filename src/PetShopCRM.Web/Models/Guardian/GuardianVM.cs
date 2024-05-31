@@ -4,6 +4,7 @@ using System.ComponentModel;
 using PetShopCRM.Domain.Models;
 using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using PetShopCRM.Domain.Enums;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PetShopCRM.Web.Models.Guardian;
 
@@ -19,6 +20,7 @@ public class GuardianVM
     public string DateBirth { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
+    [Remote("GuardianCpfExists", "Validation", AdditionalFields = "Id", ErrorMessage = ValidationKeysUtil.ValidateCPF)]
     [DisplayName("CPF")]
     public string CPF { get; set; }
 

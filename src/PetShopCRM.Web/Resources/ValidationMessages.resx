@@ -126,6 +126,9 @@
   <data name="Required" xml:space="preserve">
     <value>O campo {0} é obrigatório.</value>
   </data>
+  <data name="RequiredPetPhoto" xml:space="preserve">
+    <value>O campo Foto é obrigatório caso não tenha Identificador.</value>
+  </data>
   <data name="SizeMax" xml:space="preserve">
     <value>Máximo de {1} caracteres.</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Usuário não localizado</value>
+  </data>
+  <data name="ValidateCPF" xml:space="preserve">
+    <value>CPF já existente.</value>
   </data>
   <data name="ValidatePassword" xml:space="preserve">
     <value>Senha diferente da atual.</value>

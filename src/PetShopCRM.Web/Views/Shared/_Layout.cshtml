@@ -321,6 +321,7 @@
                         }
                         @if (loggedUser.Role == nameof(UserType.Guardian))
                         {
+                            <li class="sidebar-item"><a href="@Url.Action("List","Record")" class="sidebar-link"><i class="fa-solid fa-clipboard"></i><span class="hide-menu"> Prontuário </span></a></li>
 
                         }
                     </ul>

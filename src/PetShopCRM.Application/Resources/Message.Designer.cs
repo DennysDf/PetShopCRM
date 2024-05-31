@@ -187,6 +187,15 @@ namespace PetShopCRM.Application.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Prontuário não encontrado..
+        /// </summary>
+        public static string RecordNotFound {
+            get {
+                return ResourceManager.GetString("RecordNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Espécie não encontrada..
         /// </summary>
         public static string SpecieNotFound {

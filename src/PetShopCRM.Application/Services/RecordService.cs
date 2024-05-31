@@ -38,8 +38,16 @@ public class RecordService(IUnitOfWork unitOfWork) : IRecordService
             .AsQueryable();
 
         if (id != 0)
-            record = record.Where(c => c.Id == id);
+            record = record.Where(c => c.Pet.GuardianId == id);
 
         return new ResponseDTO<List<Record>>(record.ToList().Count > 0, "Nenhum resultado encontrado", record.ToList());
     }
+
+
+    public async Task<ResponseDTO<Record>> GetByIdAsync(int id)
+    {
+        var model = await unitOfWork.RecordRespository.GetByIdAsync(id);
+        return new ResponseDTO<Record>(model != null, Resources.Message.RecordNotFound, model);
+    }
+
 }

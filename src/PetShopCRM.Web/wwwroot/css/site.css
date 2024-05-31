@@ -3,6 +3,11 @@ label:has(+ input:not([data-val-required]))::after {
     font-weight: bold;
 }
 
+label:has(+ textarea:not([data-val-required]))::after {
+    content: ":";
+    font-weight: bold;
+}
+
 label:has(+ select:not([data-val-required]))::after {
     content: ":";
     font-weight: bold;
@@ -19,6 +24,11 @@ label:has(+ select:not([data-val-requiredif-value="true"]))::after {
 }
 
 label:has(+ input[data-val-required])::after {
+    content: "*:";
+    font-weight: bold;
+}
+
+label:has(+ textarea[data-val-required])::after {
     content: "*:";
     font-weight: bold;
 }

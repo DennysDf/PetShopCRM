@@ -377,6 +377,21 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
+        $(document).ajaxComplete(function (event, xhr, settings) {
+            maskInit();
+            select2Init();
+            formValidationInit();
+        });
+
+        function formValidationInit() {
+            $('form').each(function (i, f) {
+                $form = $(f);
+                $form.removeData('validator');
+                $form.removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse($form);
+            });
+        }
+
         function YearNow() {
             let dataAtual = new Date();
             let anoAtual = dataAtual.getFullYear();

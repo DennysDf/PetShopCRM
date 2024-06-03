@@ -22,11 +22,12 @@ public class RecordController(IPetService petService,
                                 ILoggedUserService loggedUserService,
                                 IUserService userService) : Controller
 {
-    public async Task<IActionResult> Index(int id = 0)
+    public async Task<IActionResult> Index(int id = 0, string? route = null)
     {
         var recordVM = new RecordVM
         {
-            Id = id
+            Id = id,
+            Route = route
         };
 
         return View(recordVM);
@@ -88,6 +89,10 @@ public class RecordController(IPetService petService,
 
         await recordService.AddOrUpdateAsync(model);
         notificationService.Success(message);
+
+        if(modelVM.Route != null)
+            return RedirectToAction("Pet", "Details", new { id = modelVM.PetId });
+
         return RedirectToAction("List");
     }
 
@@ -101,7 +106,7 @@ public class RecordController(IPetService petService,
             id = (int)userDTO.Data.GuardianId;
         }
 
-        var recordsDTO = await recordService.GetAllCompleteAsync(id);
+        var recordsDTO = await recordService.GetAllCompleteByGuardianAsync(id);
         if (recordsDTO.Success)
         {
             records = recordsDTO.Data;
@@ -110,7 +115,7 @@ public class RecordController(IPetService petService,
         return View(records);
     }
 
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> AjaxDetails(int id)
     {
         var recordDTO = await recordService.GetAllCompleteAsync(id);
         var recordVM = new RecordVM();

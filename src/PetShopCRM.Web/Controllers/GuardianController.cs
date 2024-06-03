@@ -79,40 +79,4 @@ public class GuardianController(
         var address = await addressService.GetByCEP(CEP);
         return JsonSerializer.Serialize(address.Data);
     }
-
-    [HttpGet]
-    public async Task<IActionResult> Details(int id = 0, int IdPet = 0)
-    {
-        ViewData["Route"] = loggedUserService.Role == UserType.Guardian.ToString() ? "Guardian" : "Index";
-        var petId = IdPet > 0 ? IdPet : 0;
-
-        if (id != 0)
-        {
-            var guardians = await guardianService.GetAllCompleteAsync();
-            petId = guardians.Data.FirstOrDefault(c => c.Id == id).Pets.FirstOrDefault().Id;
-        }
-
-        var guardian = await guardianService.GetByPetIdAsync(petId);
-
-        return View(guardian);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> DetailsHealthPlan(int id)
-    {
-        var paymentHistory = new List<PaymentHistory?>();
-        var petDTO = await petService.GetAllCompleteAsync();
-        var pet = petDTO.Data.FirstOrDefault(c => c.Id == id);
-        var payment = await paymentService.GetAllCompleteAsync(id);
-
-        foreach (var item in payment.Data)
-        {
-            var paymentHistoryTemp = await paymentHistoryService.GetAllAsync(item.Id);
-            paymentHistory.AddRange(paymentHistoryTemp);
-        }
-
-        var payments = new PaymentsListsVM();
-
-        return View(payments.GetPayments(payment.Data, paymentHistory, pet));
-    }
 }

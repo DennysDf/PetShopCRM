@@ -9,6 +9,7 @@ namespace PetShopCRM.Web.Models.Record;
 public class RecordVM
 {
     public int Id { get; set; }
+    public string? Route { get; set; }
 
     [Required(ErrorMessage = ValidationKeysUtil.Required)]
     [DisplayName("Data do atendimento")]
@@ -79,21 +80,20 @@ public class RecordVM
 
     public RecordVM ToVM(List<Domain.Models.Record> model) => model.Select(c => new RecordVM { Name = c.Pet.Name, Identifier = c.Pet.Identifier, Specie = c.Pet.Specie.Name, Guardian = c.Pet.Guardian.Name, ReasonConsultation = c.ReasonConsultation, Date = c.Date, Diagnosis = c.Diagnosis, ClinicalHistory = c.ClinicalHistory, Observation = c.Observation, Prescription = c.Prescription, PhysicalExam = c.PhysicalExam, Procedure = c.ProcedureHealthPlan.Procedure.Description, Clinic = c.Clinic.Name, HealthPlan = c.ProcedureHealthPlan.HealthPlan.Name }).First();
 
-    public RecordVM ToVM(Domain.Models.Record model) 
+    public RecordVM ToVM(Domain.Models.Record model)
     {
-        var vm = new RecordVM();
-        vm.Date = model.Date;
-        vm.ClinicId = model.ClinicId;
-        vm.PetId = model.PetId;
-        vm.ProcedureHealthPlanId = model.ProcedureHealthPlanId;
-        vm.ReasonConsultation = model.ReasonConsultation;
-        vm.ClinicalHistory = model.ClinicalHistory;
-        vm.Observation = model.Observation;
-        vm.Diagnosis = model.Diagnosis;
-        vm.PhysicalExam = model.PhysicalExam;
-        vm.Prescription = model.Prescription;
+        this.Date = model.Date;
+        this.ClinicId = model.ClinicId;
+        this.PetId = model.PetId;
+        this.ProcedureHealthPlanId = model.ProcedureHealthPlanId;
+        this.ReasonConsultation = model.ReasonConsultation;
+        this.ClinicalHistory = model.ClinicalHistory;
+        this.Observation = model.Observation;
+        this.Diagnosis = model.Diagnosis;
+        this.PhysicalExam = model.PhysicalExam;
+        this.Prescription = model.Prescription;
 
-        return  vm;
+        return this;
 
     }
 }

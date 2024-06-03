@@ -85,7 +85,7 @@ public class PetController(
 
         if (model.Route != null)
         {
-            return RedirectToAction("Details", "Guardian", new { IdPet = model.Id });
+            return RedirectToAction("Pet", "Details", new { id = model.Id });
         }
 
 

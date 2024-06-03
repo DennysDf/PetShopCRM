@@ -381,6 +381,7 @@
             maskInit();
             select2Init();
             formValidationInit();
+            bootstrapTableInit();
         });
 
         function formValidationInit() {
@@ -431,18 +432,23 @@
             $(".select2").select2({ width: '100%', language: "pt-BR" })
         }
 
+        function bootstrapTableInit() {
+            $('.bootstrap-table').each(function () {
+                $(this).attr({
+                    'data-toggle': 'table',
+                    'data-search': 'true',
+                    'data-pagination': 'true',
+                    'data-show-export': 'true',
+                    'data-page-list': '[10, 25, 50, 100, all]'
+                });
+            });
+
+            $('table[data-toggle="table"]').bootstrapTable();
+        }
+
         select2Init();
         maskInit();
-
-        $('.bootstrap-table').each(function () {
-            $(this).attr({
-                'data-toggle': 'table',
-                'data-search': 'true',
-                'data-pagination': 'true',
-                'data-show-export': 'true',
-                'data-page-list': '[10, 25, 50, 100, all]'
-            });
-        });
+        bootstrapTableInit();
 
         @if (NotificationUtil.Stack.Count > 0)
         {

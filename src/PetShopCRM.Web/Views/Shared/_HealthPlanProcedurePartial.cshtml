@@ -1,0 +1,45 @@
+﻿@model HealthPlan
+@{
+    Layout = null;
+}
+<div class="table-responsive-xl">
+    <table class="table table-sm bg-white table-hover bootstrap-table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Procedimento</th>
+                <th>Coparticipação</th>
+                <th>Limite Anual</th>
+                <th>Carencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model.ProcedureHealthPlans.GroupBy(x => x.Procedure.ProcedureGroup.Description))
+            {
+                <tr class="">
+                    <th colspan="4" class="bg-dark border-2 border-dark-subtle font-bold text-center text-white">@group.Key</th>
+                </tr>
+                @foreach (var proc in group.ToList())
+                {
+                    <tr>
+                        <td>@proc.Procedure.Description</td>
+                        <td>
+                            @if (proc.CoparticipationUnit == PetShopCRM.Domain.Enums.ProcedureCoparticipationUnit.Value)
+                            {
+                                <b>R$ </b>
+
+                                <span class="value-mask">@proc.Coparticipation</span>
+                            }
+                            else
+                            {
+                                <span class="value-mask">@proc.Coparticipation</span>
+
+                                <b>%</b>
+                            }
+                        <td>@(proc.AnnualLimit?.ToString() ?? "Ilimitado")</td>
+                        <td class="text-nowrap">@proc.Lack dias</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

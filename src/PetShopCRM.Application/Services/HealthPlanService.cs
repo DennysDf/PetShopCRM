@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShopCRM.Application.DTOs;
-using PetShopCRM.Application.DTOs.Payments;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
-using PetShopCRM.Infrastructure.Data.UnitOfWork;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
 
 namespace PetShopCRM.Application.Services;
@@ -32,6 +29,17 @@ public class HealthPlanService(IUnitOfWork unitOfWork) : IHealthPlanService
     {
         var model = await unitOfWork.HealthPlansRepository.GetByIdAsync(id);
         return new ResponseDTO<HealthPlan>(model != null, Resources.Message.GuardianNotFound, model);
+    }
+
+    public async Task<ResponseDTO<HealthPlan>> GetCompleteByIdAsync(int id)
+    {
+        var healthPlan = await unitOfWork.HealthPlansRepository.GetBy(x => x.Id == id)
+            .Include(c => c.ProcedureHealthPlans)
+                .ThenInclude(c => c.Procedure)
+                    .ThenInclude(c => c.ProcedureGroup)
+            .FirstOrDefaultAsync();
+
+        return new ResponseDTO<HealthPlan>(healthPlan != null, "Nenhum resultado encontrado", healthPlan);
     }
 
     public ResponseDTO<List<HealthPlan>> GetAllCompleteAsync(int id = 0)

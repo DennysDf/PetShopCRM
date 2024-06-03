@@ -1,5 +1,4 @@
-﻿using Azure;
-using PetShopCRM.Application.DTOs;
+﻿using PetShopCRM.Application.DTOs;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.DTOs.Report;
 
@@ -11,8 +10,8 @@ public interface IPetService
     Task<ResponseDTO<List<Pet>>> GetAllCompleteAsync();
     Task<Pet> AddOrUpdateAsync(Pet guardin);
     Task<ResponseDTO<Pet>> GetByIdAsync(int id);
+    Task<ResponseDTO<Pet>> GetCompleteByIdAsync(int id);
     Task<bool> DeleteAsync(int id);
-    Task<ResponseDTO<List<Pet>>> GetPetByGuardian(int id);
     List<PetUpdateImgDTO>? GetPetsForUpdateImg();
     Task<List<Pet>> GetAllForPlansAsync();
 }

@@ -1,0 +1,205 @@
+﻿@model DetailsPetVM
+@{
+    ViewData["Title"] = "Detalhes do pet";
+    ViewData["Caminho"] = "<li>Detalhes</li><li>Pet</li>";
+}
+
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.GuardianId)
+@Html.HiddenFor(x => x.HealthPlanId)
+@Html.HiddenFor(x => x.PaymentId)
+
+<div class="row">
+    @if (Model.UrlPhoto != null)
+    {
+        <div class="col-lg-3 col-sm-12">
+            <img src="~/Upload/Pet/@Model.Id/@Model.UrlPhoto" class="w-100" alt="Imagem do Pet">
+        </div>
+    }
+    <div class="col">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-address-card"></i> <b>Nome:</b> @Model.Name
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-palette"></i> <b>Cor:</b> @Model.Color
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fas fa-dog"></i> <b>Espécie:</b> @Model.Specie
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fas fa-venus-mars"></i> <b>Sexo:</b> @Model.Sex
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-weight-scale"></i> <b>Peso:</b> @Model.Weight
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-diamond"></i> <b>Raça:</b> @Model.Breed
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-diamond"></i> <b>Castrado:</b> @Model.Spayed
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fas fa-microchip"></i> <b>Chip:</b> @Model.Identifier
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-user"></i> <b>Tutor:</b> @Model.Guardian
+            </div>
+            <div class="col-lg-6 col-sm-12 mt-3">
+                <i class="fa-solid fa-heart-pulse"></i> <b>Plano de saúde:</b> @Model.HealthPlan
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col py-3">
+        <a class="btn btn-secondary h-100 p-4 w-100 btnDados btnGuardian" href="javascript:void(0)">
+            Tutor + Pets
+        </a>
+    </div>
+    <div class="col py-3">
+        <a class="btn btn-secondary h-100 p-4 w-100 btnDados btnHeathPlan" href="javascript:void(0)">
+            Plano de saúde
+        </a>
+    </div>
+    <div class="col py-3">
+        <a class="btn btn-secondary h-100 p-4 w-100 btnDados btnPayment" href="javascript:void(0)">
+            Pagamento
+        </a>
+    </div>
+    <div class="col py-3">
+        <a class="btn btn-secondary h-100 p-4 w-100 btnDados btnRecord" href="javascript:void(0)">
+            Prontuário
+        </a>
+    </div>
+    <div class="col py-3">
+        <a class="btn btn-success h-100 p-4 w-100 btnVoltar" href="javascript:void(0)">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
+</div>
+<div class="border border-dark w-100 p-3 d-none divDados">
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(() => {
+            $('.btnDados').on('click', function () {
+                ResizeDados();
+
+                $('.btnDados').removeClass('btn-dark');
+                $(this).addClass('btn-dark');
+
+                if (Math.trunc($('.btnDados').offset().top - 5) != $('html').scrollTop()) {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top - 5
+                    }, 500);
+                }
+            });
+
+            $('.btnVoltar').on('click', function () {
+                ResizeDados();
+
+                $('.btnDados').removeClass('btn-dark');
+                
+                var timeout = 0;
+
+                if ($('html').scrollTop() != 0) {
+                    $('html, body').animate({
+                        scrollTop: 0
+                    }, 500);
+
+                    timeout = 500;
+                }
+
+                setTimeout(() => {
+                    $('.divDados').html('');
+                    $('.divDados').hide();
+                }, timeout);
+            });
+
+            $('.btnGuardian').on('click', function () {
+                ResizeDados();
+
+                var guardianId = $('#@nameof(Model.GuardianId)').val();
+
+                $.get('@Url.Action("AjaxGuardian")', { guardianId }, function (response) {
+                    if (response != null) {
+                        $('.divDados').html(response);
+                    } else {
+                        MensagemSemDados("Tutor");
+                    }
+                }).fail(function () {
+                    MensagemSemDados("Tutor", true);
+                });;
+            });
+
+            $('.btnHeathPlan').on('click', function () {
+                ResizeDados();
+
+                var healthPlanId = $('#@nameof(Model.HealthPlanId)').val();
+
+                $.get('@Url.Action("AjaxHealthPlan")', { healthPlanId }, function (response) {
+                    if (response != null) {
+                        $('.divDados').html(response);
+                    } else {
+                        MensagemSemDados("Plano de Saúde");
+                    }
+                }).fail(function () {
+                    MensagemSemDados("Plano de Saúde", true);
+                });;
+            });
+
+            $('.btnPayment').on('click', function () {
+                ResizeDados();
+
+                var paymentId = $('#@nameof(Model.PaymentId)').val();
+
+                $.get('@Url.Action("AjaxPayment")', { paymentId }, function (response) {
+                    if (response != null) {
+                        $('.divDados').html(response);
+                    } else {
+                        MensagemSemDados("Pagamento");
+                    }
+                }).fail(function () {
+                    MensagemSemDados("Pagamento", true);
+                });
+            });
+
+            $('.btnRecord').on('click', function () {
+                ResizeDados();
+
+                var petId = $('#@nameof(Model.Id)').val();
+
+                $.get('@Url.Action("AjaxRecord")', { petId }, function (response) {
+                    if (response != null) {
+                        $('.divDados').html(response);
+                    } else {
+                        MensagemSemDados("Prontuário");
+                    }
+                }).fail(function () {
+                    MensagemSemDados("Prontuário", true);
+                });;
+            });
+
+            function MensagemSemDados(name, isError = false) {
+                var message;
+
+                if (isError) {
+                    message = $(`<h3 class="align-content-center font-24 mt-5 py-5 text-bg-danger text-center text-white">Falha ao obter dados para: <b>${name}</b></h3>`);
+                } else {
+                    message = $(`<h3 class="align-content-center font-24 mt-5 py-5 text-bg-dark text-center text-white">Não há dados para: <b>${name}</b></h3>`)
+                }
+
+                $('.divDados').html(message);
+            }
+
+            function ResizeDados() {
+                var minHeight = window.innerHeight - $('.btnDados').parent()[0].clientHeight - $('.footer')[0].clientHeight;
+                $('.divDados').css('min-height', minHeight);
+
+                $('.divDados').show();
+            }
+        });
+    </script>
+}

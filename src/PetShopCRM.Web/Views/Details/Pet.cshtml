@@ -11,12 +11,19 @@
 @Html.HiddenFor(x => x.GuardianId)
 @Html.HiddenFor(x => x.HealthPlanId)
 @Html.HiddenFor(x => x.PaymentId)
+<style type="text/css">
+    .ajuste-foto{
+        max-width:400px;
+        max-height: 400px;
+        object-fit:contain;
+    }
+</style>
 
 <div class="row">
     @if (Model.UrlPhoto != null)
     {
         <div class="col-lg-3 col-sm-12">
-            <img src="~/Upload/Pet/@Model.Id/@Model.UrlPhoto" class="w-100" alt="Imagem do Pet">
+            <img src="~/Upload/Pet/@Model.Id/@Model.UrlPhoto" class="w-100 ajuste-foto" alt="Imagem do Pet">
             @if (Model.NeedUpdatePhoto)
             {
                 <span class="d-block text-bg-danger text-center text-white w-100" style="width: 100%;display: block;">Necessário atualizar a foto.</span>
@@ -25,6 +32,16 @@
     }
     <div class="col">
         <div class="row">
+
+            @if (loggedUser.Role == nameof(UserType.Guardian))
+            {
+                <div class=" mt-3 d-lg-none d-sm-block text-center">
+
+                    <a class="edit btn btn-success" href="javascript:void(0)" data-id="@Model.Id">
+                        <i class="text-dark fa fa-pencil-alt"></i> Editar
+                    </a>
+                </div>
+            }
             <div class="col-lg-6 col-sm-12 mt-3">
                 <i class="fa-solid fa-address-card"></i> <b>Nome:</b> @Model.Name
             </div>
@@ -52,7 +69,8 @@
             <div class="col-lg-6 col-sm-12 mt-3">
                 <i class="fa-solid fa-heart-pulse"></i> <b>Plano de saúde:</b> @Model.HealthPlan
             </div>
-            <div class="col-lg-6 col-sm-12 mt-3">
+
+            <div class="col-lg-6 col-sm-12 d-lg-block d-none mt-3">
                 @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
                 {
                     <i class="fa-solid fa-user"></i> <b>Tutor:</b> @Model.Guardian

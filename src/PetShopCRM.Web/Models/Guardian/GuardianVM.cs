@@ -65,23 +65,23 @@ public class GuardianVM
 
 
 
-    public List<GuardianVM> ToList(List<Domain.Models.Guardian> listGuardian)  =>listGuardian.Select(guardian => new GuardianVM
-        {
-            Name = guardian.Name,
-            Address = guardian.Address,
-            CPF = guardian.CPF,
-            DateBirth = guardian.DateBirth,
-            Id = guardian.Id,
-            Phone = guardian.Phone,
-            CEP = guardian.CEP,
-            Country = guardian.Country,
-            State = guardian.State,
-            City = guardian.City,
-            Neighborhood = guardian.Neighborhood,
-            Email = guardian.Email, 
-            Unit = guardian.Unit,
-            Number = guardian.Number,
-        }).ToList();
+    public List<GuardianVM> ToList(List<Domain.Models.Guardian> listGuardian) => listGuardian.Select(guardian => new GuardianVM
+    {
+        Name = guardian.Name,
+        Address = guardian.Address,
+        CPF = guardian.CPF,
+        DateBirth = guardian.DateBirth,
+        Id = guardian.Id,
+        Phone = guardian.Phone,
+        CEP = guardian.CEP,
+        Country = guardian.Country,
+        State = guardian.State,
+        City = guardian.City,
+        Neighborhood = guardian.Neighborhood,
+        Email = guardian.Email,
+        Unit = guardian.Unit,
+        Number = guardian.Number,
+    }).ToList();
 
     public Domain.Models.Guardian ToModel() => new Domain.Models.Guardian() { Id = this.Id, Name = this.Name, Address = this.Address, CPF = this.CPF, DateBirth = this.DateBirth, Phone = this.Phone, CEP = this.CEP, Country = this.Country, State = this.State, City = this.City, Neighborhood = this.Neighborhood, Email = this.Email, Unit = this.Unit, Number = this.Number };
 
@@ -91,14 +91,20 @@ public class GuardianVM
 
         var user = new Domain.Models.User()
         {
-            Name = this.Name, CPF = this.CPF, Email = this.Email,  Type = UserType.Guardian, Phone = this.Phone, Login = cpf, Password = "vetcard123"
-
+            Name = this.Name,
+            CPF = this.CPF,
+            Email = this.Email,
+            Type = UserType.Guardian,
+            Phone = this.Phone,
+            Login = cpf,
+            Password = "vetcard123",
+            GuardianId = this.Id
         };
         return user;
     }
 
 
-    public GuardianVM ToVM(Domain.Models.Guardian model) => new GuardianVM { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone, CEP = model.CEP, Country = model.Country, State = model.State, City = model.City, Neighborhood = model.Neighborhood , Email = model.Email, Unit = model.Unit , Number = model.Number };
-    
+    public GuardianVM ToVM(Domain.Models.Guardian model) => new GuardianVM { Id = model.Id, Name = model.Name, Address = model.Address, CPF = model.CPF, DateBirth = model.DateBirth, Phone = model.Phone, CEP = model.CEP, Country = model.Country, State = model.State, City = model.City, Neighborhood = model.Neighborhood, Email = model.Email, Unit = model.Unit, Number = model.Number };
+
 
 }

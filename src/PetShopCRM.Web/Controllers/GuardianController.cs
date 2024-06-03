@@ -51,11 +51,17 @@ public class GuardianController(
     {
         var message = model.Id != 0 ? Resources.Text.GuardianUpdateSucess : Resources.Text.GuardianAddSucess;
         model.Country = "BR";
-        await guardianService.AddOrUpdateAsync(model.ToModel());
+
+        var guardian = model.ToModel();
+
+        await guardianService.AddOrUpdateAsync(guardian);
         
         if (model.Id == 0) 
         {
-            await userService.AddOrUpdateAsync(model.ToModelUser());
+            var user = model.ToModelUser();
+            user.GuardianId = guardian.Id;
+
+            await userService.AddOrUpdateAsync(user);
             await emailService.SendAsync(model.Email,"Usuário VetCard", $"<p>Olá <strong>{model.Name}</strong>,<p>Seu login e senha para acessar o sistema VetCard foram criados com sucesso.<p><strong>Login:</strong> {model.CPF.Replace(".","").Replace("-","")}<br><strong>Senha:</strong> vetcard123<p>Por favor, acesse <a href=http://plano.vetcard.com.br>nosso sistema</a> para fazer o login e começar a usar nossos serviços.<p>Se precisar de ajuda ou tiver qualquer dúvida, estamos à disposição.<p>Atenciosamente,<p>Equipe VetCard",true);
         }
 

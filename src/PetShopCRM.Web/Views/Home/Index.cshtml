@@ -50,11 +50,11 @@
         </div>
     }
 
-<form asp-action="Details" asp-controller="Guardian" method="get">
+<form asp-action="Pet" asp-controller="Details" method="get">
 
     <div class="row mb-4 align-items-end justify-content-center">
         <div class="col-sm-11">
-            <select class="form-control select2" name="IdPet" id="IdPet" asp-items="ViewBag.Pets">
+            <select class="form-control select2" name="id" id="IdPet" asp-items="ViewBag.Pets">
                 <option selected value="0">Pesquisar por pet...</option>
             </select>
         </div>

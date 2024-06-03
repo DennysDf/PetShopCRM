@@ -1,0 +1,132 @@
+﻿@model Guardian
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+    #imagemNoModal {
+        max-width: 80%;
+        height: auto;
+        display: block; /* Adicionado para centralizar a imagem caso seja menor que o modal */
+        margin: 0 auto; /* Adicionado para centralizar a imagem caso seja menor que o modal */
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-address-card"></i> <b>Nome:</b> @Model.Name
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-address-card"></i> <b>CPF:</b> @Model.CPF
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-phone"></i> <b>Telefone:</b> @Model.Phone
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-envelope"></i> <b>E-mail:</b> @Model.Email
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-star"></i> <b>Nascimento:</b> @Model.DateBirth
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-map-location"></i> <b>Endereço:</b> @Model.City, @Model.Address, @Model.Number
+    </div>
+</div>
+<hr class="border-dark" />
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="pb-1 pt-2 text-bg-secondary">
+            <h4>Pets</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="table-responsive-xl">
+            <table class="table table-sm table-striped bg-white table-hover bootstrap-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th width="15px">Chip</th>
+                        <th>Nome</th>
+                        <th>Espécie</th>
+                        <th>Plano de Saúde</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    @foreach (var item in Model.Pets)
+                    {
+                        <tr class="bg-white">
+                            <td class="text-nowrap" width="15px">
+                                @if (item.UrlPhoto != null)
+                                {
+                                    <a href="javascript:void(0)" data-id="@item.Id" data-toggle="modal" data-target="#modal-img">  <img src="~/Upload/Pet/@item.Id/@item.UrlPhoto" width="40" /></a>
+                                }
+                                @if (item.Identifier != null)
+                                {
+                                    @item.Identifier
+                                }
+                            </td>
+                            <td class="text-nowrap">
+                                <a href="@Url.Action("Pet","Details", new{ id = item.Id })" target="_blank">
+                                    @item.Name
+                                </a>
+                            </td>
+                            <td class="text-nowrap">@item.Specie.Name</td>
+                            <td class="text-nowrap">@(item.Payments.LastOrDefault(x => x.IsSuccess && x.Active && x.ExternalId != null)?.HealthPlan != null ? item.Payments.LastOrDefault(x => x.IsSuccess && x.Active && x.ExternalId != null)?.HealthPlan.Name : "N/A")</td>
+                            <td class="text-nowrap text-right">
+                                <a class="edit" href="javascript:void(0)" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                    <i class="text-dark fa fa-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" role="dialog" data-bs-backdrop="static" id="modal-img" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title title"></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <img src="" id="imagemNoModal" style="width: 60%;" alt="Imagem em tamanho real">
+                <br />
+                <div class="row justify-content-center text-center ">
+                    <div class="col-sm-8">
+                        <b>Foto atualizada há <span id="days-last-update"></span> dias atrás. </b>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('click', 'a[data-toggle="modal"]', function (event) {
+        var id = $(this).data("id")
+        var imagemSrc = $(this).find('img').attr('src');
+        $('#imagemNoModal').attr('src', imagemSrc);
+
+        $.get('@Url.Action("AjaxiImgPet", "Pet")', { "id": id }, function (response) {
+            var pet = JSON.parse(response)
+            $("#name-pet").text(pet.Name)
+            $("#specie-pet").text(pet.Specie)
+            $("#chip-pet").text(pet.Identifier)
+            $("#guardian-pet").text(pet.Guardian)
+            $("#days-last-update").text(pet.LastUpdate)
+            $("#modal-img").modal("show");
+        });
+    });
+</script>

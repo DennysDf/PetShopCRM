@@ -8,8 +8,8 @@ public class Pet : EntityBase
     public int GuardianId { get; set; }
     public string Identifier { get; set; }
     public int SpecieId { get; set; }
-    public string Sexy { get; set; }   
-    public string Color { get; set; }  
+    public string Sex { get; set; }
+    public string Color { get; set; }
     public string Weight { get; set; }
     public string Age { get; set; }
     public string Breed { get; set; }

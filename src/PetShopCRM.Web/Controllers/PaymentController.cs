@@ -101,7 +101,7 @@ public class PaymentController(
         if (route != null)
         {
             var petId = paymentService.GetById(id).PetId;
-            return RedirectToAction("DetailsHealthPlan", "Guardian", new { Id = petId });
+            return RedirectToAction("Pet", "Details", new { id = petId });
         }
 
         return RedirectToAction("Index");

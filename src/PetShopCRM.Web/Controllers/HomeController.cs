@@ -60,7 +60,7 @@ public class HomeController(
 
         if (petsDTO.Success)
         {
-            var pets = petsDTO.Data.Where(c => c.Active && c.UrlPhoto != null && (c.ShowReportImgUpdate ?? false) && (DateTime.Now - (DateTime)c.UpdatedDateImg).Days > 30);
+            var pets = petsDTO.Data.Where(c => c.Active && c.UrlPhoto != null && (c.ShowReportImgUpdate ?? false) && (DateTime.Now - c.UpdatedDateImg.Value).Days > 30);
 
             if (guardianId != 0)
                 pets = pets.Where(c => c.GuardianId == guardianId);

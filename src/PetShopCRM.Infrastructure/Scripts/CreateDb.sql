@@ -80,7 +80,7 @@ CREATE TABLE Pets (
     GuardianId INT NOT NULL,
     Identifier NVARCHAR(255) NULL,
     SpecieId INT NOT NULL,
-    Sexy NVARCHAR(20),
+    Sex NVARCHAR(20),
     Color NVARCHAR(20),
     Weight NVARCHAR(20),
     Age NVARCHAR(20),

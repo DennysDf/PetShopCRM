@@ -111,15 +111,10 @@ public class HealthPlansController(
     }
 
     [HttpGet]
-    public IActionResult Benefits(int id)
+    public IActionResult Details(int id)
     {
         var healthPlanDTO = healthPlanService.GetAllCompleteAsync(id);
-        var listHealthPlansProceduresVM = new HealthPlansProcedureVM();
-
-        if (healthPlanDTO.Success) { 
-            listHealthPlansProceduresVM = listHealthPlansProceduresVM.ToVM(healthPlanDTO.Data.First());
-        }
-
-        return View(listHealthPlansProceduresVM);
+        
+        return View(healthPlanDTO.Data.FirstOrDefault() ?? new());
     }
 }

@@ -76,4 +76,8 @@
     $("#confirm-del").click(function () {
         window.location.href = "@Url.Action("Delete", "Payment")?id=" + $("#del-evento").val() + "&route=Guardian";
     });
+
+    $(function () {
+        $('table[data-toggle="table"]').bootstrapTable();
+    });
 </script>

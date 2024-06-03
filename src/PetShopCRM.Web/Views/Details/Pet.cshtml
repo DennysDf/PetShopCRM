@@ -185,7 +185,9 @@
                     }
                 }).fail(function () {
                     MensagemSemDados("Tutor", true);
-                });;
+                }).always(function() {
+                    $('table[data-toggle="table"]').bootstrapTable();
+                });
             });
 
             $('.btnHeathPlan').on('click', function () {
@@ -202,7 +204,9 @@
                     }
                 }).fail(function () {
                     MensagemSemDados("Plano de Saúde", true);
-                });;
+                }).always(function() {
+                    $('table[data-toggle="table"]').bootstrapTable();
+                });
             });
 
             $('.btnPayment').on('click', function () {
@@ -218,6 +222,8 @@
                     }
                 }).fail(function () {
                     MensagemSemDados("Pagamento", true);
+                }).always(function() {
+                    $('table[data-toggle="table"]').bootstrapTable();
                 });
             });
 
@@ -234,7 +240,7 @@
                     }
                 }).fail(function () {
                     MensagemSemDados("Prontuário", true);
-                });;
+                });
             });
 
             function MensagemSemDados(name, isError = false) {

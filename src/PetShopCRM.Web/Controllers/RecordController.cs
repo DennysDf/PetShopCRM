@@ -60,12 +60,34 @@ public class RecordController(IPetService petService,
 
             var planIdCreate = paymentService.GetPlanByPet(model.PetId);
 
-            if(model.HealthPlanId == 0)
+            if (model.HealthPlanId == 0)
                 model.HealthPlanId = planIdCreate.Id;
+
+            var recordProceduresDTO = await recordService.GetAllUsesByPetAsync(model.PetId);
 
             var proceduresHealthPlanDTO = await procedureHealthPlanService.GetAllCompleteAsync(model.HealthPlanId);
             var procedures = proceduresHealthPlanDTO.Data.Where(c => c.Lack <= (DateTime.Now - planIdCreate.DateCreate).Days);
-            model.ListProcedureHealthPlan = new SelectList(procedures.Select(c => new { c.Id, Text = c.Procedure.Description }).ToList(), "Id", "Text");
+
+            var procedureGroupSelectList = procedures
+                .Select(x => x.Procedure.ProcedureGroup.Description)
+                .Distinct()
+                .Select(x => new SelectListGroup { Name = x })
+                .ToList();
+
+            var proceduresSelectListItems = procedures
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = $"{c.Procedure.Description} | {(c.CoparticipationUnit == ProcedureCoparticipationUnit.Value ? $"R$ {c.Coparticipation}" : $"{c.Coparticipation}%")} | {(recordProceduresDTO.Data.FirstOrDefault(x => x.ProcedureId == c.ProcedureId)?.Quantity ?? 0)}/{(c.AnnualLimit?.ToString() ?? "Ilimitado")}",
+                    Group = procedureGroupSelectList.First(d => d.Name == c.Procedure.ProcedureGroup.Description)
+                }).ToList();
+
+            model.ListProcedureHealthPlan = new SelectList(
+                proceduresSelectListItems,
+                "Value",
+                "Text",
+                model.ProcedureHealthPlanId,
+                "Group.Name");
         }
 
         return View(model);
@@ -77,7 +99,7 @@ public class RecordController(IPetService petService,
         var message = modelVM.Id != 0 ? Resources.Text.RecordUpdateSucess : Resources.Text.RecordAddSucess;
 
         Record model = new();
-        if(modelVM.Id == 0)
+        if (modelVM.Id == 0)
         {
             model = modelVM.ToModel(model);
         }
@@ -90,7 +112,7 @@ public class RecordController(IPetService petService,
         await recordService.AddOrUpdateAsync(model);
         notificationService.Success(message);
 
-        if(modelVM.Route != null)
+        if (modelVM.Route != null)
             return RedirectToAction("Pet", "Details", new { id = modelVM.PetId });
 
         return RedirectToAction("List");

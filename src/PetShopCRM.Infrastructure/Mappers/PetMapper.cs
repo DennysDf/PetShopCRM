@@ -33,7 +33,7 @@ public class PetMapper : IEntityTypeConfiguration<Pet>
         builder.Property(x => x.SpecieId)
             .IsRequired();
 
-        builder.Property(x => x.Sexy)
+        builder.Property(x => x.Sex)
             .IsRequired(false);
 
         builder.Property(x => x.Color)

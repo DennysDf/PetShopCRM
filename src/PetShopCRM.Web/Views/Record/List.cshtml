@@ -51,7 +51,7 @@
             Pet:
         </label>
         <div class="col-12">
-            <input type="text" class="form-control" />
+            <input type="text" id="searchPet" class="form-control" />
         </div>
     </div>
 }
@@ -59,7 +59,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-md-4">
+        <div class="col-md-4" data-pet="@item.Pet.Name">
 
             <div class="card mb-4">
                 <div class="card-body">
@@ -123,6 +123,20 @@
             $.get('@Url.Action("AjaxDetails", "Record")', { id: id }, function (response) {
                 $('#modal-body').html(response);
                 $('#modal').modal('show');
+            });
+        });
+
+        $('#searchPet').on('keyup', function () {
+            var value = $(this).val();
+            if(value == "")
+                $('div[data-pet]').show();
+
+            $('div[data-pet]').hide();
+            $('div[data-pet]').each(function (i, e) {
+                var name = $(e).data('pet').toLowerCase();
+
+                if (name.includes(value.toLowerCase()))
+                    $(e).show();
             });
         });
     </script>

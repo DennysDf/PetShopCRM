@@ -33,12 +33,16 @@ public class DetailsController(
         return Json(null);
     }
 
-    public async Task<IActionResult> AjaxHealthPlan(int healthPlanId)
+    public async Task<IActionResult> AjaxHealthPlan(int healthPlanId, int petId)
     {
         var healthPlanDTO = await healthPlanService.GetCompleteByIdAsync(healthPlanId);
 
         if (healthPlanDTO != null && healthPlanDTO.Success)
+        {
+            ViewData["RecordProcedures"] = (await recordService.GetAllUsesByPetAsync(petId)).Data;
+
             return View(healthPlanDTO.Data);
+        }
 
         return Json(null);
     }

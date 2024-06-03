@@ -83,5 +83,22 @@
         $('#PetId').on('change', () => {
             AjaxForm();
         });
+
+        $('#ProcedureHealthPlanId').select2('destroy');
+        $('#ProcedureHealthPlanId optgroup option').each(function (i, e) {
+            var text = $(e).text();
+            var split = text.split('|')[2];
+
+            if (split != undefined && !split.includes('Ilimitado')) {
+                var usos = split.replace(/^\s+|\s+$/gm, '');
+                var uso = usos.split('/')[0];
+                var total = usos.split('/')[1];
+
+                if (uso == total) {
+                    $(e).attr('disabled', true);
+                }
+            }
+        });
+        $(".select2").select2({ width: '100%', language: "pt-BR" });
     });
 </script>

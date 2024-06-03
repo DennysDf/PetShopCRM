@@ -33,7 +33,7 @@ public class PetVM
     public string Specie { get; set; }
 
     [DisplayName("Sexo")]
-    public string? Sexy { get; set; }
+    public string? Sex { get; set; }
 
     [DisplayName("Cor")]
     public string? Color { get; set; }
@@ -73,7 +73,7 @@ public class PetVM
         UrlPhoto = pet.UrlPhoto
     }).ToList();
 
-    public Domain.Models.Pet ToModel() => new() { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sexy = Sexy != "0" ? Sexy : null, Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto, ShowReportImgUpdate = this.ShowReportImgUpdate };
+    public Domain.Models.Pet ToModel() => new() { Id = this.Id, Name = this.Name, GuardianId = this.GuardianId, Identifier = this.Identifier, SpecieId = this.SpecieId, Sex = Sex != "0" ? Sex : null, Age = this.Age, Breed = this.Breed, Color = this.Color, Obs = this.Obs, Spayed = this.Spayed.HasValue && Spayed.HasValue ? (Spayed == 1 ? true : (Spayed == 0 ? false : (bool?)null)) : (bool?)null, Weight = this.Weight, UrlPhoto = this.UrlPhoto, ShowReportImgUpdate = this.ShowReportImgUpdate };
 
     public Domain.Models.Pet ToModel(Domain.Models.Pet model)
     {
@@ -82,7 +82,7 @@ public class PetVM
         model.GuardianId = this.GuardianId;
         model.Identifier = this.Identifier;
         model.SpecieId = this.SpecieId;
-        model.Sexy = this.Sexy != "0" ? this.Sexy : model.Sexy;
+        model.Sex = this.Sex != "0" ? this.Sex : model.Sex;
         model.Age = this.Age ?? model.Age;
         model.Breed = this.Breed ?? model.Breed;
         model.Color = this.Color ?? model.Color;
@@ -103,7 +103,7 @@ public class PetVM
         pet.GuardianId = model.GuardianId;
         pet.Identifier = model.Identifier;
         pet.SpecieId = model.SpecieId;
-        pet.Sexy = model.Sexy;
+        pet.Sex = model.Sex;
         pet.Age = model.Age;
         pet.Weight = model.Weight;
         pet.Color = model.Color;

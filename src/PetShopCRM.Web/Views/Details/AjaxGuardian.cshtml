@@ -88,27 +88,6 @@
     </div>
 </div>
 
-<div class="modal fade" role="dialog" data-bs-backdrop="static" id="modal-pet" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <form asp-action="Index" asp-controller="Pet" method="post" enctype="multipart/form-data">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title title">Editar Pet</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" id="modal-body-pet">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
-                    <button type="submit" id="btn-salve" class="btn btn-success"><i class="fa fa-check-circle"></i> Salvar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <div class="modal" role="dialog" data-bs-backdrop="static" id="modal-img" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -135,22 +114,6 @@
 </div>
 
 <script type="text/javascript">
-    $(document).on('click', ".edit", function () {
-        var id = $(this).data("id");
-        AjaxPet(id);
-    });
-
-    function AjaxPet(id) {
-        $.post('@Url.Action("Ajax", "Pet")', { "id": id }, function (response) {
-            $("#modal-body-pet").html(response);
-            $("#Identifier").attr("readonly", true)
-            $("#Route").val("Guardian")
-            $("#GuardianId").attr("readonly", true)
-            $("#show-report").addClass("d-none")
-            $("#modal-pet").modal("show");
-        })
-    }
-
     $(document).on('click', 'a[data-toggle="modal"]', function (event) {
         var id = $(this).data("id")
         var imagemSrc = $(this).find('img').attr('src');

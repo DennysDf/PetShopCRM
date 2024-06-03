@@ -1,6 +1,9 @@
-﻿@model HealthPlan
+﻿@using PetShopCRM.Application.DTOs.Records
+@model HealthPlan
 @{
     Layout = null;
+
+    var recordProceduresDTO = ViewBag.RecordProcedures as List<RecordProcedureUseDTO>;
 }
 <div class="table-responsive-xl">
     <table class="table table-sm bg-white table-hover bootstrap-table">
@@ -8,6 +11,10 @@
             <tr>
                 <th>Procedimento</th>
                 <th>Coparticipação</th>
+                @if (recordProceduresDTO != null)
+                {
+                    <th>Usos</th>
+                }
                 <th>Limite Anual</th>
                 <th>Carencia</th>
             </tr>
@@ -16,7 +23,7 @@
             @foreach (var group in Model.ProcedureHealthPlans.GroupBy(x => x.Procedure.ProcedureGroup.Description))
             {
                 <tr class="">
-                    <th colspan="4" class="bg-dark border-2 border-dark-subtle font-bold text-center text-white">@group.Key</th>
+                    <th colspan="5" class="bg-dark border-2 border-dark-subtle font-bold text-center text-white">@group.Key</th>
                 </tr>
                 @foreach (var proc in group.ToList())
                 {
@@ -35,6 +42,11 @@
 
                                 <b>%</b>
                             }
+                        </td>
+                        @if (recordProceduresDTO != null)
+                        {
+                            <td>@(recordProceduresDTO.FirstOrDefault(x => x.ProcedureId == proc.ProcedureId)?.Quantity ?? 0)</td>
+                        }
                         <td>@(proc.AnnualLimit?.ToString() ?? "Ilimitado")</td>
                         <td class="text-nowrap">@proc.Lack dias</td>
                     </tr>

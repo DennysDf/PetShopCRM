@@ -23,6 +23,7 @@ public class ProcedureHealthPlanService(IUnitOfWork unitOfWork) : IProcedureHeal
     {
         var procedureHealthPlan = unitOfWork.ProcedureHealthPlanRepository.GetBy(x => x.Active)
             .Include(c => c.Procedure)
+                .ThenInclude(c => c.ProcedureGroup)
             .AsQueryable();
 
         if (healthPlanId != 0)

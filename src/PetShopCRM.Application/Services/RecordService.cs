@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Records;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
@@ -84,5 +85,16 @@ public class RecordService(IUnitOfWork unitOfWork) : IRecordService
             .ToListAsync();
 
         return new ResponseDTO<List<Record>>(record.Count > 0, "Nenhum resultado encontrado", record);
+    }
+
+    public async Task<ResponseDTO<List<RecordProcedureUseDTO>>> GetAllUsesByPetAsync(int petId)
+    {
+        var record = await unitOfWork.RecordRespository.GetBy(x => x.PetId == petId)
+            .Include(c => c.ProcedureHealthPlan).Where(x => x.Date.Year == DateTime.Now.Year)
+                .GroupBy(x => x.ProcedureHealthPlan.ProcedureId)
+                .Select(x => new RecordProcedureUseDTO { ProcedureId = x.Key, Quantity = x.Count() })
+                .ToListAsync();
+
+        return new ResponseDTO<List<RecordProcedureUseDTO>>(record.Count > 0, "Nenhum resultado encontrado", record);
     }
 }

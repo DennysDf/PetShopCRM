@@ -1,4 +1,5 @@
 ﻿using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.DTOs.Records;
 using PetShopCRM.Domain.Models;
 
 namespace PetShopCRM.Application.Services.Interfaces;
@@ -10,4 +11,5 @@ public interface IRecordService
     Task<ResponseDTO<List<Record>>> GetAllCompleteByGuardianAsync(int guardianId);
     Task<ResponseDTO<Record>> GetByIdAsync(int id);
     Task<ResponseDTO<List<Record>>> GetAllCompleteByPetAsync(int petId);
+    Task<ResponseDTO<List<RecordProcedureUseDTO>>> GetAllUsesByPetAsync(int petId);
 }

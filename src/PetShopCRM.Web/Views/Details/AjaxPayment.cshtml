@@ -1,0 +1,79 @@
+﻿@model Payment
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-heart-pulse"></i> <b>Plano:</b> @Model.HealthPlan.Name
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-dollar"></i> <b>Valor:</b> R$<span class="value-mask"> @Model.HealthPlan.Value</span>
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-calendar-days"></i> <b>Primeiro pagamento:</b> @(Model.FirstPayment?.ToDateBrazilMin() ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-calendar-days"></i> <b>Último pagamento:</b> @(Model.LastPayment?.ToDateBrazilMin() ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-diamond"></i> <b>Parcela atual:</b> @Model.Installment
+    </div>
+    @if (Model.IsSuccess && Model.Active)
+    {
+        <div class="col-lg-6 col-sm-12 mt-3">
+            <a class="mr-2 deletar btn btn-danger" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Cancelar Plano" data-id="@Model.Id">
+                <i class="fa fa-times"> </i> Cancelar
+            </a>
+        </div>
+    }
+</div>
+<hr class="border-dark" />
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="pb-1 pt-2 text-bg-secondary">
+            <h4>Histórico</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <partial name="_MonitoringPartial" model="PaymentHistoryVM.ToList(Model.PaymentHistories.ToList())" view-data="ViewData">
+    </div>
+</div>
+
+<div class="modal" style="padding-top:120px" role="dialog" id="delete" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title"><i class="fa fa-exclamation-triangle " style="color:yellow"></i>  ATENÇÃO <i style="color:yellow" class="fa fa-exclamation-triangle"></i></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="font-weight-bold font-18">
+                    Tem certeza que deseja cancelar sua assinatura do plano de saúde?
+                    <input type="hidden" id="del-evento" />
+                </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fa fa-times-circle"></i>  Fechar</button>
+                <button type="button" id="confirm-del" class="btn btn-success"><i class="fa fa-check-circle"></i> Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(".deletar").click(function () {
+        var id = $(this).data("id")
+        $("#del-evento").val(id)
+        $("#delete").modal("show")
+    })
+
+    $("#confirm-del").click(function () {
+        window.location.href = "@Url.Action("Delete", "Payment")?id=" + $("#del-evento").val() + "&route=Guardian";
+    });
+</script>

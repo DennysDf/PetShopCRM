@@ -6,6 +6,8 @@
 <div class="container-fluid">
     <form asp-action="Index" method="post" id="formRecord">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Route" />
+        <div id="divForm"></div>
     </form>
 </div>
 
@@ -15,7 +17,7 @@
             var data = $("#formRecord").serialize();
 
             $.post('@Url.Action("AjaxForm")', data, function (response) {
-                $("#formRecord").html(response);
+                $("#divForm").html(response);
                 $('.field-validation-error').text('');
             });
         }

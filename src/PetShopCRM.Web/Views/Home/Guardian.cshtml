@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Início";
 }
-  <style>
+<style>
     .card-link {
         color: inherit;
         text-decoration: none;
@@ -25,27 +25,22 @@
         object-fit: cover; /* cobre a área do container sem distorcer a imagem */
     }
 
-  </style>
-
-@if (ViewBag.AlertUpdateImg != null)
-{
-    <div class="row align-items-right justify-content-center mb-3">
-        <div class="col-sm-2">
-            <a href="@Url.Action("Details","Guardian", new{Id = ViewBag.GuardianId})" class="btn btn-danger text-white">Acessar a página de detalhes para atualizar foto.</a>
-        </div>
-    </div>
-}
+</style>
 
 <div class="row justify-content-center">
     @foreach (var item in Model)
     {
         <div class="col-md-4">
-            <a href="@Url.Action("Details", "Guardian", new {IdPet = item.Id})" class="card-link">
-                <div class="card mb-4">
-                    @if(item.Url != null){
+            <div class="card mb-4">
+                @if (item.NeedUpdatePhoto)
+                {
+                    <a href="@Url.Action("Pet","Details", new { Id = item.Id })" class="btn btn-danger text-white">Acessar para atualizar a foto.</a>
+                }
+                <a href="@Url.Action("Pet", "Details", new { id = item.Id })" class="card-link text-dark">
+                    @if (item.Url != null)
+                    {
                         <img src="~/Upload/Pet/@item.Id/@item.Url" class="card-img-top" alt="Imagem do Pet">
                     }
-                    
                     <div class="card-body">
                         <h5 class="card-title text-center"><i class="fas fa-paw"></i> @item.Name</h5>
                         <div class="row text-center">
@@ -54,13 +49,13 @@
                                 <p class="card-text"><i class="fas fa-dog"></i> <strong>Espécie:</strong> @item.Specie</p>
                             </div>
                             <div class="col">
-                                <p class="card-text"><i class="fas fa-venus-mars"></i> <strong>Sexo:</strong> @item.Sexy</p>
+                                <p class="card-text"><i class="fas fa-venus-mars"></i> <strong>Sexo:</strong> @item.Sex</p>
                                 <p class="card-text"><i class="fas fa-notes-medical"></i> <strong>Plano de Saúde:</strong> @item.HealthPlan</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     }
 </div>

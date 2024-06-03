@@ -10,7 +10,8 @@ public class UserGuardianVM
     public string Specie { get; set; }
     public string HealthPlan { get; set; }
     public string Url { get; set; }
-    public string Sexy { get; set; }
+    public string Sex { get; set; }
+    public bool NeedUpdatePhoto { get; set; }
 
     public List<UserGuardianVM> ToViewModel(List<Domain.Models.Pet> model)
     {
@@ -28,7 +29,8 @@ public class UserGuardianVM
                 Specie = item.Specie.Name,
                 HealthPlan = healthPlan,
                 Url = item.UrlPhoto,
-                Sexy = item.Sexy == "F" ? "Femea":"Macho"
+                Sex = item.Sex == "F" ? "Femea":"Macho",
+                NeedUpdatePhoto = item.UrlPhoto != null && item.ShowReportImgUpdate == true && item.UpdatedDateImg != null && (DateTime.Now - item.UpdatedDateImg.Value).Days > 30
             };
 
             listGuard.Add(guardian);

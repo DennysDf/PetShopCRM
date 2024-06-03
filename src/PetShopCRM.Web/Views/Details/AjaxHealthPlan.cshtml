@@ -1,0 +1,33 @@
+﻿@model HealthPlan
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-heart-pulse"></i> <b>Nome:</b> @Model.Name
+    </div>
+    <div class="col-lg-6 col-sm-12 mt-3">
+        <i class="fa-solid fa-dollar"></i> <b>Valor:</b> R$<span class="value-mask"> @Model.Value</span>
+    </div>
+    @if (Model.Description != null)
+    {
+        <div class="col-12 mt-3">
+            <i class="fa-solid fa-file-lines"></i> <b>Descrição:</b> @Model.Description
+        </div>
+    }
+</div>
+<hr class="border-dark" />
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="pb-1 pt-2 text-bg-secondary">
+            <h4>Procedimentos</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <partial name="_HealthPlanProcedurePartial" model="Model" view-data="ViewData">
+    </div>
+</div>

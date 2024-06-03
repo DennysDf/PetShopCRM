@@ -23,6 +23,16 @@ public class PaymentService(
             .FirstOrDefault();
     }
 
+    public async Task<ResponseDTO<Payment>> GetCompleteByIdAsync(int id)
+    {
+        var payment = await unitOfWork.PaymentRepository.GetBy(x => x.Id == id)
+            .Include(x => x.HealthPlan)
+            .Include(x => x.PaymentHistories)
+            .FirstOrDefaultAsync();
+
+        return new ResponseDTO<Payment>(payment != null, "Nenhum resultado encontrado", payment);
+    }
+
     public async Task<List<Payment>> GetAllAsync()
     {
         var payments = unitOfWork.PaymentRepository.GetBy().ToList();
@@ -127,7 +137,7 @@ public class PaymentService(
 
         if (payment == null) return false;
 
-        var result = pagarMeService.CancelSubscription(payment.ExternalId);
+        var result = pagarMeService.CancelSubscription(payment.ExternalId ?? "");
 
         var deleted = await unitOfWork.PaymentRepository.DeleteOrRestoreAsync(payment.Id);
         await unitOfWork.SaveChangesAsync();

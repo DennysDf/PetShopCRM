@@ -8,6 +8,7 @@ namespace PetShopCRM.Application.Services.Interfaces;
 public interface IPaymentService
 {
     Payment? GetById(int id);
+    Task<ResponseDTO<Payment>> GetCompleteByIdAsync(int id);
     Task<List<Payment>> GetAllAsync();
     Task<ResponseDTO<Payment?>> AddOrUpdateAsync(int petId, int healthPlanId, int? paymentId = null, CardDTO? card = null, BillingAddressDTO? billingAddress = null, CustomerDTO? customer = null);
     string GenerateWebhookUrl();

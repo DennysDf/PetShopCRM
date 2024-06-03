@@ -1,17 +1,8 @@
-﻿using PetShopCRM.Application.DTOs.User;
+﻿using Microsoft.EntityFrameworkCore;
 using PetShopCRM.Application.DTOs;
+using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;
 using PetShopCRM.Infrastructure.Data.UnitOfWork.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PetShopCRM.Application.Services.Interfaces;
-using PetShopCRM.Application.DTOs.Guardian;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Polly.Bulkhead;
-using Microsoft.EntityFrameworkCore;
 
 namespace PetShopCRM.Application.Services;
 
@@ -59,6 +50,19 @@ public class GuardianService(IUnitOfWork unitOfWork) : IGuardianService
         var model = await unitOfWork.GuardianRepository.GetByIdAsync(id);
         return new ResponseDTO<Guardian>(model != null, Resources.Message.GuardianNotFound, model);
 
+    }
+
+    public async Task<ResponseDTO<Guardian>> GetCompleteByIdAsync(int id)
+    {
+        var guardian = unitOfWork.GuardianRepository.GetBy(x => x.Id == id)
+            .Include(c => c.Pets)
+                .ThenInclude(c => c.Specie)
+            .Include(c => c.Pets)
+                .ThenInclude(c => c.Payments)
+                    .ThenInclude(c => c.HealthPlan)
+            .FirstOrDefault();
+
+        return new ResponseDTO<Guardian>(guardian != null, Resources.Message.GuardianNotFound, guardian);
     }
 
     public async Task<bool> DeleteAsync(int id)

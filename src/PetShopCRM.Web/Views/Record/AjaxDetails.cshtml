@@ -1,0 +1,52 @@
+﻿@model RecordVM
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <b>Pet:</b> @(Model.Identifier != null ? Model.Identifier + " - " : "") @Model.Name
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Tutor:</b> @Model.Guardian
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Espécie:</b> @Model.Specie
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Clínica:</b> @Model.Clinic
+    </div>
+</div>
+<div class="row my-3">
+    <div class="col-12 text-center">
+        <div class="pb-1 pt-2 text-bg-secondary">
+            <h4>Prontuário</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-sm-12">
+        <b>Data:</b> @Model.Date.ToDateBrazilMin()
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Procedimento:</b> @Model.Procedure
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Motivo da Consulta:</b> @(Model.ReasonConsultation ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Histórico Clínico:</b> @(Model.ClinicalHistory ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Exame Físico:</b> @(Model.PhysicalExam ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Diagnóstico:</b> @(Model.Diagnosis ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Prescrição:</b> @(Model.Prescription ?? "N/A")
+    </div>
+    <div class="col-lg-6 col-sm-12">
+        <b>Observações:</b> @(Model.Observation ?? "N/A")
+    </div>
+</div>

@@ -22,11 +22,12 @@ public class RecordController(IPetService petService,
                                 ILoggedUserService loggedUserService,
                                 IUserService userService) : Controller
 {
-    public async Task<IActionResult> Index(int id = 0)
+    public async Task<IActionResult> Index(int id = 0, string? route = null)
     {
         var recordVM = new RecordVM
         {
-            Id = id
+            Id = id,
+            Route = route
         };
 
         return View(recordVM);
@@ -59,12 +60,34 @@ public class RecordController(IPetService petService,
 
             var planIdCreate = paymentService.GetPlanByPet(model.PetId);
 
-            if(model.HealthPlanId == 0)
+            if (model.HealthPlanId == 0)
                 model.HealthPlanId = planIdCreate.Id;
+
+            var recordProceduresDTO = await recordService.GetAllUsesByPetAsync(model.PetId);
 
             var proceduresHealthPlanDTO = await procedureHealthPlanService.GetAllCompleteAsync(model.HealthPlanId);
             var procedures = proceduresHealthPlanDTO.Data.Where(c => c.Lack <= (DateTime.Now - planIdCreate.DateCreate).Days);
-            model.ListProcedureHealthPlan = new SelectList(procedures.Select(c => new { c.Id, Text = c.Procedure.Description }).ToList(), "Id", "Text");
+
+            var procedureGroupSelectList = procedures
+                .Select(x => x.Procedure.ProcedureGroup.Description)
+                .Distinct()
+                .Select(x => new SelectListGroup { Name = x })
+                .ToList();
+
+            var proceduresSelectListItems = procedures
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = $"{c.Procedure.Description} | {(c.CoparticipationUnit == ProcedureCoparticipationUnit.Value ? $"R$ {c.Coparticipation}" : $"{c.Coparticipation}%")} | {(recordProceduresDTO.Data.FirstOrDefault(x => x.ProcedureId == c.ProcedureId)?.Quantity ?? 0)}/{(c.AnnualLimit?.ToString() ?? "Ilimitado")}",
+                    Group = procedureGroupSelectList.First(d => d.Name == c.Procedure.ProcedureGroup.Description)
+                }).ToList();
+
+            model.ListProcedureHealthPlan = new SelectList(
+                proceduresSelectListItems,
+                "Value",
+                "Text",
+                model.ProcedureHealthPlanId,
+                "Group.Name");
         }
 
         return View(model);
@@ -76,7 +99,7 @@ public class RecordController(IPetService petService,
         var message = modelVM.Id != 0 ? Resources.Text.RecordUpdateSucess : Resources.Text.RecordAddSucess;
 
         Record model = new();
-        if(modelVM.Id == 0)
+        if (modelVM.Id == 0)
         {
             model = modelVM.ToModel(model);
         }
@@ -88,6 +111,10 @@ public class RecordController(IPetService petService,
 
         await recordService.AddOrUpdateAsync(model);
         notificationService.Success(message);
+
+        if (modelVM.Route != null)
+            return RedirectToAction("Pet", "Details", new { id = modelVM.PetId });
+
         return RedirectToAction("List");
     }
 
@@ -101,7 +128,7 @@ public class RecordController(IPetService petService,
             id = (int)userDTO.Data.GuardianId;
         }
 
-        var recordsDTO = await recordService.GetAllCompleteAsync(id);
+        var recordsDTO = await recordService.GetAllCompleteByGuardianAsync(id);
         if (recordsDTO.Success)
         {
             records = recordsDTO.Data;
@@ -110,7 +137,7 @@ public class RecordController(IPetService petService,
         return View(records);
     }
 
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> AjaxDetails(int id)
     {
         var recordDTO = await recordService.GetAllCompleteAsync(id);
         var recordVM = new RecordVM();

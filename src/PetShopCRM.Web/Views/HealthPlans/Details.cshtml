@@ -1,0 +1,27 @@
+﻿@model HealthPlan
+@{
+    ViewData["Title"] = "Procedimentos";
+    ViewData["Caminho"] = "<li>Plano de Saúde</li><li>Benefícios</li>";
+}
+
+<div class="container">
+    <div class="col-12 text-center">
+        <div class="card-header justify-content-between align-items-center">
+            <h3 class="header-title">Plano de Saúde</h3>
+        </div>
+    </div>
+    <div class="row m-15 text-center ">
+        <div class="col-2"></div>
+        <div class="col-sm-12 col-md-4">
+            <b>Nome: </b>
+            <span>@Model.Name</span>
+        </div>
+        <div class=" col-sm-12 col-md-6">
+            <b>Valor: </b>
+            <b>R$ </b> <span class="value-mask"> @Model.Value</span>
+        </div>
+    </div> 
+</div>
+<div class="container">
+    <partial name="_HealthPlanProcedurePartial" model="Model" view-data="ViewData">
+</div>

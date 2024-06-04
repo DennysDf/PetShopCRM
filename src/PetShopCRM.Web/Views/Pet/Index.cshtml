@@ -33,7 +33,7 @@
                     <th>Nome</th>
                     <th>Tutor</th>
                     <th>Espécie</th>
-                    <th width="15" class="text-center" data-field="operate" data-events="operateEvents"> </th>
+                    <th class="text-center" data-field="operate" data-events="operateEvents"> </th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -206,21 +206,20 @@
 
             $("#confirm-del").click(function () {
                 window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
-            });
-
-            var $table = $('#table')
-            window.operateEvents = {
-                'click .edit': function (e, value, row, index) {
-                    var id = [row.id]
-                    Ajax(id)
-                },
-                'click .deletar': function (e, value, row, index) {
-                    var id = [row.id]
-                    $("#del-evento").val(id)
-                    $("#delete").modal("show")
-                }
-            }     
-
+            });  
         })
+
+        var $table = $('#table')
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                var id = [row.id]
+                Ajax(id)
+            },
+            'click .deletar': function (e, value, row, index) {
+                var id = [row.id]
+                $("#del-evento").val(id)
+                $("#delete").modal("show")
+            }
+        }
     </script>
 }

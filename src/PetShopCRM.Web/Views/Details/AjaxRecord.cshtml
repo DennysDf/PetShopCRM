@@ -53,7 +53,7 @@
                             @if (loggedUser.Role == nameof(UserType.Admin) || loggedUser.Role == nameof(UserType.General))
                             {
                                 <div class="col-1">
-                                    <a class="edit" href="@Url.Action("Index", "Record",new {Id = item.Id, Route = "Details"})" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                    <a class="edit" href="@Url.Action("Index", "Record",new {Id = item.Id, Route = "Details"})" data-toggle="tooltip" title="Editar" data-bs-placement="left" data-id="@item.Id">
                                         <i class="text-dark fa fa-pencil-alt"></i>
                                     </a>
                                 </div>

@@ -38,7 +38,7 @@
                 <i class="fas fa-venus-mars"></i> <b>Sexo:</b> @Model.Sex
             </div>
             <div class="col-lg-6 col-sm-12 mt-3">
-                <i class="fa-solid fa-weight-scale"></i> <b>Peso:</b> @Model.Weight
+                <i class="fa-solid fa-weight-scale"></i> <b>Peso:</b> @Model.Weight kg
             </div>
             <div class="col-lg-6 col-sm-12 mt-3">
                 <i class="fa-solid fa-dna"></i> <b>Raça:</b> @Model.Breed
@@ -122,6 +122,8 @@
 @section Scripts {
     <script type="text/javascript">
         $(() => {
+            loadGuardian();
+
             $(document).on('click', ".edit", function () {
                 var id = $(this).data("id");
                 AjaxPet(id);
@@ -173,6 +175,10 @@
             });
 
             $('.btnGuardian').on('click', function () {
+                loadGuardian();
+            });
+
+            function loadGuardian() {
                 ResizeDados();
 
                 var guardianId = $('#@nameof(Model.GuardianId)').val();
@@ -185,10 +191,10 @@
                     }
                 }).fail(function () {
                     MensagemSemDados("Tutor", true);
-                }).always(function() {
+                }).always(function () {
                     $('table[data-toggle="table"]').bootstrapTable();
                 });
-            });
+            }
 
             $('.btnHeathPlan').on('click', function () {
                 ResizeDados();

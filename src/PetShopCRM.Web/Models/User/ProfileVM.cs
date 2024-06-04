@@ -48,8 +48,6 @@ public class ProfileVM
 
     public ProfileDTO ToDTO()
     {
-        
-
         return new ProfileDTO(Id, Name, Password, PasswordNew, ConfirmPassword, Email, Phone, NamePhoto);
     }
 }

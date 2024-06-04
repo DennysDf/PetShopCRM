@@ -19,6 +19,17 @@ public class PetService(IUnitOfWork unitOfWork) : IPetService
         return pets.ToList();
     }
 
+    public async Task<List<Pet>> GetAllWithoutActivePlanAsync()
+    {
+        var pets = unitOfWork.PetRepository.GetBy()
+            .Include(x => x.Guardian)
+            .Include(x => x.Payments)
+            .Where(x => !x.Payments.Any(s => s.Active && s.IsSuccess && s.ExternalId != null))
+            .OrderBy(c => c.Name);
+
+        return pets.ToList();
+    }
+
     public async Task<ResponseDTO<List<Pet>>> GetAllCompleteAsync()
     {
         var pets = unitOfWork.PetRepository.GetBy();

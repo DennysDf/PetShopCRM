@@ -47,7 +47,8 @@ public class AddUserVM
     [DisplayName("CPF")]
     public string CPF { get; set; }
 
-    public static List<AddUserVM> ToList(List<Domain.Models.User> listUsers) => listUsers.Select(users => new AddUserVM {
+    public static List<AddUserVM> ToList(List<Domain.Models.User> listUsers) => listUsers.Select(users => new AddUserVM
+    {
         CPF = users.CPF,
         Name = users.Name,
         Type = users.Type,
@@ -55,10 +56,23 @@ public class AddUserVM
         Phone = users.Phone,
         Id = users.Id,
         Login = users.Login,
-        Password = users.Password        
+        Password = users.Password
     }).ToList();
 
-    public Domain.Models.User ToModel() => new Domain.Models.User() { Id = this.Id, Name = this.Name, CPF = this.CPF, Email = this.Email, Login = this.Login, Password = this.Password, Phone = this.Phone };
+    public Domain.Models.User ToModel(Domain.Models.User user)
+    {
+        user.Id = this.Id;
+        user.Name = this.Name;
+        user.CPF = this.CPF;
+        user.Email = this.Email;
+        user.Login = this.Login;
+        user.Phone = this.Phone;
+
+        if (!string.IsNullOrEmpty(this.Password))
+            user.Password = this.Password;
+
+        return user;
+    }
 
     public AddUserVM ToVM(Domain.Models.User model) => new() { Id = model.Id, Login = model.Login, Password = model.Password, Name = model.Name, Type = model.Type, Email = model.Email, Phone = model.Phone, CPF = model.CPF };
 }

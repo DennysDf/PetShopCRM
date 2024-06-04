@@ -153,7 +153,7 @@
                         <label>Valor:</label>
                     </div>
                     <div class="col-6">
-                        R$ @healthPlan.Value
+                        <b>R$ </b><span class="value-mask">@healthPlan.Value</span>
                     </div>
                 </div>
                 <hr />
@@ -164,8 +164,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <p>Estou ciente de todos os custos e os benefícios fornecidos pelo plano de saúde da VetCard para pets, além de concordar com uma cobrança recorrente no meu cartão de crédito no valor de <label>R$ @healthPlan.Value</label>, a ser cobrada 1 vez por mês a partir de hoje, dia <label>@DateTime.Now.ToDateBrazilMin()</label>.</p>
+                <div class="col-12 fs-6">
+                    <p>Estou ciente de todos os custos e os benefícios fornecidos pelo plano de saúde da VetCard para pets, além de concordar com uma cobrança recorrente no meu cartão de crédito no valor de <label>R$ <span class="value-mask">@healthPlan.Value</span></label>, a ser cobrada 1 vez por mês a partir de hoje, dia <label>@DateTime.Now.ToDateBrazilMin()</label>.</p>
                     <p>Para visualizar todos os benefícios que o seu plano oferece, por favor, clique <a href="http://vetcard.com.br/" target="_blank">aqui</a>.</p>
                     <input type="checkbox" id="checkTermo" name="checkTermo" value="true" /> <label for="checkTermo">Marque para concordar!</label>
                     <br />
@@ -322,6 +322,11 @@
             $('label[for="Card_Cvv"]').text("CVV");
 
             $('#btnSalvar').attr('disabled', true);
+            $('#btnSalvar').parent().attr('title', 'Obrigatório concordar com o Termo de consentimento!');
+            $('#btnSalvar').parent().data('toggle', 'popover');
+            $('#btnSalvar').parent().data('placement', 'left');
+
+            const popoverSalvar = bootstrap.Popover.getOrCreateInstance($('#btnSalvar').parent()[0]);
 
             $('input[name="Card.HasCard"][Value=true]').click();
 
@@ -329,9 +334,11 @@
                 if($('#checkTermo').is(':checked')){
                     $('#btnSalvar').removeAttr('disabled');
                     $('#checkTermo').parent().find('span').hide();
+                    popoverSalvar.disable();
                 }else{
                     $('#btnSalvar').attr('disabled', true);
                     $('#checkTermo').parent().find('span').show();
+                    popoverSalvar.enable();
                 }
             });
 
@@ -346,6 +353,8 @@
 
                     $('.divStep1').hide();
                     $('.divStep2').show();
+
+                    $('input[name="BillingAddress.HasBillingAddress"][value="true"]').click()
                 }
             });
 
@@ -353,7 +362,6 @@
                 e.preventDefault();
 
                 $('input[name="Customer.HasCustomer"][value="false"]').click()
-                $('input[name="BillingAddress.HasBillingAddress"][value="false"]').click()
 
                 $('#btnCancelar').show();
                 $('#btnProximo').show();

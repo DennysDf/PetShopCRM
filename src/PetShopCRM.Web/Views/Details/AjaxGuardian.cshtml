@@ -76,7 +76,7 @@
                             <td class="text-nowrap">@item.Specie.Name</td>
                             <td class="text-nowrap">@(item.Payments.LastOrDefault(x => x.IsSuccess && x.Active && x.ExternalId != null)?.HealthPlan != null ? item.Payments.LastOrDefault(x => x.IsSuccess && x.Active && x.ExternalId != null)?.HealthPlan.Name : "N/A")</td>
                             <td class="text-nowrap text-right">
-                                <a class="edit" href="javascript:void(0)" data-toggle="tooltip" title="Editar" data-placement="left" data-id="@item.Id">
+                                <a class="edit" href="javascript:void(0)" data-toggle="tooltip" title="Editar" data-bs-placement="left" data-id="@item.Id">
                                     <i class="text-dark fa fa-pencil-alt"></i>
                                 </a>
                             </td>

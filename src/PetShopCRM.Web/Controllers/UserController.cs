@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Enums;
+using PetShopCRM.Domain.Models;
 using PetShopCRM.Web.Models.User;
 using PetShopCRM.Web.Services.Interfaces;
 
@@ -144,7 +145,18 @@ namespace PetShopCRM.Web.Controllers
         {
             var message = model.Id != 0 ? Resources.Text.UserUpdateSucess : Resources.Text.UserAddSucess;
 
-            await userService.AddOrUpdateAsync(model.ToModel());
+            User user = new();
+            if(model.Id != 0)
+            {
+                var userDTO = await userService.GetUserByIdAsync(model.Id);
+
+                if(userDTO.Success)
+                    user = userDTO.Data;
+            }
+
+            model.ToModel(user);
+
+            await userService.AddOrUpdateAsync(user);
 
             notificationService.Success(message);
 

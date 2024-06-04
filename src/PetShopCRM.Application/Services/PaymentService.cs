@@ -28,6 +28,8 @@ public class PaymentService(
         var payment = await unitOfWork.PaymentRepository.GetBy(x => x.Id == id)
             .Include(x => x.HealthPlan)
             .Include(x => x.PaymentHistories)
+            .Include(x => x.Guardian)
+            .Include(x => x.Pet)
             .FirstOrDefaultAsync();
 
         return new ResponseDTO<Payment>(payment != null, "Nenhum resultado encontrado", payment);

@@ -1,4 +1,7 @@
-﻿@model Payment
+﻿@using PetShopCRM.Domain.Enums
+@using PetShopCRM.Web.Services.Interfaces
+@inject ILoggedUserService loggedUser
+@model Payment
 @{
     Layout = null;
 }
@@ -19,10 +22,10 @@
     <div class="col-lg-6 col-sm-12 mt-3">
         <i class="fa-solid fa-diamond"></i> <b>Parcela atual:</b> @Model.Installment
     </div>
-    @if (Model.IsSuccess && Model.Active)
+    @if (Model.IsSuccess && Model.Active && !(loggedUser.Role == nameof(UserType.Guardian) && (DateTime.Now - (Model.FirstPayment ?? DateTime.Now)).Days <= 30))
     {
         <div class="col-lg-6 col-sm-12 mt-3">
-            <a class="mr-2 deletar btn btn-danger" href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="Cancelar Plano" data-id="@Model.Id">
+            <a class="mr-2 deletar btn btn-danger" href="javascript:void(0)" data-toggle="tooltip" data-bs-placement="left" title="Cancelar Plano" data-id="@Model.Id">
                 <i class="fa fa-times"> </i> Cancelar
             </a>
         </div>

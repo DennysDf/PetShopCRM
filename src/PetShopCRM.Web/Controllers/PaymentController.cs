@@ -47,7 +47,7 @@ public class PaymentController(
     
     public async Task<IActionResult> Form()
     {
-        var pets = await petService.GetAllAsync();
+        var pets = await petService.GetAllWithoutActivePlanAsync();
         var healthPlans = await healthPlanService.GetAllAsync();
 
         var paymentVM = new PaymentVM

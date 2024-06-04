@@ -7,6 +7,7 @@ namespace PetShopCRM.Application.Services.Interfaces;
 public interface IPetService
 {
     Task<List<Pet>> GetAllAsync();
+    Task<List<Pet>> GetAllWithoutActivePlanAsync();
     Task<ResponseDTO<List<Pet>>> GetAllCompleteAsync();
     Task<Pet> AddOrUpdateAsync(Pet guardin);
     Task<ResponseDTO<Pet>> GetByIdAsync(int id);

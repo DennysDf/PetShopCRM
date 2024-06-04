@@ -5,7 +5,7 @@
 
 body {
     background-image: url(../imagens/background-green.jpg);
-    background-repeat: no-repeat;
+    background-repeat: round;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,4 +59,14 @@ label:has(+ select:not([data-val-required]))::after {
 label:has(+ select[data-val-required])::after {
     content: "*:";
     font-weight: bold;
+}
+
+.popover {
+    --bs-popover-bg: #000;
+}
+
+    .popover-header {
+    color: #fff;
+    background-color: #000;
+    border-bottom: 1px solid #000;
 }

@@ -190,19 +190,6 @@
                 Ajax(id);
             })
 
-            function Ajax(id) {
-                $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
-                    $("#modal-body").html(response);
-                    select2Init();
-                    maskInit();          
-                    if (id != 0) {
-                        $("#title-pet").text("Editar Pet")
-                    } else {
-                        $("#title-pet").text("Cadastrar Pet")
-                    }
-                    $("#modal").modal("show");
-                })
-            }
 
             $("#confirm-del").click(function () {
                 window.location.href = "@Url.Action("Delete")?id=" + $("#del-evento").val();
@@ -220,6 +207,20 @@
                 $("#del-evento").val(id)
                 $("#delete").modal("show")
             }
+        }
+
+        function Ajax(id) {
+            $.post('@Url.Action("Ajax")', { "id": id }, function (response) {
+                $("#modal-body").html(response);
+                select2Init();
+                maskInit();
+                if (id != 0) {
+                    $("#title-pet").text("Editar Pet")
+                } else {
+                    $("#title-pet").text("Cadastrar Pet")
+                }
+                $("#modal").modal("show");
+            })
         }
     </script>
 }

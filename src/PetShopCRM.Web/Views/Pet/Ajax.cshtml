@@ -17,14 +17,14 @@
         <input type="text" class="form-control" asp-for="Identifier" placeholder="Escreva o chip..." autofocus />
         <span asp-validation-for="Identifier"></span>
     </div>
- 
+
 </div>
 <div class="row mt-2">
 
     <div class="col-sm-6">
         <label asp-for="GuardianId"></label>
         <select asp-for="GuardianId" class="form-control select2" data-dropdown-parent="#modal" asp-items="Model.GuardianList">
-            <option disabled selected>Selecione</option>            
+            <option disabled selected>Selecione</option>
         </select>
         <span asp-validation-for="GuardianId"></span>
     </div>
@@ -49,17 +49,17 @@
     </div>
     <div class="col-sm-4">
         <label asp-for="Color"></label>
-        <input type="text" asp-for="Color" class="form-control" placeholder="Escreva a cor..."  />
+        <input type="text" asp-for="Color" class="form-control" placeholder="Escreva a cor..." />
     </div>
     <div class="col-sm-4">
         <label asp-for="Breed"></label>
-        <input type="text" asp-for="Breed" class="form-control" placeholder="Escreva a raça..."  />
+        <input type="text" asp-for="Breed" class="form-control" placeholder="Escreva a raça..." />
     </div>
 </div>
 <div class="row mt-2">
     <div class="col-sm-4">
         <label asp-for="Age"></label>
-        <input type="text" asp-for="Age" class="form-control" placeholder="Escreva a idade..."  />
+        <input type="text" asp-for="Age" class="form-control" placeholder="Escreva a idade..." />
     </div>
     <div class="col-sm-4">
         <label asp-for="Weight"></label>
@@ -82,8 +82,8 @@
         <span asp-validation-for="Photo"></span>
     </div>
 
-     <div class="col-6">
-         <label  asp-for="ShowReportImgUpdate" class="form-check-label">Incluir no relatório de imagens atualizadas?</label>   <br />     
+    <div class="col-6">
+        <label asp-for="ShowReportImgUpdate" class="form-check-label">Incluir no relatório de imagens atualizadas?</label>   <br />
         <div class="form-check form-check-inline ml-3">
             <input class="form-check-inline" type="radio" asp-for="ShowReportImgUpdate" id="radioCustomer1" value="true">
             <label class="form-check-label" for="radioCustomer1">Sim</label>
@@ -93,11 +93,6 @@
             <label class="form-check-label" for="radioCustomer2">Não</label>
         </div>
     </div>
-@* 
-    <div class="col-sm-6" id="show-report">      
-        <label  asp-for="ShowReportImgUpdate" class="">Incluir no relatório de imagens atualizadas?</label>
-        <input class="" type="checkbox" asp-for="ShowReportImgUpdate">    
-    </div *@
 </div>
 <div class="row mt-2">
     <div class="col-sm-12">

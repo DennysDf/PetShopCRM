@@ -220,6 +220,15 @@
                     $("#title-pet").text("Cadastrar Pet")
                 }
                 $("#modal").modal("show");
+
+                setTimeout(function () {
+                    if (!!$('#UrlPhoto').val()) {
+                        $('#Photo').rules('remove', 'requiredifinput');
+                        $('#Photo').removeAttr('data-val-requiredifinput');
+                        $('#Photo').removeAttr('data-val-requiredifinput-desiredvalue');
+                        $('#Photo').removeAttr('data-val-requiredifinput-propertyname');
+                    }
+                }, 1000);
             })
         }
     </script>

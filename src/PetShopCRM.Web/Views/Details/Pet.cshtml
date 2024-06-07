@@ -155,6 +155,15 @@
                     $("#GuardianId").attr("readonly", true)
                     $('label[for="ShowReportImgUpdate"]').parent().hide();
                     $("#modal-pet").modal("show");
+
+                    setTimeout(function () {
+                        if (!!$('#UrlPhoto').val()) {
+                            $('#Photo').rules('remove', 'requiredifinput');
+                            $('#Photo').removeAttr('data-val-requiredifinput');
+                            $('#Photo').removeAttr('data-val-requiredifinput-desiredvalue');
+                            $('#Photo').removeAttr('data-val-requiredifinput-propertyname');
+                        }
+                    }, 1000);
                 })
             }
 

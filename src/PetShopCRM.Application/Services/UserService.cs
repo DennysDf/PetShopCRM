@@ -1,4 +1,5 @@
-﻿using PetShopCRM.Application.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using PetShopCRM.Application.DTOs;
 using PetShopCRM.Application.DTOs.User;
 using PetShopCRM.Application.Services.Interfaces;
 using PetShopCRM.Domain.Models;

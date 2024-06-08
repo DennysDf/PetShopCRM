@@ -180,7 +180,7 @@ public class PaymentService(
 
     private async Task SendCheckoutEmail(Guardian guardian, HealthPlan healthPlan, Pet pet, Payment payment)
     {
-        var checkoutUrl = webContext.GenerateUrl("Payment", "Checkout") + $"?refId={payment.Id.EncryptNumberAsBase64()}";
+        var checkoutUrl = webContext.GenerateUrl("Payment", "Checkout") + $"?refId={payment.Id.Encrypt()}";
 
         await emailService.SendAsync(guardian.Email, "Plano de Saúde Pet VetCard.", $"<hr><div><center><div><p style=text-align:center><strong><a href={checkoutUrl} style=background-color:#396;color:#fff;padding:5px;border-radius:5px>ACESSAR O CHECKOUT</a></strong></div></center></div><hr><p>Prezado(a) {guardian.Name},<p>Esperamos que você e seu amado pet estejam bem.<p>Agradecemos pela confiança em nossos serviços e estamos felizes em tê-lo como nosso cliente.<p><strong>Detalhes do Plano solicitado:</strong><ul><li><strong>Plano:</strong> {healthPlan.Name}<li><strong>Valor:</strong> R$ {healthPlan.Value.ToString("#,###.##").Replace(',', '!').Replace('.', ',').Replace('!', '.')}<li><strong>Pet:</strong> {pet.Name}</ul><p><strong>Acesse a página de checkout para realizar o pagamento: <a href={checkoutUrl}>aqui</a></strong><p>Para visualizar todos os benefícios que o seu plano oferece, por favor, clique <a href=http://vetcard.com.br/ >aqui</a>.<p>Caso tenha alguma dúvida ou necessite de assistência, não hesite em entrar em contato conosco. Estamos à disposição para ajudar no que for necessário.<p>Mais uma vez, agradecemos pela sua compra e esperamos que você e seu pet tenham uma excelente experiência com o VetCard.<p>Atenciosamente,<p>Equipe VetCard", true);
 

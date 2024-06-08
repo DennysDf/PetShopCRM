@@ -333,11 +333,11 @@
             $('#checkTermo').on('change', function () {
                 if($('#checkTermo').is(':checked')){
                     $('#btnSalvar').removeAttr('disabled');
-                    $('#checkTermo').parent().find('span').hide();
+                    $('#checkTermo').parent().children('span').hide();
                     popoverSalvar.disable();
                 }else{
                     $('#btnSalvar').attr('disabled', true);
-                    $('#checkTermo').parent().find('span').show();
+                    $('#checkTermo').parent().children('span').show();
                     popoverSalvar.enable();
                 }
             });

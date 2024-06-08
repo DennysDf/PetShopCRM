@@ -172,9 +172,15 @@ public class PaymentController(
     [AllowAnonymous]
     public async Task<IActionResult> Checkout(string refId)
     {
-        var paymentId = refId.DecryptNumberFromBase64();
+        var id = refId.DecryptToInt();
 
-        var payment = paymentService.GetById(paymentId);
+        if(id == 0)
+        {
+            notificationService.Error("Essa url expirou, solicite uma nova!");
+            return RedirectToAction("Login", "User");
+        }
+
+        var payment = paymentService.GetById(id);
         var pets = await petService.GetAllAsync();
         var healthPlans = await healthPlanService.GetAllAsync();
 
@@ -184,7 +190,7 @@ public class PaymentController(
 
         var paymentVM = new PaymentVM
         {
-            Id = paymentId,
+            Id = payment.Id,
             PetId = payment.PetId,
             PetList = new SelectList(pets.Select(c => new { c.Id, Name = $"{c.Name} - {c.Identifier} - {c.Guardian.Name}" }).ToList(), nameof(Pet.Id), nameof(Pet.Name)),
             HealthPlanId = payment.HealthPlanId,

@@ -1650,10 +1650,10 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(50.00,3,120,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexiaGastrectomiaParcialEsplenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(69.00,0,0,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
+VALUES(69.00,1,0,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,0,60,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_LocacaoSalaAtendimentoVolante),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50.00,1,60,(SELECT ID FROM @HealthPlan_Gold),(SELECT ID FROM @Procedures_LocacaoSalaAtendimentoVolante),GETDATE(),NULL,1,NULL,'Value')
 
 
 --Black
@@ -2201,7 +2201,7 @@ INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthP
 VALUES(20.00,3,120,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_TorcaoDilatacaoGastricaReducaoGastropexiaGastrectomiaParcialEsplenectomia),GETDATE(),NULL,1,NULL,'Percent')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(0,0,0,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
+VALUES(0,1,0,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_Microchipagem),GETDATE(),NULL,1,NULL,'Value')
 
 INSERT INTO ProcedureHealthPlans([Coparticipation],[AnnualLimit],[Lack],[HealthPlanId],[ProcedureId],[CreatedDate],[UpdatedDate],[Active],[Observation],[CoparticipationUnit])
-VALUES(50.00,0,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LocacaoSalaAtendimentoVolante),GETDATE(),NULL,1,NULL,'Value')
+VALUES(50.00,1,60,(SELECT ID FROM @HealthPlan_Black),(SELECT ID FROM @Procedures_LocacaoSalaAtendimentoVolante),GETDATE(),NULL,1,NULL,'Value')

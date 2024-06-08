@@ -58,7 +58,7 @@ public class PaymentVM
             IsActive = x.Active,
             Pet = $"{x.Pet.Identifier} - {x.Pet.Name} - {x.Guardian.Name}",
             HealhPlan = x.HealthPlan.Name,
-            GuardianPhoneMessage = $"https://api.whatsapp.com/send?phone={"55" + Regex.Replace(x.Guardian.Phone, @"\D", "")}&text=Ol%C3%A1%20{x.Guardian.Name},%20%0AEsperamos%20que%20esteja%20tudo%20bem%20com%20voc%C3%AA!%0ATe%20enviamos%20no%20e-mail:%20{x.Guardian.Email},%20o%20link%20para%20continuar%20o%20pagamento%20do%20plano%20de%20sa%C3%BAde%20VetCard.%0ACaso%20n%C3%A3o%20tenha%20visto,%20basta%20clicar%20no%20link%20abaixo%20para%20acessar.%0A{webContext.GenerateUrl("Payment", "Checkout")}?refId={x.Id.EncryptNumberAsBase64()}%0A%0AAgradecemos%20sua%20colabora%C3%A7%C3%A3o%20e%20estamos%20%C3%A0%20disposi%C3%A7%C3%A3o%20para%20qualquer%20d%C3%BAvida.%0A%0AAtenciosamente,%C2%A0VetCard."
+            GuardianPhoneMessage = $"https://api.whatsapp.com/send?phone={"55" + Regex.Replace(x.Guardian.Phone, @"\D", "")}&text=Ol%C3%A1%20{x.Guardian.Name},%20%0AEsperamos%20que%20esteja%20tudo%20bem%20com%20voc%C3%AA!%0ATe%20enviamos%20no%20e-mail:%20{x.Guardian.Email},%20o%20link%20para%20continuar%20o%20pagamento%20do%20plano%20de%20sa%C3%BAde%20VetCard.%0ACaso%20n%C3%A3o%20tenha%20visto,%20basta%20clicar%20no%20link%20abaixo%20para%20acessar.%0A{webContext.GenerateUrl("Payment", "Checkout")}?refId={x.Id.Encrypt()}%0A%0AAgradecemos%20sua%20colabora%C3%A7%C3%A3o%20e%20estamos%20%C3%A0%20disposi%C3%A7%C3%A3o%20para%20qualquer%20d%C3%BAvida.%0A%0AAtenciosamente,%C2%A0VetCard."
         }).ToList();
     }
 }

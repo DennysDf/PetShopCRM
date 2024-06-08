@@ -191,7 +191,7 @@ namespace PetShopCRM.Web.Controllers
                 var model = userDTO.Data;
                 var email = model.Email;
                 message = $"E-mail de recuperação enviado para {email.MaskEmail()}.";
-                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{webContext.GenerateUrl("User", "RestorePasswordExternal")}?id={model.Id.EncryptNumberAsBase64()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
+                await emailService.SendAsync(model.Email, "Recuperação de senha", $"<p>Olá {model.Name},<p>Para redefinir sua senha, clique no link abaixo:<p><a href=\"{webContext.GenerateUrl("User", "RestorePasswordExternal")}?id={model.Id.Encrypt()}\">Link de Recuperação de Senha</a></p><br><p>Atenciosamente, VetCard.", true);
             }
 
             return message;
@@ -201,6 +201,14 @@ namespace PetShopCRM.Web.Controllers
         [HttpGet]
         public IActionResult RestorePasswordExternal(string id)
         {
+            var decodedId = id.DecryptToInt();
+
+            if (decodedId == 0)
+            {
+                notificationService.Error("Essa url expirou, solicite uma nova!");
+                return RedirectToAction("Login", "User");
+            }
+
             return View(new UserLoginVM() { Id = id });
         }
 
@@ -208,7 +216,7 @@ namespace PetShopCRM.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RestorePasswordExternal(UserLoginVM model)
         {
-            var id = model.Id.DecryptNumberFromBase64();
+            var id = model.Id.DecryptToInt();
 
             var userDTO = await userService.GetUserByIdAsync(id);
 

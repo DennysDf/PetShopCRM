@@ -41,7 +41,6 @@ public class PagarMeService : IPagarMeService
                 Interval = "month",
                 IntervalCount = 1,
                 BillingType = "prepaid",
-                Installments = 1,
                 StatementDescriptor = plan.Name.Contains('-') ? plan.Name.Split("-")[1] : plan.Name,
                 Customer = new CreateCustomerRequest
                 {

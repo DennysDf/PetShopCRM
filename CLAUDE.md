@@ -46,10 +46,9 @@ PetShopCRM/
 | ORM | Entity Framework Core 8 (SQL Server, code-first) |
 | Banco | Microsoft SQL Server |
 | Tempo real | SignalR (`NotificationHub`) |
-| Email | MailKit — SMTP Gmail (porta 587) |
+| Email | MailKit v4.6.0 — SMTP Gmail (porta 587) |
 | Pagamentos | PagarMe (SDK customizado em `PetShopCRM.External`) |
-| JSON | Newtonsoft.Json |
-| Serialização | System.Text.Json (secundário) |
+| HTTP Client | Microsoft.Extensions.Http v9.0.2 (WebAppCliente) |
 
 ---
 
@@ -81,7 +80,7 @@ Não há Docker, Makefile, scripts npm ou pipelines de CI/CD.
 | `src/PetShopCRM.Web/appsettings.json` | Produção (SQL Server em site4now.net, Gmail SMTP) |
 | `src/PetShopCRM.Web/appsettings.Development.json` | Overrides locais (connection string local) |
 
-A classe `AppSettings` (em `Infrastructure.Settings`) faz bind de toda a seção de configuração via `builder.Services.Configure<AppSettings>(builder.Configuration)`.
+A classe `AppSettings` (em `PetShopCRM.Infrastructure.Settings`) faz bind de toda a configuração via `builder.Services.Configure<AppSettings>(builder.Configuration)`.
 
 Não existem arquivos `.env`. Toda configuração vai nos `appsettings` files.
 
@@ -114,7 +113,7 @@ public class EntityBase
 }
 ```
 
-**Entidades principais:**
+**Entidades principais (15):**
 
 | Entidade | Descrição |
 |---|---|
@@ -133,11 +132,17 @@ public class EntityBase
 | `Configuration` | Configurações da aplicação (chave-valor) |
 | `Log` | Log de erros e eventos do sistema |
 
-**Enums principais (`src/PetShopCRM.Domain/Enums/`):**
-- `UserType` — `Admin`, `General`, `Guardian`
-- `LogType` — tipos de log
-- `NotificationType` — tipos de notificação
-- `ConfigurationKey`, `ConfigurationGroup`, `ConfigurationType` — configurações da app
+**Enums (`src/PetShopCRM.Domain/Enums/`):**
+
+| Enum | Valores |
+|---|---|
+| `UserType` | `Admin`, `General`, `Guardian` |
+| `LogType` | tipos de log do sistema |
+| `NotificationType` | tipos de notificação |
+| `ConfigurationKey` | chaves de configuração da app |
+| `ConfigurationGroup` | agrupamentos de configuração |
+| `ConfigurationType` | tipos de configuração |
+| `ProcedureCoparticipationUnit` | unidades de coparticipação de procedimentos |
 
 ---
 
@@ -145,21 +150,30 @@ public class EntityBase
 
 ### Padrão Repository + Unit of Work
 
-```csharp
-// Repositório genérico — métodos principais
-Task<T?> GetByIdAsync(int id);
-IQueryable<T> GetBy(Expression<Func<T, bool>> predicate);
-Task<PaginateDTO<T>> GetPaginateByAsync(int page, int size, ...);
-Task<bool> AddOrUpdateAsync(T entity);
-Task<bool> DeleteOrRestoreAsync(int id);  // soft delete: altera Active
+O `UnitOfWork` expõe repositórios com lazy initialization via `??=`. Há 14 repositórios, um por entidade.
 
-// Unit of Work — um save para todos os repos
+```csharp
+// IRepositoryBase<T> — métodos disponíveis
+Task<T?> GetByIdAsync(int id);
+IQueryable<T> GetBy(Expression<Func<T, bool>>? filter = null);
+Task<int> GetTotalByAsync(Expression<Func<T, bool>>? filter = null);
+Task<IQueryable<T>> GetPaginateByAsync(Expression<Func<T, bool>>? filter = null, int pageIndex = 0, int pageSize = 10);
+Task<T> AddOrUpdateAsync(T entity);                   // Id == 0 → insert; Id != 0 → update
+Task<List<T>> AddOrUpdateRangeAsync(List<T> entities);
+Task<bool> DeleteOrRestoreAsync(int id);              // toggle Active (soft delete)
+Task<bool> DeletePermanentAsync(int id);              // remoção física — usar com cautela
+
+// Unit of Work — persiste todas as mudanças pendentes
 await _unitOfWork.SaveChangesAsync();
 ```
 
-- **Soft delete**: nunca use DELETE direto. Chame `DeleteOrRestoreAsync()` ou defina `entity.Active = false`.
-- **EF Core config**: auto-descoberta de `IEntityTypeConfiguration<T>` pela assembly.
-- **Paginação**: use `GetPaginateByAsync()` — não traga todos os registros em memória.
+**Regras de acesso a dados:**
+- **Soft delete**: use `DeleteOrRestoreAsync()` que alterna `Active`. Nunca DELETE direto sem motivo explícito.
+- **`DeletePermanentAsync`** existe mas deve ser usado apenas quando a remoção física for requisito de negócio.
+- **`GetBy`** retorna `IQueryable` com `AsNoTracking()` — sempre materializar com `.ToList()` / `.FirstOrDefault()` antes de retornar da camada de serviço.
+- **Paginação**: use `GetPaginateByAsync(filter, pageIndex, pageSize)` — não traga todos os registros em memória.
+- **EF Core config**: auto-descoberta de `IEntityTypeConfiguration<T>` pela assembly via `PetShopDbContext`.
+- **`AddOrUpdateAsync`**: seta `UpdatedDate = DateTime.Now` sempre. No insert, seta também `Active = true` e `CreatedDate`.
 
 ---
 
@@ -171,36 +185,93 @@ Cada conceito de domínio tem interface + implementação:
 I{Name}Service  →  {Name}Service
 ```
 
-Exemplos: `IUserService`, `IGuardianService`, `IPetService`, `IPaymentService`, `IEmailService`, etc.
+**Serviços registrados (15) em `Application.Bootstrapper.AddServices()`:**
+
+| Interface | Responsabilidade |
+|---|---|
+| `IUserService` | CRUD de usuários, autenticação |
+| `IGuardianService` | CRUD de tutores |
+| `IClinicService` | Dados da clínica |
+| `IPetService` | CRUD de pets |
+| `ISpecieService` | CRUD de espécies |
+| `IHealthPlanService` | Planos de saúde |
+| `IPaymentService` | Pagamentos e assinaturas |
+| `IPaymentHistoryService` | Histórico de transações |
+| `IConfigurationService` | Configurações da aplicação |
+| `ILogService` | Registro de logs e erros |
+| `IProcedureService` | Procedimentos veterinários |
+| `IProcedureGroupService` | Grupos de procedimentos |
+| `IProcedureHealthPlanService` | Relação procedimento ↔ plano |
+| `IRecordService` | Prontuários médicos |
+| `IEmailService` | Envio de e-mail via MailKit |
 
 **Padrão de retorno:**
 ```csharp
-// Serviços retornam Response<T> com flag de sucesso
-public class Response<T>
-{
-    public bool Success { get; set; }
-    public string Message { get; set; }
-    public T Data { get; set; }
-}
+// ResponseDTO é um record imutável
+public record ResponseDTO<T>(bool Success, string Message, T Data);
 ```
-
-Registro: `builder.Services.AddServices()` (via `Application.Bootstrapper`).
 
 ---
 
 ## Camada Web (`src/PetShopCRM.Web/`)
 
-### Controllers
+### Controllers (14)
 
+| Controller | Responsabilidade |
+|---|---|
+| `HomeController` | Dashboard principal (índice e visão guardian) |
+| `UserController` | Login, logout, perfil, gestão de usuários |
+| `GuardianController` | CRUD de tutores |
+| `PetController` | CRUD de pets |
+| `SpecieController` | CRUD de espécies |
+| `HealthPlansController` | Planos de saúde e detalhes |
+| `ProcedureController` | Procedimentos, grupos e relação com planos |
+| `PaymentController` | Checkout, monitoramento e histórico de pagamentos |
+| `RecordController` | Prontuários médicos |
+| `ClinicController` | Dados e configuração da clínica |
+| `ConfigurationController` | Configurações da aplicação |
+| `DetailsController` | Views Ajax de detalhes (guardians, pets, pagamentos, planos, prontuários) |
+| `ReportController` | Relatórios e upload de imagem de perfil |
+| `ValidationController` | Endpoints de validação client-side |
+
+**Convenções de controllers:**
 - Injeção de dependência via construtor
 - Autorização por política: `[Authorize(Policy = nameof(UserType.Admin))]`
-- As três políticas são: `Admin`, `General`, `Guardian`
-  - `General` aceita também `Admin` (Admin > General)
+- Três políticas: `Admin` (somente Admin), `General` (Admin ou General), `Guardian` (somente Guardian)
+- Actions Ajax retornam `JsonResult` ou `PartialViewResult`
 
 ### ViewModels (`Web/Models/`)
 
 - ViewModels têm método `.ToDTO()` para converter para o DTO da camada Application
 - Validações via Data Annotations; mensagens em `ValidationMessages.resx`
+- Estrutura de pastas espelha os controllers
+
+**ViewModels existentes:**
+
+| ViewModel | Localização |
+|---|---|
+| `ClinicVM` | `Models/Clinic/` |
+| `ConfigurationVM` | `Models/Configuration/` |
+| `DetailsPetVM` | `Models/Details/` |
+| `AddressModel` | `Models/Endereco/` |
+| `GuardianVM` | `Models/Guardian/` |
+| `HealthPlansVM` | `Models/HealthPlans/` |
+| `PaymentVM`, `PaymentHistoryVM` | `Models/Payment/` |
+| `PetVM` | `Models/Pet/` |
+| `ProcedureVM`, `ProcedureGroupVM`, `ProcedureHealthPlanVM` | `Models/Procedure/` |
+| `RecordVM` | `Models/Record/` |
+| `SpecieVM` | `Models/Specie/` |
+| `AddUserVM`, `ProfileVM`, `UserGuardianVM`, `UserLoginVM` | `Models/User/` |
+| `ResponseVM` | `Models/` (raiz) |
+
+### Atributos de Validação Customizados (`Web/Util/ValidationAttribute.cs`)
+
+| Atributo | Comportamento |
+|---|---|
+| `[RequiredIf(propertyName)]` | Campo obrigatório condicionalmente com base em uma propriedade booleana |
+| `[RequiredIfInput(propertyName, desiredValue)]` | Campo obrigatório se outra propriedade tiver valor específico |
+
+Ambos implementam `IClientModelValidator` para validação client-side via data-attributes.
 
 ### Recursos / Localização (`Web/Resources/`)
 
@@ -213,14 +284,40 @@ Registro: `builder.Services.AddServices()` (via `Application.Bootstrapper`).
 
 ### Serviços Web (`Web/Services/`)
 
-| Serviço | Responsabilidade |
+| Serviço | Interface | Responsabilidade |
+|---|---|---|
+| `LoginService` | `ILoginService` | Autenticação via cookies ASP.NET Core |
+| `LoggedUserService` | `ILoggedUserService` | Extrai claims do usuário logado |
+| `NotificationService` | `INotificationService` | Gerencia notificações de usuário |
+| `Upload` | `IUpload` | Upload de arquivos (fotos de pets) |
+| `AddressService` | `IAddressService` | Consulta/gestão de endereços |
+| `WebContext` | `IWebContext` | Contexto web da requisição atual |
+
+### Utilitários (`Web/Util/`)
+
+| Utilitário | Função |
 |---|---|
-| `LoginService` | Autenticação via cookies ASP.NET Core |
-| `LoggedUserService` | Extrai claims do usuário logado (Id, Name, Role, Image) |
-| `NotificationService` | Gerencia notificações de usuário |
-| `Upload` | Upload de arquivos (fotos de pets) |
-| `AddressService` | Consulta/gestão de endereços |
-| `WebContext` | Contexto web da requisição atual |
+| `CPFUltil.cs` | Formatação e validação de CPF |
+| `DateToBrazil.cs` | Formatação de datas para o padrão brasileiro |
+| `EmailMaskerUltil.cs` | Mascaramento de endereços de e-mail |
+| `EnumUtil.cs` | Helpers para enumerações |
+| `FormFileExtensions.cs` | Extensões para `IFormFile` |
+| `NotificationUtil.cs` | Helpers para notificações |
+| `ParseDecimal.cs` | Conversão segura para decimal |
+| `ParseInt.cs` | Conversão segura para int |
+| `ValidationAttribute.cs` | Atributos de validação customizados |
+| `ValidationKeysUtil.cs` | Chaves de validação |
+
+### Reports (`Web/Reports/`)
+
+Classes utilitárias que calculam métricas comparativas (mês atual vs. mês anterior) para o dashboard:
+
+| Classe | Métricas |
+|---|---|
+| `GuardiansReport` | Quantidade de tutores, percentual, seta de tendência |
+| `PetsReport` | Quantidade de pets e tendência |
+| `RevenueReport` | Receita e variação percentual |
+| `SalesReport` | Vendas e variação percentual |
 
 ---
 
@@ -239,13 +336,41 @@ _loggedUserService.Role  // UserType enum
 _loggedUserService.Image
 ```
 
+**Políticas de autorização:**
+```csharp
+.AddPolicy("Admin",    x => x.RequireRole("Admin"))
+.AddPolicy("General",  x => x.RequireRole("Admin", "General"))  // Admin também acessa
+.AddPolicy("Guardian", x => x.RequireRole("Guardian"))
+```
+
 ---
 
 ## Notificações em Tempo Real (SignalR)
 
 - Hub: `NotificationHub` na rota `/Notification`
+- `EnableDetailedErrors = true` em todos os ambientes
 - Métodos server→client: `SendNotificationAll()`, `SendNotificationUser(userId)`, `JoinGroup(group)`
-- Middleware de exceções: `LogExceptionMiddleware` — captura erros globais, loga via `ILogService` e redireciona para login
+
+---
+
+## Middleware
+
+### `LogExceptionMiddleware` (`Web/Middlewares/`)
+
+Registrado via `app.UseLogException()`. Captura exceções globais, registra via `ILogService` e redireciona para a página de login. Deve ser posicionado **após** `UseAuthentication()` e **antes** de `UseRouting()`.
+
+**Ordem do pipeline em `Program.cs`:**
+1. `UseAuthentication()`
+2. `UseExceptionHandler` (somente produção)
+3. `UseHsts` (somente produção)
+4. `UseCors` (AllowAnyOrigin)
+5. `UseHttpsRedirection()`
+6. `UseStaticFiles()`
+7. `UseLogException()` (middleware customizado)
+8. `UseRouting()`
+9. `UseAuthorization()`
+10. `MapHub<NotificationHub>("/Notification")`
+11. `MapControllerRoute` (default)
 
 ---
 
@@ -254,9 +379,50 @@ _loggedUserService.Image
 Localização: `src/PetShopCRM.External/PagarMe/`
 
 - SDK customizado com suporte a: cartão de crédito, boleto, PIX, transferência bancária, assinaturas recorrentes
-- Interface: `IPagarMeService`
+- Interface principal: `IPagarMeService`
+- Modelos de integração: `CustomerDTO`, `CardDTO`, `BillingAddressDTO`, `WebhookDTO`, `CardBrand`
+- Controllers SDK: `ChargesController`, `TransactionsController`, `RecipientsController`, `CustomersController`, `TokensController`, `PlansController`, `OrdersController`, `TransfersController`
 - Inclui tratamento de webhooks
 - Registro: `builder.Services.AddExternalServices()` (via `External.Bootstrapper`)
+
+---
+
+## WebAppCliente (`WebAppCliente/`)
+
+App cliente MVC legado que consome a API do PetShopCRM via HTTP.
+
+| Componente | Descrição |
+|---|---|
+| `ClienteController` | CRUD de clientes (listar, criar, editar, detalhes, deletar) |
+| `HomeController` | Login e home |
+| `ClienteService` | Chamadas HTTP para a API de guardians/clientes |
+| `Autenticacao` | Serviço de autenticação JWT com a API |
+| `ClienteViewModel` | ViewModel de cliente |
+| `TokenViewModel` | Token de autenticação |
+| `UsuarioViewModel` | Dados do usuário para login |
+
+Dependência: `Microsoft.Extensions.Http v9.0.2`.
+
+---
+
+## Infraestrutura (`src/PetShopCRM.Infrastructure/`)
+
+### DbContext (`PetShopDbContext.cs`)
+
+14 `DbSet<T>` registrados: `Users`, `Guardians`, `Pets`, `Clinics`, `Species`, `HealthPlans`, `Payments`, `Configurations`, `PaymentHistories`, `Logs`, `Procedures`, `ProcedureGroups`, `ProcedureHealthPlans`, `Records`.
+
+### Mappers (`Infrastructure/Mappers/`)
+
+13 mappers de configuração EF Core (um por entidade), descobertos automaticamente pela assembly.
+
+### Scripts de Banco (`Infrastructure/Scripts/`)
+
+- `CreateDb.sql` — script de criação do banco
+- `Procedimentos/` — scripts de seed de procedimentos
+
+### Bootstrapper
+
+> **Atenção:** O arquivo tem typo no nome: `Boostrapper.cs` (sem 't') mas o método é `AddRepositories()`. Registra somente `IUnitOfWork → UnitOfWork` como Scoped.
 
 ---
 
@@ -268,7 +434,10 @@ Localização: `src/PetShopCRM.External/PagarMe/`
 - **Injeção de dependência**: sempre via construtor
 - **Nullable**: `#nullable enable` — tratar possíveis nulos explicitamente
 - **Commits**: mensagens em português (convenção do projeto)
-- **Soft delete**: sempre usar `Active = false`, nunca remover registros do banco
+- **Soft delete**: sempre usar `DeleteOrRestoreAsync()` ou `Active = false`, nunca remover registros sem necessidade
+- **ResponseDTO**: é um `record` imutável — não tente criar instâncias com setters
+- **ViewModels**: sempre implementar `.ToDTO()` para conversão para a camada Application
+- **Recursos (.resx)**: usar os arquivos existentes para novas strings; não hardcodar mensagens em português no código
 
 ---
 
@@ -277,23 +446,28 @@ Localização: `src/PetShopCRM.External/PagarMe/`
 | Path | Descrição |
 |---|---|
 | `src/PetShopCRM.Web/Program.cs` | Entry point, DI container, middleware pipeline |
-| `src/PetShopCRM.Infrastructure/PetShopDbContext.cs` | EF Core DbContext |
-| `src/PetShopCRM.Application/Bootstrapper.cs` | Registro dos serviços da Application |
-| `src/PetShopCRM.Infrastructure/Bootstrapper.cs` | Registro dos repositórios |
-| `src/PetShopCRM.External/Bootstrapper.cs` | Registro dos serviços externos |
-| `src/PetShopCRM.Web/Controllers/` | Controllers MVC |
-| `src/PetShopCRM.Web/Views/` | Razor Views (organizadas por controller) |
-| `src/PetShopCRM.Web/Models/` | ViewModels |
-| `src/PetShopCRM.Web/Services/` | Serviços específicos da camada Web |
-| `src/PetShopCRM.Web/SignalHubs/` | Hubs SignalR |
-| `src/PetShopCRM.Web/Middlewares/` | Middlewares customizados |
-| `src/PetShopCRM.Web/Resources/` | Arquivos .resx de localização |
-| `src/PetShopCRM.Domain/Models/` | Entidades de domínio |
-| `src/PetShopCRM.Domain/Enums/` | Enumerações |
-| `src/PetShopCRM.Application/Services/` | Serviços de negócio |
-| `src/PetShopCRM.Application/DTOs/` | Data Transfer Objects |
-| `src/PetShopCRM.Infrastructure/Data/Repository/` | Implementações de repositório |
-| `src/PetShopCRM.External/PagarMe/` | SDK PagarMe |
+| `src/PetShopCRM.Infrastructure/PetShopDbContext.cs` | EF Core DbContext com 14 DbSets |
+| `src/PetShopCRM.Application/Bootstrapper.cs` | Registro dos 15 serviços da Application |
+| `src/PetShopCRM.Infrastructure/Boostrapper.cs` | Registro do UnitOfWork (typo no nome) |
+| `src/PetShopCRM.External/Bootstrapper.cs` | Registro do PagarMeService |
+| `src/PetShopCRM.Web/Controllers/` | 14 controllers MVC |
+| `src/PetShopCRM.Web/Views/` | Razor Views (46 arquivos .cshtml) |
+| `src/PetShopCRM.Web/Models/` | 19 ViewModels |
+| `src/PetShopCRM.Web/Services/` | 6 serviços específicos da camada Web |
+| `src/PetShopCRM.Web/SignalHubs/NotificationHub.cs` | Hub SignalR |
+| `src/PetShopCRM.Web/Middlewares/LogExceptionMiddleware.cs` | Middleware de exceções |
+| `src/PetShopCRM.Web/Resources/` | 4 arquivos .resx de localização |
+| `src/PetShopCRM.Web/Reports/` | 4 classes de relatório para dashboard |
+| `src/PetShopCRM.Web/Util/` | 10 utilitários da camada Web |
+| `src/PetShopCRM.Domain/Models/` | 15 entidades de domínio |
+| `src/PetShopCRM.Domain/Enums/` | 7 enumerações |
+| `src/PetShopCRM.Application/Services/` | 15 serviços de negócio |
+| `src/PetShopCRM.Application/DTOs/` | DTOs (ResponseDTO, ClinicDTO, GuardianDTO, etc.) |
+| `src/PetShopCRM.Infrastructure/Data/Repository/` | RepositoryBase + 14 repositórios específicos |
+| `src/PetShopCRM.Infrastructure/Data/UnitOfWork/` | UnitOfWork com lazy init de repos |
+| `src/PetShopCRM.Infrastructure/Mappers/` | 13 mappers de configuração EF Core |
+| `src/PetShopCRM.Infrastructure/Settings/AppSettings.cs` | Classe de configuração da aplicação |
+| `src/PetShopCRM.External/PagarMe/` | SDK PagarMe customizado |
 
 ---
 
